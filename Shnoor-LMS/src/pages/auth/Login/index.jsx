@@ -110,16 +110,14 @@ const Login = () => {
         }
     };
 
+    const onTogglePassword = () => setShowPassword(!showPassword);
+
     return (
         <LoginView
-            email={email}
-            setEmail={setEmail}
-            password={password}
-            setPassword={setPassword}
+            formData={{ email, password, rememberMe }}
+            setFormData={{ setEmail, setPassword, setRememberMe }}
             showPassword={showPassword}
-            setShowPassword={setShowPassword}
-            rememberMe={rememberMe}
-            setRememberMe={setRememberMe}
+            onTogglePassword={onTogglePassword}
             error={error}
             loading={loading}
             handleLogin={handleLogin}

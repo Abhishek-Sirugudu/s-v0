@@ -1,41 +1,22 @@
 @import "tailwindcss";
 
-:root {
-  --color-primary: #003B5C;
-  --color-primary-light: #145E86;
-  --color-primary-dark: #00263A;
+@theme {
+  --color-primary: #0f172a;
+  --color-primary-900: #0f172a;
+  --color-indigo-600: #4f46e5;
+  --color-slate-50: #f8fafc;
+  --color-slate-900: #0f172a;
   
-  --color-accent: #E8AA25;
-  --color-accent-hover: #C7901E;
-
-  --color-success: #10B981;
-  --color-secondary: #E8AA25;
-
-  --color-bg-main: #FFFFFF;
-  --color-bg-light: #F8FAFC;
-  --color-text-main: #0f172a;
-  --color-text-secondary: #64748b;
-  --color-border: #e2e8f0;
-
-  --font-heading: 'Inter', sans-serif;
-  --font-body: 'Inter', sans-serif;
   --font-family-base: 'Inter', sans-serif;
+  
+  --radius-xl: 0.75rem; /* 12px */
+  --radius-2xl: 1rem; /* 16px */
+  --radius-3xl: 1.5rem; /* 24px */
+}
 
-  --space-xs: 5px;
-  --space-sm: 10px;
-  --space-md: 20px;
-  --space-lg: 30px;
-  --space-xl: 50px;
-
-  --radius-sm: 5px;
-  --radius-md: 10px;
-  --radius-lg: 20px;
-  --radius-full: 9999px;
-
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
-  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
-
+:root {
+  --color-bg-light: #f8fafc;
+  --color-text-main: #0f172a;
   --transition-fast: 0.2s ease;
 }
 
@@ -48,6 +29,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@layer utilities {
+  .input-field {
+    @apply w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--color-indigo-600)]/20 focus:border-[var(--color-indigo-600)] transition-all font-medium tracking-tight;
+  }
+}
+
 img, picture, video, canvas {
   display: block;
   max-width: 100%;
@@ -57,18 +44,14 @@ input, button, textarea, select {
   font: inherit;
 }
 
-p, h1, h2, h3, h4, h5, h6 {
-  overflow-wrap: break-word;
-}
-
 a {
-  color: var(--color-primary);
+  color: var(--color-indigo-600);
   text-decoration: none;
   transition: color var(--transition-fast);
 }
 
 a:hover {
-  color: var(--color-primary-light);
+  filter: brightness(1.1);
 }
 
 ::-webkit-scrollbar {

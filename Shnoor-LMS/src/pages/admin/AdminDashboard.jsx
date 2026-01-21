@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {
-  BarChart,
-  Bar,
+  LineChart,
+  Line,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -10,257 +10,234 @@ import {
 } from 'recharts';
 import {
   Users,
+  Activity,
   BookOpen,
-  Clock,
-  Award,
-  HardDrive,
-  AlertTriangle,
-  MoreHorizontal,
+  Server,
+  Download,
+  Calendar,
+  Search,
+  ChevronDown,
   ArrowUpRight,
-  Database
+  ArrowDownRight,
+  Clock
 } from 'lucide-react';
 
 const AdminDashboard = () => {
-  // Mock Data Generators
-  const generateChartData = () => {
+  // --- Mock Data Generators ---
+  const generateActivityData = () => {
     const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
     return days.map(day => ({
       day,
-      modules: Math.floor(Math.random() * 50) + 20,
-      exams: Math.floor(Math.random() * 20) + 5,
+      logins: Math.floor(Math.random() * 800) + 400,
+      enrollments: Math.floor(Math.random() * 300) + 100,
     }));
   };
 
   const generateTableData = () => {
     const statuses = ['Active', 'Review', 'Archived'];
-    return Array.from({ length: 15 }).map((_, i) => ({
-      id: `CRS-${1000 + i}`,
+    return Array.from({ length: 12 }).map((_, i) => ({
+      id: `CRS-${202400 + i}`,
       title: ['Advanced React Patterns', 'System Design Interview', 'Python for Data Science', 'DevOps Fundamentals', 'Enterprise Architecture', 'Cloud Native Basics'][i % 6] + ` ${Math.floor(i / 6) + 1}`,
       instructor: ['Dr. Sarah Chen', 'Markus Schmidt', 'Priya Patel', 'Alex Rivera', 'Emily Zhang', 'John Doe'][i % 6],
-      activeStudents: Math.floor(Math.random() * 500) + 50,
-      completionRate: Math.floor(Math.random() * 40) + 40,
+      category: ['Development', 'Business', 'Design'][i % 3],
+      duration: `${Math.floor(Math.random() * 20) + 10}h ${Math.floor(Math.random() * 50)}m`,
+      students: Math.floor(Math.random() * 500) + 50,
+      completion: Math.floor(Math.random() * 40) + 60,
       status: statuses[i % 3]
     }));
   };
 
-  const [chartData] = useState(generateChartData());
+  const [activityData] = useState(generateActivityData());
   const [tableData] = useState(generateTableData());
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] p-4 md:p-6 font-sans text-slate-800 flex flex-col items-center">
-      <div className="w-full max-w-[1440px]">
-        {/* Header */}
-        <div className="mb-6 flex flex-col sm:flex-row sm:justify-between sm:items-end gap-4">
+    <div className="min-h-screen bg-[#f8fafc] p-2 font-sans text-slate-900 flex flex-col">
+      <div className="w-full space-y-8 flex-1 flex flex-col">
+
+        {/* --- Header Section (Minimalist) --- */}
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-6 border-b border-slate-200 pb-6 shrink-0">
           <div>
-            <h1 className="text-2xl font-bold text-[#003B5C] tracking-tight">Executive Dashboard</h1>
-            <p className="text-slate-500 text-xs font-semibold tracking-wider uppercase mt-1">System Usage & Content Velocity</p>
+            <h1 className="text-3xl font-semibold text-slate-900 tracking-tight">Executive Overview</h1>
+            <p className="text-slate-500 text-base mt-1">Platform performance and system metrics.</p>
           </div>
-          <div className="flex items-center gap-3 bg-white px-3 py-1.5 rounded-sm border border-slate-200 shadow-sm">
-            <div className="text-right">
-              <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Last Updated</div>
-              <div className="text-xs font-bold text-[#003B5C]">{new Date().toLocaleDateString()}</div>
-            </div>
+          <div className="flex items-center gap-3">
+            <button className="flex items-center gap-2 px-4 py-2 bg-white border border-slate-300 rounded-md text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors">
+              <Calendar size={14} className="text-slate-400" />
+              <span>{new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+              <ChevronDown size={12} className="text-slate-400 ml-1" />
+            </button>
+            <button className="flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-md text-xs font-semibold hover:bg-slate-800 transition-colors">
+              <Download size={14} /> Export Data
+            </button>
           </div>
         </div>
 
-        {/* Row 1: KPI Cards - Compact Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        {/* --- KPI Grid (Formal) --- */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 shrink-0">
           <KpiCard
-            title="Active Learners"
-            value="2,845"
-            trend="12% vs last week"
-            icon={<Users size={20} className="text-white" />}
-            color="bg-[#003B5C]"
-            textColor="text-white"
-            trendColor="text-emerald-300 bg-white/10"
+            title="Total Active Learners"
+            value="12,482"
+            trend="12%"
+            isPositive={true}
+            icon={<Users size={20} />}
           />
           <KpiCard
-            title="Global Completion"
+            title="Sessions per User"
+            value="4.3"
+            trend="5.4%"
+            isPositive={true}
+            icon={<Activity size={20} />}
+          />
+          <KpiCard
+            title="Course Completion Rate"
             value="68.4%"
-            trend="+5.2% vs last week"
-            icon={<BookOpen size={20} className="text-[#003B5C]" />}
-            color="bg-white"
-            textColor="text-[#003B5C]"
-            borderColor="border-slate-200"
-            trendColor="text-emerald-600 bg-emerald-50"
+            trend="2.1%"
+            isPositive={false}
+            icon={<BookOpen size={20} />}
           />
           <KpiCard
-            title="Learning Hours"
-            value="14.2k"
-            trend="+8.5% vs last week"
-            icon={<Clock size={20} className="text-[#003B5C]" />}
-            color="bg-white"
-            textColor="text-[#003B5C]"
-            borderColor="border-slate-200"
-            trendColor="text-emerald-600 bg-emerald-50"
-          />
-          <KpiCard
-            title="Certificates"
-            value="982"
-            trend="+14% vs last week"
-            icon={<Award size={20} className="text-[#003B5C]" />}
-            color="bg-white"
-            textColor="text-[#003B5C]"
-            borderColor="border-slate-200"
-            trendColor="text-emerald-600 bg-emerald-50"
+            title="System Uptime"
+            value="99.99%"
+            trend="Stable"
+            isPositive={true}
+            icon={<Server size={20} />}
           />
         </div>
 
-        {/* Row 2: Analytics Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
-          {/* Content Velocity Chart (66%) */}
-          <div className="lg:col-span-2 bg-white p-5 rounded-sm shadow-sm border border-slate-200 flex flex-col h-[320px]">
-            <div className="flex justify-between items-center mb-4">
+        {/* --- Main Analytics (Clean Lines) --- */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 shrink-0">
+
+          {/* Traffic Chart */}
+          <div className="lg:col-span-2 bg-white p-6 rounded-lg border border-slate-200 shadow-sm flex flex-col h-[400px]">
+            <div className="flex justify-between items-center mb-8 shrink-0">
               <div>
-                <h3 className="text-base font-bold text-[#003B5C]">Content Velocity</h3>
-                <p className="text-[11px] text-slate-400 font-medium uppercase tracking-wide">Modules vs Exams</p>
+                <h3 className="text-base font-semibold text-slate-900">Engagement Trends</h3>
               </div>
-              <div className="flex gap-4 text-[10px] font-bold uppercase tracking-wider">
+              <div className="flex gap-6">
                 <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 bg-[#003B5C]"></span> <span className="text-slate-600">Modules</span>
+                  <span className="w-2 h-0.5 bg-[var(--color-indigo-600)]"></span>
+                  <span className="text-xs font-medium text-slate-500">Logins</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 bg-[#E8AA25]"></span> <span className="text-slate-600">Exams</span>
+                  <span className="w-2 h-0.5 bg-slate-300"></span>
+                  <span className="text-xs font-medium text-slate-500">Enrollments</span>
                 </div>
               </div>
             </div>
             <div className="flex-1 w-full min-h-0">
               <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={chartData} barSize={32} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                <LineChart data={activityData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
                   <XAxis
                     dataKey="day"
                     axisLine={false}
                     tickLine={false}
-                    tick={{ fill: '#64748b', fontSize: 11, fontWeight: 600 }}
+                    tick={{ fill: '#64748b', fontSize: 11 }}
                     dy={10}
                   />
                   <YAxis
                     axisLine={false}
                     tickLine={false}
-                    tick={{ fill: '#64748b', fontSize: 11, fontWeight: 600 }}
+                    tick={{ fill: '#64748b', fontSize: 11 }}
                   />
                   <Tooltip
-                    cursor={{ fill: '#f8fafc' }}
                     contentStyle={{
                       backgroundColor: '#fff',
                       border: '1px solid #e2e8f0',
-                      borderRadius: '2px',
-                      boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)',
-                      fontSize: '12px'
+                      padding: '8px 12px',
+                      fontSize: '12px',
+                      boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
                     }}
+                    itemStyle={{ padding: 0 }}
+                    cursor={{ stroke: '#cbd5e1', strokeWidth: 1 }}
                   />
-                  <Bar dataKey="modules" stackId="a" fill="#003B5C" radius={[0, 0, 0, 0]} />
-                  <Bar dataKey="exams" stackId="a" fill="#E8AA25" radius={[2, 2, 0, 0]} />
-                </BarChart>
+                  <Line
+                    type="monotone"
+                    dataKey="logins"
+                    stroke="var(--color-indigo-600)"
+                    strokeWidth={2}
+                    dot={false}
+                    activeDot={{ r: 4, fill: 'var(--color-indigo-600)' }}
+                  />
+                  <Line
+                    type="monotone"
+                    dataKey="enrollments"
+                    stroke="#cbd5e1"
+                    strokeWidth={2}
+                    dot={false}
+                    activeDot={{ r: 4, fill: '#cbd5e1' }}
+                  />
+                </LineChart>
               </ResponsiveContainer>
             </div>
           </div>
 
-          {/* Infrastructure Load (33%) */}
-          <div className="flex flex-col gap-4 h-[320px]">
-            {/* Storage Usage */}
-            <div className="bg-white p-5 rounded-sm shadow-sm border border-slate-200 flex-[1.4] flex flex-col justify-center">
-              <div className="flex justify-between items-center mb-5">
-                <h3 className="text-base font-bold text-[#003B5C]">System Load</h3>
-                <Database size={16} className="text-slate-400" />
-              </div>
+          {/* System Health (Linear & Minimal) */}
+          <div className="bg-white p-6 rounded-lg border border-slate-200 shadow-sm flex flex-col justify-center h-[400px]">
+            <h3 className="text-base font-semibold text-slate-900 mb-8">System Status</h3>
 
-              <div className="space-y-5">
-                <div>
-                  <div className="flex justify-between text-[11px] font-bold mb-1.5">
-                    <span className="text-slate-500 uppercase tracking-wide">Video Storage</span>
-                    <span className="text-[#003B5C]">65GB / 100GB</span>
-                  </div>
-                  <div className="h-2.5 w-full bg-slate-100 overflow-hidden">
-                    <div className="h-full bg-[#003B5C]" style={{ width: '65%' }}></div>
-                  </div>
-                </div>
-
-                <div>
-                  <div className="flex justify-between text-[11px] font-bold mb-1.5">
-                    <span className="text-slate-500 uppercase tracking-wide">DB Capacity</span>
-                    <span className="text-[#003B5C]">42%</span>
-                  </div>
-                  <div className="h-2.5 w-full bg-slate-100 overflow-hidden">
-                    <div className="h-full bg-emerald-500" style={{ width: '42%' }}></div>
-                  </div>
-                </div>
-              </div>
+            <div className="space-y-10 flex-1">
+              <HealthBar label="Storage Usage" value={85} />
+              <HealthBar label="Database Load" value={45} />
+              <HealthBar label="Bandwidth" value={62} />
+              <HealthBar label="API Latency" value={24} />
             </div>
 
-            {/* Ghost Accounts Alert */}
-            <div className="bg-[#FFFCF0] p-5 rounded-sm shadow-sm border border-[#E8AA25]/30 flex-1 flex flex-col justify-center relative overflow-hidden group">
-              {/* Orange decoration line */}
-              <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#E8AA25]"></div>
-
-              <div className="z-10 relative pl-2">
-                <div className="flex items-center gap-2 mb-2">
-                  <AlertTriangle size={16} className="text-[#E8AA25]" />
-                  <h4 className="text-sm font-bold text-[#003B5C]">Attention Needed</h4>
-                </div>
-
-                <p className="text-xs text-slate-700 mb-3 leading-snug font-medium">
-                  <strong className="text-[#003B5C]">842 users</strong> inactive &gt; 90 days.
-                </p>
-
-                <button className="text-[10px] font-bold text-white uppercase tracking-wider bg-[#003B5C] px-3 py-1.5 hover:bg-[#002a42] transition-colors shadow-sm">
-                  Run Archiver
-                </button>
+            <div className="pt-6 border-t border-slate-100 shrink-0">
+              <div className="flex items-center gap-3">
+                <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+                <span className="text-sm font-medium text-emerald-700">All systems operational</span>
               </div>
-              <Users size={60} className="absolute -right-2 -bottom-2 text-[#E8AA25] opacity-[0.08]" />
             </div>
           </div>
         </div>
 
-        {/* Row 3: Management Table */}
-        <div className="bg-white rounded-sm shadow-sm border border-slate-200 flex flex-col h-[400px]">
-          <div className="px-5 py-3 border-b border-slate-100 flex justify-between items-center bg-white sticky top-0 shrink-0">
-            <h3 className="text-base font-bold text-[#003B5C]">Course Performance Matrix</h3>
-            <div className="flex gap-2">
-              <button className="text-[10px] font-bold text-slate-500 bg-slate-50 border border-slate-200 px-2 py-1 uppercase hover:bg-slate-100">Export CSV</button>
-              <button className="p-1 text-slate-400 hover:text-[#003B5C] transition-colors"> <MoreHorizontal size={18} /> </button>
+        {/* --- Data Table (Professional) --- */}
+        <div className="bg-white border border-slate-200 rounded-lg shadow-sm flex-1 flex flex-col min-h-0">
+          <div className="px-6 py-4 border-b border-slate-200 flex justify-between items-center bg-white shrink-0">
+            <h3 className="text-base font-semibold text-slate-900">Course Participation Matrix</h3>
+            <div className="relative w-64">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={14} />
+              <input
+                type="text"
+                placeholder="Filter courses..."
+                className="w-full pl-9 pr-4 py-1.5 text-sm border border-slate-200 rounded-md focus:border-slate-400 focus:ring-0 outline-none transition-colors"
+              />
             </div>
           </div>
-          <div className="overflow-auto flex-1 custom-scrollbar">
-            <table className="w-full text-left border-collapse">
-              <thead className="bg-[#F8FAFC] border-b border-slate-200 sticky top-0 z-10 shadow-sm">
+
+          <div className="overflow-auto flex-1">
+            <table className="w-full text-left border-collapse h-full">
+              <thead className="bg-[#f8fafc] border-b border-slate-200 sticky top-0 z-10">
                 <tr>
-                  <th className="px-4 py-2.5 text-[10px] font-bold text-slate-500 uppercase tracking-wider w-[35%]">Course Details</th>
-                  <th className="px-4 py-2.5 text-[10px] font-bold text-slate-500 uppercase tracking-wider w-[20%]">Instructor</th>
-                  <th className="px-4 py-2.5 text-[10px] font-bold text-slate-500 uppercase tracking-wider text-center w-[15%]">Active (7d)</th>
-                  <th className="px-4 py-2.5 text-[10px] font-bold text-slate-500 uppercase tracking-wider w-[20%]">Completion</th>
-                  <th className="px-4 py-2.5 text-[10px] font-bold text-slate-500 uppercase tracking-wider text-right w-[10%]">Status</th>
+                  <th className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wide">Course</th>
+                  <th className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wide">Instructor</th>
+                  <th className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wide">Duration</th>
+                  <th className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wide">Students</th>
+                  <th className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wide text-right">Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100/80">
-                {tableData.map((course, index) => (
-                  <tr key={course.id} className="hover:bg-slate-50/80 transition-colors group">
-                    <td className="px-4 py-2">
-                      <div className="flex flex-col">
-                        <span className="text-xs font-bold text-[#003B5C] group-hover:text-[#E8AA25] transition-colors truncate">{course.title}</span>
-                        <span className="text-[10px] text-slate-400 font-mono">{course.id}</span>
+              <tbody className="divide-y divide-slate-100">
+                {tableData.map((course) => (
+                  <tr key={course.id} className="hover:bg-[#f8fafc] transition-colors">
+                    <td className="px-6 py-4">
+                      <div className="font-medium text-slate-900 text-base">{course.title}</div>
+                      <div className="text-sm text-slate-500 mt-0.5">{course.category}</div>
+                    </td>
+                    <td className="px-6 py-4 text-base text-slate-600">
+                      {course.instructor}
+                    </td>
+                    <td className="px-6 py-4 text-base text-slate-600">
+                      <div className="flex items-center gap-1.5">
+                        <Clock size={16} className="text-slate-400" />
+                        {course.duration}
                       </div>
                     </td>
-                    <td className="px-4 py-2">
-                      <span className="text-xs font-semibold text-slate-600">{course.instructor}</span>
+                    <td className="px-6 py-4 text-base text-slate-600 tabular-nums">
+                      {course.students}
                     </td>
-                    <td className="px-4 py-2 text-center">
-                      <span className="text-xs font-bold text-slate-700 bg-slate-100 px-1.5 py-0.5 rounded-sm">{course.activeStudents}</span>
-                    </td>
-                    <td className="px-4 py-2">
-                      <div className="flex items-center gap-2">
-                        <div className="flex-1 h-1.5 bg-slate-100 overflow-hidden">
-                          <div
-                            className={`h-full ${course.completionRate > 70 ? 'bg-[#003B5C]' : 'bg-[#E8AA25]'}`}
-                            style={{ width: `${course.completionRate}%` }}
-                          ></div>
-                        </div>
-                        <span className="text-[10px] font-bold text-slate-600 w-6 text-right">{course.completionRate}%</span>
-                      </div>
-                    </td>
-                    <td className="px-4 py-2 text-right">
-                      <StatusPill status={course.status} />
+                    <td className="px-6 py-4 text-right">
+                      <StatusIndicator status={course.status} />
                     </td>
                   </tr>
                 ))}
@@ -268,42 +245,68 @@ const AdminDashboard = () => {
             </table>
           </div>
         </div>
+
       </div>
     </div>
   );
 };
 
-// Sub-components
-const KpiCard = ({ title, value, trend, icon, color, textColor = "text-white", borderColor = "border-transparent", trendColor }) => (
-  <div className={`${color} ${borderColor} p-4 rounded-sm shadow-sm border hover:shadow-md transition-shadow relative overflow-hidden group flex flex-col justify-between h-[110px]`}>
-    <div className="flex justify-between items-start z-10 relative mb-1">
-      <h3 className={`text-[11px] font-extrabold uppercase tracking-widest opacity-80 ${textColor}`}>{title}</h3>
-      <div className={`p-1.5 rounded-sm ${textColor === 'text-white' ? 'bg-white/20' : 'bg-slate-100'}`}>
-        {icon}
+// --- Minimalist Sub-components ---
+
+const KpiCard = ({ title, value, trend, isPositive, icon }) => {
+  return (
+    <div className="bg-white p-6 rounded-lg border border-slate-200 shadow-sm flex flex-col justify-between h-[150px]">
+      <div className="flex justify-between items-start">
+        <div className="space-y-1">
+          <p className="text-sm font-semibold text-slate-500 uppercase tracking-wide">{title}</p>
+          <h3 className="text-3xl font-semibold text-slate-900 tracking-tight">{value}</h3>
+        </div>
+        <div className="text-slate-400">
+          {icon}
+        </div>
+      </div>
+
+      <div className="flex items-center gap-1.5 mt-4">
+        {isPositive ?
+          <ArrowUpRight size={16} className="text-emerald-600" /> :
+          <ArrowDownRight size={16} className="text-rose-600" />
+        }
+        <span className={`text-base font-medium ${isPositive ? 'text-emerald-600' : 'text-rose-600'}`}>
+          {trend}
+        </span>
+        <span className="text-sm text-slate-400">vs last month</span>
       </div>
     </div>
+  );
+};
 
-    <div className="z-10 relative">
-      <div className={`text-2xl font-bold ${textColor} tracking-tight leading-none mb-1.5`}>{value}</div>
-      <div className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded-sm text-[10px] font-bold ${trendColor}`}>
-        <ArrowUpRight size={10} />
-        <span>{trend}</span>
-      </div>
+const HealthBar = ({ label, value }) => (
+  <div className="space-y-2">
+    <div className="flex justify-between text-sm font-medium">
+      <span className="text-slate-600">{label}</span>
+      <span className="text-slate-900">{value}%</span>
+    </div>
+    <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
+      <div
+        className="h-full bg-[var(--color-indigo-600)]"
+        style={{ width: `${value}%` }}
+      ></div>
     </div>
   </div>
 );
 
-const StatusPill = ({ status }) => {
-  const styles = {
-    Active: "bg-emerald-50 text-emerald-700 border-emerald-200",
-    Review: "bg-amber-50 text-amber-700 border-amber-200",
-    Archived: "bg-slate-50 text-slate-500 border-slate-200"
+const StatusIndicator = ({ status }) => {
+  const colors = {
+    Active: "bg-emerald-500",
+    Review: "bg-amber-500",
+    Archived: "bg-slate-400"
   };
 
   return (
-    <span className={`inline-flex items-center justify-center px-2 py-0.5 rounded-sm text-[9px] font-extrabold uppercase tracking-wide border ${styles[status] || styles.Archived} min-w-[60px]`}>
-      {status}
-    </span>
+    <div className="inline-flex items-center justify-end gap-2">
+      <span className={`w-2.5 h-2.5 rounded-full ${colors[status] || colors.Archived}`}></span>
+      <span className="text-sm font-medium text-slate-600">{status}</span>
+    </div>
   );
 };
 

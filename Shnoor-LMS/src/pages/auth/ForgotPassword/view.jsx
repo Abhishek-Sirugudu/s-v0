@@ -1,5 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { ChevronLeft, KeyRound, AlertCircle, CheckCircle2, ShieldCheck, Mail } from 'lucide-react';
+import brandLogo from '../../../assets/SHnoor_logo_1.jpg';
+import markLogo from '../../../assets/just_logo.jpeg';
 
 const ForgotPasswordView = ({
     email,
@@ -10,88 +13,105 @@ const ForgotPasswordView = ({
     handleReset
 }) => {
     return (
-        <div className="min-h-screen flex text-slate-800 font-sans bg-slate-50">
-            {/* Brand Section (Left) - Hidden on mobile */}
-            <div className="hidden md:flex flex-col justify-center items-center w-1/2 lg:w-[45%] bg-[#003B5C] text-white p-12 relative overflow-hidden">
-                <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
-                <div className="z-10 text-center max-w-lg">
-                    <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl">
-                        🔒
+        <div className="flex min-h-screen bg-slate-50 font-sans">
+            {/* Brand Section - Left Side */}
+            <div className="hidden md:flex flex-col justify-between w-5/12 bg-[var(--color-primary-900)] p-12 text-white relative overflow-hidden">
+                <div className="relative z-10">
+                    <div className="flex items-center gap-3 mb-12">
+                        <img
+                            src={brandLogo}
+                            alt="SHNOOR Logo"
+                            className="w-12 h-12 rounded-lg bg-white/10 p-1"
+                        />
+                        <span className="text-lg font-bold tracking-tight">SHNOOR LMS</span>
                     </div>
-                    <h2 className="text-3xl font-bold mb-4 tracking-tight">Security First</h2>
-                    <p className="text-blue-100 text-lg leading-relaxed mb-8">
-                        We value your security. Follow the instructions to securely reset your password
-                        and regain access to your SHNOOR Dashboard.
+
+                    <h2 className="text-4xl font-bold mb-6 tracking-tight leading-tight">
+                        Security is our priority.
+                    </h2>
+                    <p className="text-slate-400 text-lg leading-relaxed max-w-sm">
+                        Recover your access safely and securely using our encrypted recovery gateway.
                     </p>
-                    <div className="bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-white/10 text-left">
-                        <p className="italic text-blue-50">"The support team helped me recover my account in minutes. Great service!"</p>
-                        <p className="text-sm font-bold mt-4 text-white">- James Wilson, Administrator</p>
+                </div>
+
+                <div className="relative z-10">
+                    <div className="bg-white/5 p-6 rounded-2xl border border-white/10 backdrop-blur-sm">
+                        <div className="flex gap-1 text-emerald-400 mb-2">
+                            <ShieldCheck size={20} />
+                            <span className="text-xs font-bold uppercase tracking-wider">Encrypted Channel</span>
+                        </div>
+                        <p className="text-slate-300 text-sm italic">"I was able to recover my account instantly. The security protocols are top-notch."</p>
                     </div>
                 </div>
+
+                {/* Abstract overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-primary-900)] via-transparent to-indigo-900/20 pointer-events-none"></div>
             </div>
 
-            {/* Form Section (Right) */}
-            <div className="flex-1 flex items-center justify-center p-6">
-                <div className="w-full max-w-md bg-white p-8 md:p-10 rounded-2xl md:shadow-xl md:border border-slate-100">
-                    <div className="text-center mb-8">
-                        <div className="w-12 h-12 bg-amber-50 text-amber-500 rounded-xl flex items-center justify-center mx-auto mb-4 text-xl shadow-sm border border-amber-100">
-                            🔑
+            {/* Form Section - Right Side */}
+            <div className="flex-1 flex items-center justify-center p-6 md:p-12 relative bg-white">
+                <div className="w-full max-w-[400px]">
+
+                    <div className="mb-10 text-center md:text-left">
+                        <div className="hidden md:flex w-12 h-12 bg-slate-100 rounded-xl items-center justify-center mb-6">
+                            <KeyRound className="text-slate-900" size={24} />
                         </div>
-                        <h2 className="text-2xl font-bold text-slate-800">Reset Password</h2>
-                        <p className="text-slate-500 text-sm mt-2">Enter your email to receive reset instructions.</p>
+                        {/* Mobile Logo */}
+                        <div className="md:hidden flex flex-col items-center mb-6">
+                            <img src={markLogo} alt="Logo" className="w-12 h-12 rounded-lg mb-4" />
+                        </div>
+
+                        <h1 className="text-2xl font-bold text-slate-900 tracking-tight mb-2">Access Recovery</h1>
+                        <p className="text-slate-500 text-sm">Enter your registered email to receive reset instructions.</p>
                     </div>
 
                     {error && (
-                        <div className="mb-6 p-4 bg-red-50 border border-red-100 text-red-700 text-sm rounded-lg flex items-center gap-2 animate-pulse">
-                            <span className="font-bold">Error:</span> {error}
+                        <div className="mb-6 p-4 bg-red-50 border border-red-100 text-red-600 rounded-xl text-sm font-medium flex items-center gap-2 text-left">
+                            <AlertCircle size={18} className="shrink-0" />
+                            {error}
                         </div>
                     )}
 
                     {message && (
-                        <div className="mb-6 p-4 bg-emerald-50 border border-emerald-100 text-emerald-700 text-sm rounded-lg flex items-center gap-2 text-center justify-center">
-                            ✅ {message}
+                        <div className="mb-6 p-4 bg-emerald-50 border border-emerald-100 text-emerald-700 text-sm font-medium rounded-xl flex items-center gap-2 text-left">
+                            <CheckCircle2 size={18} className="shrink-0" />
+                            {message}
                         </div>
                     )}
 
                     <form onSubmit={handleReset} className="space-y-6">
-                        <div className="space-y-1.5">
-                            <label className="text-xs font-bold text-slate-700 uppercase tracking-wide">
-                                Email Address
-                            </label>
-                            <input
-                                type="email"
-                                placeholder="Enter your registered email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
-                                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#003B5C]/20 focus:border-[#003B5C] transition-all text-sm font-medium"
-                            />
+                        <div className="space-y-2">
+                            <label className="block text-[11px] font-black text-slate-500 uppercase tracking-[0.2em]">Email Address</label>
+                            <div className="relative">
+                                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+                                <input
+                                    type="email"
+                                    placeholder="name@institution.com"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    className="input-field !pl-12"
+                                    required
+                                />
+                            </div>
                         </div>
 
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full py-3 px-4 bg-[#003B5C] hover:bg-[#002e48] text-white font-bold rounded-lg shadow-sm hover:shadow-md transition-all transform active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                            className="w-full bg-[var(--color-primary)] hover:bg-slate-800 text-white font-bold py-3 px-4 rounded-xl shadow-lg shadow-slate-900/10 transform transition-all active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed"
                         >
-                            {loading ? (
-                                <>
-                                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                                    <span>Sending Link...</span>
-                                </>
-                            ) : (
-                                <span>Reset Password</span>
-                            )}
+                            {loading ? 'Sending Link...' : 'Send Recovery Link'}
                         </button>
 
-                        <div className="text-center border-t border-slate-100 pt-6 mt-6">
-                            <p className="text-sm text-slate-500">
-                                Remembered your password?{' '}
-                                <Link to="/" className="text-[#003B5C] font-bold hover:underline">
-                                    Sign In
-                                </Link>
-                            </p>
-                        </div>
+                        <Link to="/login" className="flex items-center justify-center gap-2 text-sm font-semibold text-[var(--color-indigo-600)] hover:text-indigo-800 transition-colors pt-2">
+                            <ChevronLeft size={16} />
+                            Back to Authority Gateway
+                        </Link>
                     </form>
+                </div>
+
+                <div className="absolute bottom-6 text-[10px] text-slate-400 font-medium uppercase tracking-widest hidden md:block">
+                    Secured by SHNOOR V1.0
                 </div>
             </div>
         </div>

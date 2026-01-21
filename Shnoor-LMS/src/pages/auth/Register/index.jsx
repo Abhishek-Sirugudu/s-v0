@@ -6,12 +6,13 @@ import { auth, db } from '../../../auth/firebase';
 import RegisterView from './view';
 
 const Register = () => {
+    const [step, setStep] = useState(1);
     const [formData, setFormData] = useState({
         fullName: '',
         email: '',
         password: '',
         confirmPassword: '',
-        role: 'student'
+        role: '' // Role is selected in Step 1
     });
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -26,6 +27,17 @@ const Register = () => {
             ...formData,
             [e.target.name]: e.target.value
         });
+    };
+
+    const handleRoleSelect = (role) => {
+        setFormData(prev => ({ ...prev, role }));
+        setStep(2);
+        setError('');
+    };
+
+    const handleBack = () => {
+        setStep(1);
+        setError('');
     };
 
     const togglePasswordVisibility = () => {
@@ -62,7 +74,7 @@ const Register = () => {
                 accountStatus: 'pending'
             });
 
-            setSuccessMessage("Account created successfully. Your account is pending Admin approval. Please wait for verification.");
+            setSuccessMessage("Account created successfully. Your account is pending Admin approval.");
 
             setTimeout(() => {
                 navigate('/login');
@@ -82,6 +94,8 @@ const Register = () => {
 
     return (
         <RegisterView
+            step={step}
+            setStep={setStep}
             formData={formData}
             error={error}
             loading={loading}
@@ -89,6 +103,8 @@ const Register = () => {
             showPassword={showPassword}
             showConfirmPassword={showConfirmPassword}
             handleChange={handleChange}
+            handleRoleSelect={handleRoleSelect}
+            handleBack={handleBack}
             handleRegister={handleRegister}
             togglePasswordVisibility={togglePasswordVisibility}
             toggleConfirmPasswordVisibility={toggleConfirmPasswordVisibility}
