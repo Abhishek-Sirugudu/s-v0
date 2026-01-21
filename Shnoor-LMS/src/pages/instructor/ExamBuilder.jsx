@@ -27,7 +27,10 @@ const ExamBuilder = () => {
                 const snapshot = await getDocs(q);
                 const courses = snapshot.docs.map(doc => ({
                     id: doc.id,
-                    title: doc.data().title
+                    id: doc.id,
+                    title: doc.data().title,
+                    validityPeriod: doc.data().validityPeriod,
+                    validityUnit: doc.data().validityUnit
                 }));
                 setInstructorCourses(courses);
             } catch (err) {
@@ -43,13 +46,31 @@ const ExamBuilder = () => {
         type: 'Exam',
         duration: 60,
         passPercentage: 70,
+        passPercentage: 70,
         linkedCourseId: '',
+        validityPeriod: '',
+        validityUnit: 'Weeks',
         questions: []
     });
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+        setFormData(prev => {
+            const updates = { ...prev, [name]: value };
+
+            // Auto-update validity if linking a course
+            if (name === 'linkedCourseId') {
+                const selectedCourse = instructorCourses.find(c => c.id === value);
+                if (selectedCourse) {
+                    updates.validityPeriod = selectedCourse.validityPeriod || '';
+                    updates.validityUnit = selectedCourse.validityUnit || 'Weeks';
+                } else {
+                    updates.validityPeriod = '';
+                    updates.validityUnit = 'Weeks';
+                }
+            }
+            return updates;
+        });
     };
 
     const addQuestion = (type) => {
@@ -192,11 +213,46 @@ const ExamBuilder = () => {
                                 ))}
                             </select>
                             <small style={{ color: '#666', marginTop: '5px', display: 'block' }}>
-                                If selected, students must complete this course before taking the exam.
+                                If selected, the exam validity will follow the course duration.
                             </small>
                         </div>
+
                         <div className="form-group">
-                            <label>Duration (minutes)</label>
+                            <label>Exam Validity (Access Period)</label>
+                            <div className="flex-center-gap" style={{ display: 'flex', gap: '10px' }}>
+                                <input
+                                    type="number"
+                                    name="validityPeriod"
+                                    placeholder="e.g. 4"
+                                    value={formData.validityPeriod}
+                                    onChange={handleInputChange}
+                                    disabled={!!formData.linkedCourseId}
+                                    title={formData.linkedCourseId ? "Inherited from Linked Course" : "Set Validity Period"}
+                                    style={{ flex: 1, backgroundColor: formData.linkedCourseId ? '#f3f4f6' : 'white' }}
+                                />
+                                <select
+                                    name="validityUnit"
+                                    value={formData.validityUnit}
+                                    onChange={handleInputChange}
+                                    disabled={!!formData.linkedCourseId}
+                                    style={{ width: '120px', backgroundColor: formData.linkedCourseId ? '#f3f4f6' : 'white' }}
+                                >
+                                    <option value="Days">Days</option>
+                                    <option value="Weeks">Weeks</option>
+                                    <option value="Months">Months</option>
+                                    <option value="Years">Years</option>
+                                </select>
+                            </div>
+                            {formData.linkedCourseId && (
+                                <small className="text-blue-500" style={{ marginTop: '5px', display: 'block' }}>
+                                    <FaExclamationCircle style={{ marginRight: 4 }} />
+                                    Syncs with Course Duration
+                                </small>
+                            )}
+                        </div>
+
+                        <div className="form-group">
+                            <label>Exam Timer Duration (minutes)</label>
                             <input type="number" name="duration" value={formData.duration} onChange={handleInputChange} />
                         </div>
                         <div className="form-group">

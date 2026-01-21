@@ -22,6 +22,8 @@ const AddCourse = () => {
     customCategory: '',
     thumbnail: '',
     level: '',
+    validityPeriod: '',
+    validityUnit: 'Weeks',
     status: 'draft',
     modules: []
   });
@@ -65,7 +67,12 @@ const AddCourse = () => {
           const docRef = doc(db, "courses", editCourseId);
           const docSnap = await getDoc(docRef);
           if (docSnap.exists()) {
-            setCourseData({ ...docSnap.data() });
+            const data = docSnap.data();
+            setCourseData({ 
+              ...data,
+              validityPeriod: data.validityPeriod || '',
+              validityUnit: data.validityUnit || 'Weeks'
+            });
           }
         } catch (err) {
           console.error("Error loading course:", err);
@@ -190,6 +197,8 @@ const AddCourse = () => {
       category: finalCategory,
       thumbnail: courseData.thumbnail,
       level: courseData.level,
+      validityPeriod: courseData.validityPeriod,
+      validityUnit: courseData.validityUnit,
       status: statusOverride,
       modules: courseData.modules,
       instructorId: auth.currentUser.uid,
@@ -292,6 +301,32 @@ const AddCourse = () => {
                 <option value="Intermediate">Intermediate</option>
                 <option value="Advanced">Advanced</option>
               </select>
+            </div>
+
+            <div className="form-group">
+              <label>Course Validity (Duration to complete) <span className="text-red-500">*</span></label>
+              <div className="flex-center-gap" style={{ display: 'flex', gap: '10px' }}>
+                <input
+                  type="number"
+                  name="validityPeriod"
+                  placeholder="e.g. 4"
+                  value={courseData.validityPeriod}
+                  onChange={handleCourseChange}
+                  required
+                  style={{ flex: 1 }}
+                />
+                <select 
+                  name="validityUnit" 
+                  value={courseData.validityUnit} 
+                  onChange={handleCourseChange}
+                  style={{ width: '120px' }}
+                >
+                  <option value="Days">Days</option>
+                  <option value="Weeks">Weeks</option>
+                  <option value="Months">Months</option>
+                  <option value="Years">Years</option>
+                </select>
+              </div>
             </div>
 
             {isCustomCategory && (
@@ -538,6 +573,7 @@ const AddCourse = () => {
               <p><strong>Description:</strong> {courseData.description}</p>
               <p><strong>Category:</strong> {isCustomCategory ? courseData.customCategory : courseData.category}</p>
               <p><strong>Level:</strong> {courseData.level}</p>
+              <p><strong>Validity:</strong> {courseData.validityPeriod} {courseData.validityUnit}</p>
               <p><strong>Modules:</strong> {courseData.modules.length}</p>
               <p><strong>Total Duration:</strong> {courseData.modules.reduce((acc, m) => acc + Number(m.duration || 0), 0)} mins</p>
             </div>
