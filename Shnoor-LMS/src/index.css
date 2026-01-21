@@ -9,9 +9,9 @@
   
   --font-family-base: 'Inter', sans-serif;
   
-  --radius-xl: 0.75rem; /* 12px */
-  --radius-2xl: 1rem; /* 16px */
-  --radius-3xl: 1.5rem; /* 24px */
+  --radius-xl: 0.75rem;  
+  --radius-2xl: 1rem;  
+  --radius-3xl: 1.5rem;  
 }
 
 :root {

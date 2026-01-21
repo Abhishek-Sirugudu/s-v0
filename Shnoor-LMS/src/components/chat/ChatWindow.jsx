@@ -106,7 +106,7 @@ const ChatWindow = ({ activeChat, currentUser, onSendMessage, onBack }) => {
 
     return (
         <div className="flex flex-col h-full bg-white">
-            {/* Header */}
+            { }
             <div className="h-16 px-6 border-b border-slate-200 flex items-center justify-between bg-white shrink-0 sticky top-0 z-10 shadow-sm">
                 <div className="flex items-center gap-4">
                     <button
@@ -125,7 +125,7 @@ const ChatWindow = ({ activeChat, currentUser, onSendMessage, onBack }) => {
                 </div>
             </div>
 
-            {/* Messages Area */}
+            { }
             <div
                 className="flex-1 overflow-y-auto p-6 space-y-4 bg-slate-50 scroll-smooth custom-scrollbar"
                 onClick={() => setShowEmoji(false)}
@@ -165,7 +165,7 @@ const ChatWindow = ({ activeChat, currentUser, onSendMessage, onBack }) => {
                 <div ref={messagesEndRef} />
             </div>
 
-            {/* File Preview Bar */}
+            { }
             {selectedFile && (
                 <div className="px-4 py-3 bg-blue-50 border-t border-blue-100 flex items-center gap-3">
                     <div className="p-2 bg-white rounded-lg shadow-sm">
@@ -185,13 +185,13 @@ const ChatWindow = ({ activeChat, currentUser, onSendMessage, onBack }) => {
                 </div>
             )}
 
-            {/* Input Area */}
+            { }
             <div className="p-4 bg-white border-t border-slate-200">
                 <form
                     className="flex items-center gap-2 bg-slate-100 rounded-2xl p-1.5 border border-transparent focus-within:border-blue-500/50 focus-within:bg-white focus-within:ring-4 focus-within:ring-blue-500/10 transition-all shadow-inner"
                     onSubmit={handleSubmit}
                 >
-                    {/* Emoji Toggle */}
+                    { }
                     <button
                         type="button"
                         className="p-2.5 text-slate-400 hover:text-amber-500 hover:bg-amber-50 rounded-xl transition-colors relative"
@@ -205,7 +205,7 @@ const ChatWindow = ({ activeChat, currentUser, onSendMessage, onBack }) => {
                         )}
                     </button>
 
-                    {/* File Upload */}
+                    { }
                     <button
                         type="button"
                         className="p-2.5 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-colors"
@@ -221,7 +221,7 @@ const ChatWindow = ({ activeChat, currentUser, onSendMessage, onBack }) => {
                         onChange={handleFileSelect}
                     />
 
-                    {/* Text Input */}
+                    { }
                     <input
                         type="text"
                         placeholder="Type a message..."
@@ -232,7 +232,7 @@ const ChatWindow = ({ activeChat, currentUser, onSendMessage, onBack }) => {
                         className="flex-1 bg-transparent border-none focus:ring-0 text-slate-800 placeholder-slate-400 px-2 font-medium"
                     />
 
-                    {/* Send Button */}
+                    { }
                     <button
                         type="submit"
                         disabled={(!newMessage.trim() && !selectedFile) || isUploading}

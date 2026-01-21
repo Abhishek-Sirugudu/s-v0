@@ -63,7 +63,7 @@ const ApproveUsersView = ({ loading, pendingUsers, handleAction }) => {
                                                 <div className="font-bold text-slate-900 text-base tracking-tight">{user.name || 'Unknown Name'}</div>
                                                 <div className="text-sm text-slate-500 font-medium">{user.email}</div>
                                                 <div className="md:hidden mt-1 flex gap-2">
-                                                    {/* Mobile Role Badge */}
+                                                    { }
                                                     <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wide ${user.role === 'admin' ? 'bg-purple-50 text-purple-700 text-xs' :
                                                         user.role === 'instructor' ? 'bg-indigo-50 text-indigo-700' :
                                                             'bg-emerald-50 text-emerald-700'

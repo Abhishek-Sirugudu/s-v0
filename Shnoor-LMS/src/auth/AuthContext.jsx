@@ -1,4 +1,4 @@
-// src/auth/AuthContext.jsx
+
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { auth, db } from './firebase';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
@@ -19,14 +19,14 @@ export function AuthProvider({ children }) {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         try {
-          // Get Role from Firebase
+          
           const docRef = doc(db, 'users', user.uid);
           const docSnap = await getDoc(docRef);
 
           if (docSnap.exists()) {
             setUserRole(docSnap.data().role);
           } else {
-            setUserRole('student'); // Default fallback
+            setUserRole('student'); 
           }
 
         } catch (error) {

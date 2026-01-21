@@ -24,7 +24,7 @@ const AssignCourseView = ({
 
                     <div className="flex flex-1 overflow-hidden divide-x divide-slate-200">
 
-                        {/* Students Column */}
+                        { }
                         <div className="flex-1 flex flex-col min-w-0 bg-slate-50/50">
                             <div className="p-4 border-b border-slate-100 bg-white">
                                 <h3 className="flex items-center gap-2 text-lg font-bold text-slate-800 mb-4 tracking-tight">
@@ -76,7 +76,7 @@ const AssignCourseView = ({
                             </div>
                         </div>
 
-                        {/* Courses Column */}
+                        { }
                         <div className={`flex-1 flex flex-col min-w-0 transition-opacity ${selectedStudents.length === 0 ? 'opacity-50 pointer-events-none bg-slate-50' : 'bg-white'}`}>
                             <div className="p-4 border-b border-slate-100 bg-white">
                                 <h3 className="flex items-center gap-2 text-lg font-bold text-slate-800 mb-1 tracking-tight">

@@ -17,7 +17,7 @@ const StudentPerformanceView = ({
 
     return (
         <div className="max-w-7xl mx-auto pb-12">
-            {/* Header */}
+            { }
             <div className="flex items-center gap-4 mb-8">
                 <button
                     onClick={() => navigate(-1)}
@@ -31,9 +31,9 @@ const StudentPerformanceView = ({
                 </div>
             </div>
 
-            {/* Stats Cards */}
+            { }
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                {/* Total Students */}
+                { }
                 <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm border-l-4 border-l-blue-600">
                     <div className="flex justify-between items-center">
                         <div>
@@ -46,7 +46,7 @@ const StudentPerformanceView = ({
                     </div>
                 </div>
 
-                {/* At Risk */}
+                { }
                 <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm border-l-4 border-l-red-500">
                     <div className="flex justify-between items-center">
                         <div>
@@ -61,7 +61,7 @@ const StudentPerformanceView = ({
                     </div>
                 </div>
 
-                {/* High Performers */}
+                { }
                 <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm border-l-4 border-l-emerald-500">
                     <div className="flex justify-between items-center">
                         <div>
@@ -77,7 +77,7 @@ const StudentPerformanceView = ({
                 </div>
             </div>
 
-            {/* Students Table */}
+            { }
             <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
                 <div className="p-6 border-b border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4">
                     <h3 className="text-lg font-bold text-slate-900">Enrolled Students</h3>

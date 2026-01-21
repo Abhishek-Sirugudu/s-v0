@@ -35,9 +35,9 @@ const CourseDetailView = ({
                 <FaArrowLeft /> Back to Courses
             </button>
 
-            {/* Hero Section */}
+            { }
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                {/* Left Column: Content */}
+                { }
                 <div className="lg:col-span-2 space-y-8">
                     <div>
                         <div className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-700 uppercase tracking-wide mb-4">
@@ -73,7 +73,7 @@ const CourseDetailView = ({
                         </div>
                     </div>
 
-                    {/* What you'll learn */}
+                    { }
                     <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
                         <h3 className="text-xl font-bold text-slate-900 mb-6">What you'll learn</h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

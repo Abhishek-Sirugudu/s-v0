@@ -72,8 +72,8 @@ const CoursePlayer = () => {
                 awardXP(auth.currentUser.uid, 10, 'Completed Lesson');
             }
 
-            // Optional: Toast notification here instead of alert
-            // alert("Module marked as completed! +10 XP 🎉");
+            
+            
         }
     };
 

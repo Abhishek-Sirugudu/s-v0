@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaClock, FaAngleLeft, FaAngleRight, FaTrophy, FaTimesCircle, FaCheckCircle, FaCode } from 'react-icons/fa';
-import PracticeSession from '../PracticeSession'; // Assuming PracticeSession is a separate component
+import PracticeSession from '../PracticeSession'; 
 
 const ExamRunnerView = ({
     loading, exam,
@@ -79,7 +79,7 @@ const ExamRunnerView = ({
 
     return (
         <div className="h-[calc(100vh-6rem)] flex flex-col bg-slate-50">
-            {/* Header */}
+            { }
             <div className="h-16 bg-slate-900 text-white px-6 flex items-center justify-between shrink-0 shadow-md z-20">
                 <div className="flex items-center gap-4">
                     <button
@@ -107,9 +107,9 @@ const ExamRunnerView = ({
                 )}
             </div>
 
-            {/* Layout */}
+            { }
             <div className="flex flex-1 overflow-hidden">
-                {/* Sidebar */}
+                { }
                 <div className="w-64 bg-white border-r border-slate-200 flex flex-col p-6 overflow-y-auto hidden md:flex">
                     <div className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-6">
                         Progress
@@ -147,7 +147,7 @@ const ExamRunnerView = ({
                     </div>
                 </div>
 
-                {/* Content */}
+                { }
                 <div className={`flex-1 overflow-y-auto ${currentQ.type === 'coding' ? 'p-0' : 'p-6 md:p-10'} flex flex-col items-center bg-slate-50/50`}>
 
                     {currentQ.type === 'descriptive' ? (

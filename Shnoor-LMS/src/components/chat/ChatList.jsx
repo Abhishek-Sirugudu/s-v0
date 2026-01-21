@@ -12,7 +12,7 @@ const ChatList = ({ chats, activeChat, onSelectChat, currentUser }) => {
             </div>
 
             <div className="flex-1 overflow-y-auto custom-scrollbar">
-                {/* Groups Section */}
+                { }
                 <div className="pt-4 px-3 pb-2">
                     <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider px-3 mb-2">Course Groups</h4>
                     <div className="space-y-1">
@@ -37,7 +37,7 @@ const ChatList = ({ chats, activeChat, onSelectChat, currentUser }) => {
                     </div>
                 </div>
 
-                {/* Direct Messages Section */}
+                { }
                 <div className="pt-2 px-3 pb-4">
                     <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider px-3 mb-2">Direct Messages</h4>
                     <div className="space-y-1">

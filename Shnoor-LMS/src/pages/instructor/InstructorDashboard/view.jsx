@@ -14,7 +14,7 @@ const InstructorDashboardView = ({ loading, userName, stats, navigate }) => {
 
     return (
         <div className="max-w-7xl mx-auto pb-12">
-            {/* Header */}
+            { }
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
                 <div>
                     <h2 className="text-2xl font-bold text-slate-900">Hello, {userName}! 👋</h2>
@@ -25,9 +25,9 @@ const InstructorDashboardView = ({ loading, userName, stats, navigate }) => {
                 </div>
             </div>
 
-            {/* Stats Grid */}
+            { }
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                {/* Courses Stat */}
+                { }
                 <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm border-l-4 border-l-amber-400">
                     <div className="flex justify-between items-center">
                         <div>
@@ -40,7 +40,7 @@ const InstructorDashboardView = ({ loading, userName, stats, navigate }) => {
                     </div>
                 </div>
 
-                {/* Students Stat */}
+                { }
                 <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm border-l-4 border-l-blue-800">
                     <div className="flex justify-between items-center">
                         <div>
@@ -53,7 +53,7 @@ const InstructorDashboardView = ({ loading, userName, stats, navigate }) => {
                     </div>
                 </div>
 
-                {/* Rating Stat */}
+                { }
                 <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm border-l-4 border-l-amber-400">
                     <div className="flex justify-between items-center">
                         <div>
@@ -69,7 +69,7 @@ const InstructorDashboardView = ({ loading, userName, stats, navigate }) => {
                 </div>
             </div>
 
-            {/* Analytics Section */}
+            { }
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
                 <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
                     <div className="flex justify-between items-center mb-6">
@@ -102,7 +102,7 @@ const InstructorDashboardView = ({ loading, userName, stats, navigate }) => {
                 </div>
             </div>
 
-            {/* Quick Actions */}
+            { }
             <div>
                 <h3 className="text-xl font-bold text-slate-900 mb-6">Quick Actions</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

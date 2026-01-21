@@ -4,7 +4,7 @@ import { FaBookReader, FaFire, FaMedal, FaPlayCircle, FaTrophy, FaBolt, FaClock,
 const StudentDashboardView = ({ studentName, enrolledCount, lastCourse, gamification, navigate }) => {
     return (
         <div className="space-y-8 animate-fade-in">
-            {/* Welcome Section */}
+            { }
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
                 <div>
                     <h2 className="text-2xl font-bold text-slate-900 mb-1">Welcome back, {studentName}! 👋</h2>
@@ -24,9 +24,9 @@ const StudentDashboardView = ({ studentName, enrolledCount, lastCourse, gamifica
                 </div>
             </div>
 
-            {/* Stats Grid */}
+            { }
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {/* Daily Streak Card */}
+                { }
                 <div
                     className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 cursor-pointer relative overflow-hidden group hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
                     onClick={() => navigate('/student/leaderboard')}
@@ -60,7 +60,7 @@ const StudentDashboardView = ({ studentName, enrolledCount, lastCourse, gamifica
                     </div>
                 </div>
 
-                {/* Enrolled Courses Card */}
+                { }
                 <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 group hover:shadow-lg hover:-translate-y-1 transition-all duration-300 relative overflow-hidden">
                     <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-amber-400 to-orange-400"></div>
                     <div className="flex justify-between items-center h-full">
@@ -74,7 +74,7 @@ const StudentDashboardView = ({ studentName, enrolledCount, lastCourse, gamifica
                     </div>
                 </div>
 
-                {/* Assignments Card */}
+                { }
                 <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 group hover:shadow-lg hover:-translate-y-1 transition-all duration-300 relative overflow-hidden">
                     <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-400 to-cyan-400"></div>
                     <div className="flex justify-between items-center h-full">
@@ -89,7 +89,7 @@ const StudentDashboardView = ({ studentName, enrolledCount, lastCourse, gamifica
                 </div>
             </div>
 
-            {/* Resume Course Banner */}
+            { }
             {lastCourse ? (
                 <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-700 to-indigo-600 shadow-lg text-white p-8 flex flex-col md:flex-row items-center justify-between gap-6 group">
                     <div className="relative z-10">
@@ -102,11 +102,11 @@ const StudentDashboardView = ({ studentName, enrolledCount, lastCourse, gamifica
                             <FaPlayCircle /> Resume Course
                         </button>
                     </div>
-                    {/* Decorative Icon */}
+                    { }
                     <div className="hidden md:block absolute right-10 bottom-[-20px] text-white/10 transform rotate-12 group-hover:rotate-0 transition-transform duration-500">
                         <FaPlayCircle size={140} />
                     </div>
-                    {/* Abstract Shapes */}
+                    { }
                     <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
                 </div>
             ) : (

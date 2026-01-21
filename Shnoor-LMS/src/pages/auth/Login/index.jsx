@@ -8,7 +8,7 @@ import LoginView from './view';
 const Login = () => {
     const navigate = useNavigate();
 
-    // State
+    
     const [email, setEmail] = useState(() => {
         if (typeof window === 'undefined') return '';
         const saved = localStorage.getItem('rememberedEmail');

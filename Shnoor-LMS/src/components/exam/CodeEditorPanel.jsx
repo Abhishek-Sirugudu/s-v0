@@ -11,7 +11,7 @@ const CodeEditorPanel = ({ question, startCode, language, onLanguageChange, onCo
 
     return (
         <div className="flex flex-col h-full bg-[#1e1e1e] border-l border-[#333]">
-            {/* Editor Header */}
+            { }
             <div className="flex justify-between items-center px-4 py-2 bg-[#252526] border-b border-[#333]">
                 <div className="flex items-center gap-2">
                     <span role="img" aria-label="code" className="text-sm">💻</span>
@@ -33,7 +33,7 @@ const CodeEditorPanel = ({ question, startCode, language, onLanguageChange, onCo
                 </div>
             </div>
 
-            {/* Monaco Wrapper */}
+            { }
             <div className="flex-1 min-h-0">
                 <Editor
                     height="100%"
@@ -53,7 +53,7 @@ const CodeEditorPanel = ({ question, startCode, language, onLanguageChange, onCo
                 />
             </div>
 
-            {/* Bottom Panel */}
+            { }
             <div className="h-[200px] flex flex-col bg-[#1e1e1e] border-t border-[#333]">
                 <div className="flex border-b border-[#333] bg-[#252526]">
                     <div
@@ -103,7 +103,7 @@ const CodeEditorPanel = ({ question, startCode, language, onLanguageChange, onCo
                 </div>
             </div>
 
-            {/* Footer Actions */}
+            { }
             <div className="p-3 bg-[#252526] border-t border-[#333] flex justify-end gap-3">
                 <button className="flex items-center gap-2 px-4 py-1.5 bg-[#333] text-slate-300 rounded hover:bg-[#444] transition-colors text-sm font-bold">
                     <FaSave /> Save

@@ -56,11 +56,11 @@ const CourseListView = ({ loading, courses, navigate, handleDelete }) => {
                                 className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden cursor-pointer hover:shadow-md hover:-translate-y-1 transition-all group relative"
                                 onClick={() => navigate(`/instructor/add-course?edit=${course.id}`, { state: { courseData: course } })}
                             >
-                                {/* Top Status Bar */}
+                                { }
                                 <div className={`h-1.5 w-full ${statusClasses.split(' ')[0]}`}></div>
 
                                 <div className="p-5">
-                                    {/* Actions Overlay (Initial hidden, visible on hover) */}
+                                    { }
                                     <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity bg-white/90 p-1.5 rounded-lg shadow-sm border border-slate-100 backdrop-blur-sm z-10">
                                         <button
                                             onClick={(e) => { e.stopPropagation(); navigate(`/instructor/add-course?edit=${course.id}`, { state: { courseData: course } }) }}
@@ -82,12 +82,12 @@ const CourseListView = ({ loading, courses, navigate, handleDelete }) => {
                                         </button>
                                     </div>
 
-                                    {/* Icon */}
+                                    { }
                                     <div className="w-16 h-16 bg-slate-100 text-slate-400 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-blue-50 group-hover:text-blue-200 transition-colors">
                                         <FaFolder size={32} />
                                     </div>
 
-                                    {/* Content */}
+                                    { }
                                     <div className="space-y-4">
                                         <div className="flex justify-between items-start gap-2">
                                             <span className="text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full truncate max-w-[50%]">

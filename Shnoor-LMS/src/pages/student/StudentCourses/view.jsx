@@ -25,7 +25,7 @@ const StudentCoursesView = ({
 
     return (
         <div className="space-y-6 animate-fade-in">
-            {/* Header */}
+            { }
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
                     <h3 className="text-2xl font-bold text-slate-900">{activeTab === 'my-learning' ? 'My Learning' : 'Course Catalog'}</h3>
@@ -35,7 +35,7 @@ const StudentCoursesView = ({
                 </div>
             </div>
 
-            {/* Filters */}
+            { }
             <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex flex-col md:flex-row gap-4 items-center">
                 <div className="relative flex-1 w-full">
                     <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
@@ -72,7 +72,7 @@ const StudentCoursesView = ({
                 </div>
             </div>
 
-            {/* Tabs */}
+            { }
             <div className="flex gap-8 border-b border-slate-200 px-2">
                 <button
                     className={`pb-3 text-sm font-semibold transition-all relative ${activeTab === 'my-learning'
@@ -100,7 +100,7 @@ const StudentCoursesView = ({
                 </button>
             </div>
 
-            {/* Course Grid */}
+            { }
             {displayCourses.length === 0 ? (
                 <div className="bg-white border-2 border-dashed border-slate-200 rounded-2xl p-16 text-center">
                     {activeTab === 'my-learning' ? (

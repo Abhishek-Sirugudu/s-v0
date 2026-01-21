@@ -19,9 +19,9 @@ const LeaderboardView = ({ loading, topThree, rest, getRank }) => {
             </h2>
             <p className="text-slate-500 mb-12">Compete with peers and earn your place among the masters!</p>
 
-            {/* Podium */}
+            { }
             <div className="flex justify-center items-end gap-4 mb-16 h-72">
-                {/* 2nd Place */}
+                { }
                 {topThree[1] && (
                     <div className="flex flex-col items-center animate-bounce-slow" style={{ animationDuration: '2.2s' }}>
                         <div className="w-20 h-20 rounded-full bg-slate-200 border-4 border-slate-300 flex items-center justify-center mb-3 overflow-hidden shadow-lg relative z-10">
@@ -38,7 +38,7 @@ const LeaderboardView = ({ loading, topThree, rest, getRank }) => {
                     </div>
                 )}
 
-                {/* 1st Place */}
+                { }
                 {topThree[0] && (
                     <div className="flex flex-col items-center z-20 animate-bounce-slow overflow-visible" style={{ animationDuration: '3s' }}>
                         <FaCrown className="text-yellow-500 text-4xl mb-2 rotate-12 drop-shadow-sm" />
@@ -56,7 +56,7 @@ const LeaderboardView = ({ loading, topThree, rest, getRank }) => {
                     </div>
                 )}
 
-                {/* 3rd Place */}
+                { }
                 {topThree[2] && (
                     <div className="flex flex-col items-center animate-bounce-slow" style={{ animationDuration: '2.5s' }}>
                         <div className="w-20 h-20 rounded-full bg-amber-100 border-4 border-amber-300 flex items-center justify-center mb-3 overflow-hidden shadow-lg relative z-10">
@@ -74,7 +74,7 @@ const LeaderboardView = ({ loading, topThree, rest, getRank }) => {
                 )}
             </div>
 
-            {/* List */}
+            { }
             <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
                 <table className="w-full text-left">
                     <thead className="bg-slate-50 border-b border-slate-200">
@@ -88,10 +88,10 @@ const LeaderboardView = ({ loading, topThree, rest, getRank }) => {
                     <tbody className="divide-y divide-slate-100">
                         {rest.map((student, idx) => {
                             const rank = getRank(student.xp);
-                            // Assuming rank returns { color: 'text-class', bg: 'bg-class', name: 'Rank Name' }
-                            // We might need to adjust if getRank returns tailwind classes or hex strings.
-                            // Based on previous code, looks like it returns classes or we map them.
-                            // Let's assume getRank returns styled object or we style here.
+                            
+                            
+                            
+                            
 
                             return (
                                 <tr key={student.id} className="hover:bg-slate-50 transition-colors">

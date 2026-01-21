@@ -30,7 +30,7 @@ const StudentChatView = ({
 
             <div className={`flex flex-1 h-full overflow-hidden ${activeChat ? 'active-chat-mobile' : ''}`}>
 
-                {/* Chat List Sidebar */}
+                { }
                 <div className={`w-full md:w-80 border-r border-slate-200 bg-slate-50 flex flex-col ${activeChat ? 'hidden md:flex' : 'flex'}`}>
                     <div className="p-4 border-b border-slate-200 bg-white">
                         <h2 className="text-xl font-bold text-slate-800">Messages</h2>
@@ -45,7 +45,7 @@ const StudentChatView = ({
                     </div>
                 </div>
 
-                {/* Chat Window Area */}
+                { }
                 <div className={`flex-1 flex flex-col bg-white ${!activeChat ? 'hidden md:flex' : 'flex'}`}>
                     {activeChat ? (
                         <ChatWindow

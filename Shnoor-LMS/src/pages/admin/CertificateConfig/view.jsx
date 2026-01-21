@@ -95,7 +95,7 @@ const CertificateConfigView = ({ loading, config, setConfig, handleSave }) => {
                                     <small className="text-[10px] uppercase font-bold text-slate-500">{config.authorityName}</small>
                                 </div>
                             </div>
-                            {/* Decorative Corner */}
+                            { }
                             <div className="absolute top-0 left-0 border-t-[40px] border-r-[40px] border-t-blue-900 border-r-transparent"></div>
                             <div className="absolute bottom-0 right-0 border-b-[40px] border-l-[40px] border-b-blue-900 border-l-transparent"></div>
                         </div>

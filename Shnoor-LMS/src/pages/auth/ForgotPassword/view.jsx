@@ -14,7 +14,7 @@ const ForgotPasswordView = ({
 }) => {
     return (
         <div className="flex min-h-screen bg-slate-50 font-sans">
-            {/* Brand Section - Left Side */}
+            { }
             <div className="hidden md:flex flex-col justify-between w-5/12 bg-[var(--color-primary-900)] p-12 text-white relative overflow-hidden">
                 <div className="relative z-10">
                     <div className="flex items-center gap-3 mb-12">
@@ -44,11 +44,11 @@ const ForgotPasswordView = ({
                     </div>
                 </div>
 
-                {/* Abstract overlay */}
+                { }
                 <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-primary-900)] via-transparent to-indigo-900/20 pointer-events-none"></div>
             </div>
 
-            {/* Form Section - Right Side */}
+            { }
             <div className="flex-1 flex items-center justify-center p-6 md:p-12 relative bg-white">
                 <div className="w-full max-w-[400px]">
 
@@ -56,7 +56,7 @@ const ForgotPasswordView = ({
                         <div className="hidden md:flex w-12 h-12 bg-slate-100 rounded-xl items-center justify-center mb-6">
                             <KeyRound className="text-slate-900" size={24} />
                         </div>
-                        {/* Mobile Logo */}
+                        { }
                         <div className="md:hidden flex flex-col items-center mb-6">
                             <img src={markLogo} alt="Logo" className="w-12 h-12 rounded-lg mb-4" />
                         </div>

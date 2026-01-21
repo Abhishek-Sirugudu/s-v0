@@ -20,7 +20,7 @@ const InstructorSettingsView = ({
         <div className="max-w-4xl mx-auto pb-12">
             <h2 className="text-2xl font-bold text-slate-900 mb-8">Instructor Profile & Settings</h2>
 
-            {/* Public Profile Section */}
+            { }
             <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden mb-8">
                 <div className="p-6 border-b border-slate-100 flex items-center gap-3">
                     <div className="w-10 h-10 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center">
@@ -61,7 +61,7 @@ const InstructorSettingsView = ({
                 </div>
             </div>
 
-            {/* Security Section */}
+            { }
             <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
                 <div className="p-6 border-b border-slate-100 flex items-center gap-3">
                     <div className="w-10 h-10 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center">

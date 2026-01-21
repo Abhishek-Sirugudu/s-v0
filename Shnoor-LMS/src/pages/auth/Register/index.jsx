@@ -12,7 +12,7 @@ const Register = () => {
         email: '',
         password: '',
         confirmPassword: '',
-        role: '' // Role is selected in Step 1
+        role: '' 
     });
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);

@@ -14,7 +14,7 @@ const ApproveCoursesView = ({ loading, pendingCourses, selectedCourse, setSelect
 
     return (
         <div className="h-[calc(100vh-6rem)] flex flex-col p-2 bg-slate-50 font-sans w-full">
-            {/* Header */}
+            { }
             <div className="flex justify-between items-center mb-6 shrink-0 px-2">
                 <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-xl bg-indigo-50 text-[var(--color-indigo-600)] flex items-center justify-center border border-indigo-100 shadow-sm">
@@ -31,10 +31,10 @@ const ApproveCoursesView = ({ loading, pendingCourses, selectedCourse, setSelect
                 </div>
             </div>
 
-            {/* Content Area */}
+            { }
             <div className={`flex flex-1 gap-6 overflow-hidden w-full ${selectedCourse ? 'grid grid-cols-1 lg:grid-cols-[1fr_500px]' : ''}`}>
 
-                {/* Courses List */}
+                { }
                 <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col transition-all duration-300">
                     <div className="overflow-y-auto flex-1 custom-scrollbar">
                         <table className="w-full text-left border-collapse">
@@ -97,10 +97,10 @@ const ApproveCoursesView = ({ loading, pendingCourses, selectedCourse, setSelect
                     </div>
                 </div>
 
-                {/* Details Panel */}
+                { }
                 {selectedCourse && (
                     <div className="bg-white rounded-2xl shadow-xl border border-slate-200 flex flex-col overflow-hidden animate-slide-in-right h-full">
-                        {/* Details Header */}
+                        { }
                         <div className="p-6 border-b border-slate-100 bg-slate-50/50 flex justify-between items-start gap-4">
                             <div>
                                 <h3 className="text-xl font-bold text-slate-900 leading-tight mb-2 tracking-tight">{selectedCourse.title}</h3>
@@ -116,7 +116,7 @@ const ApproveCoursesView = ({ loading, pendingCourses, selectedCourse, setSelect
                             </button>
                         </div>
 
-                        {/* Details Content */}
+                        { }
                         <div className="flex-1 overflow-y-auto p-6 space-y-6 custom-scrollbar">
                             <div>
                                 <h4 className="text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-2">Description</h4>
@@ -158,7 +158,7 @@ const ApproveCoursesView = ({ loading, pendingCourses, selectedCourse, setSelect
                             </div>
                         </div>
 
-                        {/* Actions Footer */}
+                        { }
                         <div className="p-4 border-t border-slate-100 bg-slate-50 flex gap-3">
                             <button
                                 className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-white text-red-600 rounded-xl font-bold border border-red-100 hover:bg-red-50 transition-colors text-sm shadow-sm"

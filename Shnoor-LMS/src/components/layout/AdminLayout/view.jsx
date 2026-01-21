@@ -24,7 +24,7 @@ const AdminLayoutView = ({ isSidebarOpen, setIsSidebarOpen, handleLogout, adminN
 
     return (
         <div className="flex min-h-screen bg-slate-50 font-sans text-slate-900">
-            {/* Mobile Sidebar Overlay */}
+            { }
             {isSidebarOpen && (
                 <div
                     className="fixed inset-0 bg-black/50 z-40 lg:hidden backdrop-blur-sm transition-opacity"
@@ -32,12 +32,12 @@ const AdminLayoutView = ({ isSidebarOpen, setIsSidebarOpen, handleLogout, adminN
                 />
             )}
 
-            {/* Sidebar */}
+            { }
             <div className={`fixed lg:static inset-y-0 left-0 z-50 w-64 bg-white border-r border-slate-200 shadow-xl lg:shadow-none transform transition-transform duration-300 ease-in-out
                 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
             `}>
                 <div className="flex flex-col h-full">
-                    {/* Brand */}
+                    { }
                     <div className="flex items-center gap-3 p-6 border-b border-slate-100">
                         <img
                             src={markLogo}
@@ -50,7 +50,7 @@ const AdminLayoutView = ({ isSidebarOpen, setIsSidebarOpen, handleLogout, adminN
                         </div>
                     </div>
 
-                    {/* Navigation */}
+                    { }
                     <div className="flex-1 overflow-y-auto py-6 px-4 scrollbar-thin scrollbar-thumb-slate-200">
 
                         <div className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 px-2">Main Menu</div>
@@ -72,9 +72,9 @@ const AdminLayoutView = ({ isSidebarOpen, setIsSidebarOpen, handleLogout, adminN
                 </div>
             </div>
 
-            {/* Main Content */}
+            { }
             <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-                {/* Top Bar */}
+                { }
                 <header className="bg-white border-b border-slate-200 h-16 px-4 lg:px-8 flex items-center justify-between shadow-sm sticky top-0 z-30">
                     <div className="flex items-center gap-4">
                         <button
@@ -106,7 +106,7 @@ const AdminLayoutView = ({ isSidebarOpen, setIsSidebarOpen, handleLogout, adminN
                     </div>
                 </header>
 
-                {/* Content Area */}
+                { }
                 <main className="flex-1 overflow-auto bg-slate-50 p-4 lg:p-8">
                     <div className="max-w-7xl mx-auto">
                         <Outlet />

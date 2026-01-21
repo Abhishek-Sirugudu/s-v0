@@ -5,7 +5,7 @@ const SocketContext = createContext();
 export const useSocket = () => useContext(SocketContext);
 
 export const SocketProvider = ({ children }) => {
-    // Mock socket object with no-op functions to prevent errors
+    
     const mockSocket = {
         on: (event, callback) => { console.log(`[MockSocket] Listening for: ${event}`); },
         emit: (event, data) => { console.log(`[MockSocket] Emitting: ${event}`, data); },

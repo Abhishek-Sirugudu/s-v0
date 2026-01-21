@@ -23,7 +23,7 @@ const PracticeAreaView = ({ loading, filter, setFilter, filteredChallenges, navi
 
     return (
         <div className="max-w-7xl mx-auto pb-12">
-            {/* Header */}
+            { }
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
                 <div>
                     <h2 className="text-2xl font-bold text-slate-900">Practice Arena</h2>
@@ -47,7 +47,7 @@ const PracticeAreaView = ({ loading, filter, setFilter, filteredChallenges, navi
                 </div>
             </div>
 
-            {/* Grid */}
+            { }
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {filteredChallenges.length === 0 ? (
                     <div className="col-span-full py-16 text-center bg-slate-50 border-2 border-dashed border-slate-200 rounded-3xl">

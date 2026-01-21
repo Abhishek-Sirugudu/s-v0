@@ -23,7 +23,7 @@ import {
 } from 'lucide-react';
 
 const AdminDashboard = () => {
-  // --- Mock Data Generators ---
+  
   const generateActivityData = () => {
     const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
     return days.map(day => ({
@@ -54,7 +54,7 @@ const AdminDashboard = () => {
     <div className="min-h-screen bg-[#f8fafc] p-2 font-sans text-slate-900 flex flex-col">
       <div className="w-full space-y-8 flex-1 flex flex-col">
 
-        {/* --- Header Section (Minimalist) --- */}
+        { }
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-6 border-b border-slate-200 pb-6 shrink-0">
           <div>
             <h1 className="text-3xl font-semibold text-slate-900 tracking-tight">Executive Overview</h1>
@@ -72,7 +72,7 @@ const AdminDashboard = () => {
           </div>
         </div>
 
-        {/* --- KPI Grid (Formal) --- */}
+        { }
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 shrink-0">
           <KpiCard
             title="Total Active Learners"
@@ -104,10 +104,10 @@ const AdminDashboard = () => {
           />
         </div>
 
-        {/* --- Main Analytics (Clean Lines) --- */}
+        { }
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 shrink-0">
 
-          {/* Traffic Chart */}
+          { }
           <div className="lg:col-span-2 bg-white p-6 rounded-lg border border-slate-200 shadow-sm flex flex-col h-[400px]">
             <div className="flex justify-between items-center mb-8 shrink-0">
               <div>
@@ -172,7 +172,7 @@ const AdminDashboard = () => {
             </div>
           </div>
 
-          {/* System Health (Linear & Minimal) */}
+          { }
           <div className="bg-white p-6 rounded-lg border border-slate-200 shadow-sm flex flex-col justify-center h-[400px]">
             <h3 className="text-base font-semibold text-slate-900 mb-8">System Status</h3>
 
@@ -192,7 +192,7 @@ const AdminDashboard = () => {
           </div>
         </div>
 
-        {/* --- Data Table (Professional) --- */}
+        { }
         <div className="bg-white border border-slate-200 rounded-lg shadow-sm flex-1 flex flex-col min-h-0">
           <div className="px-6 py-4 border-b border-slate-200 flex justify-between items-center bg-white shrink-0">
             <h3 className="text-base font-semibold text-slate-900">Course Participation Matrix</h3>
@@ -251,7 +251,7 @@ const AdminDashboard = () => {
   );
 };
 
-// --- Minimalist Sub-components ---
+
 
 const KpiCard = ({ title, value, trend, isPositive, icon }) => {
   return (

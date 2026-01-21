@@ -19,7 +19,7 @@ const LoginView = ({
 
     return (
         <div className="flex min-h-screen bg-slate-50 font-sans">
-            {/* Brand Section - Left Side */}
+            { }
             <div className="hidden md:flex flex-col justify-between w-5/12 bg-[var(--color-primary-900)] p-12 text-white relative overflow-hidden">
                 <div className="relative z-10">
                     <div className="flex items-center gap-3 mb-12">
@@ -49,15 +49,15 @@ const LoginView = ({
                     </div>
                 </div>
 
-                {/* Abstract overlay */}
+                { }
                 <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-primary-900)] via-transparent to-indigo-900/20 pointer-events-none"></div>
             </div>
 
-            {/* Form Section - Right Side */}
+            { }
             <div className="flex-1 flex items-center justify-center p-6 md:p-12 relative bg-white">
                 <div className="w-full max-w-[400px]">
 
-                    {/* Header */}
+                    { }
                     <div className="mb-10">
                         <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center mb-6">
                             <Lock className="text-slate-900" size={24} />
@@ -66,7 +66,7 @@ const LoginView = ({
                         <p className="text-slate-500">Authorize access to your dashboard.</p>
                     </div>
 
-                    {/* Error Alert */}
+                    { }
                     {error && (
                         <div className="mb-6 p-4 bg-red-50 border border-red-100 text-red-600 rounded-xl text-sm font-medium flex items-center gap-2">
                             <ShieldCheck size={18} />

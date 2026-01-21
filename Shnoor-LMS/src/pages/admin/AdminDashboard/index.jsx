@@ -21,11 +21,11 @@ const AdminDashboard = () => {
         try {
             setLoading(true);
             
-            // 1. Fetch Basic Stats
+            
             const usersSnap = await getDocs(collection(db, "users"));
             const coursesSnap = await getDocs(query(collection(db, "courses"), where("status", "==", "published")));
 
-            // 2. Set Stats with safe fallbacks
+            
             setStats({
                 activeUsers: Math.floor(usersSnap.size * 0.6) || 0,
                 completionRate: 42,
@@ -33,7 +33,7 @@ const AdminDashboard = () => {
                 certificates: Math.floor(usersSnap.size * 0.1) || 0
             });
 
-            // 3. Set Chart Data
+            
             setChartData([
                 { name: 'Mon', lessons: 120 },
                 { name: 'Tue', lessons: 145 },
@@ -49,11 +49,11 @@ const AdminDashboard = () => {
         } finally {
             setLoading(false);
         }
-    }, []); // Memoized to prevent re-renders
+    }, []); 
 
     useEffect(() => {
         fetchDashboardData();
-    }, [fetchDashboardData]); // Only runs once on mount
+    }, [fetchDashboardData]); 
 
     return (
         <AdminDashboardView 

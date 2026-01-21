@@ -31,7 +31,7 @@ const ExamBuilderView = ({
             </div>
 
             <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-                {/* Tabs */}
+                { }
                 <div className="flex border-b border-slate-200">
                     <button
                         onClick={() => setStep(1)}
@@ -169,7 +169,7 @@ const ExamBuilderView = ({
 
                     {step === 2 && (
                         <div className="space-y-8">
-                            {/* Question Type Selector */}
+                            { }
                             <div className="flex justify-center gap-4 flex-wrap">
                                 <button
                                     className="flex items-center gap-2 px-5 py-2.5 bg-white border border-slate-200 hover:border-blue-500 hover:text-blue-600 text-slate-600 font-bold rounded-lg shadow-sm transition-all"
@@ -191,7 +191,7 @@ const ExamBuilderView = ({
                                 </button>
                             </div>
 
-                            {/* Questions List */}
+                            { }
                             <div className="space-y-6">
                                 {formData.questions.map((q, index) => (
                                     <div key={q.id} className="bg-slate-50 border border-slate-200 rounded-xl p-6 relative group hover:border-slate-300 transition-all">

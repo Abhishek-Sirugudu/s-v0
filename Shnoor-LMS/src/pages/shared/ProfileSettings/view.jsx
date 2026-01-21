@@ -18,7 +18,7 @@ const ProfileSettingsView = ({ loading, userData, saving, handleChange, handleSa
 
             <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-8">
 
-                {/* Left: Profile Card */}
+                { }
                 <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 flex flex-col items-center text-center h-fit">
                     <div className="relative mb-6 group cursor-pointer">
                         <div className="w-24 h-24 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center text-4xl border-4 border-white shadow-lg overflow-hidden">
@@ -43,7 +43,7 @@ const ProfileSettingsView = ({ loading, userData, saving, handleChange, handleSa
                     </div>
                 </div>
 
-                {/* Right: Edit Form */}
+                { }
                 <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
                     <h3 className="text-lg font-bold text-slate-800 mb-6 pb-4 border-b border-slate-100">Edit Profile</h3>
 

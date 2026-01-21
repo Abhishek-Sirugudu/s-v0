@@ -30,7 +30,7 @@ const CoursePlayerView = ({
 
     return (
         <div className="flex flex-col h-screen bg-slate-900 text-slate-100 overflow-hidden font-sans">
-            {/* Top Bar - Simplified */}
+            { }
             <div className="h-16 bg-slate-800 border-b border-slate-700 flex items-center justify-between px-6 flex-shrink-0 z-20 shadow-md">
                 <div className="flex items-center gap-4">
                     <button
@@ -57,9 +57,9 @@ const CoursePlayerView = ({
             </div>
 
             <div className="flex-1 flex overflow-hidden">
-                {/* Main Content Area (Video/PDF) */}
+                { }
                 <div className="flex-1 flex flex-col relative bg-black">
-                    {/* Video Player / Content Frame */}
+                    { }
                     <div className="flex-1 relative">
                         {currentModule?.type === 'video' ? (
                             (currentModule.url.includes('firebasestorage') || currentModule.url.match(/\.(mp4|webm|ogg)$/)) ? (
@@ -96,7 +96,7 @@ const CoursePlayerView = ({
                         )}
                     </div>
 
-                    {/* Controls Bar */}
+                    { }
                     <div className="h-20 bg-slate-800 border-t border-slate-700 flex items-center justify-between px-8 flex-shrink-0">
                         <div>
                             <h2 className="text-lg font-bold text-white">{currentModule?.title}</h2>
@@ -118,7 +118,7 @@ const CoursePlayerView = ({
                     </div>
                 </div>
 
-                {/* Sidebar - Course Content */}
+                { }
                 <div className="w-80 bg-slate-900 border-l border-slate-700 flex flex-col flex-shrink-0 shadow-2xl z-10">
                     <div className="p-4 bg-slate-800 border-b border-slate-700">
                         <h3 className="font-bold text-slate-100 uppercase tracking-wider text-xs">Course Content</h3>

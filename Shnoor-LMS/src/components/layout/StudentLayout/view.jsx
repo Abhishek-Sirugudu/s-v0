@@ -37,7 +37,7 @@ const StudentLayoutView = ({
 
     return (
         <div className="flex min-h-screen bg-slate-50 font-sans text-slate-900">
-            {/* Mobile Sidebar Overlay */}
+            { }
             {isSidebarOpen && (
                 <div
                     className="fixed inset-0 bg-black/50 z-40 lg:hidden backdrop-blur-sm"
@@ -45,12 +45,12 @@ const StudentLayoutView = ({
                 />
             )}
 
-            {/* Sidebar */}
+            { }
             <div className={`fixed lg:static inset-y-0 left-0 z-50 w-64 bg-white border-r border-slate-200 shadow-xl lg:shadow-none transform transition-transform duration-300 ease-in-out
                 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
             `}>
                 <div className="flex flex-col h-full">
-                    {/* Brand */}
+                    { }
                     <div className="flex items-center gap-3 p-6 border-b border-slate-100">
                         <img
                             src={markLogo}
@@ -63,7 +63,7 @@ const StudentLayoutView = ({
                         </div>
                     </div>
 
-                    {/* Navigation */}
+                    { }
                     <div className="flex-1 overflow-y-auto py-6 px-4 scrollbar-thin scrollbar-thumb-slate-200">
                         <ul className="space-y-1">
                             <NavItem path="dashboard" icon={FaChartLine} label="Dashboard" />
@@ -77,9 +77,9 @@ const StudentLayoutView = ({
                 </div>
             </div>
 
-            {/* Main Content */}
+            { }
             <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-                {/* Top Bar */}
+                { }
                 <header className="bg-white border-b border-slate-200 h-16 px-4 lg:px-8 flex items-center justify-between shadow-sm sticky top-0 z-30">
                     <div className="flex items-center gap-4">
                         <button
@@ -92,7 +92,7 @@ const StudentLayoutView = ({
                     </div>
 
                     <div className="flex items-center gap-4">
-                        {/* Rank Badge */}
+                        { }
                         <div className="hidden md:flex items-center gap-2 bg-slate-50 px-3 py-1.5 rounded-full border border-slate-100">
                             <div className="flex flex-col items-end">
                                 <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider leading-none mb-0.5">Rank</span>
@@ -103,12 +103,12 @@ const StudentLayoutView = ({
                             </div>
                         </div>
 
-                        {/* XP Badge */}
+                        { }
                         <div className="hidden md:flex items-center gap-2 bg-amber-50 text-amber-900 px-3 py-1.5 rounded-full border border-amber-200 font-bold text-sm">
                             <FaStar className="text-amber-500" /> {xp} XP
                         </div>
 
-                        {/* User Profile */}
+                        { }
                         <div className="flex items-center gap-3 pl-4 border-l border-slate-200">
                             <div className="text-right hidden md:block">
                                 <div className="text-sm font-semibold text-slate-900">{studentName}</div>
@@ -128,7 +128,7 @@ const StudentLayoutView = ({
                     </div>
                 </header>
 
-                {/* Content Area */}
+                { }
                 <main className="flex-1 overflow-auto bg-slate-50 p-4 lg:p-8">
                     <div className="max-w-7xl mx-auto">
                         <Outlet context={{ studentName, xp }} />
