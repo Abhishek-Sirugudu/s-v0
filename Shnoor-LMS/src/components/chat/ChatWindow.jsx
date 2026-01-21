@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FaPaperPlane, FaArrowLeft, FaSmile, FaPaperclip, FaTimes, FaFileAlt, FaVideo, FaImage } from 'react-icons/fa';
 import EmojiPicker from 'emoji-picker-react';
-import '../../styles/Chat.css';
 
 const ChatWindow = ({ activeChat, currentUser, onSendMessage, onBack }) => {
     const [newMessage, setNewMessage] = useState('');
@@ -39,9 +38,6 @@ const ChatWindow = ({ activeChat, currentUser, onSendMessage, onBack }) => {
 
         try {
             await onSendMessage(newMessage, selectedFile);
-
-
-
             setNewMessage('');
             setSelectedFile(null);
             setShowEmoji(false);
@@ -51,57 +47,57 @@ const ChatWindow = ({ activeChat, currentUser, onSendMessage, onBack }) => {
         } finally {
             setIsUploading(false);
         }
-    }
-};
+    };
 
-const renderAttachment = (msg) => {
-    if (!msg.attachment_url) return null;
+    const renderAttachment = (msg) => {
+        if (!msg.attachment_url) return null;
 
-    const type = msg.attachment_type || 'file';
+        const type = msg.attachment_type || 'file';
 
-    if (type === 'image') {
-        return (
-            <img
-                src={msg.attachment_url}
-                alt="attachment"
-                style={{ maxWidth: '100%', maxHeight: '300px', borderRadius: '8px', marginBottom: '5px', cursor: 'pointer' }}
-                onClick={() => window.open(msg.attachment_url, '_blank')}
-            />
-        );
-    }
-    if (type === 'video') {
-        return (
-            <video controls style={{ maxWidth: '100%', maxHeight: '300px', borderRadius: '8px', marginBottom: '5px' }}>
-                <source src={msg.attachment_url} />
-                Your browser does not support the video tag.
-            </video>
-        );
-    }
-    if (type === 'audio') {
-        return (
-            <audio controls src={msg.attachment_url} style={{ marginTop: '5px', width: '100%' }} />
-        );
-
+        if (type === 'image') {
+            return (
+                <img
+                    src={msg.attachment_url}
+                    alt="attachment"
+                    className="max-w-full max-h-[300px] rounded-lg mb-2 cursor-pointer hover:opacity-95 transition-opacity"
+                    onClick={() => window.open(msg.attachment_url, '_blank')}
+                />
+            );
+        }
+        if (type === 'video') {
+            return (
+                <video controls className="max-w-full max-h-[300px] rounded-lg mb-2 bg-black">
+                    <source src={msg.attachment_url} />
+                    Your browser does not support the video tag.
+                </video>
+            );
+        }
+        if (type === 'audio') {
+            return (
+                <audio controls src={msg.attachment_url} className="w-full mt-2" />
+            );
+        }
 
         return (
             <a
                 href={msg.attachment_url}
                 target="_blank"
                 rel="noreferrer"
-                style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'inherit', textDecoration: 'none', background: 'rgba(0,0,0,0.05)', padding: '10px', borderRadius: '8px' }}
+                className="flex items-center gap-2 bg-slate-100 p-3 rounded-lg text-slate-700 hover:bg-slate-200 transition-colors mb-2"
             >
-                <FaFileAlt size={20} />
-                <span style={{ textDecoration: 'underline' }}>{msg.attachment_name || 'Download File'}</span>
+                <FaFileAlt className="text-slate-500" size={20} />
+                <span className="underline text-sm font-medium truncate max-w-[200px]">{msg.attachment_name || 'Download File'}</span>
             </a>
         );
     };
 
     if (!activeChat) {
         return (
-            <div className="chat-main no-chat-selected">
-                <div className="empty-state-content">
-                    <p>Select a conversation to start chatting</p>
+            <div className="flex-1 flex flex-col items-center justify-center bg-slate-50 text-slate-400 p-8">
+                <div className="w-16 h-16 bg-white rounded-full shadow-sm flex items-center justify-center mb-4">
+                    <FaSmile size={32} className="text-slate-300" />
                 </div>
+                <p className="text-lg font-medium text-slate-500">Select a conversation to start chatting</p>
             </div>
         );
     }
@@ -109,98 +105,119 @@ const renderAttachment = (msg) => {
     const recipientName = activeChat.recipientName || "Unknown User";
 
     return (
-        <div className="chat-main">
-            {/* --- HEADER --- */}
-            <div className="chat-header">
-                <button className="mobile-back-btn" onClick={onBack}>
-                    <FaArrowLeft />
-                </button>
-                <div className="contact-info">
-                    <h3 className="contact-name">{recipientName}</h3>
+        <div className="flex flex-col h-full bg-white">
+            {/* Header */}
+            <div className="h-16 px-6 border-b border-slate-200 flex items-center justify-between bg-white shrink-0 sticky top-0 z-10 shadow-sm">
+                <div className="flex items-center gap-4">
+                    <button
+                        className="md:hidden p-2 -ml-2 text-slate-500 hover:bg-slate-100 rounded-full transition-colors"
+                        onClick={onBack}
+                    >
+                        <FaArrowLeft />
+                    </button>
+                    <div>
+                        <h3 className="text-lg font-bold text-slate-900">{recipientName}</h3>
+                        <div className="flex items-center gap-2">
+                            <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                            <p className="text-xs text-slate-500">Active now</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            {/* --- MESSAGES AREA --- */}
-            <div className="chat-messages" onClick={() => setShowEmoji(false)}>
+            {/* Messages Area */}
+            <div
+                className="flex-1 overflow-y-auto p-6 space-y-4 bg-slate-50 scroll-smooth custom-scrollbar"
+                onClick={() => setShowEmoji(false)}
+            >
                 {activeChat.messages?.length > 0 ? (
                     activeChat.messages.map((msg) => {
                         const isMyMessage = msg.senderId === currentUser?.uid;
                         const timeString = msg.timestamp ? new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : "";
 
                         return (
-                            <div key={msg.id || Math.random()} className={`message ${isMyMessage ? 'sent' : 'received'}`}>
-                                <div className="message-content-wrapper">
-                                    <div className="message-bubble">
-                                        {renderAttachment(msg)}
+                            <div key={msg.id || Math.random()} className={`flex flex-col ${isMyMessage ? 'items-end' : 'items-start'}`}>
+                                <div className={`max-w-[85%] md:max-w-[70%] break-words shadow-sm ${isMyMessage
+                                        ? 'bg-blue-600 text-white rounded-2xl rounded-tr-sm'
+                                        : 'bg-white text-slate-800 border border-slate-100 rounded-2xl rounded-tl-sm'
+                                    } p-4 relative group`}>
 
-                                        {msg.text && <div style={{ marginTop: msg.attachment_url ? '8px' : '0' }}>{msg.text}</div>}
-                                    </div>
-                                    <div className="message-time">{timeString}</div>
+                                    {renderAttachment(msg)}
+
+                                    {msg.text && (
+                                        <div className={`text-sm md:text-base leading-relaxed ${msg.attachment_url ? 'mt-2' : ''}`}>
+                                            {msg.text}
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="text-[10px] text-slate-400 mt-1 px-1 font-medium">
+                                    {timeString}
                                 </div>
                             </div>
                         );
                     })
                 ) : (
-                    <div className="no-messages-placeholder">
+                    <div className="h-full flex flex-col items-center justify-center text-slate-400 opacity-60">
+                        <FaSmile size={48} className="mb-4" />
                         <p>No messages yet. Say hello! 👋</p>
                     </div>
                 )}
                 <div ref={messagesEndRef} />
             </div>
 
-            {/* --- FILE PREVIEW BAR --- */}
+            {/* File Preview Bar */}
             {selectedFile && (
-                <div className="file-preview-bar" style={{ padding: '10px 20px', background: '#f0f9ff', borderTop: '1px solid #e0f2fe', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <div style={{ background: '#fff', padding: '8px', borderRadius: '5px', display: 'flex', alignItems: 'center' }}>
-                        {selectedFile.type.startsWith('image/') ? <FaImage color="#3b82f6" /> :
-                            selectedFile.type.startsWith('video/') ? <FaVideo color="#ef4444" /> :
-                                <FaFileAlt color="#6b7280" />}
+                <div className="px-4 py-3 bg-blue-50 border-t border-blue-100 flex items-center gap-3">
+                    <div className="p-2 bg-white rounded-lg shadow-sm">
+                        {selectedFile.type.startsWith('image/') ? <FaImage className="text-blue-500" /> :
+                            selectedFile.type.startsWith('video/') ? <FaVideo className="text-red-500" /> :
+                                <FaFileAlt className="text-slate-500" />}
                     </div>
-                    <span style={{ fontSize: '0.9rem', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: '#334155' }}>
+                    <span className="text-sm text-slate-700 font-medium truncate flex-1">
                         {selectedFile.name}
                     </span>
-                    <button onClick={() => setSelectedFile(null)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#ef4444' }}>
+                    <button
+                        onClick={() => setSelectedFile(null)}
+                        className="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                    >
                         <FaTimes />
                     </button>
                 </div>
             )}
 
-            {/* --- INPUT AREA --- */}
-            <div className="chat-input-area">
-                <form className="chat-input-form" onSubmit={handleSubmit} style={{ position: 'relative' }}>
-
+            {/* Input Area */}
+            <div className="p-4 bg-white border-t border-slate-200">
+                <form
+                    className="flex items-center gap-2 bg-slate-100 rounded-2xl p-1.5 border border-transparent focus-within:border-blue-500/50 focus-within:bg-white focus-within:ring-4 focus-within:ring-blue-500/10 transition-all shadow-inner"
+                    onSubmit={handleSubmit}
+                >
                     {/* Emoji Toggle */}
                     <button
                         type="button"
-                        className="icon-btn"
+                        className="p-2.5 text-slate-400 hover:text-amber-500 hover:bg-amber-50 rounded-xl transition-colors relative"
                         onClick={() => setShowEmoji(!showEmoji)}
-                        style={{ color: '#fbbf24', fontSize: '1.2rem', padding: '0 10px', background: 'none', border: 'none', cursor: 'pointer' }}
                     >
-                        <FaSmile />
+                        <FaSmile size={20} />
+                        {showEmoji && (
+                            <div className="absolute bottom-14 left-0 z-50 shadow-xl rounded-2xl border border-slate-200">
+                                <EmojiPicker onEmojiClick={onEmojiClick} width={300} height={400} />
+                            </div>
+                        )}
                     </button>
 
-                    {/* Emoji Picker Popup */}
-                    {showEmoji && (
-                        <div style={{ position: 'absolute', bottom: '60px', left: '0', zIndex: 100 }}>
-                            <EmojiPicker onEmojiClick={onEmojiClick} width={300} height={400} />
-                        </div>
-                    )}
-
-                    {/* File Upload Trigger */}
+                    {/* File Upload */}
                     <button
                         type="button"
-                        className="icon-btn"
+                        className="p-2.5 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-colors"
                         onClick={() => fileInputRef.current.click()}
-                        style={{ color: '#6b7280', fontSize: '1.1rem', padding: '0 5px', background: 'none', border: 'none', cursor: 'pointer' }}
                     >
-                        <FaPaperclip />
+                        <FaPaperclip size={20} />
                     </button>
 
-                    {/* Hidden File Input */}
                     <input
                         type="file"
                         ref={fileInputRef}
-                        style={{ display: 'none' }}
+                        className="hidden"
                         onChange={handleFileSelect}
                     />
 
@@ -212,16 +229,19 @@ const renderAttachment = (msg) => {
                         onChange={(e) => setNewMessage(e.target.value)}
                         autoComplete="off"
                         disabled={isUploading}
+                        className="flex-1 bg-transparent border-none focus:ring-0 text-slate-800 placeholder-slate-400 px-2 font-medium"
                     />
 
                     {/* Send Button */}
                     <button
                         type="submit"
-                        className="send-btn"
                         disabled={(!newMessage.trim() && !selectedFile) || isUploading}
-                        style={{ opacity: (!newMessage.trim() && !selectedFile) || isUploading ? 0.5 : 1 }}
+                        className={`p-3 rounded-xl flex items-center justify-center transition-all ${(!newMessage.trim() && !selectedFile) || isUploading
+                                ? 'bg-slate-200 text-slate-400 cursor-not-allowed'
+                                : 'bg-blue-600 text-white shadow-lg shadow-blue-500/30 hover:bg-blue-700 hover:scale-105 active:scale-95'
+                            }`}
                     >
-                        <FaPaperPlane />
+                        <FaPaperPlane size={16} />
                     </button>
                 </form>
             </div>

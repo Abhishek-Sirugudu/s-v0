@@ -23,7 +23,7 @@ import AddCourse from './pages/instructor/AddCourse';
 import CourseList from './pages/instructor/CourseList';
 import ExamBuilder from './pages/instructor/ExamBuilder';
 import InstructorSettings from './pages/instructor/InstructorSettings';
-import StudentDashboard from './pages/student/StudentDashboard';
+import StudentDashboard from './pages/student/Dashboard';
 import StudentCourses from './pages/student/StudentCourses';
 import CourseDetail from './pages/student/CourseDetail';
 import CoursePlayer from './pages/student/CoursePlayer';

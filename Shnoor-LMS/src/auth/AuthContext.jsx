@@ -3,8 +3,6 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { auth, db } from './firebase';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
-import axios from 'axios'; // Import Axios
-import { API_BASE_URL } from '../config/api';
 
 const AuthContext = createContext();
 
@@ -17,44 +15,23 @@ export function AuthProvider({ children }) {
   const [userRole, setUserRole] = useState(null);
   const [loading, setLoading] = useState(true);
 
-
-
-  // Define the Sync Function
-  const syncUserToPostgres = async (user, role) => {
-    try {
-      if (API_BASE_URL) {
-        await axios.post(`${API_BASE_URL}/api/sync-user`, {
-          firebase_uid: user.uid,
-          email: user.email,
-          full_name: user.displayName || 'User',
-          role: role || 'student'
-        });
-        console.log("✅ Synced user to Postgres");
-      }
-    } catch (error) {
-      console.error("❌ Failed to sync user to Postgres:", error);
-    }
-  };
-
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         try {
-          // 1. Get Role from Firebase (Existing Logic)
+          // Get Role from Firebase
           const docRef = doc(db, 'users', user.uid);
           const docSnap = await getDoc(docRef);
-          let role = 'student';
 
           if (docSnap.exists()) {
-            role = docSnap.data().role;
-            setUserRole(role);
+            setUserRole(docSnap.data().role);
+          } else {
+            setUserRole('student'); // Default fallback
           }
-
-          // 2. Sync to Postgres (New Logic)
-          await syncUserToPostgres(user, role);
 
         } catch (error) {
           console.error("Error fetching user role:", error);
+          setUserRole('student');
         }
         setCurrentUser(user);
       } else {

@@ -1,70 +1,22 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import io from 'socket.io-client';
-import axios from 'axios';
-import { auth } from '../auth/firebase';
-import { onAuthStateChanged } from 'firebase/auth';
-
-import { API_BASE_URL, ENABLE_CHAT_SOCKET } from '../config/api';
+import React, { createContext, useContext, useState } from 'react';
 
 const SocketContext = createContext();
 
 export const useSocket = () => useContext(SocketContext);
 
 export const SocketProvider = ({ children }) => {
-    const [socket, setSocket] = useState(null);
+    // Mock socket object with no-op functions to prevent errors
+    const mockSocket = {
+        on: (event, callback) => { console.log(`[MockSocket] Listening for: ${event}`); },
+        emit: (event, data) => { console.log(`[MockSocket] Emitting: ${event}`, data); },
+        off: (event) => { console.log(`[MockSocket] Removing listener for: ${event}`); },
+        connect: () => { console.log('[MockSocket] Connected'); },
+        disconnect: () => { console.log('[MockSocket] Disconnected'); },
+        close: () => { console.log('[MockSocket] Closed'); },
+    };
+
+    const [socket] = useState(mockSocket);
     const [unreadCounts, setUnreadCounts] = useState({});
-
-    useEffect(() => {
-        if (!ENABLE_CHAT_SOCKET) return;
-
-        const newSocket = io(API_BASE_URL);
-        setSocket(newSocket);
-
-        return () => newSocket.close();
-    }, []);
-
-    useEffect(() => {
-        if (!socket) return;
-
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
-            if (user) {
-                socket.emit('join_user', user.uid);
-
-                const fetchUnread = async () => {
-                    try {
-                        const res = await axios.get(`${API_BASE_URL}/api/chats`, {
-                            params: { firebase_uid: user.uid }
-                        });
-                        const counts = {};
-                        res.data.forEach(chat => {
-                            if (chat.unread_count > 0) {
-                                counts[chat.chat_id] = chat.unread_count;
-                            }
-                        });
-                        setUnreadCounts(counts);
-                    } catch (err) {
-                        console.error("Failed to fetch unread counts", err);
-                    }
-                };
-                fetchUnread();
-
-                socket.on('new_notification', (msg) => {
-                    console.log("🔔 New Notification:", msg);
-                    setUnreadCounts(prev => ({
-                        ...prev,
-                        [msg.chat_id]: (prev[msg.chat_id] || 0) + 1
-                    }));
-                });
-            } else {
-                setUnreadCounts({});
-            }
-        });
-
-        return () => {
-            unsubscribe();
-            socket.off('new_notification');
-        };
-    }, [socket]);
 
     const markChatRead = (chatId) => {
         setUnreadCounts(prev => {

@@ -1,307 +1,309 @@
-import React, { useState, useEffect } from 'react';
-import { FaUserPlus, FaBookOpen, FaUserCheck, FaChalkboardTeacher, FaExclamationCircle, FaChartLine, FaDollarSign, FaUsers, FaArrowUp, FaArrowDown, FaGlobe } from 'react-icons/fa';
-import { collection, getDocs, query, where } from 'firebase/firestore';
-import { db } from '../../auth/firebase';
-import '../../styles/Dashboard.css';
-
-const BarChart = ({ data, height = 200, color = "linear-gradient(180deg, #3b82f6 0%, #2563eb 100%)" }) => {
-  const maxVal = Math.max(...data.map(d => d.value));
-  return (
-    <div className="analytics-chart-container" style={{ height: height }}>
-      <div className="chart-bars">
-        {data.map((item, idx) => (
-          <div key={idx} className="chart-bar-wrapper">
-            <div
-              className="chart-bar-fill"
-              style={{
-                height: `${(item.value / maxVal) * 100}%`,
-                background: color
-              }}
-            >
-              <div className="tooltip">{item.value.toLocaleString()}</div>
-            </div>
-            <span className="chart-label">{item.label}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-
-const LineChart = ({ data, height = 200, color = "#10b981" }) => {
-  const maxVal = Math.max(...data.map(d => d.value));
-  const minVal = Math.min(...data.map(d => d.value));
-
-  const width = 500;
-  const chartHeight = 100;
-
-  const points = data.map((d, i) => {
-    const x = (i / (data.length - 1)) * width;
-    const y = chartHeight - ((d.value - minVal) / (maxVal - minVal)) * (chartHeight * 0.8) - 10; // Padding
-    return `${x},${y}`;
-  }).join(' ');
-
-  return (
-    <div className="analytics-chart-container" style={{ height: height, position: 'relative', overflow: 'hidden' }}>
-      <svg viewBox={`0 0 ${width} ${chartHeight}`} preserveAspectRatio="none" style={{ width: '100%', height: '100%', overflow: 'visible' }}>
-        <defs>
-          <linearGradient id={`gradient-${color.replace('#', '')}`} x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor={color} stopOpacity="0.3" />
-            <stop offset="100%" stopColor={color} stopOpacity="0" />
-          </linearGradient>
-        </defs>
-        <path
-          d={`M0,${chartHeight} ${points} ${width},${chartHeight}`}
-          fill={`url(#gradient-${color.replace('#', '')})`}
-          style={{ transition: 'd 0.5s ease' }}
-        />
-        <polyline
-          fill="none"
-          stroke={color}
-          strokeWidth="3"
-          points={points}
-          vectorEffect="non-scaling-stroke"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="chart-line-path"
-        />
-        {data.map((d, i) => {
-          const x = (i / (data.length - 1)) * width;
-          const y = chartHeight - ((d.value - minVal) / (maxVal - minVal)) * (chartHeight * 0.8) - 10;
-          return (
-            <g key={i} className="chart-point-group">
-              <circle
-                cx={x}
-                cy={y}
-                r="3"
-                fill="white"
-                stroke={color}
-                strokeWidth="2"
-                className="chart-point"
-                vectorEffect="non-scaling-stroke"
-              />
-              <rect x={x - 20} y={y - 30} width="40" height="20" fill="transparent" />
-            </g>
-          );
-        })}
-      </svg>
-      <div className="chart-labels-x" style={{ display: 'flex', justifyContent: 'space-between', padding: '0 10px' }}>
-        {data.map((d, i) => (
-          <span key={i} style={{ position: 'static', transform: 'none' }}>{d.label}</span>
-        ))}
-      </div>
-    </div>
-  );
-};
+import React, { useState } from 'react';
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer
+} from 'recharts';
+import {
+  Users,
+  BookOpen,
+  Clock,
+  Award,
+  HardDrive,
+  AlertTriangle,
+  MoreHorizontal,
+  ArrowUpRight,
+  Database
+} from 'lucide-react';
 
 const AdminDashboard = () => {
-  const [stats, setStats] = useState({
-    totalUsers: 0,
-    pendingUsers: 0,
-    pendingCourses: 0,
-    activeInstructors: 0
-  });
-  const [loading, setLoading] = useState(true);
+  // Mock Data Generators
+  const generateChartData = () => {
+    const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    return days.map(day => ({
+      day,
+      modules: Math.floor(Math.random() * 50) + 20,
+      exams: Math.floor(Math.random() * 20) + 5,
+    }));
+  };
 
-  const courseEngagementData = [
-    { label: 'React', value: 120 },
-    { label: 'UI/UX', value: 95 },
-    { label: 'Python', value: 85 },
-    { label: 'Node', value: 70 },
-    { label: 'DevOps', value: 60 },
-    { label: 'AWS', value: 45 },
-  ];
+  const generateTableData = () => {
+    const statuses = ['Active', 'Review', 'Archived'];
+    return Array.from({ length: 15 }).map((_, i) => ({
+      id: `CRS-${1000 + i}`,
+      title: ['Advanced React Patterns', 'System Design Interview', 'Python for Data Science', 'DevOps Fundamentals', 'Enterprise Architecture', 'Cloud Native Basics'][i % 6] + ` ${Math.floor(i / 6) + 1}`,
+      instructor: ['Dr. Sarah Chen', 'Markus Schmidt', 'Priya Patel', 'Alex Rivera', 'Emily Zhang', 'John Doe'][i % 6],
+      activeStudents: Math.floor(Math.random() * 500) + 50,
+      completionRate: Math.floor(Math.random() * 40) + 40,
+      status: statuses[i % 3]
+    }));
+  };
 
-  const studentActivityData = [
-    { label: 'Mon', value: 120 },
-    { label: 'Tue', value: 145 },
-    { label: 'Wed', value: 132 },
-    { label: 'Thu', value: 190 },
-    { label: 'Fri', value: 210 },
-    { label: 'Sat', value: 180 },
-    { label: 'Sun', value: 250 },
-  ];
-
-  useEffect(() => {
-    const fetchStats = async () => {
-      try {
-        const usersSnapshot = await getDocs(collection(db, "users"));
-        let total = 0;
-        let pending = 0;
-        let instructors = 0;
-
-        usersSnapshot.forEach(doc => {
-          const data = doc.data();
-          total++;
-          if (data.accountStatus === 'pending') pending++;
-          if (data.role === 'instructor') instructors++;
-        });
-
-        const pendingCoursesQuery = query(collection(db, "courses"), where("status", "==", "pending"));
-        const pendingCoursesSnapshot = await getDocs(pendingCoursesQuery);
-        const pendingCoursesCount = pendingCoursesSnapshot.size;
-
-        setStats({
-          totalUsers: total,
-          pendingUsers: pending,
-          pendingCourses: pendingCoursesCount,
-          activeInstructors: instructors
-        });
-      } catch (error) {
-        console.error("Error fetching stats:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchStats();
-  }, []);
-
-  const recentActivity = [
-    { id: 1, text: "New Instructor application received: John Doe", time: "2 mins ago", type: 'user' },
-    { id: 2, text: "System backup completed successfully", time: "1 hour ago", type: 'system' },
-    { id: 3, text: "Course 'React Basics' approved by Admin", time: "3 hours ago", type: 'course' },
-    { id: 4, text: "Payment received: $49.99 from Jane Smith", time: "5 hours ago", type: 'payment' },
-    { id: 5, text: "New Ticket: Login issue reported", time: "6 hours ago", type: 'alert' }
-  ];
-
-  if (loading) return <div className="p-8">Loading dashboard metrics...</div>;
+  const [chartData] = useState(generateChartData());
+  const [tableData] = useState(generateTableData());
 
   return (
-    <div className="p-6 dashboard-fade-in">
-      <div className="flex-between-center mb-6">
-        <div>
-          <h2 className="text-2xl font-bold text-gray-800">Analytics Overview</h2>
-          <p className="text-gray-500">Welcome back, Admin. Here's what's happening today.</p>
-        </div>
-        <button className="btn-primary"><FaArrowDown style={{ marginRight: '8px' }} /> Download Report</button>
-      </div>
-
-      {/* Main Stats Grid */}
-      <div className="grid-4 mb-xl">
-        <div className="stat-card premium-card">
-          <div className="flex-between-center mb-2">
-            <span className="stat-label">Total Learners</span>
-            <span className="trend-badge positive"><FaArrowUp /> 8.2%</span>
+    <div className="min-h-screen bg-[#F8FAFC] p-4 md:p-6 font-sans text-slate-800 flex flex-col items-center">
+      <div className="w-full max-w-[1440px]">
+        {/* Header */}
+        <div className="mb-6 flex flex-col sm:flex-row sm:justify-between sm:items-end gap-4">
+          <div>
+            <h1 className="text-2xl font-bold text-[#003B5C] tracking-tight">Executive Dashboard</h1>
+            <p className="text-slate-500 text-xs font-semibold tracking-wider uppercase mt-1">System Usage & Content Velocity</p>
           </div>
-          <div className="stat-number">{stats.totalUsers}</div>
-          <div className="stat-subtext">Active Learners</div>
-          <div className="stat-icon-overlay primary"><FaUsers /></div>
-        </div>
-
-        <div className="stat-card premium-card">
-          <div className="flex-between-center mb-2">
-            <span className="stat-label">Course Enrollments</span>
-            <span className="trend-badge positive"><FaArrowUp /> 15%</span>
-          </div>
-          <div className="stat-number">482</div>
-          <div className="stat-subtext">New this month</div>
-          <div className="stat-icon-overlay info"><FaBookOpen /></div>
-        </div>
-
-        <div className="stat-card premium-card">
-          <div className="flex-between-center mb-2">
-            <span className="stat-label">Completion Rate</span>
-            <span className="trend-badge neutral">+2%</span>
-          </div>
-          <div className="stat-number">68%</div>
-          <div className="stat-subtext">Avg. across all courses</div>
-          <div className="stat-icon-overlay success"><FaChalkboardTeacher /></div>
-        </div>
-
-        <div className="stat-card premium-card">
-          <div className="flex-between-center mb-2">
-            <span className="stat-label">Active Instructors</span>
-            <span className="trend-badge neutral">+1.2%</span>
-          </div>
-          <div className="stat-number">{stats.activeInstructors}</div>
-          <div className="stat-subtext">Currently active</div>
-          <div className="stat-icon-overlay secondary"><FaUserCheck /></div>
-        </div>
-      </div>
-
-      {/* Charts Section */}
-      <div className="grid-2 mb-xl" style={{ gridTemplateColumns: '2fr 1fr' }}>
-        <div className="form-box full-width" style={{ background: 'white', borderRadius: '16px', border: '1px solid #e5e7eb' }}>
-          <div className="flex-between-center mb-6">
-            <h3 className="section-title mb-0">Most Popular Courses</h3>
-            <div className="time-filter">
-              <span className="active">Enrollments</span>
-              <span>Views</span>
+          <div className="flex items-center gap-3 bg-white px-3 py-1.5 rounded-sm border border-slate-200 shadow-sm">
+            <div className="text-right">
+              <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Last Updated</div>
+              <div className="text-xs font-bold text-[#003B5C]">{new Date().toLocaleDateString()}</div>
             </div>
           </div>
-          <BarChart data={courseEngagementData} color="linear-gradient(180deg, #6366f1 0%, #4f46e5 100%)" />
         </div>
 
-        <div className="form-box full-width" style={{ background: 'white', borderRadius: '16px', border: '1px solid #e5e7eb' }}>
-          <div className="flex-between-center mb-6">
-            <h3 className="section-title mb-0">Student Activity</h3>
-            <FaChartLine className="text-gray-400" />
+        {/* Row 1: KPI Cards - Compact Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+          <KpiCard
+            title="Active Learners"
+            value="2,845"
+            trend="12% vs last week"
+            icon={<Users size={20} className="text-white" />}
+            color="bg-[#003B5C]"
+            textColor="text-white"
+            trendColor="text-emerald-300 bg-white/10"
+          />
+          <KpiCard
+            title="Global Completion"
+            value="68.4%"
+            trend="+5.2% vs last week"
+            icon={<BookOpen size={20} className="text-[#003B5C]" />}
+            color="bg-white"
+            textColor="text-[#003B5C]"
+            borderColor="border-slate-200"
+            trendColor="text-emerald-600 bg-emerald-50"
+          />
+          <KpiCard
+            title="Learning Hours"
+            value="14.2k"
+            trend="+8.5% vs last week"
+            icon={<Clock size={20} className="text-[#003B5C]" />}
+            color="bg-white"
+            textColor="text-[#003B5C]"
+            borderColor="border-slate-200"
+            trendColor="text-emerald-600 bg-emerald-50"
+          />
+          <KpiCard
+            title="Certificates"
+            value="982"
+            trend="+14% vs last week"
+            icon={<Award size={20} className="text-[#003B5C]" />}
+            color="bg-white"
+            textColor="text-[#003B5C]"
+            borderColor="border-slate-200"
+            trendColor="text-emerald-600 bg-emerald-50"
+          />
+        </div>
+
+        {/* Row 2: Analytics Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
+          {/* Content Velocity Chart (66%) */}
+          <div className="lg:col-span-2 bg-white p-5 rounded-sm shadow-sm border border-slate-200 flex flex-col h-[320px]">
+            <div className="flex justify-between items-center mb-4">
+              <div>
+                <h3 className="text-base font-bold text-[#003B5C]">Content Velocity</h3>
+                <p className="text-[11px] text-slate-400 font-medium uppercase tracking-wide">Modules vs Exams</p>
+              </div>
+              <div className="flex gap-4 text-[10px] font-bold uppercase tracking-wider">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 bg-[#003B5C]"></span> <span className="text-slate-600">Modules</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 bg-[#E8AA25]"></span> <span className="text-slate-600">Exams</span>
+                </div>
+              </div>
+            </div>
+            <div className="flex-1 w-full min-h-0">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={chartData} barSize={32} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                  <XAxis
+                    dataKey="day"
+                    axisLine={false}
+                    tickLine={false}
+                    tick={{ fill: '#64748b', fontSize: 11, fontWeight: 600 }}
+                    dy={10}
+                  />
+                  <YAxis
+                    axisLine={false}
+                    tickLine={false}
+                    tick={{ fill: '#64748b', fontSize: 11, fontWeight: 600 }}
+                  />
+                  <Tooltip
+                    cursor={{ fill: '#f8fafc' }}
+                    contentStyle={{
+                      backgroundColor: '#fff',
+                      border: '1px solid #e2e8f0',
+                      borderRadius: '2px',
+                      boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)',
+                      fontSize: '12px'
+                    }}
+                  />
+                  <Bar dataKey="modules" stackId="a" fill="#003B5C" radius={[0, 0, 0, 0]} />
+                  <Bar dataKey="exams" stackId="a" fill="#E8AA25" radius={[2, 2, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
           </div>
-          <LineChart data={studentActivityData} color="#10b981" />
-          <div className="mt-4 text-center">
-            <span className="text-2xl font-bold text-green-600">250</span>
-            <p className="text-sm text-gray-500">Active students today</p>
+
+          {/* Infrastructure Load (33%) */}
+          <div className="flex flex-col gap-4 h-[320px]">
+            {/* Storage Usage */}
+            <div className="bg-white p-5 rounded-sm shadow-sm border border-slate-200 flex-[1.4] flex flex-col justify-center">
+              <div className="flex justify-between items-center mb-5">
+                <h3 className="text-base font-bold text-[#003B5C]">System Load</h3>
+                <Database size={16} className="text-slate-400" />
+              </div>
+
+              <div className="space-y-5">
+                <div>
+                  <div className="flex justify-between text-[11px] font-bold mb-1.5">
+                    <span className="text-slate-500 uppercase tracking-wide">Video Storage</span>
+                    <span className="text-[#003B5C]">65GB / 100GB</span>
+                  </div>
+                  <div className="h-2.5 w-full bg-slate-100 overflow-hidden">
+                    <div className="h-full bg-[#003B5C]" style={{ width: '65%' }}></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div className="flex justify-between text-[11px] font-bold mb-1.5">
+                    <span className="text-slate-500 uppercase tracking-wide">DB Capacity</span>
+                    <span className="text-[#003B5C]">42%</span>
+                  </div>
+                  <div className="h-2.5 w-full bg-slate-100 overflow-hidden">
+                    <div className="h-full bg-emerald-500" style={{ width: '42%' }}></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Ghost Accounts Alert */}
+            <div className="bg-[#FFFCF0] p-5 rounded-sm shadow-sm border border-[#E8AA25]/30 flex-1 flex flex-col justify-center relative overflow-hidden group">
+              {/* Orange decoration line */}
+              <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#E8AA25]"></div>
+
+              <div className="z-10 relative pl-2">
+                <div className="flex items-center gap-2 mb-2">
+                  <AlertTriangle size={16} className="text-[#E8AA25]" />
+                  <h4 className="text-sm font-bold text-[#003B5C]">Attention Needed</h4>
+                </div>
+
+                <p className="text-xs text-slate-700 mb-3 leading-snug font-medium">
+                  <strong className="text-[#003B5C]">842 users</strong> inactive &gt; 90 days.
+                </p>
+
+                <button className="text-[10px] font-bold text-white uppercase tracking-wider bg-[#003B5C] px-3 py-1.5 hover:bg-[#002a42] transition-colors shadow-sm">
+                  Run Archiver
+                </button>
+              </div>
+              <Users size={60} className="absolute -right-2 -bottom-2 text-[#E8AA25] opacity-[0.08]" />
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Detailed Sections */}
-      <div className="grid-2 mb-xl">
-        <div className="form-box full-width">
-          <h3 className="section-title mb-md">Student Performance Metrics</h3>
-          <div className="region-list">
-            <div className="region-item">
-              <div className="flex items-center gap-3">
-                <FaBookOpen className="text-blue-500" />
-                <span>Course Completion Rate</span>
-              </div>
-              <div className="progress-bar-container">
-                <div className="progress-bar" style={{ width: '78%' }}></div>
-              </div>
-              <span className="font-bold">78%</span>
-            </div>
-            <div className="region-item">
-              <div className="flex items-center gap-3">
-                <FaChalkboardTeacher className="text-purple-500" />
-                <span>Quiz Pass Rate</span>
-              </div>
-              <div className="progress-bar-container">
-                <div className="progress-bar purple" style={{ width: '64%' }}></div>
-              </div>
-              <span className="font-bold">64%</span>
-            </div>
-            <div className="region-item">
-              <div className="flex items-center gap-3">
-                <FaUsers className="text-green-500" />
-                <span>Assignment Submission</span>
-              </div>
-              <div className="progress-bar-container">
-                <div className="progress-bar green" style={{ width: '92%' }}></div>
-              </div>
-              <span className="font-bold">92%</span>
+        {/* Row 3: Management Table */}
+        <div className="bg-white rounded-sm shadow-sm border border-slate-200 flex flex-col h-[400px]">
+          <div className="px-5 py-3 border-b border-slate-100 flex justify-between items-center bg-white sticky top-0 shrink-0">
+            <h3 className="text-base font-bold text-[#003B5C]">Course Performance Matrix</h3>
+            <div className="flex gap-2">
+              <button className="text-[10px] font-bold text-slate-500 bg-slate-50 border border-slate-200 px-2 py-1 uppercase hover:bg-slate-100">Export CSV</button>
+              <button className="p-1 text-slate-400 hover:text-[#003B5C] transition-colors"> <MoreHorizontal size={18} /> </button>
             </div>
           </div>
-        </div>              <span>11%</span>
-      </div>
-
-      {/* Recent Activity Section */}
-      <div className="form-box full-width">
-        <h3 className="section-title mb-md">Recent System Activity</h3>
-        <div className="activity-list">
-          {recentActivity.map(item => (
-            <div key={item.id} className="activity-item">
-              <div className={`activity-dot ${item.type}`}></div>
-              <div className="activity-content">
-                <p className="activity-text">{item.text}</p>
-                <span className="activity-time">{item.time}</span>
-              </div>
-            </div>
-          ))}
+          <div className="overflow-auto flex-1 custom-scrollbar">
+            <table className="w-full text-left border-collapse">
+              <thead className="bg-[#F8FAFC] border-b border-slate-200 sticky top-0 z-10 shadow-sm">
+                <tr>
+                  <th className="px-4 py-2.5 text-[10px] font-bold text-slate-500 uppercase tracking-wider w-[35%]">Course Details</th>
+                  <th className="px-4 py-2.5 text-[10px] font-bold text-slate-500 uppercase tracking-wider w-[20%]">Instructor</th>
+                  <th className="px-4 py-2.5 text-[10px] font-bold text-slate-500 uppercase tracking-wider text-center w-[15%]">Active (7d)</th>
+                  <th className="px-4 py-2.5 text-[10px] font-bold text-slate-500 uppercase tracking-wider w-[20%]">Completion</th>
+                  <th className="px-4 py-2.5 text-[10px] font-bold text-slate-500 uppercase tracking-wider text-right w-[10%]">Status</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100/80">
+                {tableData.map((course, index) => (
+                  <tr key={course.id} className="hover:bg-slate-50/80 transition-colors group">
+                    <td className="px-4 py-2">
+                      <div className="flex flex-col">
+                        <span className="text-xs font-bold text-[#003B5C] group-hover:text-[#E8AA25] transition-colors truncate">{course.title}</span>
+                        <span className="text-[10px] text-slate-400 font-mono">{course.id}</span>
+                      </div>
+                    </td>
+                    <td className="px-4 py-2">
+                      <span className="text-xs font-semibold text-slate-600">{course.instructor}</span>
+                    </td>
+                    <td className="px-4 py-2 text-center">
+                      <span className="text-xs font-bold text-slate-700 bg-slate-100 px-1.5 py-0.5 rounded-sm">{course.activeStudents}</span>
+                    </td>
+                    <td className="px-4 py-2">
+                      <div className="flex items-center gap-2">
+                        <div className="flex-1 h-1.5 bg-slate-100 overflow-hidden">
+                          <div
+                            className={`h-full ${course.completionRate > 70 ? 'bg-[#003B5C]' : 'bg-[#E8AA25]'}`}
+                            style={{ width: `${course.completionRate}%` }}
+                          ></div>
+                        </div>
+                        <span className="text-[10px] font-bold text-slate-600 w-6 text-right">{course.completionRate}%</span>
+                      </div>
+                    </td>
+                    <td className="px-4 py-2 text-right">
+                      <StatusPill status={course.status} />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
+  );
+};
+
+// Sub-components
+const KpiCard = ({ title, value, trend, icon, color, textColor = "text-white", borderColor = "border-transparent", trendColor }) => (
+  <div className={`${color} ${borderColor} p-4 rounded-sm shadow-sm border hover:shadow-md transition-shadow relative overflow-hidden group flex flex-col justify-between h-[110px]`}>
+    <div className="flex justify-between items-start z-10 relative mb-1">
+      <h3 className={`text-[11px] font-extrabold uppercase tracking-widest opacity-80 ${textColor}`}>{title}</h3>
+      <div className={`p-1.5 rounded-sm ${textColor === 'text-white' ? 'bg-white/20' : 'bg-slate-100'}`}>
+        {icon}
+      </div>
+    </div>
+
+    <div className="z-10 relative">
+      <div className={`text-2xl font-bold ${textColor} tracking-tight leading-none mb-1.5`}>{value}</div>
+      <div className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded-sm text-[10px] font-bold ${trendColor}`}>
+        <ArrowUpRight size={10} />
+        <span>{trend}</span>
+      </div>
+    </div>
+  </div>
+);
+
+const StatusPill = ({ status }) => {
+  const styles = {
+    Active: "bg-emerald-50 text-emerald-700 border-emerald-200",
+    Review: "bg-amber-50 text-amber-700 border-amber-200",
+    Archived: "bg-slate-50 text-slate-500 border-slate-200"
+  };
+
+  return (
+    <span className={`inline-flex items-center justify-center px-2 py-0.5 rounded-sm text-[9px] font-extrabold uppercase tracking-wide border ${styles[status] || styles.Archived} min-w-[60px]`}>
+      {status}
+    </span>
   );
 };
 

@@ -4,7 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import ProblemDescription from '../../components/exam/ProblemDescription';
 import CodeEditorPanel from '../../components/exam/CodeEditorPanel';
 import { getStudentData } from '../../utils/studentData';
-import '../../styles/CodeEditor.css';
+
 
 const PracticeSession = ({ question: propQuestion, value, onChange, onComplete }) => {
     const { challengeId } = useParams();
@@ -196,41 +196,44 @@ if __name__ == "__main__":
         setIsRunning(false);
     };
 
-    if (loading) return <div className="p-8">Loading challenge...</div>;
-    if (!question) return <div className="p-8">Challenge not found.</div>;
+
+    if (loading) return <div className="p-8 text-center text-slate-500">Loading challenge...</div>;
+    if (!question) return <div className="p-8 text-center text-slate-500">Challenge not found.</div>;
 
     const content = (
-        <div className="ce-split-layout">
-            <div className="ce-panel-left custom-scrollbar">
+        <div className="flex h-full overflow-hidden">
+            <div className="w-[40%] h-full border-r border-slate-200 bg-slate-50">
                 <ProblemDescription question={question} />
             </div>
-            <CodeEditorPanel
-                question={question}
-                startCode={code}
-                language={selectedLanguage}
-                onLanguageChange={handleLanguageChange}
-                onCodeChange={handleCodeChange}
-                onRun={handleRun}
-                onSubmit={isEmbedded ? null : () => { }}
-                isRunning={isRunning}
-                consoleOutput={consoleOutput}
-                isEmbedded={isEmbedded}
-            />
+            <div className="w-[60%] h-full relative">
+                <CodeEditorPanel
+                    question={question}
+                    startCode={code}
+                    language={selectedLanguage}
+                    onLanguageChange={handleLanguageChange}
+                    onCodeChange={handleCodeChange}
+                    onRun={handleRun}
+                    onSubmit={isEmbedded ? null : () => { }}
+                    isRunning={isRunning}
+                    consoleOutput={consoleOutput}
+                    isEmbedded={isEmbedded}
+                />
+            </div>
         </div>
     );
 
     if (isEmbedded) {
-        return <div className="ce-container" style={{ height: '100%' }}>{content}</div>;
+        return <div className="h-full bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">{content}</div>;
     }
 
     return (
-        <div className="ce-container" style={{ flexDirection: 'column' }}>
-            <div style={{ padding: '10px 20px', borderBottom: '1px solid #333', background: '#2d2d2d' }}>
-                <button onClick={() => navigate('/student/practice')} className="btn-secondary" style={{ color: '#fff', borderColor: '#555' }}>
+        <div className="flex flex-col h-[calc(100vh-6rem)] bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden m-6">
+            <div className="px-6 py-3 border-b border-slate-200 bg-white flex items-center justify-between">
+                <button onClick={() => navigate('/student/practice')} className="text-sm font-bold text-slate-500 hover:text-slate-800 transition-colors flex items-center gap-2">
                     &larr; Back to Challenges
                 </button>
             </div>
-            {content}
+            <div className="flex-1 overflow-hidden">{content}</div>
         </div>
     );
 };

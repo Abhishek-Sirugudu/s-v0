@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Editor from '@monaco-editor/react';
 import { FaCog, FaExpand, FaPlay, FaSave, FaPaperPlane } from 'react-icons/fa';
-import '../../styles/CodeEditor.css';
 
 const CodeEditorPanel = ({ question, startCode, language, onLanguageChange, onCodeChange, onRun, onSubmit, isRunning, consoleOutput }) => {
     const [activeTab, setActiveTab] = useState('testcases');
@@ -11,30 +10,31 @@ const CodeEditorPanel = ({ question, startCode, language, onLanguageChange, onCo
     };
 
     return (
-        <div className="ce-panel-right">
-            <div className="editor-header">
-                <div className="lang-selector">
-                    <span role="img" aria-label="code">💻</span>
+        <div className="flex flex-col h-full bg-[#1e1e1e] border-l border-[#333]">
+            {/* Editor Header */}
+            <div className="flex justify-between items-center px-4 py-2 bg-[#252526] border-b border-[#333]">
+                <div className="flex items-center gap-2">
+                    <span role="img" aria-label="code" className="text-sm">💻</span>
                     <select
                         value={language}
                         onChange={(e) => onLanguageChange && onLanguageChange(e.target.value)}
-                        className="bg-transparent border-none text-sm font-semibold focus:outline-none cursor-pointer"
-                        style={{ color: 'inherit' }}
+                        className="bg-transparent border-none text-sm font-semibold text-slate-200 focus:outline-none cursor-pointer"
                     >
-                        <option value="javascript" style={{ color: '#000' }}>JavaScript</option>
-                        <option value="python" style={{ color: '#000' }}>Python</option>
-                        <option value="java" style={{ color: '#000' }}>Java</option>
-                        <option value="cpp" style={{ color: '#000' }}>C++</option>
-                        <option value="go" style={{ color: '#000' }}>Go</option>
+                        <option value="javascript" className="text-black">JavaScript</option>
+                        <option value="python" className="text-black">Python</option>
+                        <option value="java" className="text-black">Java</option>
+                        <option value="cpp" className="text-black">C++</option>
+                        <option value="go" className="text-black">Go</option>
                     </select>
                 </div>
-                <div className="editor-actions-top">
-                    <button className="icon-btn" title="Settings"><FaCog /></button>
-                    <button className="icon-btn" title="Fullscreen"><FaExpand /></button>
+                <div className="flex gap-2 text-slate-400">
+                    <button className="p-1 hover:text-white transition-colors" title="Settings"><FaCog /></button>
+                    <button className="p-1 hover:text-white transition-colors" title="Fullscreen"><FaExpand /></button>
                 </div>
             </div>
 
-            <div className="monaco-wrapper">
+            {/* Monaco Wrapper */}
+            <div className="flex-1 min-h-0">
                 <Editor
                     height="100%"
                     defaultLanguage="javascript"
@@ -53,48 +53,49 @@ const CodeEditorPanel = ({ question, startCode, language, onLanguageChange, onCo
                 />
             </div>
 
-            <div className="bottom-panel">
-                <div className="bp-tabs">
+            {/* Bottom Panel */}
+            <div className="h-[200px] flex flex-col bg-[#1e1e1e] border-t border-[#333]">
+                <div className="flex border-b border-[#333] bg-[#252526]">
                     <div
-                        className={`bp-tab ${activeTab === 'testcases' ? 'active' : ''}`}
+                        className={`px-4 py-2 text-xs font-bold uppercase cursor-pointer transition-colors ${activeTab === 'testcases' ? 'bg-[#1e1e1e] text-blue-400 border-t-2 border-blue-400' : 'text-slate-500 hover:text-slate-300'}`}
                         onClick={() => setActiveTab('testcases')}
                     >
                         Test Cases
                     </div>
                     <div
-                        className={`bp-tab ${activeTab === 'console' ? 'active' : ''}`}
+                        className={`px-4 py-2 text-xs font-bold uppercase cursor-pointer transition-colors ${activeTab === 'console' ? 'bg-[#1e1e1e] text-blue-400 border-t-2 border-blue-400' : 'text-slate-500 hover:text-slate-300'}`}
                         onClick={() => setActiveTab('console')}
                     >
                         Console
                     </div>
                 </div>
 
-                <div className="bp-content custom-scrollbar">
+                <div className="flex-1 overflow-y-auto p-4 text-sm font-mono text-slate-300">
                     {activeTab === 'testcases' && (
                         <div>
                             {(question.testCases || []).filter(tc => tc.isPublic).map((tc, idx) => (
-                                <div key={idx} className="tc-item">
-                                    <div className="tc-label">Input</div>
-                                    <div className="tc-input-box mb-2">{tc.input}</div>
-                                    <div className="tc-label">Expected Output</div>
-                                    <div className="tc-input-box">{tc.output}</div>
+                                <div key={idx} className="mb-4 last:mb-0">
+                                    <div className="text-[10px] font-bold text-slate-500 uppercase mb-1">Input</div>
+                                    <div className="bg-[#2d2d2d] p-2 rounded mb-2 border border-[#444]">{tc.input}</div>
+                                    <div className="text-[10px] font-bold text-slate-500 uppercase mb-1">Expected Output</div>
+                                    <div className="bg-[#2d2d2d] p-2 rounded border border-[#444]">{tc.output}</div>
                                 </div>
                             ))}
                             {(question.testCases || []).filter(tc => tc.isPublic).length === 0 && (
-                                <div className="text-gray-500">No public test cases.</div>
+                                <div className="text-gray-500 italic">No public test cases.</div>
                             )}
                         </div>
                     )}
 
                     {activeTab === 'console' && (
-                        <div className="console-output">
+                        <div className="space-y-1">
                             {consoleOutput.length === 0 && <div className="text-gray-500 italic">&gt; Run code to see logging output...</div>}
                             {consoleOutput.map((log, i) => (
-                                <div key={i} className="console-log-item">
-                                    <span className={log.type === 'error' ? 'console-log-icon-error' : 'console-log-icon-success'}>
+                                <div key={i} className="flex gap-2 items-start font-mono text-xs">
+                                    <span className={log.type === 'error' ? 'text-red-500' : 'text-emerald-500'}>
                                         {log.type === 'error' ? '⨯' : '✓'}
                                     </span>
-                                    <span className={log.type === 'error' ? 'console-log-msg-error' : 'console-log-msg-success'}>{log.msg}</span>
+                                    <span className={`${log.type === 'error' ? 'text-red-300' : 'text-emerald-300'} whitespace-pre-wrap`}>{log.msg}</span>
                                 </div>
                             ))}
                         </div>
@@ -102,12 +103,21 @@ const CodeEditorPanel = ({ question, startCode, language, onLanguageChange, onCo
                 </div>
             </div>
 
-            <div className="ce-footer">
-                <button className="btn-ce secondary"><FaSave /> Save</button>
-                <button className="btn-ce run" onClick={onRun} disabled={isRunning}>
+            {/* Footer Actions */}
+            <div className="p-3 bg-[#252526] border-t border-[#333] flex justify-end gap-3">
+                <button className="flex items-center gap-2 px-4 py-1.5 bg-[#333] text-slate-300 rounded hover:bg-[#444] transition-colors text-sm font-bold">
+                    <FaSave /> Save
+                </button>
+                <button
+                    className={`flex items-center gap-2 px-4 py-1.5 bg-emerald-600 text-white rounded hover:bg-emerald-700 transition-colors text-sm font-bold disabled:opacity-50 disabled:cursor-not-allowed`}
+                    onClick={onRun}
+                    disabled={isRunning}
+                >
                     {isRunning ? 'Running...' : <><FaPlay size={12} /> Run</>}
                 </button>
-                <button className="btn-ce submit" onClick={onSubmit}><FaPaperPlane size={12} /> Submit</button>
+                <button className="flex items-center gap-2 px-4 py-1.5 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors text-sm font-bold" onClick={onSubmit}>
+                    <FaPaperPlane size={12} /> Submit
+                </button>
             </div>
         </div>
     );
