@@ -14,7 +14,7 @@ const MyCertificatesView = ({ loading, currentUser, certificates, selectedCert, 
 
     if (selectedCert) {
         return (
-            <div className="max-w-7xl mx-auto">
+            <div className="w-full">
                 <div className="flex justify-between items-center mb-8 p-4 bg-slate-50 rounded-xl border border-slate-200 print:hidden">
                     <button
                         onClick={() => setSelectedCert(null)}
@@ -84,7 +84,7 @@ const MyCertificatesView = ({ loading, currentUser, certificates, selectedCert, 
     }
 
     return (
-        <div className="max-w-7xl mx-auto pb-12">
+        <div className="w-full pb-12">
             <div className="flex justify-between items-center mb-10">
                 <div>
                     <h3 className="text-2xl font-bold text-slate-900">My Achievements</h3>
@@ -105,44 +105,36 @@ const MyCertificatesView = ({ loading, currentUser, certificates, selectedCert, 
                 </div>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    {certificates.map((cert, idx) => {
-                        
-                        const gradients = [
-                            'from-blue-600 to-blue-400',
-                            'from-purple-600 to-purple-400',
-                            'from-emerald-600 to-emerald-400',
-                            'from-amber-500 to-amber-400'
-                        ];
-                        const gradientClass = gradients[idx % gradients.length];
+                    {certificates.map((cert) => (
+                        <div
+                            key={cert.id}
+                            className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden hover:border-indigo-300 hover:shadow-md transition-all cursor-pointer flex flex-col group h-full"
+                            onClick={() => setSelectedCert(cert)}
+                        >
+                            <div className="h-40 bg-slate-50 border-b border-slate-100 flex flex-col items-center justify-center p-6 relative">
+                                <FaCertificate size={40} className="text-slate-300 mb-2 group-hover:text-indigo-400 transition-colors" />
+                                <div className="text-xs font-bold text-slate-400 uppercase tracking-widest">Certificate</div>
+                            </div>
 
-                        return (
-                            <div
-                                key={cert.id}
-                                className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col group"
-                                onClick={() => setSelectedCert(cert)}
-                            >
-                                <div className={`h-48 bg-gradient-to-br ${gradientClass} flex flex-col items-center justify-center text-white p-4 relative overflow-hidden`}>
-                                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.2)_0%,transparent_70%)] opacity-50"></div>
-                                    <FaCertificate size={50} className="mb-3 text-amber-300 drop-shadow-md relative z-10" />
-                                    <div className="font-serif text-xl tracking-[2px] font-bold relative z-10 border-t border-b border-white/30 py-1">CERTIFICATE</div>
-                                </div>
-
-                                <div className="p-6 flex flex-col flex-1 bg-white relative">
-                                    <h4 className="text-lg font-bold text-slate-900 mb-2 line-clamp-2">{cert.courseName}</h4>
-                                    <p className="text-xs text-slate-500 font-semibold uppercase tracking-wider mb-6">
-                                        Issued: {cert.issueDate}
+                            <div className="p-5 flex flex-col flex-1">
+                                <h4 className="text-base font-bold text-slate-900 mb-2 line-clamp-2 leading-snug group-hover:text-indigo-600 transition-colors">
+                                    {cert.courseName}
+                                </h4>
+                                <div className="mt-auto space-y-3 pt-4 border-t border-slate-100">
+                                    <p className="text-xs text-slate-500 font-medium flex justify-between">
+                                        <span>Issued</span>
+                                        <span className="text-slate-700">{cert.issueDate}</span>
                                     </p>
-
                                     <button
-                                        className="w-full mt-auto bg-slate-900 text-white font-bold py-2.5 rounded-xl flex items-center justify-center gap-2 group-hover:bg-blue-600 transition-colors shadow-lg shadow-slate-900/10"
+                                        className="w-full bg-white border border-slate-200 text-slate-600 text-xs font-bold py-2 rounded flex items-center justify-center gap-2 group-hover:border-indigo-500 group-hover:text-indigo-600 transition-all"
                                         onClick={(e) => { e.stopPropagation(); setSelectedCert(cert); }}
                                     >
-                                        <FaDownload /> View / Print
+                                        <FaDownload size={10} /> View Credential
                                     </button>
                                 </div>
                             </div>
-                        );
-                    })}
+                        </div>
+                    ))}
                 </div>
             )}
         </div>

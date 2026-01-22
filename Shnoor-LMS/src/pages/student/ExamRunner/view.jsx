@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaClock, FaAngleLeft, FaAngleRight, FaTrophy, FaTimesCircle, FaCheckCircle, FaCode } from 'react-icons/fa';
-import PracticeSession from '../PracticeSession'; 
+import PracticeSession from '../PracticeSession';
 
 const ExamRunnerView = ({
     loading, exam,
@@ -22,25 +22,38 @@ const ExamRunnerView = ({
 
     if (isSubmitted && result) {
         return (
-            <div className="flex items-center justify-center min-h-[80vh] p-6 bg-slate-50">
-                <div className="bg-white p-12 rounded-3xl shadow-lg border border-slate-200 w-full max-w-2xl text-center">
+            <div className="flex items-center justify-center min-h-[80vh] bg-slate-50 font-sans">
+                <div className="bg-white p-12 rounded-lg shadow-sm border border-slate-200 w-full text-center">
                     {result.passed ? (
-                        <div className="space-y-6">
-                            <FaTrophy size={80} className="text-amber-400 mx-auto drop-shadow-md animate-bounce-slow" />
-                            <div>
-                                <h2 className="text-3xl font-bold text-slate-800 mb-2">Excellent Work!</h2>
-                                <p className="text-xl text-slate-600">You passed <strong className="text-slate-900">{exam.title}</strong></p>
+                        <div className="space-y-8">
+                            <div className="w-20 h-20 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center mx-auto">
+                                <FaTrophy size={40} />
                             </div>
-                            <div className="text-7xl font-bold text-emerald-500 font-mono tracking-tight">
-                                {result.percentage}%
+                            <div className="space-y-2">
+                                <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Assessment Passed</h2>
+                                <p className="text-slate-500">You successfully completed <strong className="text-slate-900">{exam.title}</strong></p>
                             </div>
-                            <div className="bg-emerald-50 text-emerald-700 py-3 rounded-xl font-medium border border-emerald-100">
-                                Your certificate has been generated.
+
+                            <div className="bg-slate-50 border border-slate-100 rounded-lg p-6">
+                                <div className="text-sm font-bold text-slate-400 uppercase tracking-wide mb-1">Final Score</div>
+                                <div className="text-5xl font-bold text-indigo-600 tracking-tight">
+                                    {result.percentage}%
+                                </div>
                             </div>
-                            <div className="flex gap-4 justify-center pt-4">
-                                <button className="px-6 py-3 border border-slate-300 rounded-xl text-slate-600 font-bold hover:bg-slate-50 transition-colors" onClick={() => navigate('/student/dashboard')}>Back to Home</button>
+
+                            <div className="text-xs font-medium text-slate-400">
+                                A certificate has been generated for your records.
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-4 pt-2">
                                 <button
-                                    className="px-6 py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 shadow-lg shadow-blue-500/30 transition-all"
+                                    className="px-6 py-2.5 border border-slate-200 rounded-lg text-slate-600 font-bold hover:bg-slate-50 hover:text-slate-800 transition-colors text-sm"
+                                    onClick={() => navigate('/student/dashboard')}
+                                >
+                                    Return Home
+                                </button>
+                                <button
+                                    className="px-6 py-2.5 bg-indigo-600 text-white rounded-lg font-bold hover:bg-indigo-700 transition-all text-sm shadow-sm"
                                     onClick={() => navigate('/student/certificates')}
                                 >
                                     View Certificate
@@ -48,20 +61,32 @@ const ExamRunnerView = ({
                             </div>
                         </div>
                     ) : (
-                        <div className="space-y-6">
-                            <FaTimesCircle size={80} className="text-red-500 mx-auto drop-shadow-md" />
-                            <div>
-                                <h2 className="text-3xl font-bold text-slate-800 mb-2">Assessment Failed</h2>
-                                <p className="text-xl text-slate-600">You scored</p>
+                        <div className="space-y-8">
+                            <div className="w-20 h-20 bg-rose-50 text-rose-500 rounded-full flex items-center justify-center mx-auto">
+                                <FaTimesCircle size={40} />
                             </div>
-                            <div className="text-7xl font-bold text-red-500 font-mono tracking-tight">
-                                {result.percentage}%
+                            <div className="space-y-2">
+                                <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Assessment Failed</h2>
+                                <p className="text-slate-500">You did not meet the passing criteria for this exam.</p>
                             </div>
-                            <p className="text-slate-500">Required to pass: {exam.passScore}%</p>
-                            <div className="flex gap-4 justify-center pt-4">
-                                <button className="px-6 py-3 border border-slate-300 rounded-xl text-slate-600 font-bold hover:bg-slate-50 transition-colors" onClick={() => navigate('/student/dashboard')}>Back to Home</button>
+
+                            <div className="bg-slate-50 border border-slate-100 rounded-lg p-6">
+                                <div className="text-sm font-bold text-slate-400 uppercase tracking-wide mb-1">Your Score</div>
+                                <div className="text-5xl font-bold text-rose-500 tracking-tight">
+                                    {result.percentage}%
+                                </div>
+                                <div className="text-xs font-bold text-slate-400 mt-2">Required: {exam.passScore}%</div>
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-4 pt-2">
                                 <button
-                                    className="px-6 py-3 bg-red-500 text-white rounded-xl font-bold hover:bg-red-600 shadow-lg shadow-red-500/30 transition-all"
+                                    className="px-6 py-2.5 border border-slate-200 rounded-lg text-slate-600 font-bold hover:bg-slate-50 hover:text-slate-800 transition-colors text-sm"
+                                    onClick={() => navigate('/student/dashboard')}
+                                >
+                                    Return Home
+                                </button>
+                                <button
+                                    className="px-6 py-2.5 bg-rose-600 text-white rounded-lg font-bold hover:bg-rose-700 transition-all text-sm shadow-sm"
                                     onClick={() => window.location.reload()}
                                 >
                                     Retake Exam
@@ -95,8 +120,8 @@ const ExamRunnerView = ({
                 {!isPractice && (
                     <div className="flex items-center gap-4">
                         <span className={`px-4 py-1.5 rounded-full flex items-center gap-2 font-mono font-bold text-lg border transition-all ${timeLeft < 300
-                                ? 'bg-red-500/20 text-red-300 border-red-500/50 animate-pulse'
-                                : 'bg-white/10 text-white border-white/10'
+                            ? 'bg-red-500/20 text-red-300 border-red-500/50 animate-pulse'
+                            : 'bg-white/10 text-white border-white/10'
                             }`}>
                             <FaClock size={16} /> {formatTime(timeLeft)}
                         </span>
@@ -151,7 +176,7 @@ const ExamRunnerView = ({
                 <div className={`flex-1 overflow-y-auto ${currentQ.type === 'coding' ? 'p-0' : 'p-6 md:p-10'} flex flex-col items-center bg-slate-50/50`}>
 
                     {currentQ.type === 'descriptive' ? (
-                        <div className="w-full max-w-4xl bg-white rounded-2xl shadow-sm border border-slate-200 flex flex-col h-full md:h-auto min-h-[500px]">
+                        <div className="w-full bg-white rounded-2xl shadow-sm border border-slate-200 flex flex-col h-full md:h-auto min-h-[500px]">
                             <div className="p-6 md:p-8 border-b border-slate-100 flex justify-between items-start gap-4">
                                 <div>
                                     <span className="text-sm font-bold text-slate-400 uppercase tracking-wide">Question {currentQIndex + 1}</span>
@@ -231,7 +256,7 @@ const ExamRunnerView = ({
                             </div>
                         </div>
                     ) : (
-                        <div className="w-full max-w-4xl bg-white rounded-2xl shadow-sm border border-slate-200 flex flex-col h-full md:h-auto overflow-hidden">
+                        <div className="w-full bg-white rounded-2xl shadow-sm border border-slate-200 flex flex-col h-full md:h-auto overflow-hidden">
                             <div className="p-6 md:p-8 border-b border-slate-100 flex justify-between items-start gap-4 bg-slate-50/50">
                                 <div>
                                     <span className="text-sm font-bold text-slate-400 uppercase tracking-wide">Question {currentQIndex + 1}</span>
@@ -246,14 +271,14 @@ const ExamRunnerView = ({
                                 {currentQ.options.map((opt, i) => (
                                     <label
                                         key={i}
-                                        className={`group flex items-center gap-4 p-4 md:p-5 rounded-xl border-2 cursor-pointer transition-all hover:shadow-md ${answers[currentQIndex] === opt
-                                                ? 'border-blue-500 bg-blue-50/50'
-                                                : 'border-slate-100 bg-white hover:border-blue-200 hover:bg-slate-50'
+                                        className={`group flex items-center gap-4 p-4 md:p-5 rounded-lg border-2 cursor-pointer transition-all ${answers[currentQIndex] === opt
+                                            ? 'border-indigo-500 bg-indigo-50 ring-1 ring-indigo-500'
+                                            : 'border-slate-200 bg-white hover:border-indigo-300 hover:bg-slate-50'
                                             }`}
                                     >
                                         <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center shrink-0 transition-colors ${answers[currentQIndex] === opt
-                                                ? 'border-blue-500 bg-blue-500'
-                                                : 'border-slate-300 group-hover:border-blue-400'
+                                            ? 'border-indigo-500 bg-indigo-500'
+                                            : 'border-slate-300 group-hover:border-indigo-400'
                                             }`}>
                                             {answers[currentQIndex] === opt && <div className="w-2.5 h-2.5 bg-white rounded-full" />}
                                         </div>
@@ -266,8 +291,8 @@ const ExamRunnerView = ({
                                             className="hidden"
                                         />
                                         <span className={`text-lg transition-colors ${answers[currentQIndex] === opt
-                                                ? 'text-blue-700 font-bold'
-                                                : 'text-slate-600 font-medium group-hover:text-slate-800'
+                                            ? 'text-blue-700 font-bold'
+                                            : 'text-slate-600 font-medium group-hover:text-slate-800'
                                             }`}>{opt}</span>
                                     </label>
                                 ))}

@@ -9,17 +9,18 @@ const InstructorChatView = ({
     handleSendMessage, setActiveChat
 }) => {
     return (
-        <div className="h-[calc(100vh-6rem)] flex flex-col bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+        <div className="h-[calc(100vh-64px)] bg-[#f8fafc] flex overflow-hidden font-sans border-t border-slate-200">
+            {/* Notification Toast */}
             {notification && notification.visible && (
-                <div className="fixed top-24 right-6 min-w-[300px] z-50 bg-white border-l-4 border-blue-600 shadow-xl rounded-lg p-4 animate-slide-in">
+                <div className="absolute top-4 right-6 z-50 bg-white border-l-4 border-indigo-600 shadow-xl rounded-md p-4 animate-fade-in-down min-w-[320px]">
                     <div className="flex items-start gap-4">
-                        <div className="text-2xl pt-1">🔔</div>
+                        <div className="text-xl">🔔</div>
                         <div className="flex-1">
-                            <strong className="block text-slate-900 font-bold">{notification.sender}</strong>
-                            <p className="text-slate-600 text-sm">{notification.message}</p>
+                            <strong className="block text-slate-900 font-bold text-sm">{notification.sender}</strong>
+                            <p className="text-slate-600 text-xs mt-1">{notification.message}</p>
                         </div>
                         <button
-                            className="text-slate-400 hover:text-slate-600"
+                            className="text-slate-400 hover:text-slate-600 transition-colors"
                             onClick={() => setNotification({ ...notification, visible: false })}
                         >
                             ×
@@ -28,44 +29,42 @@ const InstructorChatView = ({
                 </div>
             )}
 
-            <div className={`flex flex-1 h-full overflow-hidden ${activeChat ? 'active-chat-mobile' : ''}`}>
-
-                { }
-                <div className={`w-full md:w-80 border-r border-slate-200 bg-slate-50 flex flex-col ${activeChat ? 'hidden md:flex' : 'flex'}`}>
-                    <div className="p-4 border-b border-slate-200 bg-white">
-                        <h2 className="text-xl font-bold text-slate-800">Messages</h2>
-                    </div>
-                    <div className="flex-1 overflow-y-auto">
-                        <ChatList
-                            chats={chats}
-                            activeChat={activeChat}
-                            onSelectChat={handleSelectChat}
-                            currentUser={currentUser}
-                        />
-                    </div>
+            {/* Sidebar (Chat List) */}
+            <div className={`w-full md:w-80 bg-white border-r border-slate-200 flex flex-col shrink-0 transition-transform ${activeChat ? 'hidden md:flex' : 'flex'}`}>
+                <div className="p-4 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+                    <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wide">Messages</h2>
+                    <span className="text-xs font-bold bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full">{chats.length}</span>
                 </div>
+                <div className="flex-1 overflow-y-auto custom-scrollbar">
+                    <ChatList
+                        chats={chats}
+                        activeChat={activeChat}
+                        onSelectChat={handleSelectChat}
+                        currentUser={currentUser}
+                    />
+                </div>
+            </div>
 
-                { }
-                <div className={`flex-1 flex flex-col bg-white ${!activeChat ? 'hidden md:flex' : 'flex'}`}>
-                    {activeChat ? (
-                        <ChatWindow
-                            activeChat={activeChat}
-                            currentUser={currentUser}
-                            onSendMessage={handleSendMessage}
-                            onBack={() => setActiveChat(null)}
-                        />
-                    ) : (
-                        <div className="flex-1 flex flex-col items-center justify-center text-slate-400 p-8">
-                            <div className="w-24 h-24 bg-slate-100 rounded-full flex items-center justify-center mb-6">
-                                <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                                </svg>
-                            </div>
-                            <h3 className="text-xl font-bold text-slate-700 mb-2">No Chat Selected</h3>
-                            <p>Select a student from the list to start messaging.</p>
+            {/* Main Chat Area */}
+            <div className={`flex-1 flex flex-col bg-[#f8fafc] ${!activeChat ? 'hidden md:flex' : 'flex'} relative`}>
+                {activeChat ? (
+                    <ChatWindow
+                        activeChat={activeChat}
+                        currentUser={currentUser}
+                        onSendMessage={handleSendMessage}
+                        onBack={() => setActiveChat(null)}
+                    />
+                ) : (
+                    <div className="flex-1 flex flex-col items-center justify-center text-slate-400 p-8">
+                        <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mb-4">
+                            <svg className="w-10 h-10 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                            </svg>
                         </div>
-                    )}
-                </div>
+                        <h3 className="text-lg font-bold text-slate-600 mb-1">Select a Conversation</h3>
+                        <p className="text-sm text-slate-400">Choose a student from the sidebar to start chatting.</p>
+                    </div>
+                )}
             </div>
         </div>
     );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaUser, FaEnvelope, FaLinkedin, FaGithub, FaSave, FaCamera } from 'react-icons/fa';
 
-const ProfileSettingsView = ({ loading, userData, saving, handleChange, handleSave }) => {
+const ProfileSettingsView = ({ loading, userData, saving, handleChange, handleSave, handleImageUpload, uploading, previewUrl }) => {
 
     if (loading) return (
         <div className="flex items-center justify-center min-h-[400px]">
@@ -13,7 +13,7 @@ const ProfileSettingsView = ({ loading, userData, saving, handleChange, handleSa
     );
 
     return (
-        <div className="max-w-6xl mx-auto pb-12">
+        <div className="w-full pb-12">
             <h2 className="text-2xl font-bold mb-8 text-slate-800">Account Settings</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-8">
@@ -21,12 +21,28 @@ const ProfileSettingsView = ({ loading, userData, saving, handleChange, handleSa
                 { }
                 <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 flex flex-col items-center text-center h-fit">
                     <div className="relative mb-6 group cursor-pointer">
-                        <div className="w-24 h-24 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center text-4xl border-4 border-white shadow-lg overflow-hidden">
-                            {userData.displayName ? userData.displayName[0].toUpperCase() : <FaUser />}
+                        <div className="w-24 h-24 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center text-4xl border-4 border-white shadow-lg overflow-hidden relative">
+                            {previewUrl ? (
+                                <img src={previewUrl} alt="Profile" className="w-full h-full object-cover" />
+                            ) : (
+                                userData.displayName ? userData.displayName[0].toUpperCase() : <FaUser />
+                            )}
+                            {uploading && (
+                                <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                                    <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                                </div>
+                            )}
                         </div>
-                        <button className="absolute bottom-0 right-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center border-2 border-white shadow-md hover:bg-blue-700 transition-colors">
+                        <label className="absolute bottom-0 right-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center border-2 border-white shadow-md hover:bg-blue-700 transition-colors cursor-pointer">
                             <FaCamera size={12} />
-                        </button>
+                            <input
+                                type="file"
+                                accept="image/*"
+                                className="hidden"
+                                onChange={handleImageUpload}
+                                disabled={uploading}
+                            />
+                        </label>
                     </div>
 
                     <h3 className="text-xl font-bold text-slate-900 mb-1">{userData.displayName || 'User'}</h3>
@@ -54,7 +70,7 @@ const ProfileSettingsView = ({ loading, userData, saving, handleChange, handleSa
                                 name="displayName"
                                 value={userData.displayName}
                                 onChange={handleChange}
-                                placeholder="John Doe"
+                                placeholder="Enter User name"
                                 className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all font-medium"
                             />
                         </div>

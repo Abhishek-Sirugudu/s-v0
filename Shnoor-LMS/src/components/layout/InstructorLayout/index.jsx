@@ -22,6 +22,7 @@ const InstructorLayout = () => {
     return (
         <InstructorLayoutView
             userName={userName}
+            photoURL={currentUser?.photoURL}
             isSidebarOpen={isSidebarOpen}
             setIsSidebarOpen={setIsSidebarOpen}
             handleLogout={handleLogout}

@@ -38,7 +38,7 @@ const ApproveCoursesView = ({ loading, pendingCourses, selectedCourse, setSelect
                 <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col transition-all duration-300">
                     <div className="overflow-y-auto flex-1 custom-scrollbar">
                         <table className="w-full text-left border-collapse">
-                            <thead className="bg-slate-50 border-b border-slate-200 sticky top-0 z-10 text-xs font-black text-slate-500 uppercase tracking-[0.1em]">
+                            <thead className="bg-slate-50 border-b border-slate-200 sticky top-0 z-10 text-sm font-bold text-slate-700 uppercase tracking-wide">
                                 <tr>
                                     <th className="py-4 px-6">Course Title</th>
                                     <th className="py-4 px-6 md:table-cell hidden">Instructor</th>

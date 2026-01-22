@@ -34,7 +34,6 @@ import StudentChat from './pages/student/StudentChat';
 import PracticeArea from './pages/student/PracticeArea';
 import PracticeSession from './pages/student/PracticeSession';
 import InstructorChat from './pages/instructor/InstructorChat';
-import StudentPerformance from './pages/instructor/StudentPerformance';
 import Leaderboard from './pages/student/Leaderboard';
 
 function App() {
@@ -78,7 +77,6 @@ function App() {
               <Route path="exams" element={<ExamBuilder />} />
               <Route path="settings" element={<InstructorSettings />} />
               <Route path="profile-settings" element={<ProfileSettings />} />
-              <Route path="performance" element={<StudentPerformance />} />
               <Route path="chat" element={<InstructorChat />} />
             </Route>
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import { FaUserCircle, FaThLarge, FaSignOutAlt, FaCog, FaChalkboardTeacher, FaCheckCircle, FaUserGraduate, FaUsers, FaBars } from 'react-icons/fa';
+import { FaUserCircle, FaThLarge, FaSignOutAlt, FaCog, FaChalkboardTeacher, FaCheckCircle, FaUserGraduate, FaUsers, FaBars, FaCertificate } from 'react-icons/fa';
 import markLogo from '../../../assets/just_logo.jpeg';
 
-const AdminLayoutView = ({ isSidebarOpen, setIsSidebarOpen, handleLogout, adminName, navigate, location }) => {
+const AdminLayoutView = ({ isSidebarOpen, setIsSidebarOpen, handleLogout, adminName, navigate, location, photoURL }) => {
 
     const NavItem = ({ path, icon: Icon, label }) => {
         const isActive = location.pathname.includes(path);
@@ -65,8 +65,9 @@ const AdminLayoutView = ({ isSidebarOpen, setIsSidebarOpen, handleLogout, adminN
                             <NavItem path="approve-courses" icon={FaCheckCircle} label="Approve Courses" />
                             <NavItem path="assign-course" icon={FaUserGraduate} label="Assign Courses" />
                             <NavItem path="approve-users" icon={FaUserCircle} label="Approve Users" />
-                            <NavItem path="certificates" icon={FaCog} label="Certificates" />
-                            <NavItem path="profile-management" icon={FaCog} label="Settings" />
+                            <NavItem path="certificates" icon={FaCertificate} label="Certificates" />
+                            <NavItem path="certificates" icon={FaCertificate} label="Certificates" />
+                            <NavItem path="settings" icon={FaCog} label="Settings" />
                         </ul>
                     </div>
                 </div>
@@ -92,12 +93,12 @@ const AdminLayoutView = ({ isSidebarOpen, setIsSidebarOpen, handleLogout, adminN
                                 <div className="text-sm font-semibold text-slate-900">{adminName}</div>
                                 <div className="text-xs text-slate-500 font-medium">Super Admin</div>
                             </div>
-                            <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 border border-slate-200">
-                                <FaUserCircle className="text-2xl" />
+                            <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 border border-slate-200 overflow-hidden">
+                                {photoURL ? <img src={photoURL} alt="Profile" className="w-full h-full object-cover" /> : <FaUserCircle className="text-2xl" />}
                             </div>
                             <button
                                 onClick={handleLogout}
-                                className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all duration-200"
+                                className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-all duration-200"
                                 title="Logout"
                             >
                                 <FaSignOutAlt className="text-lg" />
@@ -108,7 +109,7 @@ const AdminLayoutView = ({ isSidebarOpen, setIsSidebarOpen, handleLogout, adminN
 
                 { }
                 <main className="flex-1 overflow-auto bg-slate-50 p-4 lg:p-8">
-                    <div className="max-w-7xl mx-auto">
+                    <div className="w-full h-full">
                         <Outlet />
                     </div>
                 </main>

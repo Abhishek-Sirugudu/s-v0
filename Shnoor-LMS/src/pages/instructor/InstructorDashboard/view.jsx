@@ -1,152 +1,310 @@
-import React from 'react';
-import { FaBookOpen, FaUserGraduate, FaStar, FaPlus, FaFolderOpen, FaEnvelope, FaArrowRight } from 'react-icons/fa';
+import React, { useState } from 'react';
+import {
+    Users,
+    BookOpen,
+    Star,
+    Plus,
+    Folder,
+    MessageSquare,
+    ArrowUpRight,
+    ArrowDownRight,
+    TrendingUp,
+    Search,
+    Clock,
+    MoreVertical,
+    Mail
+} from 'lucide-react';
+import {
+    LineChart,
+    Line,
+    XAxis,
+    YAxis,
+    CartesianGrid,
+    Tooltip,
+    ResponsiveContainer
+} from 'recharts';
 
 const InstructorDashboardView = ({ loading, userName, stats, navigate }) => {
+    // --- Mock Data ---
+    const performanceData = [
+        { subject: 'Mon', score: 65 },
+        { subject: 'Tue', score: 59 },
+        { subject: 'Wed', score: 80 },
+        { subject: 'Thu', score: 81 },
+        { subject: 'Fri', score: 56 },
+        { subject: 'Sat', score: 95 },
+        { subject: 'Sun', score: 90 },
+    ];
+
+    const [searchTerm, setSearchTerm] = useState('');
+
+    // Mock Student Data (Merged from StudentPerformance)
+    const students = [
+        { id: 'S001', name: 'Alice Wilson', course: 'Adv. React Patterns', progress: 85, score: 92, status: 'Active' },
+        { id: 'S002', name: 'Robert Fox', course: 'Node.js Microservices', progress: 32, score: 68, status: 'At Risk' },
+        { id: 'S003', name: 'Kenny Lane', course: 'UI/UX Fundamentals', progress: 95, score: 98, status: 'Excellent' },
+        { id: 'S004', name: 'Priscilla Jones', course: 'Python for DS', progress: 45, score: 72, status: 'Active' },
+        { id: 'S005', name: 'Darlene Robertson', course: 'DevOps Basics', progress: 12, score: 45, status: 'Inactive' },
+        { id: 'S006', name: 'Ralph Edwards', course: 'Adv. React Patterns', progress: 78, score: 85, status: 'Active' },
+    ];
+
+    const filteredStudents = students.filter(s =>
+        s.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        s.course.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     if (loading) return (
-        <div className="flex items-center justify-center min-h-[400px]">
-            <div className="flex flex-col items-center gap-4">
-                <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-                <p className="text-slate-500 font-medium">Loading dashboard...</p>
-            </div>
+        <div className="flex items-center justify-center min-h-[400px] text-slate-500 font-medium animate-pulse">
+            Loading dashboard...
         </div>
     );
 
     return (
-        <div className="max-w-7xl mx-auto pb-12">
-            { }
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-                <div>
-                    <h2 className="text-2xl font-bold text-slate-900">Hello, {userName}! 👋</h2>
-                    <p className="text-slate-500 mt-1">Here's what's happening with your courses today.</p>
-                </div>
-                <div className="px-4 py-1.5 bg-blue-50 text-blue-700 border border-blue-100 rounded-full text-sm font-bold shadow-sm">
-                    Instructor Portal
-                </div>
-            </div>
+        <div className="min-h-screen bg-[#f8fafc] p-2 font-sans text-slate-900 flex flex-col">
+            <div className="w-full space-y-8 flex-1 flex flex-col">
 
-            { }
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                { }
-                <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm border-l-4 border-l-amber-400">
-                    <div className="flex justify-between items-center">
-                        <div>
-                            <span className="text-sm font-bold text-slate-500 uppercase tracking-wide">My Courses</span>
-                            <div className="text-3xl font-bold text-slate-900 mt-2">{stats.myCourses}</div>
-                        </div>
-                        <div className="w-12 h-12 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center">
-                            <FaBookOpen size={24} />
-                        </div>
+                {/* --- Header Section --- */}
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-6 border-b border-slate-200 pb-6 shrink-0">
+                    <div>
+                        <h1 className="text-3xl font-semibold text-slate-900 tracking-tight">Instructor Portal</h1>
+                        <p className="text-slate-500 text-base mt-1">Welcome back, {userName}. Overview of your course performance.</p>
                     </div>
                 </div>
 
-                { }
-                <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm border-l-4 border-l-blue-800">
-                    <div className="flex justify-between items-center">
-                        <div>
-                            <span className="text-sm font-bold text-slate-500 uppercase tracking-wide">Students Enrolled</span>
-                            <div className="text-3xl font-bold text-slate-900 mt-2">{stats.totalStudents}</div>
-                        </div>
-                        <div className="w-12 h-12 bg-blue-100 text-blue-800 rounded-xl flex items-center justify-center">
-                            <FaUserGraduate size={24} />
-                        </div>
-                    </div>
+                {/* --- KPI Grid --- */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 shrink-0">
+                    <KpiCard
+                        title="My Courses"
+                        value={stats.myCourses}
+                        trend="Active"
+                        isPositive={true}
+                        icon={<BookOpen size={20} />}
+                    />
+                    <KpiCard
+                        title="Total Students"
+                        value={stats.totalStudents}
+                        trend="12% vs last month"
+                        isPositive={true}
+                        icon={<Users size={20} />}
+                    />
+                    <KpiCard
+                        title="Average Rating"
+                        value={stats.avgRating}
+                        trend="4.8 Target"
+                        isPositive={stats.avgRating >= 4.0}
+                        icon={<Star size={20} />}
+                    />
                 </div>
 
-                { }
-                <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm border-l-4 border-l-amber-400">
-                    <div className="flex justify-between items-center">
-                        <div>
-                            <span className="text-sm font-bold text-slate-500 uppercase tracking-wide">Avg. Rating</span>
-                            <div className="text-3xl font-bold text-slate-900 mt-2 flex items-baseline gap-1">
-                                {stats.avgRating} <span className="text-base text-slate-400 font-normal">/ 5</span>
+                {/* --- Main Content Area --- */}
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 shrink-0">
+
+                    {/* Chart Section */}
+                    <div className="lg:col-span-2 bg-white p-6 rounded-lg border border-slate-200 shadow-sm flex flex-col h-[400px]">
+                        <div className="flex justify-between items-center mb-8 shrink-0">
+                            <div>
+                                <h3 className="text-base font-semibold text-slate-900">Engagement Trends</h3>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <span className="w-2 h-0.5 bg-[var(--color-indigo-600)]"></span>
+                                <span className="text-xs font-medium text-slate-500">Student Activity</span>
                             </div>
                         </div>
-                        <div className="w-12 h-12 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center">
-                            <FaStar size={24} />
+                        <div className="flex-1 w-full min-h-0">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <LineChart data={performanceData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
+                                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
+                                    <XAxis
+                                        dataKey="subject"
+                                        axisLine={false}
+                                        tickLine={false}
+                                        tick={{ fill: '#64748b', fontSize: 11 }}
+                                        dy={10}
+                                    />
+                                    <YAxis
+                                        axisLine={false}
+                                        tickLine={false}
+                                        tick={{ fill: '#64748b', fontSize: 11 }}
+                                    />
+                                    <Tooltip
+                                        contentStyle={{
+                                            backgroundColor: '#fff',
+                                            border: '1px solid #e2e8f0',
+                                            padding: '8px 12px',
+                                            fontSize: '12px',
+                                            boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
+                                        }}
+                                        itemStyle={{ padding: 0 }}
+                                        cursor={{ stroke: '#cbd5e1', strokeWidth: 1 }}
+                                    />
+                                    <Line
+                                        type="monotone"
+                                        dataKey="score"
+                                        stroke="var(--color-indigo-600)"
+                                        strokeWidth={2}
+                                        dot={false}
+                                        activeDot={{ r: 4, fill: 'var(--color-indigo-600)' }}
+                                    />
+                                </LineChart>
+                            </ResponsiveContainer>
+                        </div>
+                    </div>
+
+                    {/* Quick Actions */}
+                    <div className="bg-white p-6 rounded-lg border border-slate-200 shadow-sm flex flex-col h-[400px]">
+                        <h3 className="text-base font-semibold text-slate-900 mb-6">Quick Actions</h3>
+                        <div className="space-y-4 flex-1 overflow-y-auto pr-2">
+                            <ActionButton
+                                icon={<Plus size={18} />}
+                                title="Create New Course"
+                                description="Start building content"
+                                onClick={() => navigate('/instructor/add-course')}
+                                colorClass="bg-indigo-50 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white"
+                            />
+                            <ActionButton
+                                icon={<Folder size={18} />}
+                                title="Manage Courses"
+                                description="View and edit library"
+                                onClick={() => navigate('/instructor/courses')}
+                                colorClass="bg-amber-50 text-amber-600 group-hover:bg-amber-500 group-hover:text-white"
+                            />
+                            <ActionButton
+                                icon={<MessageSquare size={18} />}
+                                title="Message Students"
+                                description="Broadcast announcements"
+                                onClick={() => navigate('/instructor/chat')}
+                                colorClass="bg-emerald-50 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white"
+                            />
                         </div>
                     </div>
                 </div>
-            </div>
 
-            { }
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
-                <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                    <div className="flex justify-between items-center mb-6">
-                        <h3 className="text-lg font-bold text-slate-900">Student Performance Analytics</h3>
-                        <button
-                            className="text-sm text-blue-600 font-bold hover:bg-blue-50 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1"
-                            onClick={() => navigate('/instructor/performance')}
-                        >
-                            View Report <FaArrowRight size={12} />
-                        </button>
+                {/* --- Student Performance Matrix (Merged Feature) --- */}
+                <div className="bg-white border border-slate-200 rounded-lg shadow-sm flex-1 flex flex-col min-h-0">
+                    <div className="px-6 py-4 border-b border-slate-200 flex justify-between items-center bg-white shrink-0">
+                        <h3 className="text-base font-semibold text-slate-900">Student Performance Matrix</h3>
+                        <div className="relative w-64">
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={14} />
+                            <input
+                                type="text"
+                                placeholder="Filter students..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                className="w-full pl-9 pr-4 py-1.5 text-sm border border-slate-200 rounded-md focus:border-slate-400 focus:ring-0 outline-none transition-colors"
+                            />
+                        </div>
                     </div>
 
-                    <div className="flex items-end justify-between h-48 gap-4 pt-4">
-                        {[
-                            { label: 'React Basics', value: 85 },
-                            { label: 'Adv. Node.js', value: 65 },
-                            { label: 'UI/UX Design', value: 92 },
-                            { label: 'Python Intro', value: 78 }
-                        ].map((item, index) => (
-                            <div key={index} className="flex-1 flex flex-col items-center gap-2 h-full justify-end group cursor-pointer">
-                                <div className="text-xs font-bold text-slate-600 opacity-0 group-hover:opacity-100 transition-opacity mb-1 transform translate-y-2 group-hover:translate-y-0">{item.value}%</div>
-                                <div
-                                    className={`w-full max-w-[50px] rounded-t-lg transition-all duration-500 ${item.value > 80 ? 'bg-amber-400' : 'bg-slate-700'} hover:opacity-90`}
-                                    style={{ height: `${item.value}%` }}
-                                ></div>
-                                <div className="text-xs font-medium text-slate-400 text-center truncate w-full">{item.label}</div>
-                            </div>
-                        ))}
+                    <div className="overflow-auto flex-1">
+                        <table className="w-full text-left border-collapse h-full">
+                            <thead className="bg-[#f8fafc] border-b border-slate-200 sticky top-0 z-10">
+                                <tr>
+                                    <th className="px-6 py-4 text-sm font-bold text-slate-700 uppercase tracking-wide">Student Name</th>
+                                    <th className="px-6 py-4 text-sm font-bold text-slate-700 uppercase tracking-wide">Course</th>
+                                    <th className="px-6 py-4 text-sm font-bold text-slate-700 uppercase tracking-wide">Progress</th>
+                                    <th className="px-6 py-4 text-sm font-bold text-slate-700 uppercase tracking-wide">Avg. Score</th>
+                                    <th className="px-6 py-4 text-sm font-bold text-slate-700 uppercase tracking-wide text-right">Status</th>
+                                    <th className="px-6 py-4 text-sm font-bold text-slate-700 uppercase tracking-wide text-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y divide-slate-100">
+                                {filteredStudents.map((student) => (
+                                    <tr key={student.id} className="hover:bg-[#f8fafc] transition-colors">
+                                        <td className="px-6 py-4">
+                                            <div className="font-medium text-slate-900 text-base">{student.name}</div>
+                                            <div className="text-sm text-slate-500 mt-0.5">ID: {student.id}</div>
+                                        </td>
+                                        <td className="px-6 py-4 text-base text-slate-700">
+                                            {student.course}
+                                        </td>
+                                        <td className="px-6 py-4 text-base text-slate-700 w-1/5">
+                                            <div className="space-y-1">
+                                                <div className="flex justify-between text-xs text-slate-600">
+                                                    <span>Completed</span>
+                                                    <span>{student.progress}%</span>
+                                                </div>
+                                                <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
+                                                    <div
+                                                        className={`h-full ${student.progress < 30 ? 'bg-rose-500' : 'bg-indigo-600'}`}
+                                                        style={{ width: `${student.progress}%` }}
+                                                    ></div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td className="px-6 py-4 text-base text-slate-700 tabular-nums">
+                                            <span className={`font-bold ${student.score < 70 ? 'text-rose-600' : 'text-slate-700'}`}>
+                                                {student.score}%
+                                            </span>
+                                        </td>
+                                        <td className="px-6 py-4 text-right">
+                                            <div className="flex justify-end">
+                                                <StatusBadge status={student.status} />
+                                            </div>
+                                        </td>
+                                        <td className="px-6 py-4 text-right">
+                                            <button
+                                                onClick={() => navigate('/instructor/chat')}
+                                                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-indigo-600 bg-indigo-50 border border-indigo-100 rounded hover:bg-indigo-100 transition-colors"
+                                            >
+                                                <Mail size={12} /> Message
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            </div>
 
-            { }
-            <div>
-                <h3 className="text-xl font-bold text-slate-900 mb-6">Quick Actions</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <button
-                        className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all flex items-center gap-4 text-left group"
-                        onClick={() => navigate('/instructor/add-course')}
-                    >
-                        <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                            <FaPlus />
-                        </div>
-                        <div>
-                            <div className="font-bold text-slate-800">Create New Course</div>
-                            <div className="text-xs text-slate-500 mt-0.5">Start building content</div>
-                        </div>
-                    </button>
-
-                    <button
-                        className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all flex items-center gap-4 text-left group"
-                        onClick={() => navigate('/instructor/courses')}
-                    >
-                        <div className="w-12 h-12 bg-amber-50 text-amber-600 rounded-full flex items-center justify-center shrink-0 group-hover:bg-amber-500 group-hover:text-white transition-colors">
-                            <FaFolderOpen />
-                        </div>
-                        <div>
-                            <div className="font-bold text-slate-800">Manage Courses</div>
-                            <div className="text-xs text-slate-500 mt-0.5">View/Edit your library</div>
-                        </div>
-                    </button>
-
-                    <button
-                        className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all flex items-center gap-4 text-left group"
-                        onClick={() => navigate('/instructor/chat')}
-                    >
-                        <div className="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center shrink-0 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
-                            <FaEnvelope />
-                        </div>
-                        <div>
-                            <div className="font-bold text-slate-800">Message Students</div>
-                            <div className="text-xs text-slate-500 mt-0.5">Broadcast announcements</div>
-                        </div>
-                    </button>
-                </div>
             </div>
         </div>
+    );
+};
+
+// --- Sub-components ---
+
+const KpiCard = ({ title, value, trend, isPositive, icon }) => (
+    <div className="bg-white p-6 rounded-lg border border-slate-200 shadow-sm flex flex-col justify-between h-[150px]">
+        <div className="flex justify-between items-start">
+            <div className="space-y-1">
+                <p className="text-sm font-semibold text-slate-500 uppercase tracking-wide">{title}</p>
+                <h3 className="text-3xl font-semibold text-slate-900 tracking-tight">{value}</h3>
+            </div>
+            <div className="text-slate-400">{icon}</div>
+        </div>
+        <div className="flex items-center gap-1.5 mt-4">
+            {isPositive ? <ArrowUpRight size={16} className="text-emerald-600" /> : <ArrowDownRight size={16} className="text-rose-600" />}
+            <span className={`text-sm font-medium ${isPositive ? 'text-emerald-600' : 'text-slate-500'}`}>{trend}</span>
+        </div>
+    </div>
+);
+
+const ActionButton = ({ icon, title, description, onClick, colorClass }) => (
+    <button
+        onClick={onClick}
+        className="w-full p-4 rounded-lg border border-slate-100 hover:border-slate-300 hover:shadow-sm transition-all flex items-center gap-4 text-left group bg-slate-50/50 hover:bg-white"
+    >
+        <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${colorClass}`}>
+            {icon}
+        </div>
+        <div>
+            <div className="font-semibold text-slate-900 text-sm group-hover:text-indigo-600 transition-colors">{title}</div>
+            <div className="text-xs text-slate-500 mt-0.5">{description}</div>
+        </div>
+    </button>
+);
+
+const StatusBadge = ({ status }) => {
+    const styles = {
+        Active: 'bg-emerald-100 text-emerald-700',
+        'At Risk': 'bg-rose-100 text-rose-700',
+        Excellent: 'bg-indigo-100 text-indigo-700',
+        Inactive: 'bg-slate-100 text-slate-600'
+    };
+    return (
+        <span className={`px-2.5 py-0.5 rounded-full text-xs font-bold ${styles[status] || styles.Inactive}`}>
+            {status}
+        </span>
     );
 };
 

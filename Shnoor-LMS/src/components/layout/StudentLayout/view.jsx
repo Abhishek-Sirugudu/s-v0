@@ -1,13 +1,13 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import { FaList, FaTrophy, FaUserCircle, FaSignOutAlt, FaStar, FaChartLine, FaClipboardList, FaCode, FaBars } from 'react-icons/fa';
+import { FaList, FaTrophy, FaUserCircle, FaSignOutAlt, FaStar, FaChartLine, FaClipboardList, FaCode, FaBars, FaCog } from 'react-icons/fa';
 import markLogo from '../../../assets/just_logo.jpeg';
 
 const StudentLayoutView = ({
     studentName, xp, rank,
     isSidebarOpen, setIsSidebarOpen,
     handleLogout, totalUnread,
-    navigate, location
+    navigate, location, photoURL
 }) => {
 
     const NavItem = ({ path, icon: Icon, label, badgeCount }) => {
@@ -72,6 +72,7 @@ const StudentLayoutView = ({
                             <NavItem path="certificates" icon={FaTrophy} label="Certificates" />
                             <NavItem path="practice" icon={FaCode} label="Practice Arena" />
                             <NavItem path="chat" icon={({ className }) => <span className={className}>💬</span>} label="Messages" badgeCount={totalUnread} />
+                            <NavItem path="settings" icon={FaCog} label="Settings" />
                         </ul>
                     </div>
                 </div>
@@ -114,12 +115,12 @@ const StudentLayoutView = ({
                                 <div className="text-sm font-semibold text-slate-900">{studentName}</div>
                                 <div className="text-xs text-slate-500 font-medium">Student</div>
                             </div>
-                            <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 border border-slate-200">
-                                <FaUserCircle className="text-2xl" />
+                            <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 border border-slate-200 overflow-hidden">
+                                {photoURL ? <img src={photoURL} alt="Profile" className="w-full h-full object-cover" /> : <FaUserCircle className="text-2xl" />}
                             </div>
                             <button
                                 onClick={handleLogout}
-                                className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all duration-200"
+                                className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-all duration-200"
                                 title="Logout"
                             >
                                 <FaSignOutAlt className="text-lg" />
@@ -130,7 +131,7 @@ const StudentLayoutView = ({
 
                 { }
                 <main className="flex-1 overflow-auto bg-slate-50 p-4 lg:p-8">
-                    <div className="max-w-7xl mx-auto">
+                    <div className="w-full h-full">
                         <Outlet context={{ studentName, xp }} />
                     </div>
                 </main>

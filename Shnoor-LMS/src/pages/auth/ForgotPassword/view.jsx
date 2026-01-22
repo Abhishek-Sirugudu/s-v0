@@ -86,10 +86,10 @@ const ForgotPasswordView = ({
                                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
                                 <input
                                     type="email"
-                                    placeholder="name@institution.com"
+                                    placeholder="Enter your gmail"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    className="input-field !pl-12"
+                                    className="input-field pl-12!"
                                     required
                                 />
                             </div>
@@ -98,7 +98,7 @@ const ForgotPasswordView = ({
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full bg-[var(--color-primary)] hover:bg-slate-800 text-white font-bold py-3 px-4 rounded-xl shadow-lg shadow-slate-900/10 transform transition-all active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed"
+                            className="w-full bg-(--color-primary) hover:bg-slate-800 text-white font-bold py-3 px-4 rounded-xl shadow-lg shadow-slate-900/10 transform transition-all active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed"
                         >
                             {loading ? 'Sending Link...' : 'Send Recovery Link'}
                         </button>
@@ -110,9 +110,6 @@ const ForgotPasswordView = ({
                     </form>
                 </div>
 
-                <div className="absolute bottom-6 text-[10px] text-slate-400 font-medium uppercase tracking-widest hidden md:block">
-                    Secured by SHNOOR V1.0
-                </div>
             </div>
         </div>
     );

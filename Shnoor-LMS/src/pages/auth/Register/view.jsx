@@ -137,7 +137,7 @@ const RegisterView = ({
                                 <input
                                     type="text"
                                     name="fullName"
-                                    placeholder="John Doe"
+                                    placeholder="Enter User name"
                                     value={formData.fullName}
                                     onChange={handleChange}
                                     required
@@ -150,7 +150,7 @@ const RegisterView = ({
                                 <input
                                     type="email"
                                     name="email"
-                                    placeholder="name@institution.com"
+                                    placeholder="Enter your gmail"
                                     value={formData.email}
                                     onChange={handleChange}
                                     required
@@ -237,9 +237,7 @@ const RegisterView = ({
                     </div>
                 </div>
 
-                <div className="absolute bottom-6 text-[10px] text-slate-400 font-medium uppercase tracking-widest hidden md:block">
-                    Secured by SHNOOR V1.0
-                </div>
+
             </div>
         </div>
     );

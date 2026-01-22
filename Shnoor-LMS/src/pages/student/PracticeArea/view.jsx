@@ -22,7 +22,7 @@ const PracticeAreaView = ({ loading, filter, setFilter, filteredChallenges, navi
     );
 
     return (
-        <div className="max-w-7xl mx-auto pb-12">
+        <div className="w-full pb-12">
             { }
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
                 <div>
@@ -59,14 +59,16 @@ const PracticeAreaView = ({ loading, filter, setFilter, filteredChallenges, navi
                     filteredChallenges.map((challenge, index) => (
                         <div
                             key={challenge.id}
-                            className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer group flex flex-col"
+                            className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden hover:border-indigo-300 hover:shadow-md transition-all duration-300 cursor-pointer group flex flex-col h-full"
                             onClick={() => navigate(`/student/practice/session/${challenge.id}`)}
                         >
-                            <div className="h-40 bg-slate-900 relative flex items-center justify-center overflow-hidden">
-                                <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-950 opacity-90"></div>
-                                <FaCode className="text-slate-700 text-6xl relative z-10 group-hover:text-blue-500 group-hover:scale-110 transition-all duration-500" />
+                            <div className="h-40 bg-slate-50 border-b border-slate-100 relative flex items-center justify-center overflow-hidden">
+                                <FaCode className="text-slate-300 text-5xl relative z-10 group-hover:text-indigo-500 transition-all duration-300" />
 
-                                <span className={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-bold shadow-sm z-20 ${getDifficultyColor(challenge.difficulty)}`}>
+                                <span className={`absolute top-4 right-4 px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider border ${challenge.difficulty === 'Easy' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' :
+                                    challenge.difficulty === 'Medium' ? 'bg-amber-50 text-amber-600 border-amber-100' :
+                                        'bg-rose-50 text-rose-600 border-rose-100'
+                                    }`}>
                                     {challenge.difficulty}
                                 </span>
                             </div>
@@ -80,8 +82,8 @@ const PracticeAreaView = ({ loading, filter, setFilter, filteredChallenges, navi
                                         <FaCode /> {challenge.type === 'coding' ? 'Coding' : 'Quiz'}
                                         {challenge.status === 'Solved' && <FaCheckCircle className="text-emerald-500" />}
                                     </span>
-                                    <button className="bg-slate-900 text-white text-xs font-bold px-4 py-2 rounded-lg group-hover:bg-blue-600 transition-colors">
-                                        Solve
+                                    <button className="bg-white border border-slate-200 text-slate-600 hover:border-indigo-500 hover:text-indigo-600 text-xs font-bold px-4 py-2 rounded transition-colors">
+                                        Solve Challenge
                                     </button>
                                 </div>
                             </div>

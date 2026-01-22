@@ -71,7 +71,7 @@ const ExamBuilder = () => {
         const newQ = type === 'mcq'
             ? { id: Date.now(), type: 'mcq', text: '', options: ['', '', '', ''], correctAnswer: '', marks: 5 }
             : type === 'descriptive'
-                ? { id: Date.now(), type: 'descriptive', text: '', marks: 10 }
+                ? { id: Date.now(), type: 'descriptive', text: '', modelAnswer: '', marks: 10 }
                 : { id: Date.now(), type: 'coding', title: '', text: '', constraints: '', starterCode: '// Write your code here', testCases: [], marks: 20 };
 
         setFormData(prev => ({

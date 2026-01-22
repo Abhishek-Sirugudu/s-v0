@@ -13,6 +13,7 @@ const StudentLayout = () => {
     const { currentUser, logout } = useAuth();
     const [xp, setXp] = useState(0);
     const [rank, setRank] = useState('Novice');
+    const [photoURL, setPhotoURL] = useState(null);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const { unreadCounts } = useSocket();
     const totalUnread = Object.values(unreadCounts).reduce((a, b) => a + b, 0);
@@ -25,6 +26,7 @@ const StudentLayout = () => {
                     if (userDoc.exists()) {
                         const data = userDoc.data();
                         setXp(data.xp || 0);
+                        setPhotoURL(data.photoURL || currentUser.photoURL);
                         const rankObj = getRank(data.xp || 0);
                         setRank(rankObj.name);
                     }
@@ -48,6 +50,7 @@ const StudentLayout = () => {
             studentName={studentName}
             xp={xp}
             rank={rank}
+            photoURL={photoURL}
             isSidebarOpen={isSidebarOpen}
             setIsSidebarOpen={setIsSidebarOpen}
             handleLogout={handleLogout}

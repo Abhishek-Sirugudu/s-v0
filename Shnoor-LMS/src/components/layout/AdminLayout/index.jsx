@@ -22,6 +22,7 @@ const AdminLayout = () => {
             setIsSidebarOpen={setIsSidebarOpen}
             handleLogout={handleLogout}
             adminName={adminName}
+            photoURL={currentUser?.photoURL}
             navigate={navigate}
             location={location}
         />

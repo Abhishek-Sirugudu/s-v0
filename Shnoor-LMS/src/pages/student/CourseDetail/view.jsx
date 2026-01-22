@@ -27,7 +27,7 @@ const CourseDetailView = ({
     );
 
     return (
-        <div className="animate-fade-in max-w-6xl mx-auto pb-12">
+        <div className="animate-fade-in w-full pb-12">
             <button
                 onClick={() => navigate('/student/courses')}
                 className="mb-8 flex items-center gap-2 text-slate-500 hover:text-slate-900 transition-colors font-medium px-4 py-2 hover:bg-slate-100 rounded-lg w-fit"
@@ -149,19 +149,19 @@ const CourseDetailView = ({
                         </div>
 
                         <div className="p-6">
-                            <div className="text-3xl font-bold text-slate-900 mb-6">Free</div>
+                            <div className="text-3xl font-bold text-slate-900 mb-6">Open Access</div>
 
                             <button
                                 onClick={isEnrolled ? handleContinue : handleEnroll}
                                 className={`w-full py-3.5 px-4 rounded-xl font-bold text-lg mb-4 transition-all transform hover:-translate-y-0.5 shadow-lg ${isEnrolled
-                                        ? 'bg-slate-900 hover:bg-slate-800 text-white shadow-slate-900/20'
-                                        : 'bg-blue-600 hover:bg-blue-700 text-white shadow-blue-500/30'
+                                    ? 'bg-slate-900 hover:bg-slate-800 text-white shadow-slate-900/20'
+                                    : 'bg-blue-600 hover:bg-blue-700 text-white shadow-blue-500/30'
                                     }`}
                             >
                                 {isEnrolled ? 'Continue Learning' : 'Enroll Now'}
                             </button>
 
-                            <p className="text-center text-xs text-slate-500 font-medium mb-6">30-Day Money-Back Guarantee</p>
+                            <p className="text-center text-xs text-slate-500 font-medium mb-6">Lifetime Access</p>
 
                             <div className="space-y-4">
                                 <div className="text-sm font-bold text-slate-900 mb-2">This course includes:</div>

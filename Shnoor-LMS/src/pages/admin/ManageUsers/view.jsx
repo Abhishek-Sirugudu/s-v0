@@ -5,8 +5,7 @@ import {
     CheckCircle2,
     ShieldAlert,
     GraduationCap,
-    Briefcase,
-    Building2
+    Briefcase
 } from 'lucide-react';
 
 const ManageUsersView = ({
@@ -19,17 +18,16 @@ const ManageUsersView = ({
         switch (role) {
             case 'admin': return <ShieldAlert className="text-rose-500" size={16} />;
             case 'instructor': return <Briefcase className="text-[var(--color-indigo-600)]" size={16} />;
-            case 'company': return <Building2 className="text-amber-500" size={16} />;
             default: return <GraduationCap className="text-emerald-500" size={16} />;
         }
     };
 
     const getStatusBadge = (status) => {
         switch (status) {
-            case 'active': return <span className="px-2.5 py-0.5 bg-emerald-50 border border-emerald-100 text-emerald-700 rounded-md text-[10px] font-black uppercase tracking-wider">Active</span>;
-            case 'suspended': return <span className="px-2.5 py-0.5 bg-red-50 border border-red-100 text-red-700 rounded-md text-[10px] font-black uppercase tracking-wider">Suspended</span>;
-            case 'pending': return <span className="px-2.5 py-0.5 bg-amber-50 border border-amber-100 text-amber-700 rounded-md text-[10px] font-black uppercase tracking-wider">Pending</span>;
-            default: return <span className="px-2.5 py-0.5 bg-slate-50 border border-slate-200 text-slate-600 rounded-md text-[10px] font-black uppercase tracking-wider">{status || 'Unknown'}</span>;
+            case 'active': return <span className="px-2.5 py-0.5 bg-emerald-50 border border-emerald-100 text-emerald-700 rounded-md text-xs font-bold uppercase tracking-wide">Active</span>;
+            case 'suspended': return <span className="px-2.5 py-0.5 bg-red-50 border border-red-100 text-red-700 rounded-md text-xs font-bold uppercase tracking-wide">Suspended</span>;
+            case 'pending': return <span className="px-2.5 py-0.5 bg-amber-50 border border-amber-100 text-amber-700 rounded-md text-xs font-bold uppercase tracking-wide">Pending</span>;
+            default: return <span className="px-2.5 py-0.5 bg-slate-50 border border-slate-200 text-slate-600 rounded-md text-xs font-bold uppercase tracking-wide">{status || 'Unknown'}</span>;
         }
     };
 
@@ -69,7 +67,6 @@ const ManageUsersView = ({
                         <option value="all">All Roles</option>
                         <option value="student">Students</option>
                         <option value="instructor">Instructors</option>
-                        <option value="company">Companies</option>
                         <option value="admin">Admins</option>
                     </select>
                 </div>
@@ -80,11 +77,11 @@ const ManageUsersView = ({
                     <table className="w-full text-left border-collapse">
                         <thead className="bg-slate-50 border-b border-slate-200 sticky top-0 z-10">
                             <tr>
-                                <th className="py-4 px-6 text-xs font-black text-slate-500 uppercase tracking-[0.1em]">User</th>
-                                <th className="py-4 px-6 text-xs font-black text-slate-500 uppercase tracking-[0.1em]">Role</th>
-                                <th className="py-4 px-6 text-xs font-black text-slate-500 uppercase tracking-[0.1em]">Status</th>
-                                <th className="py-4 px-6 text-xs font-black text-slate-500 uppercase tracking-[0.1em]">Join Date</th>
-                                <th className="py-4 px-6 text-xs font-black text-slate-500 uppercase tracking-[0.1em] text-right">Actions</th>
+                                <th className="py-4 px-6 text-sm font-bold text-slate-700 uppercase tracking-wide">User</th>
+                                <th className="py-4 px-6 text-sm font-bold text-slate-700 uppercase tracking-wide">Role</th>
+                                <th className="py-4 px-6 text-sm font-bold text-slate-700 uppercase tracking-wide">Status</th>
+                                <th className="py-4 px-6 text-sm font-bold text-slate-700 uppercase tracking-wide">Join Date</th>
+                                <th className="py-4 px-6 text-sm font-bold text-slate-700 uppercase tracking-wide text-right">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-100">

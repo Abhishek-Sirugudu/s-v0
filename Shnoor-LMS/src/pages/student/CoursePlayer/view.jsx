@@ -48,11 +48,11 @@ const CoursePlayerView = ({
                     <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">Your Progress</div>
                     <div className="w-32 h-2 bg-slate-700 rounded-full overflow-hidden">
                         <div
-                            className="bg-green-500 h-full rounded-full transition-all duration-500"
+                            className="bg-indigo-500 h-full rounded-full transition-all duration-500"
                             style={{ width: `${progressPercentage}%` }}
                         ></div>
                     </div>
-                    <div className="text-sm font-bold text-green-400 w-10 text-right">{progressPercentage}%</div>
+                    <div className="text-sm font-bold text-indigo-400 w-10 text-right">{progressPercentage}%</div>
                 </div>
             </div>
 
@@ -106,8 +106,8 @@ const CoursePlayerView = ({
                             onClick={handleMarkComplete}
                             disabled={isModuleCompleted(currentModule?.id)}
                             className={`px-6 py-3 rounded-xl font-bold flex items-center gap-2 transition-all ${isModuleCompleted(currentModule?.id)
-                                    ? 'bg-green-500/10 text-green-500 border border-green-500/20 cursor-default'
-                                    : 'bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-600/20'
+                                ? 'bg-green-500/10 text-green-500 border border-green-500/20 cursor-default'
+                                : 'bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-600/20'
                                 }`}
                         >
                             {isModuleCompleted(currentModule?.id)
@@ -170,7 +170,7 @@ const CoursePlayerView = ({
 
                     <div className="p-4 bg-slate-800 border-t border-slate-700">
                         <button
-                            className="w-full py-3 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold rounded-xl shadow-lg shadow-orange-500/20 transition-all transform hover:-translate-y-0.5"
+                            className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-lg shadow-indigo-500/20 transition-all transform hover:-translate-y-0.5"
                             onClick={() => navigate(`/student/exam/final_${courseId}`)}
                         >
                             Take Final Exam

@@ -81,7 +81,7 @@ const LoginView = ({
                                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
                                 <input
                                     type="email"
-                                    placeholder="name@institution.com"
+                                    placeholder="Enter your gmail"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     className="input-field !pl-12"
@@ -99,7 +99,7 @@ const LoginView = ({
                                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
                                 <input
                                     type={showPassword ? "text" : "password"}
-                                    placeholder="Enter your key"
+                                    placeholder="Enter your password"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     className="input-field !pl-12 pr-11"
@@ -173,9 +173,7 @@ const LoginView = ({
                     </div>
                 </div>
 
-                <div className="absolute bottom-6 text-[10px] text-slate-400 font-medium uppercase tracking-widest">
-                    Secured by SHNOOR V1.0
-                </div>
+
             </div>
         </div>
     );

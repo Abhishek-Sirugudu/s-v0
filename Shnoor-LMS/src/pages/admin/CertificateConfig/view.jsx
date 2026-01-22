@@ -13,7 +13,7 @@ const CertificateConfigView = ({ loading, config, setConfig, handleSave }) => {
     );
 
     return (
-        <div className="p-8 max-w-4xl mx-auto">
+        <div className="p-8 w-full">
             <div className="text-center mb-10">
                 <div className="w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-4 border-4 border-amber-50 shadow-sm">
                     <FaCertificate size={28} />

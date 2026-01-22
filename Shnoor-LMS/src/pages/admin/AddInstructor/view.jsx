@@ -13,7 +13,7 @@ const AddInstructorView = ({ loading, data, handleChange, handleSubmit, navigate
     );
 
     return (
-        <div className="p-2 w-full h-full flex flex-col font-sans b-">
+        <div className="p-2 w-full h-full flex flex-col font-sans">
             <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
                 <div className="p-6 border-b border-slate-100 flex items-center gap-4 bg-slate-50/50">
                     <div className="w-12 h-12 rounded-xl bg-indigo-50 text-[var(--color-indigo-600)] flex items-center justify-center shadow-sm border border-indigo-100">
@@ -37,7 +37,7 @@ const AddInstructorView = ({ loading, data, handleChange, handleSubmit, navigate
                                     value={data.fullName}
                                     onChange={handleChange}
                                     required
-                                    placeholder="Dr. Smith"
+                                    placeholder="Enter User name"
                                     className="input-field !pl-12 text-base"
                                 />
                             </div>
@@ -53,7 +53,7 @@ const AddInstructorView = ({ loading, data, handleChange, handleSubmit, navigate
                                     value={data.email}
                                     onChange={handleChange}
                                     required
-                                    placeholder="instructor@shnoor.com"
+                                    placeholder="Enter your gmail"
                                     className="input-field !pl-12 text-base"
                                 />
                             </div>
