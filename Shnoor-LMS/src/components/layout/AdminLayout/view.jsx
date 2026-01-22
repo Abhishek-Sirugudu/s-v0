@@ -66,7 +66,6 @@ const AdminLayoutView = ({ isSidebarOpen, setIsSidebarOpen, handleLogout, adminN
                             <NavItem path="assign-course" icon={FaUserGraduate} label="Assign Courses" />
                             <NavItem path="approve-users" icon={FaUserCircle} label="Approve Users" />
                             <NavItem path="certificates" icon={FaCertificate} label="Certificates" />
-                            <NavItem path="certificates" icon={FaCertificate} label="Certificates" />
                             <NavItem path="settings" icon={FaCog} label="Settings" />
                         </ul>
                     </div>

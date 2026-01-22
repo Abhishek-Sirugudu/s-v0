@@ -400,15 +400,26 @@ const ExamBuilderView = ({
                                                     <div className="bg-slate-50 p-4 rounded-lg border border-slate-200">
                                                         <div className="flex justify-between items-center mb-3">
                                                             <label className="text-xs font-bold text-slate-500 uppercase tracking-wide">Test Cases</label>
-                                                            <button
-                                                                className="text-xs font-bold text-indigo-600 hover:text-indigo-700 flex items-center gap-1"
-                                                                onClick={() => {
-                                                                    const newTestCase = { input: '', output: '', isHidden: false };
-                                                                    updateQuestion(q.id, 'testCases', [...(q.testCases || []), newTestCase]);
-                                                                }}
-                                                            >
-                                                                <FaPlus /> Add Case
-                                                            </button>
+                                                            <div className="flex gap-2">
+                                                                <button
+                                                                    className="text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1 bg-emerald-50 px-2.5 py-1.5 rounded-md border border-emerald-100 hover:border-emerald-200 transition-all"
+                                                                    onClick={() => {
+                                                                        const newTestCase = { input: '', output: '', isHidden: false };
+                                                                        updateQuestion(q.id, 'testCases', [...(q.testCases || []), newTestCase]);
+                                                                    }}
+                                                                >
+                                                                    <FaCheckCircle size={10} /> Public
+                                                                </button>
+                                                                <button
+                                                                    className="text-xs font-bold text-amber-600 hover:text-amber-700 flex items-center gap-1 bg-amber-50 px-2.5 py-1.5 rounded-md border border-amber-100 hover:border-amber-200 transition-all"
+                                                                    onClick={() => {
+                                                                        const newTestCase = { input: '', output: '', isHidden: true };
+                                                                        updateQuestion(q.id, 'testCases', [...(q.testCases || []), newTestCase]);
+                                                                    }}
+                                                                >
+                                                                    <FaCode size={10} /> Hidden
+                                                                </button>
+                                                            </div>
                                                         </div>
                                                         <div className="space-y-2">
                                                             {(q.testCases || []).map((tc, tcIdx) => (
@@ -438,15 +449,15 @@ const ExamBuilderView = ({
                                                                         />
                                                                     </div>
                                                                     <button
-                                                                        className={`p-1.5 rounded transition-colors ${tc.isHidden ? 'bg-amber-100 text-amber-600' : 'bg-slate-100 text-slate-400 hover:text-indigo-600'}`}
+                                                                        className={`p-1.5 rounded transition-colors flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider ${tc.isHidden ? 'bg-amber-100 text-amber-700' : 'bg-emerald-100 text-emerald-700'}`}
                                                                         onClick={() => {
                                                                             const newTCs = [...q.testCases];
                                                                             newTCs[tcIdx].isHidden = !newTCs[tcIdx].isHidden;
                                                                             updateQuestion(q.id, 'testCases', newTCs);
                                                                         }}
-                                                                        title={tc.isHidden ? "Hidden Case" : "Public Case"}
+                                                                        title={tc.isHidden ? "Click to make Public" : "Click to make Hidden"}
                                                                     >
-                                                                        {tc.isHidden ? <FaCode size={12} /> : <FaCheckCircle size={12} />}
+                                                                        {tc.isHidden ? <><FaCode size={10} /> Hidden</> : <><FaCheckCircle size={10} /> Public</>}
                                                                     </button>
                                                                     <button
                                                                         className="text-slate-400 hover:text-rose-500 p-1"
