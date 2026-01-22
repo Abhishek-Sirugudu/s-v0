@@ -35,8 +35,7 @@ const RegisterView = ({
             <div className="hidden md:flex flex-col justify-between w-5/12 bg-[var(--color-primary-900)] p-12 text-white relative overflow-hidden">
                 <div className="relative z-10">
                     <div className="flex items-center mb-2 mr-100">
-                        <img src={brandLogo} alt="Shnoor Logo" style={{ maxWidth: '150px', marginBottom: '20px', borderRadius: '10px', display: 'block', margin: '0 auto 20px auto' }} />
-
+                        <img src={brandLogo} alt="Shnoor Logo" style={{ maxWidth: '150px', marginBottom: '20px', borderRadius: '10px', display: 'block' }} />
                     </div>
 
                     <h2 className="text-4xl font-bold mb-6 tracking-tight leading-tight">

@@ -17,13 +17,8 @@ const ForgotPasswordView = ({
             { }
             <div className="hidden md:flex flex-col justify-between w-5/12 bg-[var(--color-primary-900)] p-12 text-white relative overflow-hidden">
                 <div className="relative z-10">
-                    <div className="flex items-center gap-3 mb-12">
-                        <img
-                            src={brandLogo}
-                            alt="SHNOOR Logo"
-                            className="w-12 h-12 rounded-lg bg-white/10 p-1"
-                        />
-                        <span className="text-lg font-bold tracking-tight">SHNOOR LMS</span>
+                    <div className="flex items-center gap-3 mb-5">
+                       <img src={brandLogo} alt="Shnoor Logo" style={{ maxWidth: '150px', marginBottom: '20px', borderRadius: '10px', display: 'block' }} />
                     </div>
 
                     <h2 className="text-4xl font-bold mb-6 tracking-tight leading-tight">

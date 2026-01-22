@@ -225,19 +225,19 @@ const AddCourseView = ({
                                     </div>
 
                                     <div className="space-y-1.5">
-                                        <label className="text-xs font-semibold text-slate-500 flex justify-between">
-                                            Source
+                                        <div className="flex justify-between items-center">
+                                            <label className="text-xs font-semibold text-slate-500">Source</label>
                                             <div className="flex gap-2">
-                                                <span onClick={() => setVideoInputType('url')} className={`cursor-pointer ${videoInputType === 'url' ? 'text-indigo-600 font-bold' : 'text-slate-400'}`}>Link</span>
-                                                <span className="text-slate-300">|</span>
-                                                <span onClick={() => setVideoInputType('upload')} className={`cursor-pointer ${videoInputType === 'upload' ? 'text-indigo-600 font-bold' : 'text-slate-400'}`}>Upload</span>
+                                                <span onClick={() => setVideoInputType('url')} className={`cursor-pointer text-xs ${videoInputType === 'url' ? 'text-indigo-600 font-bold' : 'text-slate-400'}`}>Link</span>
+                                                <span className="text-slate-300 text-xs">|</span>
+                                                <span onClick={() => setVideoInputType('upload')} className={`cursor-pointer text-xs ${videoInputType === 'upload' ? 'text-indigo-600 font-bold' : 'text-slate-400'}`}>Upload</span>
                                             </div>
-                                        </label>
+                                        </div>
 
                                         {videoInputType === 'url' ? (
                                             <input
                                                 name="url"
-                                                placeholder="https://..."
+                                                placeholder={moduleForm.type === 'video' ? "https://youtube.com/..." : "https://example.com/file.pdf"}
                                                 value={moduleForm.url}
                                                 onChange={handleModuleChange}
                                                 className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-md focus:border-indigo-500 outline-none text-sm"
@@ -252,7 +252,7 @@ const AddCourseView = ({
                                                     className="opacity-0 absolute inset-0 w-full h-full cursor-pointer"
                                                 />
                                                 <div className="text-xs text-slate-500">
-                                                    {uploading ? `Uploading ${Math.round(uploadProgress)}%...` : (moduleForm.url ? 'File Uploaded' : 'Click to Upload')}
+                                                    {uploading ? `Uploading ${Math.round(uploadProgress)}%...` : (moduleForm.url ? 'File Uploaded' : 'Click to Upload Content')}
                                                 </div>
                                                 {uploading && (
                                                     <div className="w-full bg-slate-200 h-1 mt-2 rounded-full overflow-hidden">
@@ -261,6 +261,24 @@ const AddCourseView = ({
                                                 )}
                                             </div>
                                         )}
+                                    </div>
+
+                                    {/* Module Notes Section - Restored as requested */}
+                                    <div className="space-y-1.5">
+                                        <label className="text-xs font-bold text-slate-500 uppercase tracking-wide">Module Notes (Optional)</label>
+                                        <div className="border border-dashed border-slate-300 rounded-md p-3 text-center cursor-pointer hover:bg-slate-50 transition-colors relative">
+                                            <input
+                                                type="file"
+                                                accept="application/pdf"
+                                                onChange={(e) => handleFileUpload(e.target.files[0], 'notes')}
+                                                disabled={uploading}
+                                                className="opacity-0 absolute inset-0 w-full h-full cursor-pointer"
+                                            />
+                                            <div className="flex items-center justify-center gap-2 text-xs text-slate-500">
+                                                <FaFileAlt className="text-slate-400" />
+                                                {moduleForm.notes ? 'Notes Attached' : 'Upload PDF Notes'}
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <button
@@ -373,7 +391,7 @@ const AddCourseView = ({
 
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 
