@@ -32,7 +32,7 @@ const RegisterView = ({
     return (
         <div className="flex min-h-screen bg-slate-50 font-sans">
             { }
-            <div className="hidden md:flex flex-col justify-between w-5/12 bg-[var(--color-primary-900)] p-12 text-white relative overflow-hidden">
+            <div className="hidden md:flex flex-col justify-between w-5/12 bg-primary-900 p-12 text-white relative overflow-hidden">
                 <div className="relative z-10">
                     <div className="flex items-center mb-2 mr-100">
                         <img src={brandLogo} alt="Shnoor Logo" style={{ maxWidth: '150px', marginBottom: '20px', borderRadius: '10px', display: 'block' }} />
@@ -57,7 +57,7 @@ const RegisterView = ({
                 </div>
 
                 { }
-                <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-primary-900)] via-transparent to-indigo-900/20 pointer-events-none"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-primary-900 via-transparent to-indigo-900/20 pointer-events-none"></div>
             </div>
 
             { }
@@ -81,7 +81,7 @@ const RegisterView = ({
                             </div>
                         </div>
 
-                        <h1 className="text-2xl font-bold text-slate-900 tracking-tight mb-2">
+                        <h1 className="text-2xl font-bold text-primary-900 tracking-tight mb-2">
                             {step === 1 ? 'Select Account Type' : 'Complete Enrollment'}
                         </h1>
                         <p className="text-slate-500">
@@ -113,7 +113,7 @@ const RegisterView = ({
                                     <GraduationCap size={24} />
                                 </div>
                                 <div>
-                                    <h3 className="font-bold text-slate-900">Student Account</h3>
+                                    <h3 className="font-bold text-primary-900">Student Account</h3>
                                     <p className="text-xs text-slate-500 mt-1">Access courses, exams, and track your progress.</p>
                                 </div>
                             </button>
@@ -126,7 +126,7 @@ const RegisterView = ({
                                     <Briefcase size={24} />
                                 </div>
                                 <div>
-                                    <h3 className="font-bold text-slate-900">Instructor Account</h3>
+                                    <h3 className="font-bold text-primary-900">Instructor Account</h3>
                                     <p className="text-xs text-slate-500 mt-1">Create courses, manage students, and view analytics.</p>
                                 </div>
                             </button>
@@ -216,7 +216,7 @@ const RegisterView = ({
                                 <button
                                     type="submit"
                                     disabled={loading}
-                                    className="flex-1 bg-[var(--color-primary)] hover:bg-slate-800 text-white font-bold rounded-xl shadow-lg shadow-slate-900/10 transform transition-all active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                                    className="flex-1 bg-primary-900 hover:bg-slate-800 text-white font-bold rounded-xl shadow-lg shadow-primary-900/10 transform transition-all active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                                 >
                                     {loading ? (
                                         <span className="flex items-center gap-2">
@@ -234,7 +234,7 @@ const RegisterView = ({
 
                     <div className="mt-8 text-center text-sm text-slate-600">
                         Already have an account?{' '}
-                        <Link to="/login" className="font-bold text-[var(--color-indigo-600)] hover:text-indigo-800 hover:underline">
+                        <Link to="/login" className="font-bold text-primary-900 hover:text-indigo-800 hover:underline">
                             Sign In
                         </Link>
                     </div>

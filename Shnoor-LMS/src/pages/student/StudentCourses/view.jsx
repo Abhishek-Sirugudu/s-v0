@@ -24,11 +24,11 @@ const StudentCoursesView = ({
     );
 
     return (
-        <div className="space-y-8 font-sans text-slate-900">
+        <div className="space-y-8 font-sans text-primary-900">
             {/* Header */}
             <div className="flex flex-col md:flex-row justify-between items-end gap-6 border-b border-slate-200 pb-6">
                 <div>
-                    <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Course Library</h1>
+                    <h1 className="text-2xl font-bold text-primary-900 tracking-tight">Course Library</h1>
                     <div className="flex gap-6 mt-4">
                         <button
                             className={`pb-2 text-sm font-bold transition-all relative ${activeTab === 'my-learning'
@@ -96,7 +96,7 @@ const StudentCoursesView = ({
                     <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 text-slate-300 border border-slate-200">
                         <FaBookOpen size={24} />
                     </div>
-                    <h3 className="text-base font-bold text-slate-900 mb-1">No courses found</h3>
+                    <h3 className="text-base font-bold text-primary-900 mb-1">No courses found</h3>
                     <p className="text-sm text-slate-500">Try adjusting your filters or search terms.</p>
                 </div>
             ) : (
@@ -118,7 +118,7 @@ const StudentCoursesView = ({
 
                                 {/* Content */}
                                 <div className="p-5 flex-1 flex flex-col">
-                                    <h4 className="text-base font-bold text-slate-900 mb-2 line-clamp-2 leading-snug group-hover:text-indigo-600 transition-colors">
+                                    <h4 className="text-base font-bold text-primary-900 mb-2 line-clamp-2 leading-snug group-hover:text-indigo-600 transition-colors">
                                         {course.title}
                                     </h4>
                                     <p className="text-xs text-slate-600 mb-4 font-bold flex items-center gap-1">
@@ -128,7 +128,7 @@ const StudentCoursesView = ({
                                     <div className="mt-auto pt-4 border-t border-slate-100">
                                         {isEnrolled ? (
                                             <button
-                                                className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 px-4 rounded text-sm transition-colors flex items-center justify-center gap-2"
+                                                className="w-full bg-primary-900 hover:bg-slate-800 text-white font-bold py-2 px-4 rounded text-sm transition-colors flex items-center justify-center gap-2"
                                                 onClick={() => navigate(`/student/course/${course.id}`)}
                                             >
                                                 Resume <FaArrowRight size={10} />

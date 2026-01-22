@@ -44,7 +44,7 @@ const ManageUsersView = ({
         <div className="p-2 h-[calc(100vh-6rem)] flex flex-col font-sans w-full">
             <div className="flex justify-between items-center mb-6 shrink-0 px-2">
                 <div>
-                    <h2 className="text-2xl font-bold text-slate-900 tracking-tight">User Management</h2>
+                    <h2 className="text-2xl font-bold text-primary-900 tracking-tight">User Management</h2>
                     <p className="text-slate-500 text-base font-medium">Manage accounts and permissions across the platform.</p>
                 </div>
 
@@ -60,7 +60,7 @@ const ManageUsersView = ({
                         />
                     </div>
                     <select
-                        className="px-4 py-3 bg-white border border-slate-200 rounded-xl focus:border-[var(--color-indigo-600)] focus:ring-2 focus:ring-[var(--color-indigo-600)]/20 outline-none transition-all font-medium text-slate-600 text-sm cursor-pointer hover:border-slate-300"
+                        className="px-4 py-3 bg-white border border-slate-200 rounded-xl focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[var(--color-primary)]/20 outline-none transition-all font-medium text-slate-600 text-sm cursor-pointer hover:border-slate-300"
                         value={filterRole}
                         onChange={(e) => setFilterRole(e.target.value)}
                     >
@@ -93,7 +93,7 @@ const ManageUsersView = ({
                                                 {user.displayName?.charAt(0) || user.email?.charAt(0)}
                                             </div>
                                             <div>
-                                                <div className="font-bold text-slate-900 text-base tracking-tight">{user.displayName || 'No Name'}</div>
+                                                <div className="font-bold text-primary-900 text-base tracking-tight">{user.displayName || 'No Name'}</div>
                                                 <div className="text-sm text-slate-500 font-medium">{user.email}</div>
                                             </div>
                                         </div>

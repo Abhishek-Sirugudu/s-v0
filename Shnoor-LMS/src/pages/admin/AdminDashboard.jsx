@@ -23,7 +23,7 @@ import {
 } from 'lucide-react';
 
 const AdminDashboard = () => {
-  
+
   const generateActivityData = () => {
     const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
     return days.map(day => ({
@@ -51,13 +51,13 @@ const AdminDashboard = () => {
   const [tableData] = useState(generateTableData());
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] p-2 font-sans text-slate-900 flex flex-col">
+    <div className="min-h-screen bg-[#f8fafc] p-2 font-sans text-primary-900 flex flex-col">
       <div className="w-full space-y-8 flex-1 flex flex-col">
 
         { }
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-6 border-b border-slate-200 pb-6 shrink-0">
           <div>
-            <h1 className="text-3xl font-semibold text-slate-900 tracking-tight">Executive Overview</h1>
+            <h1 className="text-3xl font-semibold text-primary-900 tracking-tight">Executive Overview</h1>
             <p className="text-slate-500 text-base mt-1">Platform performance and system metrics.</p>
           </div>
           <div className="flex items-center gap-3">
@@ -66,7 +66,7 @@ const AdminDashboard = () => {
               <span>{new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
               <ChevronDown size={12} className="text-slate-400 ml-1" />
             </button>
-            <button className="flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-md text-xs font-semibold hover:bg-slate-800 transition-colors">
+            <button className="flex items-center gap-2 px-4 py-2 bg-primary-900 text-white rounded-md text-xs font-semibold hover:bg-slate-800 transition-colors">
               <Download size={14} /> Export Data
             </button>
           </div>
@@ -111,7 +111,7 @@ const AdminDashboard = () => {
           <div className="lg:col-span-2 bg-white p-6 rounded-lg border border-slate-200 shadow-sm flex flex-col h-[400px]">
             <div className="flex justify-between items-center mb-8 shrink-0">
               <div>
-                <h3 className="text-base font-semibold text-slate-900">Engagement Trends</h3>
+                <h3 className="text-base font-semibold text-primary-900">Engagement Trends</h3>
               </div>
               <div className="flex gap-6">
                 <div className="flex items-center gap-2">
@@ -174,7 +174,7 @@ const AdminDashboard = () => {
 
           { }
           <div className="bg-white p-6 rounded-lg border border-slate-200 shadow-sm flex flex-col justify-center h-[400px]">
-            <h3 className="text-base font-semibold text-slate-900 mb-8">System Status</h3>
+            <h3 className="text-base font-semibold text-primary-900 mb-8">System Status</h3>
 
             <div className="space-y-10 flex-1">
               <HealthBar label="Storage Usage" value={85} />
@@ -195,7 +195,7 @@ const AdminDashboard = () => {
         { }
         <div className="bg-white border border-slate-200 rounded-lg shadow-sm flex-1 flex flex-col min-h-0">
           <div className="px-6 py-4 border-b border-slate-200 flex justify-between items-center bg-white shrink-0">
-            <h3 className="text-base font-semibold text-slate-900">Course Participation Matrix</h3>
+            <h3 className="text-base font-semibold text-primary-900">Course Participation Matrix</h3>
             <div className="relative w-64">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={14} />
               <input
@@ -221,7 +221,7 @@ const AdminDashboard = () => {
                 {tableData.map((course) => (
                   <tr key={course.id} className="hover:bg-[#f8fafc] transition-colors">
                     <td className="px-6 py-4">
-                      <div className="font-medium text-slate-900 text-base">{course.title}</div>
+                      <div className="font-medium text-primary-900 text-base">{course.title}</div>
                       <div className="text-sm text-slate-500 mt-0.5">{course.category}</div>
                     </td>
                     <td className="px-6 py-4 text-base text-slate-600">
@@ -259,7 +259,7 @@ const KpiCard = ({ title, value, trend, isPositive, icon }) => {
       <div className="flex justify-between items-start">
         <div className="space-y-1">
           <p className="text-sm font-semibold text-slate-500 uppercase tracking-wide">{title}</p>
-          <h3 className="text-3xl font-semibold text-slate-900 tracking-tight">{value}</h3>
+          <h3 className="text-3xl font-semibold text-primary-900 tracking-tight">{value}</h3>
         </div>
         <div className="text-slate-400">
           {icon}

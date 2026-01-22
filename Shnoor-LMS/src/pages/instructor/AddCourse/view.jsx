@@ -20,13 +20,13 @@ const AddCourseView = ({
     );
 
     return (
-        <div className="min-h-screen bg-[#f8fafc] p-2 font-sans text-slate-900 flex flex-col">
+        <div className="min-h-screen bg-[#f8fafc] p-2 font-sans text-primary-900 flex flex-col">
             <div className="w-full max-w-none space-y-4 flex-1 flex flex-col">
 
                 {/* --- Header Section --- */}
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-6 border-b border-slate-200 pb-4 shrink-0 bg-white px-6 py-4 rounded-lg shadow-sm border">
                     <div>
-                        <h1 className="text-2xl font-bold text-slate-900 tracking-tight">
+                        <h1 className="text-2xl font-bold text-primary-900 tracking-tight">
                             {editCourseId ? 'Edit Course' : 'Create New Course'}
                         </h1>
                         <p className="text-slate-500 text-sm mt-1">Configure course details and curriculum.</p>
@@ -34,11 +34,11 @@ const AddCourseView = ({
                     <div className="flex items-center gap-2">
                         {[1, 2, 3].map(s => (
                             <div key={s} className="flex items-center">
-                                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold border transition-all ${step >= s ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-slate-400 border-slate-200'
+                                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold border transition-all ${step >= s ? 'bg-primary-900 text-white border-primary-900' : 'bg-white text-slate-400 border-slate-200'
                                     }`}>
                                     {s}
                                 </div>
-                                {s < 3 && <div className={`w-8 h-0.5 mx-1 transition-all ${step > s ? 'bg-indigo-600' : 'bg-slate-200'}`}></div>}
+                                {s < 3 && <div className={`w-8 h-0.5 mx-1 transition-all ${step > s ? 'bg-primary-900' : 'bg-slate-200'}`}></div>}
                             </div>
                         ))}
                     </div>
@@ -50,7 +50,7 @@ const AddCourseView = ({
                     {/* STEP 1: Course Details */}
                     {step === 1 && (
                         <div className="w-full">
-                            <h3 className="text-lg font-bold text-slate-900 border-b border-slate-100 pb-4 mb-6 uppercase tracking-wide text-sm flex items-center gap-2">
+                            <h3 className="text-lg font-bold text-primary-900 border-b border-slate-100 pb-4 mb-6 uppercase tracking-wide text-sm flex items-center gap-2">
                                 <FaInfoCircle className="text-slate-400" /> Basic Information
                             </h3>
 
@@ -64,7 +64,7 @@ const AddCourseView = ({
                                             value={courseData.title}
                                             onChange={handleCourseChange}
                                             autoFocus
-                                            className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-md focus:border-indigo-500 focus:ring-0 outline-none transition-all font-medium text-slate-900 text-sm"
+                                            className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-md focus:border-indigo-500 focus:ring-0 outline-none transition-all font-medium text-primary-900 text-sm"
                                         />
                                     </div>
 
@@ -76,7 +76,7 @@ const AddCourseView = ({
                                             placeholder="Overview of learning outcomes..."
                                             value={courseData.description}
                                             onChange={handleCourseChange}
-                                            className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-md focus:border-indigo-500 focus:ring-0 outline-none transition-all font-medium text-slate-900 text-sm resize-none"
+                                            className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-md focus:border-indigo-500 focus:ring-0 outline-none transition-all font-medium text-primary-900 text-sm resize-none"
                                         />
                                     </div>
 
@@ -87,7 +87,7 @@ const AddCourseView = ({
                                             placeholder="https://..."
                                             value={courseData.thumbnail}
                                             onChange={handleCourseChange}
-                                            className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-md focus:border-indigo-500 focus:ring-0 outline-none transition-all font-medium text-slate-900 text-sm"
+                                            className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-md focus:border-indigo-500 focus:ring-0 outline-none transition-all font-medium text-primary-900 text-sm"
                                         />
                                     </div>
                                 </div>
@@ -168,7 +168,7 @@ const AddCourseView = ({
 
                             <div className="mt-10 flex justify-end">
                                 <button
-                                    className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 px-6 rounded-md transition-all flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                                    className="bg-primary-900 hover:bg-slate-800 text-white font-semibold py-2.5 px-6 rounded-md transition-all flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
                                     onClick={() => setStep(2)}
                                     disabled={!courseData.title || (!courseData.category && !courseData.customCategory) || !courseData.level}
                                 >
@@ -183,7 +183,7 @@ const AddCourseView = ({
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 h-full">
                             {/* Left: Module Form */}
                             <div className="lg:col-span-1 border-r border-slate-200 pr-8">
-                                <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wide mb-6">Add Module Content</h3>
+                                <h3 className="text-sm font-bold text-primary-900 uppercase tracking-wide mb-6">Add Module Content</h3>
 
                                 <div className="space-y-5">
                                     <div className="space-y-1.5">
@@ -282,7 +282,7 @@ const AddCourseView = ({
                                     </div>
 
                                     <button
-                                        className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2.5 rounded-md transition-colors flex items-center justify-center gap-2 text-sm mt-4"
+                                        className="w-full bg-primary-900 hover:bg-slate-800 text-white font-bold py-2.5 rounded-md transition-colors flex items-center justify-center gap-2 text-sm mt-4"
                                         onClick={addModule}
                                         disabled={!moduleForm.title || !moduleForm.url}
                                     >
@@ -294,7 +294,7 @@ const AddCourseView = ({
                                     <button className="text-slate-500 hover:text-slate-800 font-semibold text-sm flex items-center gap-2" onClick={() => setStep(1)}>
                                         <FaArrowLeft size={12} /> Back
                                     </button>
-                                    <button className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-6 rounded-md text-sm flex items-center gap-2" onClick={() => setStep(3)}>
+                                    <button className="bg-primary-900 hover:bg-slate-800 text-white font-semibold py-2 px-6 rounded-md text-sm flex items-center gap-2" onClick={() => setStep(3)}>
                                         Review <FaArrowRight size={12} />
                                     </button>
                                 </div>
@@ -304,7 +304,7 @@ const AddCourseView = ({
                             <div className="lg:col-span-2">
                                 <div className="bg-[#f8fafc] h-full rounded-lg border border-slate-200 flex flex-col">
                                     <div className="px-6 py-4 border-b border-slate-200 flex justify-between items-center bg-white rounded-t-lg">
-                                        <h3 className="text-sm font-bold text-slate-900">Curriculum ({courseData.modules.length})</h3>
+                                        <h3 className="text-sm font-bold text-primary-900">Curriculum ({courseData.modules.length})</h3>
                                     </div>
 
                                     <div className="flex-1 overflow-auto p-4 space-y-2">
@@ -318,7 +318,7 @@ const AddCourseView = ({
                                                     <div className="flex items-center gap-4">
                                                         <span className="w-6 h-6 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center text-xs font-bold">{idx + 1}</span>
                                                         <div>
-                                                            <div className="font-semibold text-slate-900 text-sm">{m.title}</div>
+                                                            <div className="font-semibold text-primary-900 text-sm">{m.title}</div>
                                                             <div className="text-xs text-slate-500 flex items-center gap-2">
                                                                 <span className="uppercase font-bold text-[10px]">{m.type}</span>
                                                                 {m.duration && <span>• {m.duration} mins</span>}
@@ -343,7 +343,7 @@ const AddCourseView = ({
                     {step === 3 && (
                         <div className="w-full">
                             <div className="text-center mb-8">
-                                <h3 className="text-xl font-bold text-slate-900">Final Verification</h3>
+                                <h3 className="text-xl font-bold text-primary-900">Final Verification</h3>
                                 <p className="text-slate-500 text-sm">Review course details before publishing.</p>
                             </div>
 
@@ -351,23 +351,23 @@ const AddCourseView = ({
                                 <div className="p-6 grid grid-cols-2 gap-y-6 gap-x-12">
                                     <div>
                                         <div className="text-xs text-slate-500 uppercase font-bold tracking-wide mb-1">Title</div>
-                                        <div className="text-sm font-semibold text-slate-900">{courseData.title}</div>
+                                        <div className="text-sm font-semibold text-primary-900">{courseData.title}</div>
                                     </div>
                                     <div>
                                         <div className="text-xs text-slate-500 uppercase font-bold tracking-wide mb-1">Category</div>
-                                        <div className="text-sm font-semibold text-slate-900">{isCustomCategory ? courseData.customCategory : courseData.category}</div>
+                                        <div className="text-sm font-semibold text-primary-900">{isCustomCategory ? courseData.customCategory : courseData.category}</div>
                                     </div>
                                     <div>
                                         <div className="text-xs text-slate-500 uppercase font-bold tracking-wide mb-1">Level</div>
-                                        <div className="text-sm font-semibold text-slate-900">{courseData.level}</div>
+                                        <div className="text-sm font-semibold text-primary-900">{courseData.level}</div>
                                     </div>
                                     <div>
                                         <div className="text-xs text-slate-500 uppercase font-bold tracking-wide mb-1">Content</div>
-                                        <div className="text-sm font-semibold text-slate-900">{courseData.modules.length} Modules <span className="text-slate-400 font-normal">({courseData.modules.reduce((acc, m) => acc + Number(m.duration || 0), 0)} mins)</span></div>
+                                        <div className="text-sm font-semibold text-primary-900">{courseData.modules.length} Modules <span className="text-slate-400 font-normal">({courseData.modules.reduce((acc, m) => acc + Number(m.duration || 0), 0)} mins)</span></div>
                                     </div>
                                 </div>
                                 <div className="bg-slate-100 px-6 py-4 border-t border-slate-200 flex items-center justify-between">
-                                    <button className="text-slate-600 font-bold text-sm flex items-center gap-2 hover:text-slate-900" onClick={() => setStep(2)}>
+                                    <button className="text-slate-600 font-bold text-sm flex items-center gap-2 hover:text-primary-900" onClick={() => setStep(2)}>
                                         <FaArrowLeft size={12} /> Edit Content
                                     </button>
                                     <div className="flex gap-3">
@@ -378,7 +378,7 @@ const AddCourseView = ({
                                             Save Draft
                                         </button>
                                         <button
-                                            className="px-6 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-md text-sm shadow-sm flex items-center gap-2"
+                                            className="px-6 py-2 bg-primary-900 hover:bg-slate-800 text-white font-bold rounded-md text-sm shadow-sm flex items-center gap-2"
                                             onClick={() => handleSubmit('pending')}
                                         >
                                             <FaCheck size={12} /> Submit Course

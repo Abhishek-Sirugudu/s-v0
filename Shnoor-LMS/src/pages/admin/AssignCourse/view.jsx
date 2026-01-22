@@ -27,7 +27,7 @@ const AssignCourseView = ({
                         { }
                         <div className="flex-1 flex flex-col min-w-0 bg-slate-50/50">
                             <div className="p-4 border-b border-slate-100 bg-white">
-                                <h3 className="flex items-center gap-2 text-lg font-bold text-slate-800 mb-4 tracking-tight">
+                                <h3 className="flex items-center gap-2 text-lg font-bold text-primary-900 mb-4 tracking-tight">
                                     <User className="text-slate-400" size={20} /> Select Students
                                     {selectedStudents.length > 0 &&
                                         <span className="bg-indigo-100 text-[var(--color-indigo-600)] text-xs px-2 py-0.5 rounded-md font-bold tabular-nums">{selectedStudents.length}</span>
@@ -79,7 +79,7 @@ const AssignCourseView = ({
                         { }
                         <div className={`flex-1 flex flex-col min-w-0 transition-opacity ${selectedStudents.length === 0 ? 'opacity-50 pointer-events-none bg-slate-50' : 'bg-white'}`}>
                             <div className="p-4 border-b border-slate-100 bg-white">
-                                <h3 className="flex items-center gap-2 text-lg font-bold text-slate-800 mb-1 tracking-tight">
+                                <h3 className="flex items-center gap-2 text-lg font-bold text-primary-900 mb-1 tracking-tight">
                                     <BookOpen className="text-[var(--color-indigo-600)]" size={20} /> Select Courses
                                     {selectedCourses.length > 0 &&
                                         <span className="bg-indigo-100 text-[var(--color-indigo-600)] text-xs px-2 py-0.5 rounded-md font-bold tabular-nums">{selectedCourses.length}</span>

@@ -21,7 +21,7 @@ const ApproveCoursesView = ({ loading, pendingCourses, selectedCourse, setSelect
                         <ShieldCheck size={24} />
                     </div>
                     <div>
-                        <h2 className="text-xl font-bold text-slate-800 tracking-tight">Course Approval Queue</h2>
+                        <h2 className="text-xl font-bold text-primary-900 tracking-tight">Course Approval Queue</h2>
                         <p className="text-base text-slate-500 font-medium">Review pending content before publication.</p>
                     </div>
                 </div>
@@ -69,7 +69,7 @@ const ApproveCoursesView = ({ loading, pendingCourses, selectedCourse, setSelect
                                                 }`}
                                         >
                                             <td className="py-4 px-6">
-                                                <div className={`font-bold text-base transition-colors ${selectedCourse?.id === course.id ? 'text-[var(--color-indigo-600)]' : 'text-slate-800'}`}>
+                                                <div className={`font-bold text-base transition-colors ${selectedCourse?.id === course.id ? 'text-[var(--color-indigo-600)]' : 'text-primary-900'}`}>
                                                     {course.title}
                                                 </div>
                                             </td>
@@ -103,7 +103,7 @@ const ApproveCoursesView = ({ loading, pendingCourses, selectedCourse, setSelect
                         { }
                         <div className="p-6 border-b border-slate-100 bg-slate-50/50 flex justify-between items-start gap-4">
                             <div>
-                                <h3 className="text-xl font-bold text-slate-900 leading-tight mb-2 tracking-tight">{selectedCourse.title}</h3>
+                                <h3 className="text-xl font-bold text-primary-900 leading-tight mb-2 tracking-tight">{selectedCourse.title}</h3>
                                 <p className="text-xs text-slate-500 font-bold uppercase tracking-wide">
                                     <span className="text-[var(--color-indigo-600)]">{selectedCourse.category}</span> • {selectedCourse.instructorName || 'Unknown'}
                                 </p>
@@ -167,7 +167,7 @@ const ApproveCoursesView = ({ loading, pendingCourses, selectedCourse, setSelect
                                 <XCircle size={18} /> Reject
                             </button>
                             <button
-                                className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-[var(--color-primary)] text-white rounded-xl font-bold shadow-lg shadow-slate-900/10 hover:bg-slate-800 transition-all text-sm"
+                                className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-primary-900 text-white rounded-xl font-bold shadow-lg shadow-slate-900/10 hover:bg-slate-800 transition-all text-sm"
                                 onClick={() => handleAction(selectedCourse.id, 'published')}
                             >
                                 <CheckCircle2 size={18} /> Approve

@@ -3,12 +3,19 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { AuthProvider } from './auth/AuthContext';
 import ProtectedRoute from './auth/ProtectedRoute';
 import { SocketProvider } from './context/SocketContext';
+
+// --- Public Pages ---
+import Landing from './pages/Landing'; // The new High-End Landing Page
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import ForgotPassword from './pages/auth/ForgotPassword';
+
+// --- Layouts ---
 import AdminLayout from './components/layout/AdminLayout';
 import InstructorLayout from './components/layout/InstructorLayout';
 import StudentLayout from './components/layout/StudentLayout';
+
+// --- Admin Components ---
 import AdminDashboard from './pages/admin/AdminDashboard';
 import ProfileManagement from './pages/admin/ProfileManagement';
 import ApproveCourses from './pages/admin/ApproveCourses';
@@ -17,13 +24,18 @@ import CertificateConfig from './pages/admin/CertificateConfig';
 import AddInstructor from './pages/admin/AddInstructor';
 import ApproveUsers from './pages/admin/ApproveUsers';
 import ManageUsers from './pages/admin/ManageUsers';
-import ProfileSettings from './pages/shared/ProfileSettings';
+
+// --- Instructor Components ---
 import InstructorDashboard from './pages/instructor/InstructorDashboard';
 import AddCourse from './pages/instructor/AddCourse';
 import CourseList from './pages/instructor/CourseList';
 import ExamBuilder from './pages/instructor/ExamBuilder';
 import InstructorSettings from './pages/instructor/InstructorSettings';
-import StudentDashboard from './pages/student/Dashboard';
+import InstructorChat from './pages/instructor/InstructorChat';
+
+// --- Student Components ---
+// Note: Imports point to folders now (e.g., ./pages/student/Dashboard)
+import StudentDashboard from './pages/student/Dashboard'; 
 import StudentCourses from './pages/student/StudentCourses';
 import CourseDetail from './pages/student/CourseDetail';
 import CoursePlayer from './pages/student/CoursePlayer';
@@ -33,8 +45,10 @@ import MyCertificates from './pages/student/MyCertificates';
 import StudentChat from './pages/student/StudentChat';
 import PracticeArea from './pages/student/PracticeArea';
 import PracticeSession from './pages/student/PracticeSession';
-import InstructorChat from './pages/instructor/InstructorChat';
 import Leaderboard from './pages/student/Leaderboard';
+
+// --- Shared ---
+import ProfileSettings from './pages/shared/ProfileSettings';
 
 function App() {
   return (
@@ -42,11 +56,13 @@ function App() {
       <AuthProvider>
         <SocketProvider>
           <Routes>
+            {/* Public Routes */}
+            {/* <Route path="/" element={<Landing />} /> */}
             <Route path="/" element={<Login />} />
-            <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
 
+            {/* --- Admin Routes --- */}
             <Route path="/admin" element={
               <ProtectedRoute allowedRoles="admin">
                 <AdminLayout />
@@ -64,6 +80,7 @@ function App() {
               <Route path="settings" element={<ProfileSettings />} />
             </Route>
 
+            {/* --- Instructor Routes --- */}
             <Route path="/instructor" element={
               <ProtectedRoute allowedRoles={['instructor', 'company']}>
                 <InstructorLayout />
@@ -80,6 +97,7 @@ function App() {
               <Route path="chat" element={<InstructorChat />} />
             </Route>
 
+            {/* --- Student Routes --- */}
             <Route path="/student" element={
               <ProtectedRoute allowedRoles={['student', 'learner']}>
                 <StudentLayout />
@@ -100,6 +118,7 @@ function App() {
               <Route path="leaderboard" element={<Leaderboard />} />
             </Route>
 
+            {/* Fallback */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </SocketProvider>

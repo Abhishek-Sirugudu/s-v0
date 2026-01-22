@@ -19,17 +19,17 @@ const CourseListView = ({ loading, courses, navigate, handleDelete }) => {
     );
 
     return (
-        <div className="min-h-screen bg-[#f8fafc] p-2 font-sans text-slate-900 flex flex-col">
+        <div className="min-h-screen bg-[#f8fafc] p-2 font-sans text-primary-900 flex flex-col">
             <div className="w-full space-y-4 flex-1 flex flex-col">
 
                 {/* --- Header --- */}
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-6 border-b border-slate-200 pb-4 shrink-0 bg-white px-6 py-4 rounded-lg shadow-sm border">
                     <div>
-                        <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Course Library</h1>
+                        <h1 className="text-2xl font-bold text-primary-900 tracking-tight">Course Library</h1>
                         <p className="text-slate-500 text-sm mt-1">Manage and update your published content.</p>
                     </div>
                     <button
-                        className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-6 rounded-md shadow-sm flex items-center gap-2 text-sm"
+                        className="bg-primary-900 hover:bg-slate-800 text-white font-semibold py-2 px-6 rounded-md shadow-sm flex items-center gap-2 text-sm"
                         onClick={() => navigate('/instructor/add-course')}
                     >
                         <FaPlus size={12} /> Create New Course
@@ -39,7 +39,7 @@ const CourseListView = ({ loading, courses, navigate, handleDelete }) => {
                 {/* --- Data Table Section --- */}
                 <div className="bg-white border border-slate-200 rounded-lg shadow-sm flex-1 flex flex-col min-h-0">
                     <div className="px-6 py-4 border-b border-slate-200 flex justify-between items-center bg-white shrink-0">
-                        <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wide">My Courses ({courses.length})</h3>
+                        <h3 className="text-sm font-bold text-primary-900 uppercase tracking-wide">My Courses ({courses.length})</h3>
                         <div className="relative w-64">
                             <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={14} />
                             <input
@@ -74,7 +74,7 @@ const CourseListView = ({ loading, courses, navigate, handleDelete }) => {
                                     courses.map(course => (
                                         <tr key={course.id} className="hover:bg-[#f8fafc] transition-colors group">
                                             <td className="px-6 py-4">
-                                                <div className="font-semibold text-slate-900 text-sm">{course.title}</div>
+                                                <div className="font-semibold text-primary-900 text-sm">{course.title}</div>
                                                 <div className="text-xs text-slate-500 mt-0.5 md:hidden">{course.category}</div>
                                             </td>
                                             <td className="px-6 py-4 text-sm text-slate-600 hidden md:table-cell">

@@ -60,13 +60,13 @@ const InstructorDashboardView = ({ loading, userName, stats, navigate }) => {
     );
 
     return (
-        <div className="min-h-screen bg-[#f8fafc] p-2 font-sans text-slate-900 flex flex-col">
+        <div className="min-h-screen bg-[#f8fafc] p-2 font-sans text-primary-900 flex flex-col">
             <div className="w-full space-y-8 flex-1 flex flex-col">
 
                 {/* --- Header Section --- */}
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-6 border-b border-slate-200 pb-6 shrink-0">
                     <div>
-                        <h1 className="text-3xl font-semibold text-slate-900 tracking-tight">Instructor Portal</h1>
+                        <h1 className="text-3xl font-semibold text-primary-900 tracking-tight">Instructor Portal</h1>
                         <p className="text-slate-500 text-base mt-1">Welcome back, {userName}. Overview of your course performance.</p>
                     </div>
                 </div>
@@ -103,7 +103,7 @@ const InstructorDashboardView = ({ loading, userName, stats, navigate }) => {
                     <div className="lg:col-span-2 bg-white p-6 rounded-lg border border-slate-200 shadow-sm flex flex-col h-[400px]">
                         <div className="flex justify-between items-center mb-8 shrink-0">
                             <div>
-                                <h3 className="text-base font-semibold text-slate-900">Engagement Trends</h3>
+                                <h3 className="text-base font-semibold text-primary-900">Engagement Trends</h3>
                             </div>
                             <div className="flex items-center gap-2">
                                 <span className="w-2 h-0.5 bg-[var(--color-indigo-600)]"></span>
@@ -152,7 +152,7 @@ const InstructorDashboardView = ({ loading, userName, stats, navigate }) => {
 
                     {/* Quick Actions */}
                     <div className="bg-white p-6 rounded-lg border border-slate-200 shadow-sm flex flex-col h-[400px]">
-                        <h3 className="text-base font-semibold text-slate-900 mb-6">Quick Actions</h3>
+                        <h3 className="text-base font-semibold text-primary-900 mb-6">Quick Actions</h3>
                         <div className="space-y-4 flex-1 overflow-y-auto pr-2">
                             <ActionButton
                                 icon={<Plus size={18} />}
@@ -182,7 +182,7 @@ const InstructorDashboardView = ({ loading, userName, stats, navigate }) => {
                 {/* --- Student Performance Matrix (Merged Feature) --- */}
                 <div className="bg-white border border-slate-200 rounded-lg shadow-sm flex-1 flex flex-col min-h-0">
                     <div className="px-6 py-4 border-b border-slate-200 flex justify-between items-center bg-white shrink-0">
-                        <h3 className="text-base font-semibold text-slate-900">Student Performance Matrix</h3>
+                        <h3 className="text-base font-semibold text-primary-900">Student Performance Matrix</h3>
                         <div className="relative w-64">
                             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={14} />
                             <input
@@ -211,7 +211,7 @@ const InstructorDashboardView = ({ loading, userName, stats, navigate }) => {
                                 {filteredStudents.map((student) => (
                                     <tr key={student.id} className="hover:bg-[#f8fafc] transition-colors">
                                         <td className="px-6 py-4">
-                                            <div className="font-medium text-slate-900 text-base">{student.name}</div>
+                                            <div className="font-medium text-primary-900 text-base">{student.name}</div>
                                             <div className="text-sm text-slate-500 mt-0.5">ID: {student.id}</div>
                                         </td>
                                         <td className="px-6 py-4 text-base text-slate-700">
@@ -268,7 +268,7 @@ const KpiCard = ({ title, value, trend, isPositive, icon }) => (
         <div className="flex justify-between items-start">
             <div className="space-y-1">
                 <p className="text-sm font-semibold text-slate-500 uppercase tracking-wide">{title}</p>
-                <h3 className="text-3xl font-semibold text-slate-900 tracking-tight">{value}</h3>
+                <h3 className="text-3xl font-semibold text-primary-900 tracking-tight">{value}</h3>
             </div>
             <div className="text-slate-400">{icon}</div>
         </div>
@@ -288,7 +288,7 @@ const ActionButton = ({ icon, title, description, onClick, colorClass }) => (
             {icon}
         </div>
         <div>
-            <div className="font-semibold text-slate-900 text-sm group-hover:text-indigo-600 transition-colors">{title}</div>
+            <div className="font-semibold text-primary-900 text-sm group-hover:text-indigo-600 transition-colors">{title}</div>
             <div className="text-xs text-slate-500 mt-0.5">{description}</div>
         </div>
     </button>

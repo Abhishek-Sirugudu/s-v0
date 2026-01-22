@@ -18,7 +18,7 @@ const CertificateConfigView = ({ loading, config, setConfig, handleSave }) => {
                 <div className="w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-4 border-4 border-amber-50 shadow-sm">
                     <FaCertificate size={28} />
                 </div>
-                <h2 className="text-2xl font-bold text-slate-800">Certificate Configuration</h2>
+                <h2 className="text-2xl font-bold text-primary-900">Certificate Configuration</h2>
                 <p className="text-slate-500 mt-2">Customize the certificates issued to students.</p>
             </div>
 
@@ -104,7 +104,7 @@ const CertificateConfigView = ({ loading, config, setConfig, handleSave }) => {
                     <div className="flex justify-end">
                         <button
                             type="submit"
-                            className="flex items-center gap-2 px-8 py-3 bg-blue-600 text-white rounded-xl font-bold shadow-lg shadow-blue-500/30 hover:bg-blue-700 hover:-translate-y-0.5 transition-all"
+                            className="flex items-center gap-2 px-8 py-3 bg-primary-900 text-white rounded-xl font-bold shadow-lg shadow-primary-900/30 hover:bg-slate-800 hover:-translate-y-0.5 transition-all"
                         >
                             <FaSave /> Save Configuration
                         </button>

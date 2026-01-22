@@ -14,7 +14,7 @@ const ProfileSettingsView = ({ loading, userData, saving, handleChange, handleSa
 
     return (
         <div className="w-full pb-12">
-            <h2 className="text-2xl font-bold mb-8 text-slate-800">Account Settings</h2>
+            <h2 className="text-2xl font-bold mb-8 text-primary-900">Account Settings</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-8">
 
@@ -33,7 +33,7 @@ const ProfileSettingsView = ({ loading, userData, saving, handleChange, handleSa
                                 </div>
                             )}
                         </div>
-                        <label className="absolute bottom-0 right-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center border-2 border-white shadow-md hover:bg-blue-700 transition-colors cursor-pointer">
+                        <label className="absolute bottom-0 right-0 w-8 h-8 bg-primary-900 text-white rounded-full flex items-center justify-center border-2 border-white shadow-md hover:bg-slate-800 transition-colors cursor-pointer">
                             <FaCamera size={12} />
                             <input
                                 type="file"
@@ -45,7 +45,7 @@ const ProfileSettingsView = ({ loading, userData, saving, handleChange, handleSa
                         </label>
                     </div>
 
-                    <h3 className="text-xl font-bold text-slate-900 mb-1">{userData.displayName || 'User'}</h3>
+                    <h3 className="text-xl font-bold text-primary-900 mb-1">{userData.displayName || 'User'}</h3>
                     <p className="text-sm text-slate-500 mb-4">{userData.headline || 'No headline set'}</p>
 
                     <div className={`inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-6 ${userData.role === 'admin' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}`}>
@@ -61,7 +61,7 @@ const ProfileSettingsView = ({ loading, userData, saving, handleChange, handleSa
 
                 { }
                 <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
-                    <h3 className="text-lg font-bold text-slate-800 mb-6 pb-4 border-b border-slate-100">Edit Profile</h3>
+                    <h3 className="text-lg font-bold text-primary-900 mb-6 pb-4 border-b border-slate-100">Edit Profile</h3>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                         <div className="space-y-2 col-span-2 md:col-span-2">
@@ -71,7 +71,7 @@ const ProfileSettingsView = ({ loading, userData, saving, handleChange, handleSa
                                 value={userData.displayName}
                                 onChange={handleChange}
                                 placeholder="Enter User name"
-                                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all font-medium"
+                                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[var(--color-primary)]/20 outline-none transition-all font-medium"
                             />
                         </div>
 
@@ -129,7 +129,7 @@ const ProfileSettingsView = ({ loading, userData, saving, handleChange, handleSa
 
                     <div className="flex justify-end pt-4 border-t border-slate-100">
                         <button
-                            className={`flex items-center gap-2 px-8 py-3 bg-blue-600 text-white rounded-xl font-bold shadow-lg shadow-blue-500/30 transition-all ${saving ? 'opacity-70 cursor-not-allowed' : 'hover:bg-blue-700 hover:-translate-y-0.5'}`}
+                            className={`flex items-center gap-2 px-8 py-3 bg-primary-900 text-white rounded-xl font-bold shadow-lg shadow-primary-900/30 transition-all ${saving ? 'opacity-70 cursor-not-allowed' : 'hover:bg-slate-800 hover:-translate-y-0.5'}`}
                             onClick={handleSave}
                             disabled={saving}
                         >

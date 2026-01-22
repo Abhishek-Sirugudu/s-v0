@@ -20,7 +20,7 @@ const ApproveUsersView = ({ loading, pendingUsers, handleAction }) => {
                         <UserPlus size={24} />
                     </div>
                     <div>
-                        <h2 className="text-xl font-bold text-slate-900 tracking-tight">User Approval Queue</h2>
+                        <h2 className="text-xl font-bold text-primary-900 tracking-tight">User Approval Queue</h2>
                         <p className="text-base text-slate-500 font-medium">Review and manage new account requests.</p>
                     </div>
                 </div>
@@ -60,7 +60,7 @@ const ApproveUsersView = ({ loading, pendingUsers, handleAction }) => {
                                     <tr key={user.id} className="hover:bg-slate-50 transition-colors group">
                                         <td className="py-4 px-6">
                                             <div>
-                                                <div className="font-bold text-slate-900 text-base tracking-tight">{user.name || 'Unknown Name'}</div>
+                                                <div className="font-bold text-primary-900 text-base tracking-tight">{user.name || 'Unknown Name'}</div>
                                                 <div className="text-sm text-slate-500 font-medium">{user.email}</div>
                                                 <div className="md:hidden mt-1 flex gap-2">
                                                     { }
@@ -103,7 +103,7 @@ const ApproveUsersView = ({ loading, pendingUsers, handleAction }) => {
                                                 </button>
                                                 <button
                                                     onClick={() => handleAction(user.id, 'active', user.name)}
-                                                    className="w-8 h-8 flex items-center justify-center rounded-lg bg-[var(--color-indigo-600)] text-white hover:bg-indigo-700 transition-all shadow-md shadow-indigo-500/20 hover:shadow-lg hover:-translate-y-0.5"
+                                                    className="w-8 h-8 flex items-center justify-center rounded-lg bg-primary-900 text-white hover:bg-slate-800 transition-all shadow-md shadow-primary-900/20 hover:shadow-lg hover:-translate-y-0.5"
                                                     title="Approve"
                                                 >
                                                     <CheckCircle2 size={18} />

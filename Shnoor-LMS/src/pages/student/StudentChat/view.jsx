@@ -11,11 +11,11 @@ const StudentChatView = ({
     return (
         <div className="h-[calc(100vh-6rem)] flex flex-col bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
             {notification && notification.visible && (
-                <div className="fixed top-24 right-6 min-w-[300px] z-50 bg-white border-l-4 border-blue-600 shadow-xl rounded-lg p-4 animate-slide-in">
+                <div className="fixed top-24 right-6 min-w-[300px] z-50 bg-white border-l-4 border-indigo-600 shadow-xl rounded-lg p-4 animate-slide-in">
                     <div className="flex items-start gap-4">
                         <div className="text-2xl pt-1">🔔</div>
                         <div className="flex-1">
-                            <strong className="block text-slate-900 font-bold">{notification.sender}</strong>
+                            <strong className="block text-primary-900 font-bold">{notification.sender}</strong>
                             <p className="text-slate-600 text-sm">{notification.message}</p>
                         </div>
                         <button
@@ -33,7 +33,7 @@ const StudentChatView = ({
                 { }
                 <div className={`w-full md:w-80 border-r border-slate-200 bg-slate-50 flex flex-col ${activeChat ? 'hidden md:flex' : 'flex'}`}>
                     <div className="p-4 border-b border-slate-200 bg-white">
-                        <h2 className="text-xl font-bold text-slate-800">Messages</h2>
+                        <h2 className="text-xl font-bold text-primary-900">Messages</h2>
                     </div>
                     <div className="flex-1 overflow-y-auto">
                         <ChatList

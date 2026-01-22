@@ -17,7 +17,7 @@ const InstructorLayoutView = ({
             <li
                 className={`flex items-center gap-3 px-4 py-3 rounded-lg cursor-pointer transition-all duration-200 mt-1
                     ${isActive
-                        ? 'bg-blue-600 text-white shadow-md'
+                        ? 'bg-primary-900 text-white shadow-md'
                         : 'text-slate-600 hover:bg-slate-100'
                     }`}
                 onClick={() => { navigate(`/instructor/${path}`); setIsSidebarOpen(false); }}
@@ -36,7 +36,7 @@ const InstructorLayoutView = ({
     };
 
     return (
-        <div className="flex min-h-screen bg-slate-50 font-sans text-slate-900">
+        <div className="flex min-h-screen bg-slate-50 font-sans text-primary-900">
             { }
             {isSidebarOpen && (
                 <div
@@ -58,7 +58,7 @@ const InstructorLayoutView = ({
                             className="w-10 h-10 rounded-full object-cover shadow-sm"
                         />
                         <div className="flex flex-col">
-                            <span className="text-lg font-bold text-slate-900 tracking-tight">SHNOOR</span>
+                            <span className="text-lg font-bold text-primary-900 tracking-tight">SHNOOR</span>
                             <span className="text-xs font-medium text-slate-500 uppercase tracking-widest">International</span>
                         </div>
                     </div>
@@ -98,13 +98,13 @@ const InstructorLayoutView = ({
                         >
                             <FaBars className="text-xl" />
                         </button>
-                        <h2 className="text-xl font-semibold text-slate-800 hidden sm:block">Instructor Dashboard</h2>
+                        <h2 className="text-xl font-semibold text-primary-900 hidden sm:block">Instructor Dashboard</h2>
                     </div>
 
                     <div className="flex items-center gap-4">
                         <div className="flex items-center gap-3 pl-4 border-l border-slate-200">
                             <div className="text-right hidden md:block">
-                                <div className="text-sm font-semibold text-slate-900">{userName}</div>
+                                <div className="text-sm font-semibold text-primary-900">{userName}</div>
                                 <div className="text-xs text-slate-500 font-medium">Instructor</div>
                             </div>
                             <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 border border-slate-200 overflow-hidden">

@@ -20,7 +20,7 @@ const AddInstructorView = ({ loading, data, handleChange, handleSubmit, navigate
                         <GraduationCap size={24} />
                     </div>
                     <div>
-                        <h2 className="text-xl font-bold text-slate-900 tracking-tight">Instructor Details</h2>
+                        <h2 className="text-xl font-bold text-primary-900 tracking-tight">Instructor Details</h2>
                         <p className="text-base text-slate-500 font-medium">Add a new instructor to the platform.</p>
                     </div>
                 </div>
@@ -115,7 +115,7 @@ const AddInstructorView = ({ loading, data, handleChange, handleSubmit, navigate
                         </button>
                         <button
                             type="submit"
-                            className="px-8 py-3 bg-[var(--color-primary)] hover:bg-slate-800 text-white rounded-xl font-bold shadow-lg shadow-slate-900/10 transform transition-all active:scale-[0.98] text-sm"
+                            className="px-8 py-3 bg-primary-900 hover:bg-slate-800 text-white rounded-xl font-bold shadow-lg shadow-primary-900/10 transform transition-all active:scale-[0.98] text-sm"
                         >
                             Add Instructor
                         </button>

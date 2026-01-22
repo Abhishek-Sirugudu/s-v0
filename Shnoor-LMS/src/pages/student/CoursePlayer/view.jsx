@@ -9,19 +9,19 @@ const CoursePlayerView = ({
 }) => {
 
     if (loading) return (
-        <div className="flex items-center justify-center min-h-screen bg-slate-900 text-white">
+        <div className="flex items-center justify-center min-h-screen bg-primary-900 text-white">
             <div className="flex flex-col items-center gap-4">
-                <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                <div className="w-12 h-12 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
                 <p className="text-slate-400 font-medium tracking-wide">Loading classroom...</p>
             </div>
         </div>
     );
 
     if (!course) return (
-        <div className="min-h-screen flex items-center justify-center bg-slate-900 text-white">
+        <div className="min-h-screen flex items-center justify-center bg-primary-900 text-white">
             <div className="text-center">
                 <h2 className="text-2xl font-bold mb-2">Course Not Found</h2>
-                <button onClick={() => navigate('/student/courses')} className="text-blue-400 hover:text-blue-300 underline">
+                <button onClick={() => navigate('/student/courses')} className="text-indigo-400 hover:text-blue-300 underline">
                     Return to courses
                 </button>
             </div>
@@ -29,7 +29,7 @@ const CoursePlayerView = ({
     );
 
     return (
-        <div className="flex flex-col h-screen bg-slate-900 text-slate-100 overflow-hidden font-sans">
+        <div className="flex flex-col h-screen bg-primary-900 text-slate-100 overflow-hidden font-sans">
             { }
             <div className="h-16 bg-slate-800 border-b border-slate-700 flex items-center justify-between px-6 flex-shrink-0 z-20 shadow-md">
                 <div className="flex items-center gap-4">
@@ -88,7 +88,7 @@ const CoursePlayerView = ({
                                     href={currentModule?.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-xl transition-all hover:scale-105 flex items-center gap-2"
+                                    className="bg-primary-900 hover:bg-slate-800 text-white font-bold py-3 px-8 rounded-xl transition-all hover:scale-105 flex items-center gap-2"
                                 >
                                     Open Document <FaExternalLinkAlt size={14} />
                                 </a>
@@ -107,7 +107,7 @@ const CoursePlayerView = ({
                             disabled={isModuleCompleted(currentModule?.id)}
                             className={`px-6 py-3 rounded-xl font-bold flex items-center gap-2 transition-all ${isModuleCompleted(currentModule?.id)
                                 ? 'bg-green-500/10 text-green-500 border border-green-500/20 cursor-default'
-                                : 'bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-600/20'
+                                : 'bg-primary-900 hover:bg-slate-800 text-white shadow-lg shadow-primary-900/20'
                                 }`}
                         >
                             {isModuleCompleted(currentModule?.id)
@@ -119,7 +119,7 @@ const CoursePlayerView = ({
                 </div>
 
                 { }
-                <div className="w-80 bg-slate-900 border-l border-slate-700 flex flex-col flex-shrink-0 shadow-2xl z-10">
+                <div className="w-80 bg-primary-900 border-l border-slate-700 flex flex-col flex-shrink-0 shadow-2xl z-10">
                     <div className="p-4 bg-slate-800 border-b border-slate-700">
                         <h3 className="font-bold text-slate-100 uppercase tracking-wider text-xs">Course Content</h3>
                     </div>
@@ -136,16 +136,16 @@ const CoursePlayerView = ({
                                     className={`p-4 border-b border-slate-800 cursor-pointer transition-all hover:bg-slate-800/50 group relative ${isActive ? 'bg-slate-800' : ''
                                         }`}
                                 >
-                                    {isActive && <div className="absolute left-0 top-0 bottom-0 w-1 bg-blue-500"></div>}
+                                    {isActive && <div className="absolute left-0 top-0 bottom-0 w-1 bg-indigo-600"></div>}
 
                                     <div className="flex gap-3">
                                         <div className="mt-1 flex-shrink-0">
                                             {isCompleted ? (
                                                 <FaCheckCircle className="text-green-500" size={16} />
                                             ) : (
-                                                <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${isActive ? 'border-blue-500' : 'border-slate-600 group-hover:border-slate-500'
+                                                <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${isActive ? 'border-indigo-600' : 'border-slate-600 group-hover:border-slate-500'
                                                     }`}>
-                                                    {isActive && <div className="w-2 h-2 rounded-full bg-blue-500"></div>}
+                                                    {isActive && <div className="w-2 h-2 rounded-full bg-indigo-600"></div>}
                                                 </div>
                                             )}
                                         </div>
@@ -170,7 +170,7 @@ const CoursePlayerView = ({
 
                     <div className="p-4 bg-slate-800 border-t border-slate-700">
                         <button
-                            className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-lg shadow-indigo-500/20 transition-all transform hover:-translate-y-0.5"
+                            className="w-full py-3 bg-primary-900 hover:bg-slate-800 text-white font-bold rounded-xl shadow-lg shadow-primary-900/20 transition-all transform hover:-translate-y-0.5"
                             onClick={() => navigate(`/student/exam/final_${courseId}`)}
                         >
                             Take Final Exam

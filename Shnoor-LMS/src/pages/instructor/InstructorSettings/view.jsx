@@ -17,7 +17,7 @@ const InstructorSettingsView = ({
         <div className="min-h-screen bg-[#f8fafc] p-8">
             <div className="w-full">
                 <header className="mb-8">
-                    <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Account Settings</h1>
+                    <h1 className="text-2xl font-bold text-primary-900 tracking-tight">Account Settings</h1>
                     <p className="text-slate-500 mt-1">Manage your profile information and security.</p>
                 </header>
 
@@ -34,7 +34,7 @@ const InstructorSettingsView = ({
                                     <div className="p-2 bg-indigo-50 text-indigo-600 rounded-lg">
                                         <FaUserEdit />
                                     </div>
-                                    <h2 className="font-bold text-slate-800 text-sm uppercase tracking-wide">Public Profile</h2>
+                                    <h2 className="font-bold text-primary-900 text-sm uppercase tracking-wide">Public Profile</h2>
                                 </div>
                             </div>
 
@@ -45,7 +45,7 @@ const InstructorSettingsView = ({
                                         <input
                                             value={profile.displayName}
                                             onChange={e => setProfile({ ...profile, displayName: e.target.value })}
-                                            className="w-full px-4 py-2 bg-white border border-slate-200 rounded-md focus:border-indigo-500 focus:ring-0 outline-none transition-all font-medium text-slate-900"
+                                            className="w-full px-4 py-2 bg-white border border-slate-200 rounded-md focus:border-indigo-500 focus:ring-0 outline-none transition-all font-medium text-primary-900"
                                             placeholder="Enter User name"
                                         />
                                     </div>
@@ -63,7 +63,7 @@ const InstructorSettingsView = ({
                                 </div>
                                 <div className="mt-8 flex justify-end">
                                     <button
-                                        className="px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-md shadow-sm text-sm flex items-center gap-2 transition-colors"
+                                        className="px-6 py-2 bg-primary-900 hover:bg-slate-800 text-white font-bold rounded-md shadow-sm text-sm flex items-center gap-2 transition-colors"
                                         onClick={handleProfileUpdate}
                                     >
                                         <FaSave /> Save Changes
@@ -79,7 +79,7 @@ const InstructorSettingsView = ({
                                     <div className="p-2 bg-slate-50 text-slate-600 rounded-lg">
                                         <FaLock />
                                     </div>
-                                    <h2 className="font-bold text-slate-800 text-sm uppercase tracking-wide">Security</h2>
+                                    <h2 className="font-bold text-primary-900 text-sm uppercase tracking-wide">Security</h2>
                                 </div>
                             </div>
 

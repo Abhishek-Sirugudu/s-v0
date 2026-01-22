@@ -15,7 +15,7 @@ const PracticeAreaView = ({ loading, filter, setFilter, filteredChallenges, navi
     if (loading) return (
         <div className="flex items-center justify-center min-h-[400px]">
             <div className="flex flex-col items-center gap-4">
-                <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+                <div className="w-12 h-12 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
                 <p className="text-slate-500 font-medium">Loading challenges...</p>
             </div>
         </div>
@@ -26,7 +26,7 @@ const PracticeAreaView = ({ loading, filter, setFilter, filteredChallenges, navi
             { }
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
                 <div>
-                    <h2 className="text-2xl font-bold text-slate-900">Practice Arena</h2>
+                    <h2 className="text-2xl font-bold text-primary-900">Practice Arena</h2>
                     <p className="text-slate-500 mt-1">Sharpen your coding skills with these challenges.</p>
                 </div>
 
@@ -74,7 +74,7 @@ const PracticeAreaView = ({ loading, filter, setFilter, filteredChallenges, navi
                             </div>
 
                             <div className="p-6 flex flex-col flex-1">
-                                <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">{challenge.title}</h3>
+                                <h3 className="text-lg font-bold text-primary-900 mb-2 group-hover:text-indigo-600 transition-colors">{challenge.title}</h3>
                                 <p className="text-slate-500 text-sm line-clamp-2 mb-6 flex-1">{challenge.text}</p>
 
                                 <div className="pt-4 border-t border-slate-100 flex justify-between items-center mt-auto">
@@ -82,7 +82,7 @@ const PracticeAreaView = ({ loading, filter, setFilter, filteredChallenges, navi
                                         <FaCode /> {challenge.type === 'coding' ? 'Coding' : 'Quiz'}
                                         {challenge.status === 'Solved' && <FaCheckCircle className="text-emerald-500" />}
                                     </span>
-                                    <button className="bg-white border border-slate-200 text-slate-600 hover:border-indigo-500 hover:text-indigo-600 text-xs font-bold px-4 py-2 rounded transition-colors">
+                                    <button className="bg-primary-900 hover:bg-slate-800 text-white text-xs font-bold px-4 py-2 rounded transition-colors border border-transparent shadow-sm">
                                         Solve Challenge
                                     </button>
                                 </div>

@@ -23,7 +23,7 @@ const ExamBuilderView = ({
     };
 
     return (
-        <div className="min-h-screen bg-[#f8fafc] flex flex-col font-sans text-slate-900">
+        <div className="min-h-screen bg-[#f8fafc] flex flex-col font-sans text-primary-900">
             {/* --- Top Bar --- */}
             <header className="bg-white border-b border-slate-200 px-6 py-3 flex items-center justify-between shrink-0 h-16">
                 <div className="flex items-center gap-4">
@@ -31,7 +31,7 @@ const ExamBuilderView = ({
                         <FaArrowLeft />
                     </button>
                     <div>
-                        <h1 className="text-lg font-bold text-slate-900 tracking-tight">{formData.title || 'Untitled Exam'}</h1>
+                        <h1 className="text-lg font-bold text-primary-900 tracking-tight">{formData.title || 'Untitled Exam'}</h1>
                         <div className="flex items-center gap-3 text-xs text-slate-500">
                             {formData.duration && <span className="flex items-center gap-1"><FaClock size={10} /> {formData.duration} mins</span>}
                             <span>• {formData.questions.length} Questions</span>
@@ -47,7 +47,7 @@ const ExamBuilderView = ({
                         Save Draft
                     </button>
                     <button
-                        className="px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-md text-xs shadow-sm flex items-center gap-2 transition-colors"
+                        className="px-6 py-2 bg-primary-900 hover:bg-slate-800 text-white font-bold rounded-md text-xs shadow-sm flex items-center gap-2 transition-colors"
                         onClick={handleSave}
                     >
                         <FaSave /> Publish Exam
@@ -137,7 +137,7 @@ const ExamBuilderView = ({
                     {step === 1 && (
                         <div className="w-full space-y-6">
                             <div className="bg-white p-8 rounded-lg border border-slate-200 shadow-sm">
-                                <h2 className="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+                                <h2 className="text-xl font-bold text-primary-900 mb-6 flex items-center gap-2">
                                     <FaCog className="text-slate-400" /> Exam Settings
                                 </h2>
 
@@ -150,7 +150,7 @@ const ExamBuilderView = ({
                                                 value={formData.title}
                                                 onChange={handleInputChange}
                                                 placeholder="e.g. Mid-Term Assessment"
-                                                className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-md focus:border-indigo-500 focus:ring-0 outline-none transition-all font-semibold text-slate-900"
+                                                className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-md focus:border-indigo-500 focus:ring-0 outline-none transition-all font-semibold text-primary-900"
                                             />
                                         </div>
                                         <div className="space-y-1.5">
@@ -239,7 +239,7 @@ const ExamBuilderView = ({
                             <div className="flex justify-end">
                                 <button
                                     onClick={() => setStep(2)}
-                                    className="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-md shadow-sm flex items-center gap-2 text-sm"
+                                    className="px-8 py-3 bg-primary-900 hover:bg-slate-800 text-white font-bold rounded-md shadow-sm flex items-center gap-2 text-sm"
                                 >
                                     Proceed to Questions <FaArrowRight />
                                 </button>

@@ -15,7 +15,7 @@ const LeaderboardView = ({ loading, topThree, rest, getRank }) => {
     return (
         <div className="w-full space-y-8 font-sans">
             <div className="border-b border-slate-200 pb-6">
-                <h2 className="text-2xl font-bold text-slate-900 mb-1 flex items-center gap-2">
+                <h2 className="text-2xl font-bold text-primary-900 mb-1 flex items-center gap-2">
                     <FaTrophy className="text-indigo-600" /> Leaderboard
                 </h2>
                 <p className="text-slate-500">Top performing students across the platform.</p>
@@ -50,7 +50,7 @@ const LeaderboardView = ({ loading, topThree, rest, getRank }) => {
                                             <div className="w-8 h-8 rounded bg-slate-100 text-slate-600 flex items-center justify-center text-xs font-bold uppercase border border-slate-200">
                                                 {student.displayName[0]}
                                             </div>
-                                            <span className="text-slate-900 font-medium">{student.displayName}</span>
+                                            <span className="text-primary-900 font-medium">{student.displayName}</span>
                                         </div>
                                     </td>
                                     <td className="py-4 px-6">
@@ -78,7 +78,7 @@ const RankCard = ({ student, rank, isFirst }) => (
             #{rank}
         </div>
         <div>
-            <div className="text-sm font-bold text-slate-900">{student.displayName}</div>
+            <div className="text-sm font-bold text-primary-900">{student.displayName}</div>
             <div className="text-xs text-slate-500 font-mono">{student.xp} XP</div>
         </div>
         {isFirst && <FaTrophy className="ml-auto text-indigo-400" />}
@@ -86,4 +86,3 @@ const RankCard = ({ student, rank, isFirst }) => (
 );
 
 export default LeaderboardView;
-

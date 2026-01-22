@@ -16,7 +16,7 @@ const InstructorChatView = ({
                     <div className="flex items-start gap-4">
                         <div className="text-xl">🔔</div>
                         <div className="flex-1">
-                            <strong className="block text-slate-900 font-bold text-sm">{notification.sender}</strong>
+                            <strong className="block text-primary-900 font-bold text-sm">{notification.sender}</strong>
                             <p className="text-slate-600 text-xs mt-1">{notification.message}</p>
                         </div>
                         <button
@@ -32,7 +32,7 @@ const InstructorChatView = ({
             {/* Sidebar (Chat List) */}
             <div className={`w-full md:w-80 bg-white border-r border-slate-200 flex flex-col shrink-0 transition-transform ${activeChat ? 'hidden md:flex' : 'flex'}`}>
                 <div className="p-4 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
-                    <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wide">Messages</h2>
+                    <h2 className="text-sm font-bold text-primary-900 uppercase tracking-wide">Messages</h2>
                     <span className="text-xs font-bold bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full">{chats.length}</span>
                 </div>
                 <div className="flex-1 overflow-y-auto custom-scrollbar">

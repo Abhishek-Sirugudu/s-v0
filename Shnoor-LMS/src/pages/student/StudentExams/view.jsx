@@ -6,7 +6,7 @@ const StudentExamsView = ({ loading, exams, isPassed, accessStatus, courseNames,
     if (loading) return (
         <div className="flex items-center justify-center min-h-[400px]">
             <div className="flex flex-col items-center gap-4">
-                <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+                <div className="w-12 h-12 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
                 <p className="text-slate-500 font-medium">Loading exams...</p>
             </div>
         </div>
@@ -15,7 +15,7 @@ const StudentExamsView = ({ loading, exams, isPassed, accessStatus, courseNames,
     return (
         <div className="w-full pb-12">
             <div className="mb-8">
-                <h3 className="text-2xl font-bold text-slate-900">My Exams</h3>
+                <h3 className="text-2xl font-bold text-primary-900">My Exams</h3>
                 <p className="text-slate-500 mt-1">Take assessments to prove your skills.</p>
             </div>
 
@@ -50,7 +50,7 @@ const StudentExamsView = ({ loading, exams, isPassed, accessStatus, courseNames,
 
                                 {/* Content */}
                                 <div className="p-5 flex flex-col flex-1">
-                                    <h4 className="text-base font-bold text-slate-900 mb-2 line-clamp-2 min-h-[3rem]">{exam.title}</h4>
+                                    <h4 className="text-base font-bold text-primary-900 mb-2 line-clamp-2 min-h-[3rem]">{exam.title}</h4>
 
                                     <div className="flex items-center gap-4 text-xs font-semibold text-slate-500 mb-6 uppercase tracking-wider border-b border-slate-100 pb-4">
                                         <span>{exam.questions.length} Qs</span>
@@ -91,7 +91,7 @@ const StudentExamsView = ({ loading, exams, isPassed, accessStatus, courseNames,
                                                     <span>Pass Score: {exam.passScore}%</span>
                                                 </div>
                                                 <button
-                                                    className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 rounded text-sm shadow-sm transition-all flex items-center justify-center gap-2"
+                                                    className="w-full bg-primary-900 hover:bg-slate-800 text-white font-bold py-2 rounded text-sm shadow-sm transition-all flex items-center justify-center gap-2"
                                                     onClick={() => navigate(`/student/exam/${exam.id}`)}
                                                 >
                                                     <FaPlay size={10} /> Start Exam

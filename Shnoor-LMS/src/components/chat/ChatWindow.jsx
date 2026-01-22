@@ -138,8 +138,8 @@ const ChatWindow = ({ activeChat, currentUser, onSendMessage, onBack }) => {
                         return (
                             <div key={msg.id || Math.random()} className={`flex flex-col ${isMyMessage ? 'items-end' : 'items-start'}`}>
                                 <div className={`max-w-[85%] md:max-w-[70%] break-words shadow-sm ${isMyMessage
-                                        ? 'bg-blue-600 text-white rounded-2xl rounded-tr-sm'
-                                        : 'bg-white text-slate-800 border border-slate-100 rounded-2xl rounded-tl-sm'
+                                    ? 'bg-primary-900 text-white rounded-2xl rounded-tr-sm'
+                                    : 'bg-white text-slate-800 border border-slate-100 rounded-2xl rounded-tl-sm'
                                     } p-4 relative group`}>
 
                                     {renderAttachment(msg)}
@@ -188,7 +188,7 @@ const ChatWindow = ({ activeChat, currentUser, onSendMessage, onBack }) => {
             { }
             <div className="p-4 bg-white border-t border-slate-200">
                 <form
-                    className="flex items-center gap-2 bg-slate-100 rounded-2xl p-1.5 border border-transparent focus-within:border-blue-500/50 focus-within:bg-white focus-within:ring-4 focus-within:ring-blue-500/10 transition-all shadow-inner"
+                    className="flex items-center gap-2 bg-slate-100 rounded-2xl p-1.5 border border-transparent focus-within:border-primary-900/50 focus-within:bg-white focus-within:ring-4 focus-within:ring-primary-900/10 transition-all shadow-inner"
                     onSubmit={handleSubmit}
                 >
                     { }
@@ -207,8 +207,7 @@ const ChatWindow = ({ activeChat, currentUser, onSendMessage, onBack }) => {
 
                     { }
                     <button
-                        type="button"
-                        className="p-2.5 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-colors"
+                        className="p-2.5 text-slate-400 hover:text-primary-900 hover:bg-slate-50 rounded-xl transition-colors"
                         onClick={() => fileInputRef.current.click()}
                     >
                         <FaPaperclip size={20} />
@@ -237,8 +236,8 @@ const ChatWindow = ({ activeChat, currentUser, onSendMessage, onBack }) => {
                         type="submit"
                         disabled={(!newMessage.trim() && !selectedFile) || isUploading}
                         className={`p-3 rounded-xl flex items-center justify-center transition-all ${(!newMessage.trim() && !selectedFile) || isUploading
-                                ? 'bg-slate-200 text-slate-400 cursor-not-allowed'
-                                : 'bg-blue-600 text-white shadow-lg shadow-blue-500/30 hover:bg-blue-700 hover:scale-105 active:scale-95'
+                            ? 'bg-slate-200 text-slate-400 cursor-not-allowed'
+                            : 'bg-primary-900 text-white shadow-lg shadow-primary-900/30 hover:bg-slate-800 hover:scale-105 active:scale-95'
                             }`}
                     >
                         <FaPaperPlane size={16} />
