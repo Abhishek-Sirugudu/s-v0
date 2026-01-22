@@ -34,13 +34,9 @@ const RegisterView = ({
             { }
             <div className="hidden md:flex flex-col justify-between w-5/12 bg-[var(--color-primary-900)] p-12 text-white relative overflow-hidden">
                 <div className="relative z-10">
-                    <div className="flex items-center gap-3 mb-12">
-                        <img
-                            src={brandLogo}
-                            alt="SHNOOR Logo"
-                            className="w-12 h-12 rounded-lg bg-white/10 p-1"
-                        />
-                        <span className="text-lg font-bold tracking-tight">SHNOOR LMS</span>
+                    <div className="flex items-center mb-2 mr-100">
+                        <img src={brandLogo} alt="Shnoor Logo" style={{ maxWidth: '150px', marginBottom: '20px', borderRadius: '10px', display: 'block', margin: '0 auto 20px auto' }} />
+
                     </div>
 
                     <h2 className="text-4xl font-bold mb-6 tracking-tight leading-tight">
@@ -70,12 +66,20 @@ const RegisterView = ({
                 <div className="w-full max-w-[480px]">
 
                     <div className="mb-10 text-center md:text-left">
-                        <div className="hidden md:flex w-12 h-12 bg-slate-100 rounded-xl items-center justify-center mb-6">
-                            <UserPlus className="text-slate-900" size={24} />
-                        </div>
-                        { }
-                        <div className="md:hidden flex flex-col items-center mb-6">
-                            <img src={markLogo} alt="Logo" className="w-12 h-12 rounded-lg mb-4" />
+                        <div className="flex items-center mb-5">
+                            <img
+                                src={markLogo}
+                                alt="Shnoor International"
+                                style={{ width: '70px', height: '60px', marginLeft: '0px' }}
+                            />
+                            <div>
+                                <h1 className="brand-logo text-primary text-xl md:text-2xl font-semibold mb-1 tracking-tight leading-tight">
+                                    SHNOOR International
+                                </h1>
+                                <p className="text-xs md:text-sm text-slate-500 font-medium tracking-[0.18em] uppercase">
+                                    Learning Platform
+                                </p>
+                            </div>
                         </div>
 
                         <h1 className="text-2xl font-bold text-slate-900 tracking-tight mb-2">
