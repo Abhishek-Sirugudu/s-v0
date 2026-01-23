@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaTrophy, FaMedal } from 'react-icons/fa';
+import { Trophy, Medal } from 'lucide-react';
 
 const LeaderboardView = ({ loading, topThree, rest, getRank }) => {
 
@@ -16,7 +16,7 @@ const LeaderboardView = ({ loading, topThree, rest, getRank }) => {
         <div className="w-full space-y-8 font-sans">
             <div className="border-b border-slate-200 pb-6">
                 <h2 className="text-2xl font-bold text-primary-900 mb-1 flex items-center gap-2">
-                    <FaTrophy className="text-indigo-600" /> Leaderboard
+                    <Trophy className="text-indigo-600" /> Leaderboard
                 </h2>
                 <p className="text-slate-500">Top performing students across the platform.</p>
             </div>
@@ -81,7 +81,7 @@ const RankCard = ({ student, rank, isFirst }) => (
             <div className="text-sm font-bold text-primary-900">{student.displayName}</div>
             <div className="text-xs text-slate-500 font-mono">{student.xp} XP</div>
         </div>
-        {isFirst && <FaTrophy className="ml-auto text-indigo-400" />}
+        {isFirst && <Trophy className="ml-auto text-indigo-400" />}
     </div>
 );
 

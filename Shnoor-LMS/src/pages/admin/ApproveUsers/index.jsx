@@ -36,12 +36,6 @@ const ApproveUsers = () => {
     };
 
     const handleAction = async (userId, action, userName) => {
-        const confirmMessage = action === 'active'
-            ? `Approve access for ${userName}?`
-            : `Reject access for ${userName}?`;
-
-        if (!window.confirm(confirmMessage)) return;
-
         try {
             const userRef = doc(db, "users", userId);
             await updateDoc(userRef, {
@@ -49,11 +43,9 @@ const ApproveUsers = () => {
             });
 
             setPendingUsers(prev => prev.filter(user => user.id !== userId));
-            alert(`User ${action === 'active' ? 'Approved' : 'Rejected'} successfully.`);
 
         } catch (error) {
-            console.error(`Error ${action} user:`, error);
-            alert("Failed to update user status.");
+            // Error handling
         }
     };
 

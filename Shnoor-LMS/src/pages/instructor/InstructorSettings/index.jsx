@@ -33,16 +33,14 @@ const InstructorSettings = () => {
 
     const handleProfileUpdate = async () => {
         try {
-            alert("Profile updated successfully!");
+            // Update logic
         } catch (error) {
-            console.error("Error updating profile:", error);
-            alert("Failed to update profile.");
+            // Error handling
         }
     };
 
     const handlePasswordChange = async () => {
         if (passwords.new !== passwords.confirm) {
-            alert("New passwords do not match.");
             return;
         }
 
@@ -50,11 +48,9 @@ const InstructorSettings = () => {
             const credential = EmailAuthProvider.credential(auth.currentUser.email, passwords.current);
             await reauthenticateWithCredential(auth.currentUser, credential);
             await updatePassword(auth.currentUser, passwords.new);
-            alert("Password changed successfully!");
             setPasswords({ current: '', new: '', confirm: '' });
         } catch (error) {
-            console.error("Error changing password:", error);
-            alert("Failed to change password. check your current password.");
+            // Error handling
         }
     };
 

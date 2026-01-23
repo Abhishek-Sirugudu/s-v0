@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaClock, FaAngleLeft, FaAngleRight, FaTrophy, FaTimesCircle, FaCheckCircle, FaCode } from 'react-icons/fa';
+import { Clock, ChevronLeft, ChevronRight, Trophy, XCircle, CheckCircle, Code } from 'lucide-react';
 import PracticeSession from '../PracticeSession';
 
 const ExamRunnerView = ({
@@ -27,7 +27,7 @@ const ExamRunnerView = ({
                     {result.passed ? (
                         <div className="space-y-8">
                             <div className="w-20 h-20 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center mx-auto">
-                                <FaTrophy size={40} />
+                                <Trophy size={48} />
                             </div>
                             <div className="space-y-2">
                                 <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Assessment Passed</h2>
@@ -63,7 +63,7 @@ const ExamRunnerView = ({
                     ) : (
                         <div className="space-y-8">
                             <div className="w-20 h-20 bg-rose-50 text-rose-500 rounded-full flex items-center justify-center mx-auto">
-                                <FaTimesCircle size={40} />
+                                <XCircle size={48} />
                             </div>
                             <div className="space-y-2">
                                 <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Assessment Failed</h2>
@@ -111,7 +111,7 @@ const ExamRunnerView = ({
                         onClick={() => { if (window.confirm("Quit exam? Progress will be lost.")) navigate(-1); }}
                         className="text-white/70 hover:text-white flex items-center gap-2 transition-colors"
                     >
-                        <FaAngleLeft size={20} /> <span className="text-sm font-medium">Exit</span>
+                        <ChevronLeft size={20} /> <span className="text-sm font-medium">Exit</span>
                     </button>
                     <div className="h-6 w-px bg-white/20"></div>
                     <h3 className="text-lg font-bold truncate max-w-md">{exam.title}</h3>
@@ -123,7 +123,7 @@ const ExamRunnerView = ({
                             ? 'bg-red-500/20 text-red-300 border-red-500/50 animate-pulse'
                             : 'bg-white/10 text-white border-white/10'
                             }`}>
-                            <FaClock size={16} /> {formatTime(timeLeft)}
+                            <Clock size={16} /> {formatTime(timeLeft)}
                         </span>
                         <button className="bg-red-500 hover:bg-red-600 text-white text-sm font-bold py-2 px-4 rounded-lg shadow-md transition-colors" onClick={handleSubmit}>
                             Finish Test
@@ -201,7 +201,7 @@ const ExamRunnerView = ({
                                     className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-slate-600 hover:bg-white hover:shadow-sm border border-transparent hover:border-slate-200 transition-all ${currentQIndex === 0 ? 'invisible' : ''}`}
                                     onClick={() => setCurrentQIndex(prev => prev - 1)}
                                 >
-                                    <FaAngleLeft /> Previous
+                                    <ChevronLeft /> Previous
                                 </button>
 
                                 {currentQIndex < exam.questions.length - 1 ? (
@@ -209,7 +209,7 @@ const ExamRunnerView = ({
                                         className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 shadow-lg shadow-blue-500/30 transition-all"
                                         onClick={() => setCurrentQIndex(prev => prev + 1)}
                                     >
-                                        Next <FaAngleRight />
+                                        Next <ChevronRight />
                                     </button>
                                 ) : (
                                     <button
@@ -236,14 +236,14 @@ const ExamRunnerView = ({
                                     className={`flex items-center gap-2 px-4 py-2 rounded-lg font-bold text-slate-400 hover:text-white hover:bg-slate-800 transition-all ${currentQIndex === 0 ? 'invisible' : ''}`}
                                     onClick={() => setCurrentQIndex(prev => prev - 1)}
                                 >
-                                    <FaAngleLeft /> Previous
+                                    <ChevronLeft /> Previous
                                 </button>
                                 {currentQIndex < exam.questions.length - 1 ? (
                                     <button
                                         className="flex items-center gap-2 px-6 py-2 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-500 transition-all"
                                         onClick={() => setCurrentQIndex(prev => prev + 1)}
                                     >
-                                        Next <FaAngleRight />
+                                        Next <ChevronRight />
                                     </button>
                                 ) : (
                                     <button
@@ -303,7 +303,7 @@ const ExamRunnerView = ({
                                     className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-slate-600 hover:bg-white hover:shadow-sm border border-transparent hover:border-slate-200 transition-all ${currentQIndex === 0 ? 'invisible' : ''}`}
                                     onClick={() => setCurrentQIndex(prev => prev - 1)}
                                 >
-                                    <FaAngleLeft /> Previous
+                                    <ChevronLeft /> Previous
                                 </button>
 
                                 {currentQIndex < exam.questions.length - 1 ? (
@@ -311,7 +311,7 @@ const ExamRunnerView = ({
                                         className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 shadow-lg shadow-blue-500/30 transition-all"
                                         onClick={() => setCurrentQIndex(prev => prev + 1)}
                                     >
-                                        Next <FaAngleRight />
+                                        Next <ChevronRight />
                                     </button>
                                 ) : (
                                     <button

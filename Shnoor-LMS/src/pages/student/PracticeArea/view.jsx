@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaCode, FaCheckCircle, FaFilter } from 'react-icons/fa';
+import { Code, CheckCircle, Filter } from 'lucide-react';
 
 const PracticeAreaView = ({ loading, filter, setFilter, filteredChallenges, navigate }) => {
 
@@ -32,7 +32,7 @@ const PracticeAreaView = ({ loading, filter, setFilter, filteredChallenges, navi
 
                 <div className="flex items-center gap-3 bg-white p-1.5 rounded-xl shadow-sm border border-slate-200">
                     <div className="pl-3 text-slate-400">
-                        <FaFilter />
+                        <Filter size={16} />
                     </div>
                     <select
                         className="bg-transparent border-none text-sm font-bold text-slate-700 focus:ring-0 cursor-pointer py-1.5 pr-8 pl-1"
@@ -51,7 +51,7 @@ const PracticeAreaView = ({ loading, filter, setFilter, filteredChallenges, navi
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {filteredChallenges.length === 0 ? (
                     <div className="col-span-full py-16 text-center bg-slate-50 border-2 border-dashed border-slate-200 rounded-3xl">
-                        <FaCode className="text-slate-300 text-5xl mx-auto mb-4" />
+                        <Code className="text-slate-300 w-12 h-12 mx-auto mb-4" />
                         <h3 className="text-xl font-bold text-slate-700 mb-2">No Challenges Found</h3>
                         <p className="text-slate-500">No challenges match your selected filter.</p>
                     </div>
@@ -63,7 +63,7 @@ const PracticeAreaView = ({ loading, filter, setFilter, filteredChallenges, navi
                             onClick={() => navigate(`/student/practice/session/${challenge.id}`)}
                         >
                             <div className="h-40 bg-slate-50 border-b border-slate-100 relative flex items-center justify-center overflow-hidden">
-                                <FaCode className="text-slate-300 text-5xl relative z-10 group-hover:text-indigo-500 transition-all duration-300" />
+                                <Code className="text-slate-300 w-12 h-12 relative z-10 group-hover:text-indigo-500 transition-all duration-300" />
 
                                 <span className={`absolute top-4 right-4 px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider border ${challenge.difficulty === 'Easy' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' :
                                     challenge.difficulty === 'Medium' ? 'bg-amber-50 text-amber-600 border-amber-100' :
@@ -79,8 +79,8 @@ const PracticeAreaView = ({ loading, filter, setFilter, filteredChallenges, navi
 
                                 <div className="pt-4 border-t border-slate-100 flex justify-between items-center mt-auto">
                                     <span className="flex items-center gap-2 text-xs font-bold text-slate-500 uppercase tracking-wider">
-                                        <FaCode /> {challenge.type === 'coding' ? 'Coding' : 'Quiz'}
-                                        {challenge.status === 'Solved' && <FaCheckCircle className="text-emerald-500" />}
+                                        <Code size={14} /> {challenge.type === 'coding' ? 'Coding' : 'Quiz'}
+                                        {challenge.status === 'Solved' && <CheckCircle className="text-emerald-500" size={14} />}
                                     </span>
                                     <button className="bg-primary-900 hover:bg-slate-800 text-white text-xs font-bold px-4 py-2 rounded transition-colors border border-transparent shadow-sm">
                                         Solve Challenge

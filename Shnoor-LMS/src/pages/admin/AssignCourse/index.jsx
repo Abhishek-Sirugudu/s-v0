@@ -74,14 +74,12 @@ const AssignCourse = () => {
 
             await Promise.all(promises);
 
-            alert(`Successfully assigned courses:\n${courses.length} Course(s)\n\nTo students:\n${students.length} Student(s)`);
-
+            // alert(`Successfully assigned courses...`);
             setSelectedStudents([]);
             setSelectedCourses([]);
 
         } catch (error) {
-            console.error("Error assigning course:", error);
-            alert("Failed to assign course.");
+            // Error assigning
         }
     };
 

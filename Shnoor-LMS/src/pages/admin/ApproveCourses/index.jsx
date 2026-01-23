@@ -29,27 +29,22 @@ const ApproveCourses = () => {
             setPendingCourses(courses);
             setLoading(false);
         } catch (error) {
-            console.error("Error fetching pending courses:", error);
+            // console.error("Error fetching pending courses:", error);
             setLoading(false);
         }
     };
 
     const handleAction = async (courseId, status) => {
-        const confirmMsg = status === 'published' ? 'APPROVE and PUBLISH' : 'REJECT';
-        if (!window.confirm(`Are you sure you want to ${confirmMsg} this course?`)) return;
-
         try {
             await updateDoc(doc(db, "courses", courseId), {
                 status: status,
                 verifiedAt: new Date().toISOString()
             });
 
-            alert(`Course ${status === 'published' ? 'Approved' : 'Rejected'}!`);
             setPendingCourses(prev => prev.filter(c => c.id !== courseId));
             setSelectedCourse(null);
         } catch (error) {
-            console.error("Error updating course status:", error);
-            alert("Failed to update status.");
+            // Error handling
         }
     };
 

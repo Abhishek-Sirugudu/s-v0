@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaTrophy, FaCertificate, FaDownload, FaPrint, FaArrowLeft } from 'react-icons/fa';
+import { Trophy, Award, Download, Printer, ArrowLeft } from 'lucide-react';
 
 const MyCertificatesView = ({ loading, currentUser, certificates, selectedCert, setSelectedCert, handlePrint }) => {
 
@@ -20,13 +20,13 @@ const MyCertificatesView = ({ loading, currentUser, certificates, selectedCert, 
                         onClick={() => setSelectedCert(null)}
                         className="flex items-center gap-2 text-slate-600 hover:text-slate-900 font-bold bg-white px-4 py-2 rounded-lg border border-slate-200 shadow-sm transition-all"
                     >
-                        <FaArrowLeft /> Back to List
+                        <ArrowLeft size={16} /> Back to List
                     </button>
                     <button
                         onClick={handlePrint}
                         className="flex items-center gap-2 bg-primary-900 hover:bg-slate-800 text-white font-bold px-4 py-2 rounded-lg shadow-md transition-all"
                     >
-                        <FaPrint /> Print / Save as PDF
+                        <Printer size={16} /> Print / Save as PDF
                     </button>
                 </div>
 
@@ -44,7 +44,7 @@ const MyCertificatesView = ({ loading, currentUser, certificates, selectedCert, 
 
                     <div className="relative z-10 h-full flex flex-col justify-center items-center">
 
-                        <FaCertificate size={60} className="text-amber-400 mb-2" />
+                        <Award size={64} className="text-amber-400 mb-2" />
                         <div className="text-xl uppercase tracking-[4px] text-slate-500 mb-1">
                             Certificate of Completion
                         </div>
@@ -91,7 +91,7 @@ const MyCertificatesView = ({ loading, currentUser, certificates, selectedCert, 
                     <p className="text-slate-500 mt-1">Track your progress and earned credentials.</p>
                 </div>
                 <div className="flex items-center gap-2 bg-slate-100 text-primary-900 px-4 py-2 rounded-xl font-bold text-sm border border-slate-200 shadow-sm">
-                    <FaTrophy className="text-primary-900" /> {currentUser?.xp} XP Earned
+                    <Trophy className="text-primary-900" size={16} /> {currentUser?.xp} XP Earned
                 </div>
             </div>
 
@@ -99,7 +99,7 @@ const MyCertificatesView = ({ loading, currentUser, certificates, selectedCert, 
 
             {certificates.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-16 bg-slate-50 border-2 border-dashed border-slate-200 rounded-3xl text-center">
-                    <FaCertificate className="text-slate-300 text-6xl mb-4" />
+                    <Award className="text-slate-300 w-16 h-16 mb-4" />
                     <h3 className="text-xl font-bold text-slate-700 mb-2">No Certificates Yet</h3>
                     <p className="text-slate-500">Complete courses and pass exams to earn official certificates.</p>
                 </div>
@@ -112,7 +112,7 @@ const MyCertificatesView = ({ loading, currentUser, certificates, selectedCert, 
                             onClick={() => setSelectedCert(cert)}
                         >
                             <div className="h-40 bg-slate-50 border-b border-slate-100 flex flex-col items-center justify-center p-6 relative">
-                                <FaCertificate size={40} className="text-slate-300 mb-2 group-hover:text-primary-900 transition-colors" />
+                                <Award size={48} className="text-slate-300 mb-2 group-hover:text-primary-900 transition-colors" />
                                 <div className="text-xs font-bold text-slate-400 uppercase tracking-widest">Certificate</div>
                             </div>
 
@@ -129,7 +129,7 @@ const MyCertificatesView = ({ loading, currentUser, certificates, selectedCert, 
                                         className="w-full bg-primary-900 hover:bg-slate-800 text-white text-xs font-bold py-2 rounded flex items-center justify-center gap-2 transition-all shadow-sm"
                                         onClick={(e) => { e.stopPropagation(); setSelectedCert(cert); }}
                                     >
-                                        <FaDownload size={10} /> View Certificate
+                                        <Download size={12} /> View Certificate
                                     </button>
                                 </div>
                             </div>

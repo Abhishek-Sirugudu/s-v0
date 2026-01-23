@@ -17,7 +17,7 @@ const ManageUsersView = ({
     const getRoleIcon = (role) => {
         switch (role) {
             case 'admin': return <ShieldAlert className="text-rose-500" size={16} />;
-            case 'instructor': return <Briefcase className="text-[var(--color-indigo-600)]" size={16} />;
+            case 'instructor': return <Briefcase className="text-indigo-600" size={16} />;
             default: return <GraduationCap className="text-emerald-500" size={16} />;
         }
     };
@@ -34,7 +34,7 @@ const ManageUsersView = ({
     if (loading) return (
         <div className="flex items-center justify-center min-h-[400px]">
             <div className="flex flex-col items-center gap-4">
-                <div className="w-12 h-12 border-4 border-[var(--color-indigo-600)] border-t-transparent rounded-full animate-spin"></div>
+                <div className="w-12 h-12 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
                 <p className="text-slate-500 font-medium tracking-tight">Loading users...</p>
             </div>
         </div>

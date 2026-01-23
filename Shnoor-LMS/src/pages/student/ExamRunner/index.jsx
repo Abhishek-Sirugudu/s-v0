@@ -5,19 +5,8 @@ import { awardXP } from '../../../utils/gamification';
 import { auth } from '../../../auth/firebase';
 import ExamRunnerView from './view';
 
-const MOCK_EXAM_DATA = {
-    id: 'exam_demo_001',
-    title: 'React.js Certification Exam',
-    duration: 45,
-    passScore: 60,
-    questions: [
-        { id: 1, type: 'mcq', text: 'Which hook is used to perform side effects in functional components?', options: ['useState', 'useEffect', 'useReducer', 'useContext'], correctAnswer: 'useEffect', marks: 10 },
-        { id: 2, type: 'mcq', text: 'What is the Virtual DOM?', options: ['A direct copy of the real DOM', 'A lightweight JavaScript representation of the DOM', 'A browser extension', 'None of the above'], correctAnswer: 'A lightweight JavaScript representation of the DOM', marks: 10 },
-        { id: 3, type: 'mcq', text: 'How do you pass data to a child component?', options: ['State', 'Props', 'Redux', 'Context'], correctAnswer: 'Props', marks: 10 },
-        { id: 4, type: 'mcq', text: 'Which method is used to update state in a class component?', options: ['updateState()', 'changeState()', 'setState()', 'forceUpdate()'], correctAnswer: 'setState()', marks: 10 },
-        { id: 5, type: 'mcq', text: 'What is the default port for a React app created with CRA?', options: ['8080', '5000', '3000', '4200'], correctAnswer: '3000', marks: 10 }
-    ]
-};
+// MOCK_EXAM_DATA removed for production. 
+// Ensure backend provides exam data via API.
 
 const ExamRunner = () => {
     const { examId } = useParams();
@@ -31,7 +20,8 @@ const ExamRunner = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        setTimeout(() => {
+        const timer = setTimeout(() => {
+            // TODO: [Backend] Fetch student data from /api/student/profile
             const data = getStudentData();
             let foundExam = (data.exams || []).find(e => e.id === examId);
 
@@ -46,8 +36,6 @@ const ExamRunner = () => {
                         questions: [challenge]
                     };
                 }
-            } else if (!foundExam && (examId === 'exam_001' || examId.includes('demo'))) {
-                foundExam = MOCK_EXAM_DATA;
             }
 
             if (foundExam) {
@@ -58,6 +46,7 @@ const ExamRunner = () => {
             }
             setLoading(false);
         }, 500);
+        return () => clearTimeout(timer);
     }, [examId]);
 
     useEffect(() => {
@@ -91,7 +80,8 @@ const ExamRunner = () => {
             let totalPoints = 0;
 
             if (!exam || !exam.questions) {
-                console.error("Exam data missing questions");
+                // Data missing questions
+                return;
                 return;
             }
 
@@ -147,12 +137,11 @@ const ExamRunner = () => {
                     }
                 }
             } catch (postSubmitError) {
-                console.error("Error saving progress:", postSubmitError);
+                // Post-submit error
             }
 
         } catch (error) {
-            console.error("Error in handleSubmit:", error);
-            alert("An error occurred while submitting. Please try again or check console.");
+            // Error handling
         }
     };
 

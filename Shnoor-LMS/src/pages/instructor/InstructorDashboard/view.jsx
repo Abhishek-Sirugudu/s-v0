@@ -25,33 +25,25 @@ import {
 } from 'recharts';
 
 const InstructorDashboardView = ({ loading, userName, stats, navigate }) => {
-    // --- Mock Data ---
-    const performanceData = [
-        { subject: 'Mon', score: 65 },
-        { subject: 'Tue', score: 59 },
-        { subject: 'Wed', score: 80 },
-        { subject: 'Thu', score: 81 },
-        { subject: 'Fri', score: 56 },
-        { subject: 'Sat', score: 95 },
-        { subject: 'Sun', score: 90 },
-    ];
+    // TODO: [Backend] Fetch performance chart data from /api/instructor/analytics/performance
+    // Expected JSON Shape: [{ subject: string, score: number }]
+    const performanceData = [];
 
     const [searchTerm, setSearchTerm] = useState('');
 
-    // Mock Student Data (Merged from StudentPerformance)
-    const students = [
-        { id: 'S001', name: 'Alice Wilson', course: 'Adv. React Patterns', progress: 85, score: 92, status: 'Active' },
-        { id: 'S002', name: 'Robert Fox', course: 'Node.js Microservices', progress: 32, score: 68, status: 'At Risk' },
-        { id: 'S003', name: 'Kenny Lane', course: 'UI/UX Fundamentals', progress: 95, score: 98, status: 'Excellent' },
-        { id: 'S004', name: 'Priscilla Jones', course: 'Python for DS', progress: 45, score: 72, status: 'Active' },
-        { id: 'S005', name: 'Darlene Robertson', course: 'DevOps Basics', progress: 12, score: 45, status: 'Inactive' },
-        { id: 'S006', name: 'Ralph Edwards', course: 'Adv. React Patterns', progress: 78, score: 85, status: 'Active' },
-    ];
+    // TODO: [Backend] Fetch student performance matrix from /api/instructor/analytics/students
+    // Expected JSON Shape: 
+    // [{ 
+    //   id: string, 
+    //   name: string, 
+    //   course: string, 
+    //   progress: number, 
+    //   score: number, 
+    //   status: 'Active' | 'At Risk' | 'Excellent' | 'Inactive' 
+    // }]
+    const students = [];
 
-    const filteredStudents = students.filter(s =>
-        s.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        s.course.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const filteredStudents = [];
 
     if (loading) return (
         <div className="flex items-center justify-center min-h-[400px] text-slate-500 font-medium animate-pulse">
@@ -106,7 +98,7 @@ const InstructorDashboardView = ({ loading, userName, stats, navigate }) => {
                                 <h3 className="text-base font-semibold text-primary-900">Engagement Trends</h3>
                             </div>
                             <div className="flex items-center gap-2">
-                                <span className="w-2 h-0.5 bg-[var(--color-indigo-600)]"></span>
+                                <span className="w-2 h-0.5 bg-indigo-600"></span>
                                 <span className="text-xs font-medium text-slate-500">Student Activity</span>
                             </div>
                         </div>
@@ -140,10 +132,10 @@ const InstructorDashboardView = ({ loading, userName, stats, navigate }) => {
                                     <Line
                                         type="monotone"
                                         dataKey="score"
-                                        stroke="var(--color-indigo-600)"
+                                        stroke="#4f46e5"
                                         strokeWidth={2}
                                         dot={false}
-                                        activeDot={{ r: 4, fill: 'var(--color-indigo-600)' }}
+                                        activeDot={{ r: 4, fill: '#4f46e5' }}
                                     />
                                 </LineChart>
                             </ResponsiveContainer>
@@ -208,7 +200,7 @@ const InstructorDashboardView = ({ loading, userName, stats, navigate }) => {
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-slate-100">
-                                {filteredStudents.map((student) => (
+                                {filteredStudents.length > 0 ? filteredStudents.map((student) => (
                                     <tr key={student.id} className="hover:bg-[#f8fafc] transition-colors">
                                         <td className="px-6 py-4">
                                             <div className="font-medium text-primary-900 text-base">{student.name}</div>
@@ -250,7 +242,13 @@ const InstructorDashboardView = ({ loading, userName, stats, navigate }) => {
                                             </button>
                                         </td>
                                     </tr>
-                                ))}
+                                )) : (
+                                    <tr>
+                                        <td colSpan={6} className="text-center py-12 text-slate-400 font-medium">
+                                            No student data available
+                                        </td>
+                                    </tr>
+                                )}
                             </tbody>
                         </table>
                     </div>

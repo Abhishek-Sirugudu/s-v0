@@ -15,23 +15,7 @@ const CoursePlayer = () => {
 
     useEffect(() => {
         const fetchCourse = async () => {
-            if (courseId.startsWith('mock')) {
-                setTimeout(() => {
-                    const mockCourse = {
-                        id: courseId,
-                        title: 'Mock Course Demo',
-                        modules: [
-                            { id: 'm1', title: 'Welcome to the Course', type: 'video', url: 'https://www.youtube.com/embed/dQw4w9WgXcQ', duration: '5m' },
-                            { id: 'm2', title: 'Chapter 1: Basics', type: 'video', url: 'https://www.youtube.com/embed/dQw4w9WgXcQ', duration: '15m' },
-                            { id: 'm3', title: 'Reading Material', type: 'pdf', url: '#', duration: '10m' }
-                        ]
-                    };
-                    setCourse(mockCourse);
-                    setCurrentModule(mockCourse.modules[0]);
-                    setLoading(false);
-                }, 500);
-                return;
-            }
+            // Mock data removed for production.
 
             try {
                 const docRef = doc(db, "courses", courseId);
@@ -45,10 +29,10 @@ const CoursePlayer = () => {
                         setCurrentModule(courseData.modules[0]);
                     }
                 } else {
-                    console.error("No such course!");
+                    // console.error("No such course!");
                 }
             } catch (error) {
-                console.error("Error loading course:", error);
+                // console.error("Error loading course:", error);
             } finally {
                 setLoading(false);
             }
@@ -72,8 +56,8 @@ const CoursePlayer = () => {
                 awardXP(auth.currentUser.uid, 10, 'Completed Lesson');
             }
 
-            
-            
+
+
         }
     };
 

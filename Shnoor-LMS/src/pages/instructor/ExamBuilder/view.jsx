@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaSave, FaArrowRight, FaArrowLeft, FaTrash, FaPlus, FaCode, FaListUl, FaExclamationCircle, FaAlignLeft, FaCog, FaCheckCircle, FaClock } from 'react-icons/fa';
+import { Save, ArrowRight, ArrowLeft, Trash2, Plus, Code, List, AlertCircle, AlignLeft, Settings, CheckCircle, Clock } from 'lucide-react';
 import Editor from '@monaco-editor/react';
 
 const ExamBuilderView = ({
@@ -28,12 +28,12 @@ const ExamBuilderView = ({
             <header className="bg-white border-b border-slate-200 px-6 py-3 flex items-center justify-between shrink-0 h-16">
                 <div className="flex items-center gap-4">
                     <button onClick={() => navigate('/instructor/dashboard')} className="text-slate-400 hover:text-slate-700 transition-colors">
-                        <FaArrowLeft />
+                        <ArrowLeft size={20} />
                     </button>
                     <div>
                         <h1 className="text-lg font-bold text-primary-900 tracking-tight">{formData.title || 'Untitled Exam'}</h1>
                         <div className="flex items-center gap-3 text-xs text-slate-500">
-                            {formData.duration && <span className="flex items-center gap-1"><FaClock size={10} /> {formData.duration} mins</span>}
+                            {formData.duration && <span className="flex items-center gap-1"><Clock size={14} /> {formData.duration} mins</span>}
                             <span>• {formData.questions.length} Questions</span>
                             <span>• {formData.questions.reduce((acc, q) => acc + (q.marks || 0), 0)} Total Marks</span>
                         </div>
@@ -50,7 +50,7 @@ const ExamBuilderView = ({
                         className="px-6 py-2 bg-primary-900 hover:bg-slate-800 text-white font-bold rounded-md text-xs shadow-sm flex items-center gap-2 transition-colors"
                         onClick={handleSave}
                     >
-                        <FaSave /> Publish Exam
+                        <Save size={16} /> Publish Exam
                     </button>
                 </div>
             </header>
@@ -67,7 +67,7 @@ const ExamBuilderView = ({
                             className={`w-full text-left px-3 py-2 rounded-md text-sm font-medium flex items-center gap-3 mb-1 transition-colors ${step === 1 ? 'bg-indigo-50 text-indigo-700' : 'text-slate-600 hover:bg-slate-50'
                                 }`}
                         >
-                            <FaCog size={14} className={step === 1 ? 'text-indigo-500' : 'text-slate-400'} />
+                            <Settings size={16} className={step === 1 ? 'text-indigo-500' : 'text-slate-400'} />
                             Configuration
                         </button>
                         <button
@@ -75,7 +75,7 @@ const ExamBuilderView = ({
                             className={`w-full text-left px-3 py-2 rounded-md text-sm font-medium flex items-center gap-3 transition-colors ${step === 2 ? 'bg-indigo-50 text-indigo-700' : 'text-slate-600 hover:bg-slate-50'
                                 }`}
                         >
-                            <FaListUl size={14} className={step === 2 ? 'text-indigo-500' : 'text-slate-400'} />
+                            <List size={16} className={step === 2 ? 'text-indigo-500' : 'text-slate-400'} />
                             Questions
                         </button>
                     </div>
@@ -102,7 +102,7 @@ const ExamBuilderView = ({
                                         onClick={(e) => { e.stopPropagation(); removeQuestion(q.id); if (activeQuestionIndex >= idx && activeQuestionIndex > 0) setActiveQuestionIndex(activeQuestionIndex - 1); }}
                                         className="hidden group-hover:block p-1 text-slate-400 hover:text-rose-600 rounded"
                                     >
-                                        <FaTrash size={10} />
+                                        <Trash2 size={12} />
                                     </div>
                                 </button>
                             ))}
@@ -114,15 +114,15 @@ const ExamBuilderView = ({
                             <div className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Add New</div>
                             <div className="grid grid-cols-3 gap-2">
                                 <button onClick={() => { addQuestion('mcq'); setActiveQuestionIndex(formData.questions.length); }} className="flex flex-col items-center justify-center gap-1 p-2 bg-white border border-slate-200 rounded-md hover:border-indigo-500 hover:shadow-sm transition-all text-slate-600 hover:text-indigo-600">
-                                    <FaListUl size={14} />
+                                    <List size={16} />
                                     <span className="text-[10px] font-bold">MCQ</span>
                                 </button>
                                 <button onClick={() => { addQuestion('descriptive'); setActiveQuestionIndex(formData.questions.length); }} className="flex flex-col items-center justify-center gap-1 p-2 bg-white border border-slate-200 rounded-md hover:border-indigo-500 hover:shadow-sm transition-all text-slate-600 hover:text-indigo-600">
-                                    <FaAlignLeft size={14} />
+                                    <AlignLeft size={16} />
                                     <span className="text-[10px] font-bold">Text</span>
                                 </button>
                                 <button onClick={() => { addQuestion('coding'); setActiveQuestionIndex(formData.questions.length); }} className="flex flex-col items-center justify-center gap-1 p-2 bg-white border border-slate-200 rounded-md hover:border-indigo-500 hover:shadow-sm transition-all text-slate-600 hover:text-indigo-600">
-                                    <FaCode size={14} />
+                                    <Code size={16} />
                                     <span className="text-[10px] font-bold">Code</span>
                                 </button>
                             </div>
@@ -138,7 +138,7 @@ const ExamBuilderView = ({
                         <div className="w-full space-y-6">
                             <div className="bg-white p-8 rounded-lg border border-slate-200 shadow-sm">
                                 <h2 className="text-xl font-bold text-primary-900 mb-6 flex items-center gap-2">
-                                    <FaCog className="text-slate-400" /> Exam Settings
+                                    <Settings className="text-slate-400" size={20} /> Exam Settings
                                 </h2>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -229,7 +229,7 @@ const ExamBuilderView = ({
                                             </div>
                                             {formData.linkedCourseId && (
                                                 <div className="text-[10px] text-indigo-600 font-bold flex items-center gap-1 mt-1">
-                                                    <FaExclamationCircle /> Syncs with Course
+                                                    <AlertCircle size={12} /> Syncs with Course
                                                 </div>
                                             )}
                                         </div>
@@ -241,7 +241,7 @@ const ExamBuilderView = ({
                                     onClick={() => setStep(2)}
                                     className="px-8 py-3 bg-primary-900 hover:bg-slate-800 text-white font-bold rounded-md shadow-sm flex items-center gap-2 text-sm"
                                 >
-                                    Proceed to Questions <FaArrowRight />
+                                    Proceed to Questions <ArrowRight size={16} />
                                 </button>
                             </div>
                         </div>
@@ -310,7 +310,7 @@ const ExamBuilderView = ({
                                                                         }`}
                                                                 />
                                                                 {q.correctAnswer === opt && opt !== '' && (
-                                                                    <FaCheckCircle className="absolute right-3 top-1/2 -translate-y-1/2 text-emerald-500" />
+                                                                    <CheckCircle size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-emerald-500" />
                                                                 )}
                                                             </div>
                                                         ))}
@@ -404,26 +404,26 @@ const ExamBuilderView = ({
                                                                 <button
                                                                     className="text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1 bg-emerald-50 px-2.5 py-1.5 rounded-md border border-emerald-100 hover:border-emerald-200 transition-all"
                                                                     onClick={() => {
-                                                                        const newTestCase = { input: '', output: '', isHidden: false };
+                                                                        const newTestCase = { id: Date.now(), input: '', output: '', isHidden: false };
                                                                         updateQuestion(q.id, 'testCases', [...(q.testCases || []), newTestCase]);
                                                                     }}
                                                                 >
-                                                                    <FaCheckCircle size={10} /> Public
+                                                                    <CheckCircle size={10} /> Public
                                                                 </button>
                                                                 <button
                                                                     className="text-xs font-bold text-amber-600 hover:text-amber-700 flex items-center gap-1 bg-amber-50 px-2.5 py-1.5 rounded-md border border-amber-100 hover:border-amber-200 transition-all"
                                                                     onClick={() => {
-                                                                        const newTestCase = { input: '', output: '', isHidden: true };
+                                                                        const newTestCase = { id: Date.now(), input: '', output: '', isHidden: true };
                                                                         updateQuestion(q.id, 'testCases', [...(q.testCases || []), newTestCase]);
                                                                     }}
                                                                 >
-                                                                    <FaCode size={10} /> Hidden
+                                                                    <Code size={10} /> Hidden
                                                                 </button>
                                                             </div>
                                                         </div>
                                                         <div className="space-y-2">
                                                             {(q.testCases || []).map((tc, tcIdx) => (
-                                                                <div key={tcIdx} className="flex gap-3 items-center">
+                                                                <div key={tc.id || tcIdx} className="flex gap-3 items-center">
                                                                     <div className="flex-1">
                                                                         <input
                                                                             placeholder="Input"
@@ -457,7 +457,7 @@ const ExamBuilderView = ({
                                                                         }}
                                                                         title={tc.isHidden ? "Click to make Public" : "Click to make Hidden"}
                                                                     >
-                                                                        {tc.isHidden ? <><FaCode size={10} /> Hidden</> : <><FaCheckCircle size={10} /> Public</>}
+                                                                        {tc.isHidden ? <><Code size={10} /> Hidden</> : <><CheckCircle size={10} /> Public</>}
                                                                     </button>
                                                                     <button
                                                                         className="text-slate-400 hover:text-rose-500 p-1"
@@ -466,7 +466,7 @@ const ExamBuilderView = ({
                                                                             updateQuestion(q.id, 'testCases', newTCs);
                                                                         }}
                                                                     >
-                                                                        <FaTrash size={12} />
+                                                                        <Trash2 size={12} />
                                                                     </button>
                                                                 </div>
                                                             ))}
@@ -484,7 +484,7 @@ const ExamBuilderView = ({
                     {step === 2 && formData.questions.length === 0 && (
                         <div className="h-full flex flex-col items-center justify-center text-slate-400">
                             <div className="p-6 bg-slate-50 rounded-full mb-4">
-                                <FaListUl size={32} className="opacity-20" />
+                                <List size={32} className="opacity-20" />
                             </div>
                             <h3 className="text-lg font-bold text-slate-600 mb-2">No Questions Defined</h3>
                             <p className="text-sm max-w-xs text-center mb-6">Start building your exam by adding questions from the sidebar.</p>

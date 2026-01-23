@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaUserEdit, FaSave, FaLock } from 'react-icons/fa';
+import { UserCheck, Save, Lock } from 'lucide-react';
 
 const InstructorSettingsView = ({
     loading, profile, setProfile,
@@ -32,7 +32,7 @@ const InstructorSettingsView = ({
                             <div className="border-b border-slate-100 px-6 py-4 flex items-center justify-between">
                                 <div className="flex items-center gap-3">
                                     <div className="p-2 bg-indigo-50 text-indigo-600 rounded-lg">
-                                        <FaUserEdit />
+                                        <UserCheck size={20} />
                                     </div>
                                     <h2 className="font-bold text-primary-900 text-sm uppercase tracking-wide">Public Profile</h2>
                                 </div>
@@ -66,7 +66,7 @@ const InstructorSettingsView = ({
                                         className="px-6 py-2 bg-primary-900 hover:bg-slate-800 text-white font-bold rounded-md shadow-sm text-sm flex items-center gap-2 transition-colors"
                                         onClick={handleProfileUpdate}
                                     >
-                                        <FaSave /> Save Changes
+                                        <Save size={16} /> Save Changes
                                     </button>
                                 </div>
                             </div>
@@ -77,7 +77,7 @@ const InstructorSettingsView = ({
                             <div className="border-b border-slate-100 px-6 py-4 flex items-center justify-between">
                                 <div className="flex items-center gap-3">
                                     <div className="p-2 bg-slate-50 text-slate-600 rounded-lg">
-                                        <FaLock />
+                                        <Lock size={20} />
                                     </div>
                                     <h2 className="font-bold text-primary-900 text-sm uppercase tracking-wide">Security</h2>
                                 </div>

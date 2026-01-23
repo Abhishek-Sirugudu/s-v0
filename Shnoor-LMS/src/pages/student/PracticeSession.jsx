@@ -113,12 +113,12 @@ const PracticeSession = ({ question: propQuestion, value, onChange, onComplete }
                                 const args = [${tc.input}];
                                 const result = ${funcName}(...args);
                                 if (typeof result === 'object' && result !== null) {
-                                    console.log(JSON.stringify(result));
+
                                 } else {
-                                    console.log(result);
+
                                 }
                             } catch (err) {
-                                console.error(err.message);
+                                // console.error(err.message);
                             }
                         `;
                     }
@@ -149,7 +149,7 @@ if __name__ == "__main__":
                 }
 
             } catch (err) {
-                console.error("Wrapper preparation error", err);
+                // console.error("Wrapper preparation error", err);
             }
 
             try {

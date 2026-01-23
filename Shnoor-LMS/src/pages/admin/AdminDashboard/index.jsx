@@ -7,56 +7,53 @@ import AdminDashboardView from './view';
 const AdminDashboard = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
-    
-    const [stats, setStats] = useState({
-        activeUsers: 0,
-        completionRate: 0,
-        totalHours: 0,
-        certificates: 0
-    });
 
+    // TODO: [Backend] Fetch admin stats from /api/admin/stats
+    // Expected JSON Shape:
+    // {
+    //   activeUsers: number,
+    //   completionRate: number,
+    //   totalHours: number,
+    //   certificates: number
+    // }
+    const [stats, setStats] = useState(null);
+
+    // TODO: [Backend] Fetch chart data from /api/admin/analytics
+    // Expected JSON Shape:
+    // [
+    //   { name: "Mon", lessons: 12 },
+    //   { name: "Tue", lessons: 19 },
+    //   ...
+    // ]
     const [chartData, setChartData] = useState([]);
 
     const fetchDashboardData = useCallback(async () => {
         try {
             setLoading(true);
-            
-            
-            const usersSnap = await getDocs(collection(db, "users"));
-            const coursesSnap = await getDocs(query(collection(db, "courses"), where("status", "==", "published")));
 
-            
-            setStats({
-                activeUsers: Math.floor(usersSnap.size * 0.6) || 0,
-                completionRate: 42,
-                totalHours: usersSnap.size * 15 || 0,
-                certificates: Math.floor(usersSnap.size * 0.1) || 0
-            });
+            // TODO: [Backend] Replace with actual API calls
+            // const statsRes = await axios.get('/api/admin/stats');
+            // setStats(statsRes.data);
 
-            
-            setChartData([
-                { name: 'Mon', lessons: 120 },
-                { name: 'Tue', lessons: 145 },
-                { name: 'Wed', lessons: 190 },
-                { name: 'Thu', lessons: 165 },
-                { name: 'Fri', lessons: 210 },
-                { name: 'Sat', lessons: 85 },
-                { name: 'Sun', lessons: 95 },
-            ]);
+            // const chartRes = await axios.get('/api/admin/analytics');
+            // setChartData(chartRes.data);
 
         } catch (error) {
-            console.error("Error fetching admin stats:", error);
+            // Error handling tailored for production (e.g., toast notification)
+            // console.error removed for hygiene
         } finally {
             setLoading(false);
         }
-    }, []); 
+    }, []);
+
+
 
     useEffect(() => {
         fetchDashboardData();
-    }, [fetchDashboardData]); 
+    }, [fetchDashboardData]);
 
     return (
-        <AdminDashboardView 
+        <AdminDashboardView
             stats={stats}
             chartData={chartData}
             loading={loading}

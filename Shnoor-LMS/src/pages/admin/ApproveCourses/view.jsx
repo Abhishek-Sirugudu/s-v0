@@ -6,7 +6,7 @@ const ApproveCoursesView = ({ loading, pendingCourses, selectedCourse, setSelect
     if (loading) return (
         <div className="flex items-center justify-center min-h-[400px]">
             <div className="flex flex-col items-center gap-4">
-                <div className="w-12 h-12 border-4 border-[var(--color-indigo-600)] border-t-transparent rounded-full animate-spin"></div>
+                <div className="w-12 h-12 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
                 <p className="text-slate-500 font-medium tracking-tight">Loading courses queue...</p>
             </div>
         </div>
@@ -17,7 +17,7 @@ const ApproveCoursesView = ({ loading, pendingCourses, selectedCourse, setSelect
             { }
             <div className="flex justify-between items-center mb-6 shrink-0 px-2">
                 <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-indigo-50 text-[var(--color-indigo-600)] flex items-center justify-center border border-indigo-100 shadow-sm">
+                    <div className="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center border border-indigo-100 shadow-sm">
                         <ShieldCheck size={24} />
                     </div>
                     <div>
@@ -64,12 +64,12 @@ const ApproveCoursesView = ({ loading, pendingCourses, selectedCourse, setSelect
                                             key={course.id}
                                             onClick={() => setSelectedCourse(course)}
                                             className={`cursor-pointer transition-all hover:bg-slate-50 group border-l-4 ${selectedCourse?.id === course.id
-                                                ? 'bg-indigo-50/50 border-[var(--color-indigo-600)]'
+                                                ? 'bg-indigo-50/50 border-indigo-600'
                                                 : 'border-transparent hover:border-slate-300'
                                                 }`}
                                         >
                                             <td className="py-4 px-6">
-                                                <div className={`font-bold text-base transition-colors ${selectedCourse?.id === course.id ? 'text-[var(--color-indigo-600)]' : 'text-primary-900'}`}>
+                                                <div className={`font-bold text-base transition-colors ${selectedCourse?.id === course.id ? 'text-indigo-600' : 'text-primary-900'}`}>
                                                     {course.title}
                                                 </div>
                                             </td>
@@ -83,7 +83,7 @@ const ApproveCoursesView = ({ loading, pendingCourses, selectedCourse, setSelect
                                             </td>
                                             <td className="py-4 px-6 text-right">
                                                 <button className={`text-xs font-bold border px-3 py-1.5 rounded-lg shadow-sm transition-all ${selectedCourse?.id === course.id
-                                                    ? 'bg-white border-[var(--color-indigo-600)] text-[var(--color-indigo-600)]'
+                                                    ? 'bg-white border-indigo-600 text-indigo-600'
                                                     : 'bg-white border-slate-200 text-slate-500 hover:border-slate-300'
                                                     }`}>
                                                     Review
@@ -105,7 +105,7 @@ const ApproveCoursesView = ({ loading, pendingCourses, selectedCourse, setSelect
                             <div>
                                 <h3 className="text-xl font-bold text-primary-900 leading-tight mb-2 tracking-tight">{selectedCourse.title}</h3>
                                 <p className="text-xs text-slate-500 font-bold uppercase tracking-wide">
-                                    <span className="text-[var(--color-indigo-600)]">{selectedCourse.category}</span> • {selectedCourse.instructorName || 'Unknown'}
+                                    <span className="text-indigo-600">{selectedCourse.category}</span> • {selectedCourse.instructorName || 'Unknown'}
                                 </p>
                             </div>
                             <button
@@ -131,8 +131,9 @@ const ApproveCoursesView = ({ loading, pendingCourses, selectedCourse, setSelect
                                 </h4>
                                 <div className="space-y-2">
                                     {selectedCourse.modules && selectedCourse.modules.map((m, idx) => (
-                                        <div key={idx} className="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-md transition-shadow group">
-                                            <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 ${m.type === 'video' ? 'bg-rose-50 text-rose-500' : 'bg-indigo-50 text-[var(--color-indigo-600)]'
+                                        // Using idx as fallback key if id is missing, but prefer unique IDs
+                                        <div key={m.id || idx} className="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-md transition-shadow group">
+                                            <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 ${m.type === 'video' ? 'bg-rose-50 text-rose-500' : 'bg-indigo-50 text-indigo-600'
                                                 }`}>
                                                 {m.type === 'video' ? <Play size={16} fill="currentColor" /> : <FileText size={18} />}
                                             </div>
@@ -147,7 +148,7 @@ const ApproveCoursesView = ({ loading, pendingCourses, selectedCourse, setSelect
                                                     href={m.url}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
-                                                    className="text-xs font-bold text-[var(--color-indigo-600)] hover:underline px-3 bg-indigo-50 py-1.5 rounded-md"
+                                                    className="text-xs font-bold text-indigo-600 hover:underline px-3 bg-indigo-50 py-1.5 rounded-md"
                                                 >
                                                     View
                                                 </a>

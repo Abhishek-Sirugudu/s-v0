@@ -1,4 +1,5 @@
 import React from 'react';
+import { Bell, X, MessageSquare } from 'lucide-react';
 import ChatList from '../../../components/chat/ChatList';
 import ChatWindow from '../../../components/chat/ChatWindow';
 
@@ -13,7 +14,7 @@ const StudentChatView = ({
             {notification && notification.visible && (
                 <div className="fixed top-24 right-6 min-w-[300px] z-50 bg-white border-l-4 border-indigo-600 shadow-xl rounded-lg p-4 animate-slide-in">
                     <div className="flex items-start gap-4">
-                        <div className="text-2xl pt-1">🔔</div>
+                        <div className="pt-1 text-indigo-600"><Bell size={24} /></div>
                         <div className="flex-1">
                             <strong className="block text-primary-900 font-bold">{notification.sender}</strong>
                             <p className="text-slate-600 text-sm">{notification.message}</p>
@@ -22,7 +23,7 @@ const StudentChatView = ({
                             className="text-slate-400 hover:text-slate-600"
                             onClick={() => setNotification({ ...notification, visible: false })}
                         >
-                            ×
+                            <X size={18} />
                         </button>
                     </div>
                 </div>
@@ -57,9 +58,7 @@ const StudentChatView = ({
                     ) : (
                         <div className="flex-1 flex flex-col items-center justify-center text-slate-400 p-8">
                             <div className="w-24 h-24 bg-slate-100 rounded-full flex items-center justify-center mb-6">
-                                <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                                </svg>
+                                <MessageSquare className="text-slate-300 w-10 h-10" />
                             </div>
                             <h3 className="text-xl font-bold text-slate-700 mb-2">No Chat Selected</h3>
                             <p>Select a student from the list to start messaging.</p>

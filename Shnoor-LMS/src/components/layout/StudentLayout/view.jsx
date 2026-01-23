@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import { FaList, FaTrophy, FaUserCircle, FaSignOutAlt, FaStar, FaChartLine, FaClipboardList, FaCode, FaBars, FaCog } from 'react-icons/fa';
+import { List, Trophy, UserCircle, LogOut, Star, TrendingUp, ClipboardList, Code, Menu, Settings, MessageSquare } from 'lucide-react';
 import markLogo from '../../../assets/just_logo.jpeg';
 
 const StudentLayoutView = ({
@@ -62,13 +62,13 @@ const StudentLayoutView = ({
 
                     <div className="flex-1 overflow-y-auto py-6 px-4 scrollbar-thin scrollbar-thumb-slate-200">
                         <ul className="space-y-1">
-                            <NavItem path="dashboard" icon={FaChartLine} label="Dashboard" />
-                            <NavItem path="courses" icon={FaList} label="My Courses" />
-                            <NavItem path="exams" icon={FaClipboardList} label="Exams" />
-                            <NavItem path="certificates" icon={FaTrophy} label="Certificates" />
-                            <NavItem path="practice" icon={FaCode} label="Practice Arena" />
-                            <NavItem path="chat" icon={({ className }) => <span className={className}>💬</span>} label="Messages" badgeCount={totalUnread} />
-                            <NavItem path="settings" icon={FaCog} label="Settings" />
+                            <NavItem path="dashboard" icon={TrendingUp} label="Dashboard" />
+                            <NavItem path="courses" icon={List} label="My Courses" />
+                            <NavItem path="exams" icon={ClipboardList} label="Exams" />
+                            <NavItem path="certificates" icon={Trophy} label="Certificates" />
+                            <NavItem path="practice" icon={Code} label="Practice Arena" />
+                            <NavItem path="chat" icon={MessageSquare} label="Messages" badgeCount={totalUnread} />
+                            <NavItem path="settings" icon={Settings} label="Settings" />
                         </ul>
                     </div>
                 </div>
@@ -81,7 +81,7 @@ const StudentLayoutView = ({
                             className="lg:hidden p-2 text-slate-500 hover:bg-slate-100 rounded-lg"
                             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
                         >
-                            <FaBars className="text-xl" />
+                            <Menu className="text-xl" />
                         </button>
                         <h2 className="text-xl font-semibold text-primary-900 hidden sm:block">Student Portal</h2>
                     </div>
@@ -93,12 +93,12 @@ const StudentLayoutView = ({
                                 <span className="text-primary-900 font-bold text-sm leading-none">{rank}</span>
                             </div>
                             <div className="h-8 w-8 rounded-full bg-slate-100 flex items-center justify-center text-primary-900">
-                                <FaTrophy size={14} />
+                                <Trophy size={14} />
                             </div>
                         </div>
 
                         <div className="hidden md:flex items-center gap-2 bg-amber-50 text-amber-900 px-3 py-1.5 rounded-full border border-amber-200 font-bold text-sm">
-                            <FaStar className="text-amber-500" /> {xp} XP
+                            <Star className="text-amber-500" size={14} fill="currentColor" /> {xp} XP
                         </div>
 
                         <div className="flex items-center gap-3 pl-4 border-l border-slate-200">
@@ -107,14 +107,14 @@ const StudentLayoutView = ({
                                 <div className="text-xs text-slate-500 font-medium">Student</div>
                             </div>
                             <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 border border-slate-200 overflow-hidden">
-                                {photoURL ? <img src={photoURL} alt="Profile" className="w-full h-full object-cover" /> : <FaUserCircle className="text-2xl" />}
+                                {photoURL ? <img src={photoURL} alt="Profile" className="w-full h-full object-cover" /> : <UserCircle className="w-full h-full p-1" />}
                             </div>
                             <button
                                 onClick={handleLogout}
                                 className="p-2 text-slate-400 hover:text-primary-900 hover:bg-slate-100 rounded-lg transition-all duration-200"
                                 title="Logout"
                             >
-                                <FaSignOutAlt className="text-lg" />
+                                <LogOut className="text-lg" />
                             </button>
                         </div>
                     </div>

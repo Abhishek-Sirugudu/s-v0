@@ -1,5 +1,6 @@
 import React from 'react';
-import { FaUserCircle, FaCog, FaGlobe } from 'react-icons/fa';
+
+import { UserCircle, Settings, Globe } from 'lucide-react';
 
 const AdminProfileManagementView = () => {
     return (
@@ -12,7 +13,7 @@ const AdminProfileManagementView = () => {
                 </div>
 
                 <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 flex items-center gap-6">
-                    <FaUserCircle className="text-slate-200 text-7xl shrink-0" />
+                    <UserCircle className="text-slate-200" size={80} strokeWidth={1} />
                     <div>
                         <h4 className="text-xl font-bold text-primary-900 mb-1">Super Admin</h4>
                         <p className="text-slate-500 text-sm mb-3">admin@shnoor.com</p>
@@ -29,7 +30,7 @@ const AdminProfileManagementView = () => {
                         <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex items-center justify-between group hover:border-blue-300 transition-all">
                             <div className="flex items-center gap-4">
                                 <div className="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center text-slate-500 group-hover:bg-blue-50 group-hover:text-blue-500 transition-colors">
-                                    <FaGlobe size={24} />
+                                    <Globe size={24} />
                                 </div>
                                 <div>
                                     <div className="font-bold text-primary-900">Timezone & Region</div>
@@ -44,7 +45,7 @@ const AdminProfileManagementView = () => {
                         <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex items-center justify-between group hover:border-blue-300 transition-all">
                             <div className="flex items-center gap-4">
                                 <div className="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center text-slate-500 group-hover:bg-blue-50 group-hover:text-blue-500 transition-colors">
-                                    <FaCog size={24} />
+                                    <Settings size={24} />
                                 </div>
                                 <div>
                                     <div className="font-bold text-primary-900">Default Branding</div>

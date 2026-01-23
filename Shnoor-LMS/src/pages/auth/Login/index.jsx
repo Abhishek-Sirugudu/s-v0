@@ -8,19 +8,11 @@ import LoginView from './view';
 const Login = () => {
     const navigate = useNavigate();
 
-    
-    const [email, setEmail] = useState(() => {
-        if (typeof window === 'undefined') return '';
-        const saved = localStorage.getItem('rememberedEmail');
-        return saved && saved !== 'admin@shnoor.com' ? saved : '';
-    });
+
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
-    const [rememberMe, setRememberMe] = useState(() => {
-        if (typeof window === 'undefined') return false;
-        const saved = localStorage.getItem('rememberedEmail');
-        return !!(saved && saved !== 'admin@shnoor.com');
-    });
+    const [rememberMe, setRememberMe] = useState(false);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
@@ -62,12 +54,10 @@ const Login = () => {
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
 
-            if (rememberMe) localStorage.setItem('rememberedEmail', email);
-            else localStorage.removeItem('rememberedEmail');
+
 
             await checkRoleAndRedirect(userCredential.user);
         } catch (err) {
-            console.error(err);
             setError("Invalid Email or Password.");
             setLoading(false);
         }

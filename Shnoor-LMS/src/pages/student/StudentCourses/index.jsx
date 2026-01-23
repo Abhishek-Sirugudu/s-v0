@@ -6,45 +6,32 @@ import StudentCoursesView from './view';
 
 const StudentCourses = () => {
     const navigate = useNavigate();
+    // TODO: [Backend] Fetch courses from /api/courses
+    // Expected JSON Shape: 
+    // [{ 
+    //   id: string, 
+    //   title: string, 
+    //   category: string, 
+    //   level: 'Beginner'|'Intermediate'|'Advanced', 
+    //   instructorName: string, 
+    //   thumbnail: string 
+    // }]
     const [allCourses, setAllCourses] = useState([]);
+
+    // TODO: [Backend] Fetch user enrollment from /api/user/enrollment
+    // Expected JSON Shape: string[] (list of courseIds)
     const [enrolledIds, setEnrolledIds] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true); // Keep true initially to show loading state
     const [activeTab, setActiveTab] = useState('my-learning');
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [selectedLevel, setSelectedLevel] = useState('All');
 
     useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true);
-            try {
-                const q = query(
-                    collection(db, "courses"),
-                    where("status", "==", "published")
-                );
-                const querySnapshot = await getDocs(q);
-                const fetchedCourses = [];
-                querySnapshot.forEach((doc) => {
-                    fetchedCourses.push({ id: doc.id, ...doc.data() });
-                });
-
-                setAllCourses(fetchedCourses);
-
-                if (auth.currentUser) {
-                    const userRef = doc(db, "users", auth.currentUser.uid);
-                    const userSnap = await getDoc(userRef);
-                    if (userSnap.exists()) {
-                        setEnrolledIds(userSnap.data().enrolledCourses || []);
-                    }
-                }
-
-            } catch (error) {
-                console.error("Error fetching courses:", error);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchData();
+        // TODO: [Backend] Fetch courses logic
+        // setAllCourses(...);
+        // setEnrolledIds(...);
+        setLoading(false); // Remove this when actual fetching is implemented
     }, []);
 
     const handleEnroll = async (courseId) => {
@@ -57,7 +44,7 @@ const StudentCourses = () => {
             setEnrolledIds(prev => [...prev, courseId]);
             alert("Enrolled successfully!");
         } catch (error) {
-            console.error("Error enrolling:", error);
+            // console.error("Error enrolling:", error);
             alert("Failed to enroll.");
         }
     };

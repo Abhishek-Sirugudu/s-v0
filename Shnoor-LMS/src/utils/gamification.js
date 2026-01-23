@@ -35,13 +35,13 @@ export const awardXP = async (userId, amount, reason) => {
             lastXPAward: new Date().toISOString()
         });
 
-        console.log(`Awarded ${amount} XP to user ${userId} for ${reason}`);
+
         return true;
     } catch (error) {
-        console.error("Error awarding XP:", error);
-        return false;
+        // Error awarding XP
     }
-};
+    return false;
+}
 
 export const checkDailyStreak = async (userId) => {
     if (!userId) return;
@@ -79,7 +79,7 @@ export const checkDailyStreak = async (userId) => {
             return currentStreak;
         }
     } catch (error) {
-        console.error("Error checking streak:", error);
-        return 0;
+        // Error checking streak
     }
+    return 0;
 };

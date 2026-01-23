@@ -11,9 +11,11 @@ import Register from './pages/auth/Register';
 import ForgotPassword from './pages/auth/ForgotPassword';
 
 // --- Layouts ---
+
 import AdminLayout from './components/layout/AdminLayout';
 import InstructorLayout from './components/layout/InstructorLayout';
 import StudentLayout from './components/layout/StudentLayout';
+import ErrorBoundary from './components/layout/ErrorBoundary';
 
 // --- Admin Components ---
 import AdminDashboard from './pages/admin/AdminDashboard';
@@ -35,7 +37,7 @@ import InstructorChat from './pages/instructor/InstructorChat';
 
 // --- Student Components ---
 // Note: Imports point to folders now (e.g., ./pages/student/Dashboard)
-import StudentDashboard from './pages/student/Dashboard'; 
+import StudentDashboard from './pages/student/Dashboard';
 import StudentCourses from './pages/student/StudentCourses';
 import CourseDetail from './pages/student/CourseDetail';
 import CoursePlayer from './pages/student/CoursePlayer';
@@ -55,72 +57,74 @@ function App() {
     <Router>
       <AuthProvider>
         <SocketProvider>
-          <Routes>
-            {/* Public Routes */}
-            {/* <Route path="/" element={<Landing />} /> */}
-            <Route path="/" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
+          <ErrorBoundary>
+            <Routes>
+              {/* Public Routes */}
+              <Route path="/" element={<Landing />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
 
-            {/* --- Admin Routes --- */}
-            <Route path="/admin" element={
-              <ProtectedRoute allowedRoles="admin">
-                <AdminLayout />
-              </ProtectedRoute>
-            }>
-              <Route index element={<Navigate to="dashboard" replace />} />
-              <Route path="dashboard" element={<AdminDashboard />} />
-              <Route path="add-instructor" element={<AddInstructor />} />
-              <Route path="approve-users" element={<ApproveUsers />} />
-              <Route path="approve-courses" element={<ApproveCourses />} />
-              <Route path="assign-course" element={<AssignCourse />} />
-              <Route path="certificates" element={<CertificateConfig />} />
-              <Route path="manage-users" element={<ManageUsers />} />
-              <Route path="profile-management" element={<ProfileManagement />} />
-              <Route path="settings" element={<ProfileSettings />} />
-            </Route>
+              {/* --- Admin Routes --- */}
+              <Route path="/admin" element={
+                <ProtectedRoute allowedRoles="admin">
+                  <AdminLayout />
+                </ProtectedRoute>
+              }>
+                <Route index element={<Navigate to="dashboard" replace />} />
+                <Route path="dashboard" element={<AdminDashboard />} />
+                <Route path="add-instructor" element={<AddInstructor />} />
+                <Route path="approve-users" element={<ApproveUsers />} />
+                <Route path="approve-courses" element={<ApproveCourses />} />
+                <Route path="assign-course" element={<AssignCourse />} />
+                <Route path="certificates" element={<CertificateConfig />} />
+                <Route path="manage-users" element={<ManageUsers />} />
+                <Route path="profile-management" element={<ProfileManagement />} />
+                <Route path="settings" element={<ProfileSettings />} />
+              </Route>
 
-            {/* --- Instructor Routes --- */}
-            <Route path="/instructor" element={
-              <ProtectedRoute allowedRoles={['instructor', 'company']}>
-                <InstructorLayout />
-              </ProtectedRoute>
-            }>
-              <Route index element={<Navigate to="dashboard" replace />} />
-              <Route path="dashboard" element={<InstructorDashboard />} />
-              <Route path="add-course" element={<AddCourse />} />
-              <Route path="courses" element={<CourseList />} />
-              <Route path="add-exam/:courseId" element={<ExamBuilder />} />
-              <Route path="exams" element={<ExamBuilder />} />
-              <Route path="settings" element={<InstructorSettings />} />
-              <Route path="profile-settings" element={<ProfileSettings />} />
-              <Route path="chat" element={<InstructorChat />} />
-            </Route>
+              {/* --- Instructor Routes --- */}
+              <Route path="/instructor" element={
+                <ProtectedRoute allowedRoles={['instructor', 'company']}>
+                  <InstructorLayout />
+                </ProtectedRoute>
+              }>
+                <Route index element={<Navigate to="dashboard" replace />} />
+                <Route path="dashboard" element={<InstructorDashboard />} />
+                <Route path="add-course" element={<AddCourse />} />
+                <Route path="courses" element={<CourseList />} />
+                <Route path="add-exam/:courseId" element={<ExamBuilder />} />
+                <Route path="exams" element={<ExamBuilder />} />
+                <Route path="settings" element={<InstructorSettings />} />
+                <Route path="profile-settings" element={<ProfileSettings />} />
+                <Route path="chat" element={<InstructorChat />} />
+              </Route>
 
-            {/* --- Student Routes --- */}
-            <Route path="/student" element={
-              <ProtectedRoute allowedRoles={['student', 'learner']}>
-                <StudentLayout />
-              </ProtectedRoute>
-            }>
-              <Route index element={<Navigate to="dashboard" replace />} />
-              <Route path="dashboard" element={<StudentDashboard />} />
-              <Route path="courses" element={<StudentCourses />} />
-              <Route path="course/:courseId" element={<CourseDetail />} />
-              <Route path="course/:courseId/learn" element={<CoursePlayer />} />
-              <Route path="exams" element={<StudentExams />} />
-              <Route path="practice" element={<PracticeArea />} />
-              <Route path="practice/session/:challengeId" element={<PracticeSession />} />
-              <Route path="exam/:examId" element={<ExamRunner />} />
-              <Route path="certificates" element={<MyCertificates />} />
-              <Route path="chat" element={<StudentChat />} />
-              <Route path="settings" element={<ProfileSettings />} />
-              <Route path="leaderboard" element={<Leaderboard />} />
-            </Route>
+              {/* --- Student Routes --- */}
+              <Route path="/student" element={
+                <ProtectedRoute allowedRoles={['student', 'learner']}>
+                  <StudentLayout />
+                </ProtectedRoute>
+              }>
+                <Route index element={<Navigate to="dashboard" replace />} />
+                <Route path="dashboard" element={<StudentDashboard />} />
+                <Route path="courses" element={<StudentCourses />} />
+                <Route path="course/:courseId" element={<CourseDetail />} />
+                <Route path="course/:courseId/learn" element={<CoursePlayer />} />
+                <Route path="exams" element={<StudentExams />} />
+                <Route path="practice" element={<PracticeArea />} />
+                <Route path="practice/session/:challengeId" element={<PracticeSession />} />
+                <Route path="exam/:examId" element={<ExamRunner />} />
+                <Route path="certificates" element={<MyCertificates />} />
+                <Route path="chat" element={<StudentChat />} />
+                <Route path="settings" element={<ProfileSettings />} />
+                <Route path="leaderboard" element={<Leaderboard />} />
+              </Route>
 
-            {/* Fallback */}
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
+              {/* Fallback */}
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </ErrorBoundary>
         </SocketProvider>
       </AuthProvider>
     </Router>

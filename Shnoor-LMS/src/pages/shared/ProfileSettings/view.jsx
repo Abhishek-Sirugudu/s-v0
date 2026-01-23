@@ -6,7 +6,7 @@ const ProfileSettingsView = ({ loading, userData, saving, handleChange, handleSa
     if (loading) return (
         <div className="flex items-center justify-center min-h-[400px]">
             <div className="flex flex-col items-center gap-4">
-                <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+                <div className="w-12 h-12 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
                 <p className="text-slate-500 font-medium">Loading profile...</p>
             </div>
         </div>
@@ -21,7 +21,7 @@ const ProfileSettingsView = ({ loading, userData, saving, handleChange, handleSa
                 { }
                 <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 flex flex-col items-center text-center h-fit">
                     <div className="relative mb-6 group cursor-pointer">
-                        <div className="w-24 h-24 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center text-4xl border-4 border-white shadow-lg overflow-hidden relative">
+                        <div className="w-24 h-24 rounded-full bg-indigo-50 text-indigo-500 flex items-center justify-center text-4xl border-4 border-white shadow-lg overflow-hidden relative">
                             {previewUrl ? (
                                 <img src={previewUrl} alt="Profile" className="w-full h-full object-cover" />
                             ) : (
@@ -82,7 +82,7 @@ const ProfileSettingsView = ({ loading, userData, saving, handleChange, handleSa
                                 value={userData.headline}
                                 onChange={handleChange}
                                 placeholder="e.g. Senior Software Engineer"
-                                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all font-medium"
+                                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none transition-all font-medium"
                             />
                         </div>
 
@@ -94,7 +94,7 @@ const ProfileSettingsView = ({ loading, userData, saving, handleChange, handleSa
                                 value={userData.bio}
                                 onChange={handleChange}
                                 placeholder="Tell us about yourself..."
-                                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none resize-none transition-all font-medium"
+                                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none resize-none transition-all font-medium"
                             />
                         </div>
                     </div>
@@ -103,14 +103,14 @@ const ProfileSettingsView = ({ loading, userData, saving, handleChange, handleSa
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                         <div className="space-y-2">
                             <label className="text-sm font-bold text-slate-700 flex items-center gap-2">
-                                <FaLinkedin className="text-blue-600" /> LinkedIn URL
+                                <FaLinkedin className="text-indigo-600" /> LinkedIn URL
                             </label>
                             <input
                                 name="linkedin"
                                 value={userData.linkedin}
                                 onChange={handleChange}
                                 placeholder="https://linkedin.com/in/..."
-                                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all font-medium"
+                                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none transition-all font-medium"
                             />
                         </div>
                         <div className="space-y-2">
@@ -122,7 +122,7 @@ const ProfileSettingsView = ({ loading, userData, saving, handleChange, handleSa
                                 value={userData.github}
                                 onChange={handleChange}
                                 placeholder="https://github.com/..."
-                                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all font-medium"
+                                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none transition-all font-medium"
                             />
                         </div>
                     </div>

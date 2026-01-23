@@ -31,7 +31,7 @@ const StudentLayout = () => {
                         setRank(rankObj.name);
                     }
                 } catch (error) {
-                    console.error("Error fetching user data:", error);
+                    // Fail silently in production
                 }
             }
         };

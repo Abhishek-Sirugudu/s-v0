@@ -1,20 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getStudentData } from '../../../utils/studentData';
+
 import PracticeAreaView from './view';
 
 const PracticeArea = () => {
     const navigate = useNavigate();
+    // TODO: [Backend] Fetch practice challenges from /api/practice/challenges
+    // Expected JSON Shape: 
+    // [{ 
+    //   id: string, 
+    //   title: string, 
+    //   text: string, 
+    //   difficulty: 'Easy' | 'Medium' | 'Hard', 
+    //   type: 'coding' | 'quiz', 
+    //   status: 'Solved' | 'Unsolved' 
+    // }]
     const [challenges, setChallenges] = useState([]);
     const [loading, setLoading] = useState(true);
     const [filter, setFilter] = useState('All');
 
     useEffect(() => {
-        setTimeout(() => {
-            const data = getStudentData();
-            setChallenges(data.practiceChallenges || []);
-            setLoading(false);
-        }, 500);
+        // TODO: [Backend] Fetch challenges logic
+        // setChallenges(...);
+        setLoading(false);
     }, []);
 
     const filteredChallenges = filter === 'All'

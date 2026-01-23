@@ -1,7 +1,7 @@
 import React from 'react';
-import { FaBookReader, FaFire, FaTrophy, FaPlay, FaClock, FaArrowRight } from 'react-icons/fa';
+import { BookOpen, Flame, Trophy, Play, Clock, ArrowRight, Zap } from 'lucide-react';
 
-const StudentDashboardView = ({ studentName, enrolledCount, lastCourse, gamification, navigate }) => {
+const StudentDashboardView = ({ studentName, enrolledCount, lastCourse, gamification, recentActivity = [], deadlines = [], navigate }) => {
     return (
         <div className="space-y-8 font-sans text-slate-900">
             <div className="flex flex-col md:flex-row justify-between items-end gap-4 border-b border-slate-200 pb-6">
@@ -13,36 +13,36 @@ const StudentDashboardView = ({ studentName, enrolledCount, lastCourse, gamifica
                     onClick={() => navigate('/student/courses')}
                     className="flex items-center gap-2 text-sm font-bold text-indigo-600 hover:text-indigo-900 transition-colors"
                 >
-                    Browse Catalog <FaArrowRight size={12} />
+                    Browse Catalog <ArrowRight size={16} />
                 </button>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                 <StatCard
                     label="Current Rank"
-                    value={gamification.rank}
-                    icon={<FaTrophy size={18} />}
+                    value={gamification?.rank || '-'}
+                    icon={<Trophy size={20} />}
                     subtext="Top 15% of students"
                     colorClass="text-indigo-600 bg-indigo-50"
                 />
                 <StatCard
                     label="Daily Streak"
-                    value={`${gamification.streak} Days`}
-                    icon={<FaFire size={18} />}
+                    value={`${gamification?.streak || 0} Days`}
+                    icon={<Flame size={20} />}
                     subtext="Keep it up!"
                     colorClass="text-rose-600 bg-rose-50"
                 />
                 <StatCard
                     label="XP Earned"
-                    value={gamification.xp}
-                    icon={<FaBoltIcon size={18} />}
-                    subtext={`${gamification.nextLevelXP - gamification.xp} XP to next level`}
+                    value={gamification?.xp || 0}
+                    icon={<Zap size={20} />}
+                    subtext={`${(gamification?.nextLevelXP || 100) - (gamification?.xp || 0)} XP to next level`}
                     colorClass="text-amber-600 bg-amber-50"
                 />
                 <StatCard
                     label="Enrolled Courses"
                     value={enrolledCount}
-                    icon={<FaBookReader size={18} />}
+                    icon={<BookOpen size={20} />}
                     subtext="Active learning paths"
                     colorClass="text-emerald-600 bg-emerald-50"
                 />
@@ -52,14 +52,14 @@ const StudentDashboardView = ({ studentName, enrolledCount, lastCourse, gamifica
                 <div className="lg:col-span-2 space-y-8">
                     <div className="bg-white border border-slate-200 rounded-lg shadow-sm p-6">
                         <div className="flex items-center gap-2 mb-6">
-                            <FaPlay className="text-indigo-600" size={14} />
+                            <Play className="text-indigo-600" size={16} fill="currentColor" />
                             <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wide">Resume Learning</h3>
                         </div>
 
                         {lastCourse ? (
                             <div className="flex flex-col md:flex-row gap-6 items-start md:items-center">
                                 <div className="h-24 w-24 bg-slate-50 rounded-lg flex items-center justify-center text-slate-400 shrink-0 border border-slate-100">
-                                    <FaBookReader size={32} />
+                                    <BookOpen size={32} />
                                 </div>
                                 <div className="flex-1">
                                     <h2 className="text-xl font-bold text-primary-900 mb-2">{lastCourse.title || "Untitled Course"}</h2>
@@ -97,20 +97,24 @@ const StudentDashboardView = ({ studentName, enrolledCount, lastCourse, gamifica
                             <button className="text-xs font-bold text-indigo-600 hover:underline">View All</button>
                         </div>
                         <div className="divide-y divide-slate-100">
-                            {[1, 2, 3].map((i) => (
-                                <div key={i} className="px-6 py-4 flex items-center justify-between hover:bg-slate-50 transition-colors">
-                                    <div className="flex items-center gap-4">
-                                        <div className="p-2 bg-slate-100 text-slate-500 rounded text-xs font-bold">
-                                            MOD {i}
+                            {recentActivity.length > 0 ? (
+                                recentActivity.map((activity) => (
+                                    <div key={activity.id} className="px-6 py-4 flex items-center justify-between hover:bg-slate-50 transition-colors">
+                                        <div className="flex items-center gap-4">
+                                            <div className="p-2 bg-slate-100 text-slate-500 rounded text-xs font-bold">
+                                                {activity.type === 'quiz' ? 'QUIZ' : 'MOD'}
+                                            </div>
+                                            <div>
+                                                <div className="text-sm font-bold text-primary-900">{activity.title}</div>
+                                                <div className="text-xs text-slate-500">Score: {activity.score}%</div>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <div className="text-sm font-bold text-primary-900">Introduction to React Hooks</div>
-                                            <div className="text-xs text-slate-500">Completed Quiz • 85% Score</div>
-                                        </div>
+                                        <span className="text-xs font-medium text-slate-400">{new Date(activity.date).toLocaleDateString()}</span>
                                     </div>
-                                    <span className="text-xs font-medium text-slate-400">2h ago</span>
-                                </div>
-                            ))}
+                                ))
+                            ) : (
+                                <div className="px-6 py-8 text-center text-slate-400 text-sm">No recent activity</div>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -118,28 +122,23 @@ const StudentDashboardView = ({ studentName, enrolledCount, lastCourse, gamifica
                 <div className="space-y-6">
                     <div className="bg-white border border-slate-200 rounded-lg shadow-sm p-6">
                         <div className="flex items-center gap-2 mb-6">
-                            <FaClock className="text-rose-500" size={14} />
+                            <Clock className="text-rose-500" size={16} />
                             <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wide">Upcoming Deadlines</h3>
                         </div>
                         <div className="space-y-4">
-                            <DeadlineItem
-                                title="React Final Project"
-                                course="Web Development"
-                                due="Tomorrow"
-                                type="urgent"
-                            />
-                            <DeadlineItem
-                                title="DevOps Pipeline Quiz"
-                                course="DevOps"
-                                due="Jan 15, 2026"
-                                type="normal"
-                            />
-                            <DeadlineItem
-                                title="UX Research Paper"
-                                course="Design"
-                                due="Jan 20, 2026"
-                                type="normal"
-                            />
+                            {deadlines.length > 0 ? (
+                                deadlines.map(d => (
+                                    <DeadlineItem
+                                        key={d.id}
+                                        title={d.title}
+                                        course={d.course}
+                                        due={new Date(d.dueDate).toLocaleDateString()}
+                                        type={d.isUrgent ? 'urgent' : 'normal'}
+                                    />
+                                ))
+                            ) : (
+                                <div className="text-center text-slate-400 text-sm py-4">No upcoming deadlines</div>
+                            )}
                         </div>
                     </div>
 
@@ -154,7 +153,7 @@ const StudentDashboardView = ({ studentName, enrolledCount, lastCourse, gamifica
                                 Start Challenge
                             </button>
                         </div>
-                        <FaClock className="absolute right-[-20px] bottom-[-20px] text-white/5 text-9xl" />
+                        <Clock className="absolute right-[-20px] bottom-[-20px] text-white/5" size={120} />
                     </div>
                 </div>
             </div>
@@ -192,8 +191,6 @@ const DeadlineItem = ({ title, course, due, type }) => (
     </div>
 );
 
-const FaBoltIcon = ({ size }) => (
-    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
-);
+
 
 export default StudentDashboardView;

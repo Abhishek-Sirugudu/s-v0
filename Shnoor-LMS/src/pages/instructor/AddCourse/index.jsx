@@ -77,14 +77,6 @@ const AddCourse = () => {
                 } finally {
                     setLoading(false);
                 }
-            } else if (editCourseId && editCourseId.startsWith('mock')) {
-                setCourseData({
-                    title: 'Mock Course Edit',
-                    description: 'Editing a mock course.',
-                    category: 'Development',
-                    status: 'draft',
-                    modules: []
-                });
             }
         };
         loadCourse();
@@ -114,7 +106,7 @@ const AddCourse = () => {
         if (!file) return;
 
         if (file.size > 100 * 1024 * 1024) {
-            alert("File is too large. Max limit is 100MB.");
+            // File too large
             return;
         }
 
@@ -131,8 +123,7 @@ const AddCourse = () => {
                 setUploadProgress(progress);
             },
             (error) => {
-                console.error("Upload failed", error);
-                alert("Upload failed. Please try again.");
+                // Upload failed
                 setUploading(false);
             },
             async () => {
@@ -212,11 +203,9 @@ const AddCourse = () => {
                 await addDoc(collection(db, "courses"), payload);
             }
 
-            alert(`Course ${statusOverride === 'pending' ? 'Submitted for Approval' : 'Saved as Draft'}!`);
             navigate('/instructor/courses');
         } catch (error) {
-            console.error("Error saving course:", error);
-            alert("Failed to save course. Please try again.");
+            // Error saving course
         } finally {
             setLoading(false);
         }

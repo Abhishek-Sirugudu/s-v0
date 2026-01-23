@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import { FaUserCircle, FaBook, FaSignOutAlt, FaThLarge, FaList, FaCog, FaFileUpload, FaBars } from 'react-icons/fa';
+import { UserCircle, Book, LogOut, LayoutGrid, List, Settings, Upload, Menu, MessageSquare } from 'lucide-react';
 import markLogo from '../../../assets/just_logo.jpeg';
 
 const InstructorLayoutView = ({
@@ -68,20 +68,20 @@ const InstructorLayoutView = ({
 
                         <div className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 px-2">Academic Ops</div>
                         <ul className="mb-8">
-                            <NavItem path="dashboard" icon={FaThLarge} label="Dashboard" />
-                            <NavItem path="add-course" icon={FaFileUpload} label="Add Course" />
+                            <NavItem path="dashboard" icon={LayoutGrid} label="Dashboard" />
+                            <NavItem path="add-course" icon={Upload} label="Add Course" />
                         </ul>
 
                         <div className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 px-2">Management</div>
                         <ul className="mb-8">
-                            <NavItem path="courses" icon={FaList} label="My Courses" />
-                            <NavItem path="exams" icon={FaBook} label="Exams" />
-                            <NavItem path="chat" icon={({ className }) => <span className={className}>💬</span>} label="Messages" badgeCount={totalUnread} />
+                            <NavItem path="courses" icon={List} label="My Courses" />
+                            <NavItem path="exams" icon={Book} label="Exams" />
+                            <NavItem path="chat" icon={MessageSquare} label="Messages" badgeCount={totalUnread} />
                         </ul>
 
                         <div className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 px-2">Settings</div>
                         <ul className="mb-8">
-                            <NavItem path="profile-settings" icon={FaCog} label="Settings" />
+                            <NavItem path="profile-settings" icon={Settings} label="Settings" />
                         </ul>
                     </div>
                 </div>
@@ -96,7 +96,7 @@ const InstructorLayoutView = ({
                             className="lg:hidden p-2 text-slate-500 hover:bg-slate-100 rounded-lg"
                             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
                         >
-                            <FaBars className="text-xl" />
+                            <Menu className="text-xl" />
                         </button>
                         <h2 className="text-xl font-semibold text-primary-900 hidden sm:block">Instructor Dashboard</h2>
                     </div>
@@ -108,14 +108,14 @@ const InstructorLayoutView = ({
                                 <div className="text-xs text-slate-500 font-medium">Instructor</div>
                             </div>
                             <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 border border-slate-200 overflow-hidden">
-                                {photoURL ? <img src={photoURL} alt="Profile" className="w-full h-full object-cover" /> : <FaUserCircle className="text-2xl" />}
+                                {photoURL ? <img src={photoURL} alt="Profile" className="w-full h-full object-cover" /> : <UserCircle className="w-full h-full p-1" />}
                             </div>
                             <button
                                 onClick={handleLogout}
                                 className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-all duration-200"
                                 title="Logout"
                             >
-                                <FaSignOutAlt className="text-lg" />
+                                <LogOut className="text-lg" />
                             </button>
                         </div>
                     </div>

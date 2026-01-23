@@ -28,33 +28,12 @@ const CourseList = () => {
                 courseList.push({ id: doc.id, ...doc.data() });
             });
 
-            if (courseList.length === 0) {
-                const mockFallback = [
-                    {
-                        id: 'mock1',
-                        title: 'React Fundamentals (Demo)',
-                        category: 'Web Development',
-                        status: 'published',
-                        modules: new Array(12).fill(null),
-                        createdAt: new Date().toISOString()
-                    },
-                    {
-                        id: 'mock2',
-                        title: 'Draft Course (Demo)',
-                        category: 'Design',
-                        status: 'draft',
-                        modules: new Array(3).fill(null),
-                        createdAt: new Date().toISOString()
-                    }
-                ];
-                setCourses(mockFallback);
-            } else {
-                setCourses(courseList);
-            }
+            // TODO: [Backend] Ensure API returns empty array [] if no courses, handled below.
+            setCourses(courseList);
 
             setLoading(false);
         } catch (error) {
-            console.error("Error fetching courses:", error);
+            // console.error("Error fetching courses:", error);
             setLoading(false);
         }
     };
@@ -62,22 +41,15 @@ const CourseList = () => {
     const handleDelete = async (e, courseId, status) => {
         e.stopPropagation();
         if (status === 'published') {
-            alert("Cannot delete a published course. Please contact admin.");
             return;
         }
 
         if (window.confirm('Are you sure you want to delete this course? This cannot be undone.')) {
             try {
-                if (courseId.startsWith('mock')) {
-                    setCourses(courses.filter(c => c.id !== courseId));
-                    return;
-                }
-
                 await deleteDoc(doc(db, "courses", courseId));
                 setCourses(courses.filter(c => c.id !== courseId));
             } catch (error) {
-                console.error("Error deleting course:", error);
-                alert("Failed to delete course.");
+                // Error handling
             }
         }
     };

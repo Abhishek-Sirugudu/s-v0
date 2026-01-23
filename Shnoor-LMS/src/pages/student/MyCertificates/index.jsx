@@ -10,12 +10,19 @@ const MyCertificates = () => {
 
     useEffect(() => {
         const fetchCertificates = async () => {
-            setTimeout(() => {
-                const data = getStudentData();
-                setCurrentUser(data.currentUser);
-                setCertificates(data.certificates || []);
-                setLoading(false);
-            }, 600);
+            // TODO: [Backend] Fetch certificates from /api/student/certificates
+            // Expected JSON Shape: 
+            // [{ 
+            //   id: string, 
+            //   courseName: string, 
+            //   issueDate: string, 
+            //   score: number, 
+            //   instructor: string 
+            // }]
+            const data = getStudentData();
+            setCurrentUser(data.currentUser);
+            setCertificates(data.certificates || []);
+            setLoading(false);
         };
         fetchCertificates();
     }, []);

@@ -20,15 +20,14 @@ const AddInstructor = () => {
         setLoading(true);
 
         try {
-            setTimeout(() => {
-                alert(`Instructor "${data.fullName}" added.\n\nAction would normally create user: "${data.email}"`);
-                navigate('/admin/dashboard');
-                setLoading(false);
-            }, 1000);
+            // TODO: [Backend] Create user via Cloud Function or Secondary Admin SDK
+            // Client SDK cannot create other users directly.
+            // await createUser(data);
 
+            navigate('/admin/dashboard');
         } catch (error) {
-            console.error("Error adding instructor:", error);
-            alert("Failed to add instructor: " + error.message);
+            // Error handling
+        } finally {
             setLoading(false);
         }
     };

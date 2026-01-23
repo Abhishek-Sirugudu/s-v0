@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaPlus, FaTrash, FaEdit, FaBookOpen, FaSearch } from 'react-icons/fa';
+import { Plus, Trash2, Edit, BookOpen, Search } from 'lucide-react';
 
 const CourseListView = ({ loading, courses, navigate, handleDelete }) => {
 
@@ -32,7 +32,7 @@ const CourseListView = ({ loading, courses, navigate, handleDelete }) => {
                         className="bg-primary-900 hover:bg-slate-800 text-white font-semibold py-2 px-6 rounded-md shadow-sm flex items-center gap-2 text-sm"
                         onClick={() => navigate('/instructor/add-course')}
                     >
-                        <FaPlus size={12} /> Create New Course
+                        <Plus size={16} /> Create New Course
                     </button>
                 </div>
 
@@ -41,7 +41,7 @@ const CourseListView = ({ loading, courses, navigate, handleDelete }) => {
                     <div className="px-6 py-4 border-b border-slate-200 flex justify-between items-center bg-white shrink-0">
                         <h3 className="text-sm font-bold text-primary-900 uppercase tracking-wide">My Courses ({courses.length})</h3>
                         <div className="relative w-64">
-                            <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={14} />
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
                             <input
                                 type="text"
                                 placeholder="Filter courses..."
@@ -66,7 +66,7 @@ const CourseListView = ({ loading, courses, navigate, handleDelete }) => {
                                 {courses.length === 0 ? (
                                     <tr>
                                         <td colSpan="6" className="px-6 py-12 text-center text-slate-500">
-                                            <FaBookOpen size={24} className="mx-auto mb-2 text-slate-300" />
+                                            <BookOpen size={48} className="mx-auto mb-4 text-slate-300" strokeWidth={1} />
                                             <p className="text-sm">No courses found. Create one to get started.</p>
                                         </td>
                                     </tr>
@@ -98,7 +98,7 @@ const CourseListView = ({ loading, courses, navigate, handleDelete }) => {
                                                         className="p-1.5 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded transition-colors"
                                                         title="Edit"
                                                     >
-                                                        <FaEdit size={14} />
+                                                        <Edit size={16} />
                                                     </button>
                                                     <button
                                                         onClick={(e) => handleDelete(e, course.id, course.status)}
@@ -106,7 +106,7 @@ const CourseListView = ({ loading, courses, navigate, handleDelete }) => {
                                                         className={`p-1.5 rounded transition-colors ${course.status === 'published' ? 'text-slate-200 cursor-not-allowed' : 'text-slate-400 hover:text-rose-600 hover:bg-rose-50'}`}
                                                         title="Delete"
                                                     >
-                                                        <FaTrash size={14} />
+                                                        <Trash2 size={16} />
                                                     </button>
                                                 </div>
                                             </td>

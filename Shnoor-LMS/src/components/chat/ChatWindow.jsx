@@ -43,7 +43,7 @@ const ChatWindow = ({ activeChat, currentUser, onSendMessage, onBack }) => {
             setShowEmoji(false);
             if (fileInputRef.current) fileInputRef.current.value = '';
         } catch (error) {
-            console.error("Failed to send message", error);
+            // Failed to send
         } finally {
             setIsUploading(false);
         }

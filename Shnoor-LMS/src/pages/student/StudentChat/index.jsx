@@ -21,57 +21,59 @@ const StudentChat = () => {
 
     useEffect(() => {
         if (!currentUser) return;
-        const fetchChats = async () => {
-            try {
-                const API_URL = API_BASE_URL;
-                const res = await axios.get(`${API_URL}/api/chats`, {
-                    params: { firebase_uid: currentUser.uid }
-                });
-                const formattedChats = res.data.map(c => ({
-                    id: c.chat_id,
-                    recipientName: c.recipient_name,
-                    recipientId: c.recipient_uid,
-                    participants: [currentUser.uid, c.recipient_uid],
-                    lastMessage: 'View conversation',
-                    updatedAt: c.created_at,
-                    messages: [],
-                    unreadCount: unreadCounts[c.chat_id] || 0
-                }));
-                setChats(formattedChats);
-            } catch (err) {
-                console.error("Error fetching chats:", err);
-            }
-        };
-        fetchChats();
+        // TODO: [Backend] Uncomment this to fetch real chats.
+        // const fetchChats = async () => {
+        //     try {
+        //         const API_URL = API_BASE_URL;
+        //         const res = await axios.get(`${API_URL}/api/chats`, {
+        //             params: { firebase_uid: currentUser.uid }
+        //         });
+        //         const formattedChats = res.data.map(c => ({
+        //             id: c.chat_id,
+        //             recipientName: c.recipient_name,
+        //             recipientId: c.recipient_uid,
+        //             participants: [currentUser.uid, c.recipient_uid],
+        //             lastMessage: 'View conversation',
+        //             updatedAt: c.created_at,
+        //             messages: [],
+        //             unreadCount: unreadCounts[c.chat_id] || 0
+        //         }));
+        //         setChats(formattedChats);
+        //     } catch (err) {
+        //         console.error("Error fetching chats:", err);
+        //     }
+        // };
+        // fetchChats();
     }, [currentUser, unreadCounts]);
 
     useEffect(() => {
         if (!currentUser) return;
-        const requestPermission = async () => {
-            try {
-                const permission = await Notification.requestPermission();
-                if (permission === 'granted') {
-                    const token = await getToken(messaging, {
-                        vapidKey: "BIKeJYdJZ6JwvODYiY9k4c1BbENEmMstjx1BEyIrFC4SADfDhcIbXSOTE2X56LllL20zo5vBdNPuDKfKFQ7zt6k"
-                    });
-
-                    if (token) {
-                        const API_URL = API_BASE_URL;
-                        await axios.post(`${API_URL}/api/save-fcm-token`, {
-                            firebase_uid: currentUser.uid,
-                            fcm_token: token
-                        });
-                        console.log("FCM Token saved");
-                    }
-                }
-            } catch (err) {
-                console.error("Notification permission/token error:", err);
-            }
-        };
-        requestPermission();
+        // TODO: [Backend] Enable FCM token saving when backend is ready.
+        // const requestPermission = async () => {
+        //     try {
+        //         const permission = await Notification.requestPermission();
+        //         if (permission === 'granted') {
+        //             const token = await getToken(messaging, {
+        //                 vapidKey: "BIKeJYdJZ6JwvODYiY9k4c1BbENEmMstjx1BEyIrFC4SADfDhcIbXSOTE2X56LllL20zo5vBdNPuDKfKFQ7zt6k"
+        //             });
+        //
+        //             if (token) {
+        //                 const API_URL = API_BASE_URL;
+        //                 await axios.post(`${API_URL}/api/save-fcm-token`, {
+        //                     firebase_uid: currentUser.uid,
+        //                     fcm_token: token
+        //                 });
+        //
+        //             }
+        //         }
+        //     } catch (err) {
+        //         console.error("Notification permission/token error:", err);
+        //     }
+        // };
+        // requestPermission();
 
         const unsubscribe = onMessage(messaging, (payload) => {
-            console.log("Foreground Message:", payload);
+
             setNotification({
                 sender: payload.notification.title || "New Message",
                 message: payload.notification.body || "You have a new message",
@@ -138,7 +140,7 @@ const StudentChat = () => {
                 axios.put(`${API_URL}/api/messages/mark-read`, {
                     chat_id: newMsg.chat_id,
                     user_firebase_uid: currentUser.uid
-                }).catch(console.error);
+                }).catch(() => { });
 
                 if (markChatRead) markChatRead(newMsg.chat_id);
             }
@@ -151,8 +153,8 @@ const StudentChat = () => {
     const playNotificationSound = () => {
         try {
             const audio = new Audio("https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3");
-            audio.play().catch(e => console.warn("Audio blocked:", e));
-        } catch (error) { console.error("Audio error:", error); }
+            audio.play().catch(() => { });
+        } catch (error) { }
     };
 
     const handleSelectChat = async (chat) => {
@@ -175,7 +177,7 @@ const StudentChat = () => {
             }));
             setActiveChat({ ...chat, messages: messages });
         } catch (err) {
-            console.error("Error loading messages:", err);
+            // Error handling
         }
     };
 
@@ -202,8 +204,7 @@ const StudentChat = () => {
                 attachmentType = file.type;
                 attachmentPreviewUrl = URL.createObjectURL(file);
             } catch (err) {
-                console.error("Upload failed:", err);
-                alert("Failed to upload file.");
+                // Upload failed
                 return;
             }
         }

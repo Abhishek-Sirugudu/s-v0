@@ -5,14 +5,14 @@ const SocketContext = createContext();
 export const useSocket = () => useContext(SocketContext);
 
 export const SocketProvider = ({ children }) => {
-    
+
     const mockSocket = {
-        on: (event, callback) => { console.log(`[MockSocket] Listening for: ${event}`); },
-        emit: (event, data) => { console.log(`[MockSocket] Emitting: ${event}`, data); },
-        off: (event) => { console.log(`[MockSocket] Removing listener for: ${event}`); },
-        connect: () => { console.log('[MockSocket] Connected'); },
-        disconnect: () => { console.log('[MockSocket] Disconnected'); },
-        close: () => { console.log('[MockSocket] Closed'); },
+        on: (event, callback) => { },
+        emit: (event, data) => { },
+        off: (event) => { },
+        connect: () => { },
+        disconnect: () => { },
+        close: () => { },
     };
 
     const [socket] = useState(mockSocket);

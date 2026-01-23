@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaPlay, FaCheckCircle, FaUserTie, FaClock, FaCalendarAlt, FaStar, FaGlobe, FaCertificate, FaArrowLeft, FaCheck } from 'react-icons/fa';
+import { Play, CheckCircle, User, Clock, Calendar, Star, Globe, Award, ArrowLeft, Check } from 'lucide-react';
 
 const CourseDetailView = ({
     course, loading, isEnrolled,
@@ -32,7 +32,7 @@ const CourseDetailView = ({
                 onClick={() => navigate('/student/courses')}
                 className="mb-8 flex items-center gap-2 text-slate-500 hover:text-primary-900 transition-colors font-medium px-4 py-2 hover:bg-slate-100 rounded-lg w-fit"
             >
-                <FaArrowLeft /> Back to Courses
+                <ArrowLeft size={16} /> Back to Courses
             </button>
 
             { }
@@ -52,19 +52,19 @@ const CourseDetailView = ({
 
                         <div className="flex flex-wrap gap-6 text-sm font-medium text-slate-500 border-b border-slate-200 pb-6">
                             <div className="flex items-center gap-2">
-                                <FaGlobe className="text-slate-400" /> {course.level || 'All Levels'}
+                                <Globe className="text-slate-400" size={16} /> {course.level || 'All Levels'}
                             </div>
                             <div className="flex items-center gap-2">
-                                <FaStar className="text-amber-400" /> {course.rating || '4.5'} <span className="text-slate-400 font-normal">(120 reviews)</span>
+                                <Star className="text-amber-400" size={16} fill="currentColor" /> {course.rating || '4.5'} <span className="text-slate-400 font-normal">(120 reviews)</span>
                             </div>
                             <div className="flex items-center gap-2">
-                                <FaCalendarAlt className="text-slate-400" /> updated {course.updatedAt || 'Recently'}
+                                <Calendar className="text-slate-400" size={16} /> updated {course.updatedAt || 'Recently'}
                             </div>
                         </div>
 
                         <div className="flex items-center gap-4 pt-6">
                             <div className="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center text-slate-400">
-                                <FaUserTie size={20} />
+                                <User size={20} />
                             </div>
                             <div>
                                 <div className="text-xs text-slate-500 font-bold uppercase tracking-wider mb-0.5">Created by</div>
@@ -84,7 +84,7 @@ const CourseDetailView = ({
                                 'Become job-ready'
                             ].map((item, idx) => (
                                 <div key={idx} className="flex items-start gap-3 text-slate-600">
-                                    <FaCheck className="text-green-500 mt-1 flex-shrink-0" />
+                                    <Check className="text-green-500 mt-1 flex-shrink-0" size={16} />
                                     <span>{item}</span>
                                 </div>
                             ))}
@@ -99,7 +99,7 @@ const CourseDetailView = ({
                                 <div key={idx} className="flex items-center justify-between p-4 rounded-xl hover:bg-slate-50 border border-transparent hover:border-slate-100 transition-all group">
                                     <div className="flex items-center gap-4">
                                         <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors">
-                                            {module.type === 'video' ? <FaPlay size={10} /> : <FaCheckCircle size={12} />}
+                                            {module.type === 'video' ? <Play size={10} fill="currentColor" /> : <CheckCircle size={12} />}
                                         </div>
                                         <div>
                                             <div className="font-semibold text-primary-900">{module.title}</div>
@@ -123,7 +123,7 @@ const CourseDetailView = ({
                         <h3 className="text-xl font-bold text-primary-900 mb-6">Instructor</h3>
                         <div className="flex gap-6">
                             <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center text-slate-400 flex-shrink-0">
-                                <FaUserTie size={32} />
+                                <User size={32} />
                             </div>
                             <div>
                                 <h4 className="font-bold text-lg text-primary-900 mb-1">{course.instructor?.name}</h4>
@@ -143,7 +143,7 @@ const CourseDetailView = ({
                         <div className="h-48 bg-primary-900 relative group cursor-pointer flex items-center justify-center">
                             <div className="absolute inset-0 bg-indigo-600/20 group-hover:bg-indigo-600/30 transition-colors"></div>
                             <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center text-indigo-600 shadow-lg transform group-hover:scale-110 transition-transform duration-300">
-                                <FaPlay size={24} className="ml-1" />
+                                <Play size={24} className="ml-1" fill="currentColor" />
                             </div>
                             <div className="absolute bottom-4 text-white text-sm font-semibold tracking-wide drop-shadow-md">Preview Course</div>
                         </div>
@@ -163,13 +163,13 @@ const CourseDetailView = ({
                             <div className="space-y-4">
                                 <div className="text-sm font-bold text-primary-900 mb-2">This course includes:</div>
                                 <div className="flex items-center gap-3 text-sm text-slate-600">
-                                    <FaClock className="text-slate-400" /> {course.modules?.length * 15 || 60} mins on-demand video
+                                    <Clock className="text-slate-400" size={16} /> {course.modules?.length * 15 || 60} mins on-demand video
                                 </div>
                                 <div className="flex items-center gap-3 text-sm text-slate-600">
-                                    <FaCheckCircle className="text-slate-400" /> Access on mobile and TV
+                                    <CheckCircle className="text-slate-400" size={16} /> Access on mobile and TV
                                 </div>
                                 <div className="flex items-center gap-3 text-sm text-slate-600">
-                                    <FaCertificate className="text-slate-400" /> Certificate of completion
+                                    <Award className="text-slate-400" size={16} /> Certificate of completion
                                 </div>
                             </div>
                         </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaClipboardList, FaCheckCircle, FaPlay, FaClock, FaLock, FaExternalLinkAlt } from 'react-icons/fa';
+import { ClipboardList, CheckCircle, Play, Clock, Lock, ExternalLink } from 'lucide-react';
 
 const StudentExamsView = ({ loading, exams, isPassed, accessStatus, courseNames, navigate }) => {
 
@@ -21,7 +21,7 @@ const StudentExamsView = ({ loading, exams, isPassed, accessStatus, courseNames,
 
             {exams.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-16 bg-slate-50 border-2 border-dashed border-slate-200 rounded-3xl text-center">
-                    <FaClipboardList className="text-slate-300 text-6xl mb-4" />
+                    <ClipboardList className="text-slate-300 w-16 h-16 mb-4" />
                     <h3 className="text-xl font-bold text-slate-700 mb-2">No Exams Available</h3>
                     <p className="text-slate-500">You don't have any assigned exams yet.</p>
                 </div>
@@ -40,11 +40,11 @@ const StudentExamsView = ({ loading, exams, isPassed, accessStatus, courseNames,
                                 {/* Thumbnail */}
                                 <div className="h-40 bg-slate-50 border-b border-slate-100 flex items-center justify-center relative">
                                     {passed ? (
-                                        <FaCheckCircle className="text-emerald-500 text-5xl" />
+                                        <CheckCircle className="text-emerald-500 w-12 h-12" />
                                     ) : !unlocked ? (
-                                        <FaLock className="text-slate-300 text-4xl" />
+                                        <Lock className="text-slate-300 w-10 h-10" />
                                     ) : (
-                                        <FaClipboardList className="text-indigo-200 text-5xl group-hover:text-indigo-500 transition-colors" />
+                                        <ClipboardList className="text-indigo-200 w-12 h-12 group-hover:text-indigo-500 transition-colors" />
                                     )}
                                 </div>
 
@@ -54,14 +54,14 @@ const StudentExamsView = ({ loading, exams, isPassed, accessStatus, courseNames,
 
                                     <div className="flex items-center gap-4 text-xs font-semibold text-slate-500 mb-6 uppercase tracking-wider border-b border-slate-100 pb-4">
                                         <span>{exam.questions.length} Qs</span>
-                                        <span className="flex items-center gap-1"><FaClock size={10} /> {exam.duration}m</span>
+                                        <span className="flex items-center gap-1"><Clock size={12} /> {exam.duration}m</span>
                                     </div>
 
                                     <div className="mt-auto">
                                         {passed ? (
                                             <>
                                                 <div className="flex items-center justify-center gap-2 text-emerald-600 font-bold text-sm bg-emerald-50 py-2 rounded mb-3">
-                                                    <FaCheckCircle size={12} /> Passed
+                                                    <CheckCircle size={14} /> Passed
                                                 </div>
                                                 <button
                                                     className="w-full bg-white border border-slate-200 hover:border-indigo-500 text-slate-600 hover:text-indigo-600 font-bold py-2 rounded text-sm transition-all"
@@ -73,7 +73,7 @@ const StudentExamsView = ({ loading, exams, isPassed, accessStatus, courseNames,
                                         ) : !unlocked ? (
                                             <>
                                                 <div className="flex items-center gap-2 text-slate-400 font-bold mb-2 text-xs uppercase tracking-wide">
-                                                    <FaLock size={10} /> Locked
+                                                    <Lock size={12} /> Locked
                                                 </div>
                                                 <div className="text-xs text-slate-500 mb-4 italic">
                                                     Requires: <span className="font-semibold">{neededCourseName}</span>
@@ -82,7 +82,7 @@ const StudentExamsView = ({ loading, exams, isPassed, accessStatus, courseNames,
                                                     className="w-full bg-white border border-slate-200 text-slate-400 text-xs font-bold py-2 rounded flex items-center justify-center gap-2 cursor-not-allowed"
                                                     disabled
                                                 >
-                                                    <FaLock size={10} /> Locked
+                                                    <Lock size={12} /> Locked
                                                 </button>
                                             </>
                                         ) : (
@@ -94,7 +94,7 @@ const StudentExamsView = ({ loading, exams, isPassed, accessStatus, courseNames,
                                                     className="w-full bg-primary-900 hover:bg-slate-800 text-white font-bold py-2 rounded text-sm shadow-sm transition-all flex items-center justify-center gap-2"
                                                     onClick={() => navigate(`/student/exam/${exam.id}`)}
                                                 >
-                                                    <FaPlay size={10} /> Start Exam
+                                                    <Play size={12} fill="currentColor" /> Start Exam
                                                 </button>
                                             </>
                                         )}

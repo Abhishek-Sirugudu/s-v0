@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaBookReader, FaSearch, FaFilter, FaArrowRight, FaBookOpen } from 'react-icons/fa';
+import { BookOpen, Search, Filter, ArrowRight, Library } from 'lucide-react';
 
 const StudentCoursesView = ({
     loading,
@@ -55,7 +55,7 @@ const StudentCoursesView = ({
             {/* Controls */}
             <div className="flex flex-col md:flex-row gap-4">
                 <div className="relative flex-1">
-                    <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={14} />
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
                     <input
                         className="w-full pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-md focus:border-indigo-500 focus:ring-0 outline-none transition-all text-sm font-medium"
                         placeholder="Search by title..."
@@ -65,7 +65,7 @@ const StudentCoursesView = ({
                 </div>
                 <div className="flex items-center gap-3">
                     <div className="relative">
-                        <FaFilter className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={12} />
+                        <Filter className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={14} />
                         <select
                             className="pl-9 pr-8 py-2 bg-white border border-slate-200 rounded-md text-sm font-medium text-slate-700 focus:border-indigo-500 outline-none cursor-pointer appearance-none min-w-[160px]"
                             value={selectedCategory}
@@ -94,7 +94,7 @@ const StudentCoursesView = ({
             {displayCourses.length === 0 ? (
                 <div className="bg-slate-50 border border-slate-200 rounded-lg p-16 text-center">
                     <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 text-slate-300 border border-slate-200">
-                        <FaBookOpen size={24} />
+                        <Library size={32} />
                     </div>
                     <h3 className="text-base font-bold text-primary-900 mb-1">No courses found</h3>
                     <p className="text-sm text-slate-500">Try adjusting your filters or search terms.</p>
@@ -107,7 +107,7 @@ const StudentCoursesView = ({
                             <div key={course.id} className="bg-white rounded-lg border border-slate-200 hover:border-indigo-300 hover:shadow-sm transition-all flex flex-col h-full group">
                                 {/* Thumbnail (Placeholder) */}
                                 <div className="h-40 bg-slate-100 border-b border-slate-100 p-6 flex items-center justify-center relative overflow-hidden group-hover:bg-slate-50 transition-colors">
-                                    <FaBookReader className="text-slate-300 text-5xl group-hover:text-indigo-200 transition-colors" />
+                                    <BookOpen className="text-slate-300 w-16 h-16 group-hover:text-indigo-200 transition-colors" strokeWidth={1} />
                                     <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-2 py-0.5 rounded border border-slate-200 text-[10px] font-bold uppercase tracking-wide text-slate-800">
                                         {course.category}
                                     </div>
@@ -131,7 +131,7 @@ const StudentCoursesView = ({
                                                 className="w-full bg-primary-900 hover:bg-slate-800 text-white font-bold py-2 px-4 rounded text-sm transition-colors flex items-center justify-center gap-2"
                                                 onClick={() => navigate(`/student/course/${course.id}`)}
                                             >
-                                                Resume <FaArrowRight size={10} />
+                                                Resume <ArrowRight size={14} />
                                             </button>
                                         ) : (
                                             <button

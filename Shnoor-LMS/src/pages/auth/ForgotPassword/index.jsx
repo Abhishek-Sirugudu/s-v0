@@ -19,7 +19,6 @@ const ForgotPassword = () => {
             await sendPasswordResetEmail(auth, email);
             setMessage('If an account exists with this email, a reset link has been sent.');
         } catch (err) {
-            console.error(err);
             setError("Failed to reset password. Please try again.");
         } finally {
             setLoading(false);

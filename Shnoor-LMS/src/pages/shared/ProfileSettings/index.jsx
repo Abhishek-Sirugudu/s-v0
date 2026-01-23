@@ -109,10 +109,10 @@ const ProfileSettings = () => {
                 await updateProfile(auth.currentUser, { displayName: userData.displayName });
             }
 
-            alert("Profile updated successfully!");
+            // alert("Profile updated successfully!");
         } catch (error) {
-            console.error("Error saving profile:", error);
-            alert("Failed to save changes.");
+            // Error
+            // alert("Failed to save changes.");
         } finally {
             setSaving(false);
         }

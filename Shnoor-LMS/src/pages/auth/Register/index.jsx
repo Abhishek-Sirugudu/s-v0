@@ -12,7 +12,7 @@ const Register = () => {
         email: '',
         password: '',
         confirmPassword: '',
-        role: '' 
+        role: ''
     });
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -81,7 +81,6 @@ const Register = () => {
             }, 3000);
 
         } catch (err) {
-            console.error(err);
             if (err.code === 'auth/email-already-in-use') {
                 setError("Email is already in use.");
             } else {

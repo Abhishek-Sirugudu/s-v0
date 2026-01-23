@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaCheckCircle, FaArrowLeft, FaFilePdf, FaPlay, FaExternalLinkAlt } from 'react-icons/fa';
+import { CheckCircle, ArrowLeft, FileText, Play, ExternalLink } from 'lucide-react';
 
 const CoursePlayerView = ({
     course, currentModule, setCurrentModule,
@@ -38,7 +38,7 @@ const CoursePlayerView = ({
                         className="p-2 hover:bg-slate-700 rounded-lg text-slate-400 hover:text-white transition-colors"
                         title="Back to Courses"
                     >
-                        <FaArrowLeft />
+                        <ArrowLeft size={20} />
                     </button>
                     <div className="h-6 w-px bg-slate-700 mx-2"></div>
                     <h1 className="font-bold text-lg text-white truncate max-w-md">{course.title}</h1>
@@ -81,7 +81,7 @@ const CoursePlayerView = ({
                             )
                         ) : (
                             <div className="flex flex-col items-center justify-center h-full bg-slate-800 text-slate-300 p-8">
-                                <FaFilePdf size={64} className="text-slate-500 mb-6" />
+                                <FileText size={64} className="text-slate-500 mb-6" />
                                 <h3 className="text-2xl font-bold text-white mb-2">Document Viewer</h3>
                                 <p className="text-lg mb-8">{currentModule?.title}</p>
                                 <a
@@ -90,7 +90,7 @@ const CoursePlayerView = ({
                                     rel="noopener noreferrer"
                                     className="bg-primary-900 hover:bg-slate-800 text-white font-bold py-3 px-8 rounded-xl transition-all hover:scale-105 flex items-center gap-2"
                                 >
-                                    Open Document <FaExternalLinkAlt size={14} />
+                                    Open Document <ExternalLink size={14} />
                                 </a>
                             </div>
                         )}
@@ -111,7 +111,7 @@ const CoursePlayerView = ({
                                 }`}
                         >
                             {isModuleCompleted(currentModule?.id)
-                                ? <><FaCheckCircle /> Completed</>
+                                ? <><CheckCircle size={16} /> Completed</>
                                 : "Mark as Complete"
                             }
                         </button>
@@ -141,7 +141,7 @@ const CoursePlayerView = ({
                                     <div className="flex gap-3">
                                         <div className="mt-1 flex-shrink-0">
                                             {isCompleted ? (
-                                                <FaCheckCircle className="text-green-500" size={16} />
+                                                <CheckCircle className="text-green-500" size={16} />
                                             ) : (
                                                 <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${isActive ? 'border-indigo-600' : 'border-slate-600 group-hover:border-slate-500'
                                                     }`}>
@@ -156,7 +156,7 @@ const CoursePlayerView = ({
                                             </h5>
                                             <div className="flex items-center gap-2 text-xs text-slate-500">
                                                 <span className="flex items-center gap-1">
-                                                    {module.type === 'video' ? <FaPlay size={8} /> : <FaFilePdf size={8} />}
+                                                    {module.type === 'video' ? <Play size={8} fill="currentColor" /> : <FileText size={8} />}
                                                     <span className="capitalize">{module.type}</span>
                                                 </span>
                                                 {module.duration && <span>• {module.duration}</span>}

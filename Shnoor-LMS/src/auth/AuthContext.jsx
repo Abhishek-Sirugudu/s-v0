@@ -19,18 +19,18 @@ export function AuthProvider({ children }) {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         try {
-          
+
           const docRef = doc(db, 'users', user.uid);
           const docSnap = await getDoc(docRef);
 
           if (docSnap.exists()) {
             setUserRole(docSnap.data().role);
           } else {
-            setUserRole('student'); 
+            setUserRole('student');
           }
 
         } catch (error) {
-          console.error("Error fetching user role:", error);
+          // Error fetching user role
           setUserRole('student');
         }
         setCurrentUser(user);

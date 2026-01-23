@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { 
-  ShieldCheck, Zap, Globe, BarChart3, 
+import {
+  ShieldCheck, Zap, Globe, BarChart3,
   ArrowRight, CheckCircle2, Layout, Users,
-  Mail, Phone, MapPin, Menu, X 
+  Mail, Phone, MapPin, Menu, X
 } from 'lucide-react';
 
 const LandingView = ({ onLogin, onRegister }) => {
@@ -18,7 +18,7 @@ const LandingView = ({ onLogin, onRegister }) => {
   };
 
   const NavLink = ({ target, label }) => (
-    <button 
+    <button
       onClick={() => scrollToSection(target)}
       className="text-sm font-bold text-slate-500 hover:text-primary-900 transition-colors uppercase tracking-widest"
     >
@@ -28,7 +28,7 @@ const LandingView = ({ onLogin, onRegister }) => {
 
   return (
     <div className="min-h-screen bg-[#fcfcfd] font-sans selection:bg-accent-500 selection:text-white">
-      
+
       {/* --- NAV BAR --- */}
       <nav className="fixed top-0 w-full bg-white/90 backdrop-blur-md border-b border-slate-200 z-50">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
@@ -36,7 +36,7 @@ const LandingView = ({ onLogin, onRegister }) => {
             <div className="w-8 h-8 bg-primary-900 rounded-lg flex items-center justify-center text-white font-black text-xs">S</div>
             <span className="font-black text-lg tracking-tighter text-primary-900">SHNOOR LMS</span>
           </div>
-          
+
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-8">
             <NavLink target="home" label="Home" />
@@ -82,7 +82,7 @@ const LandingView = ({ onLogin, onRegister }) => {
             <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">System v2.0 Operational</span>
           </div>
           <h1 className="text-5xl md:text-7xl font-black text-primary-900 tracking-tighter mb-8 leading-[1.1]">
-            Enterprise Learning <br/> <span className="text-slate-400">Architecture.</span>
+            Enterprise Learning <br /> <span className="text-slate-400">Architecture.</span>
           </h1>
           <p className="text-lg md:text-xl text-slate-500 font-medium max-w-2xl mx-auto mb-10 leading-relaxed">
             Scalable skill validation and compliance management for high-performance organizations. Zero friction. Total visibility.
@@ -116,7 +116,7 @@ const LandingView = ({ onLogin, onRegister }) => {
                 '99.99% Uptime SLA Guarantee',
                 'Dedicated Customer Success Managers'
               ].map((item, i) => (
-                <li key={i} className="flex items-center gap-3">
+                <li key={item} className="flex items-center gap-3">
                   <CheckCircle2 size={20} className="text-accent-500" />
                   <span className="font-bold text-primary-900 text-sm">{item}</span>
                 </li>
@@ -146,8 +146,8 @@ const LandingView = ({ onLogin, onRegister }) => {
       <section id="features" className="py-24 px-6 bg-slate-50 border-b border-slate-200">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 max-w-2xl mx-auto">
-             <h2 className="text-sm font-black text-accent-600 uppercase tracking-widest mb-2">System Architecture</h2>
-             <h3 className="text-3xl font-black text-primary-900 tracking-tight">Designed for rigid standards and flexible pathways.</h3>
+            <h2 className="text-sm font-black text-accent-600 uppercase tracking-widest mb-2">System Architecture</h2>
+            <h3 className="text-3xl font-black text-primary-900 tracking-tight">Designed for rigid standards and flexible pathways.</h3>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -159,7 +159,7 @@ const LandingView = ({ onLogin, onRegister }) => {
               { icon: Layout, title: "Minimalist Interface", desc: "Distraction-free learning environment designed for focus." },
               { icon: Users, title: "Collaborative Cohorts", desc: "Synchronous learning groups with integrated chat." }
             ].map((feature, idx) => (
-              <div key={idx} className="p-8 bg-white border border-slate-200 rounded-2xl hover:border-accent-500 transition-all hover:shadow-md group">
+              <div key={feature.title} className="p-8 bg-white border border-slate-200 rounded-2xl hover:border-accent-500 transition-all hover:shadow-md group">
                 <div className="w-12 h-12 bg-slate-50 rounded-lg flex items-center justify-center text-primary-900 mb-6 group-hover:bg-primary-900 group-hover:text-white transition-colors">
                   <feature.icon size={24} />
                 </div>

@@ -19,24 +19,17 @@ const InstructorDashboard = () => {
             if (!auth.currentUser) return;
             setUserName(auth.currentUser.displayName || auth.currentUser.email.split('@')[0]);
 
-            try {
-                const q = query(
-                    collection(db, "courses"),
-                    where("instructorId", "==", auth.currentUser.uid)
-                );
-                const snapshot = await getCountFromServer(q);
-                const count = snapshot.data().count;
+            // TODO: [Backend] Fetch instructor dashboard stats from /api/instructor/stats
+            // Expected JSON Shape:
+            // {
+            //   myCourses: number,
+            //   totalStudents: number,
+            //   avgRating: number
+            // }
+            // const stats = await fetch(...)
+            // setStats(stats);
 
-                setStats({
-                    myCourses: count,
-                    totalStudents: Math.floor(Math.random() * 200) + 50,
-                    avgRating: 4.8
-                });
-            } catch (error) {
-                console.error("Error fetching instructor stats:", error);
-            } finally {
-                setLoading(false);
-            }
+            setLoading(false);
         };
 
         fetchStats();

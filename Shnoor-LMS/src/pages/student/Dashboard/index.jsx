@@ -9,55 +9,29 @@ const StudentDashboard = () => {
     const navigate = useNavigate();
     const [enrolledCount, setEnrolledCount] = useState(0);
     const [lastCourse, setLastCourse] = useState(null);
-    const [gamification, setGamification] = useState({
-        xp: 0,
-        rank: 'Novice',
-        streak: 0,
-        progress: 0,
-        nextLevelXP: 100
-    });
+    // TODO: [Backend] Fetch gamification stats from /api/student/gamification
+    // Expected JSON Shape: 
+    // { 
+    //   xp: number, 
+    //   rank: string, 
+    //   streak: number, 
+    //   nextLevelXP: number,
+    //   level: number
+    // }
+    const [gamification, setGamification] = useState(null);
+
+    // TODO: [Backend] Fetch recent activity from /api/student/activity
+    // Expected JSON Shape: [{ id: string, title: string, type: string, score: number, date: ISOString }]
+    const [recentActivity, setRecentActivity] = useState([]);
+
+    // TODO: [Backend] Fetch deadlines from /api/student/deadlines
+    // Expected JSON Shape: [{ id: string, title: string, course: string, dueDate: ISOString, isUrgent: boolean }]
+    const [deadlines, setDeadlines] = useState([]);
 
     useEffect(() => {
-        const fetchDashboardData = async () => {
-            const enrolled = JSON.parse(localStorage.getItem('enrolledCourses')) || [];
-            setEnrolledCount(enrolled.length);
-
-            if (enrolled.length > 0) {
-                setLastCourse({
-                    id: enrolled[enrolled.length - 1],
-                    title: 'Resume your learning',
-                    progress: 45
-                });
-            }
-
-            if (auth.currentUser) {
-                const userRef = doc(db, "users", auth.currentUser.uid);
-
-                try {
-                    const currentStreak = await checkDailyStreak(auth.currentUser.uid);
-
-                    const docSnap = await getDoc(userRef);
-                    if (docSnap.exists()) {
-                        const data = docSnap.data();
-                        const currentXP = data.xp || 0;
-                        const rankObj = getRank(currentXP);
-                        const levelProgress = getNextLevelProgress(currentXP);
-
-                        setGamification({
-                            xp: currentXP,
-                            rank: rankObj.name,
-                            streak: currentStreak,
-                            progress: levelProgress.progress,
-                            nextLevelXP: levelProgress.nextLevelXP
-                        });
-                    }
-                } catch (err) {
-                    console.error("Error fetching gamification data:", err);
-                }
-            }
-        };
-
-        fetchDashboardData();
+        // TODO: [Backend] Fetch all dashboard data concurrently
+        // const values = await Promise.all([fetchGamification(), fetchActivity(), fetchDeadlines()]);
+        // setGamification(values[0]); ...
     }, []);
 
     const studentName = auth.currentUser?.displayName || auth.currentUser?.email?.split('@')[0] || 'Student';
@@ -68,6 +42,8 @@ const StudentDashboard = () => {
             enrolledCount={enrolledCount}
             lastCourse={lastCourse}
             gamification={gamification}
+            recentActivity={recentActivity}
+            deadlines={deadlines}
             navigate={navigate}
         />
     );

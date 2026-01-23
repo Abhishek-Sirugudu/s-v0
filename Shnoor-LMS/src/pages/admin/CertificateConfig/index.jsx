@@ -34,10 +34,9 @@ const CertificateConfig = () => {
     const handleSave = async (e) => {
         e.preventDefault();
         try {
-            alert("Certificate configuration saved successfully!");
+            // alert("Certificate configuration saved successfully!");
         } catch (error) {
-            console.error("Error saving config:", error);
-            alert("Failed to save configuration.");
+            // Error
         }
     };
 

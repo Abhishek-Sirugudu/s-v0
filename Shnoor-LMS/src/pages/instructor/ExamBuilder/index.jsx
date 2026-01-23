@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { auth, db } from '../../../auth/firebase';
-import { getStudentData, saveStudentData } from '../../../utils/studentData';
 import ExamBuilderView from './view';
 
 const ExamBuilder = () => {
@@ -30,7 +29,7 @@ const ExamBuilder = () => {
                 }));
                 setInstructorCourses(courses);
             } catch (err) {
-                console.error("Error fetching courses:", err);
+                // console.error("Error fetching courses:", err);
             }
         };
         fetchCourses();
@@ -119,39 +118,28 @@ const ExamBuilder = () => {
     const handleSave = async () => {
         const error = validateForm();
         if (error) {
-            alert(error);
             return;
         }
 
         setLoading(true);
 
-        setTimeout(() => {
-            try {
-                const currentData = getStudentData();
-                const newExam = {
-                    ...formData,
-                    id: `exam_${Date.now()} `,
-                    courseId: formData.linkedCourseId || courseId || 'course_001',
-                    courseName: instructorCourses.find(c => c.id === formData.linkedCourseId)?.title || 'Custom Exam Course',
-                    questions: formData.questions.map((q, i) => ({ ...q, id: i + 1 }))
-                };
+        try {
+            // TODO: [Backend] Create/Update exam via POST /api/instructor/exams
+            // Payload: { ...formData, linkedCourseId, ... }
+            /*
+            const response = await fetch('/api/instructor/exams', {
+                method: 'POST',
+                body: JSON.stringify(formData)
+            });
+            */
 
-                const updatedExams = [...(currentData.exams || []), newExam];
+            navigate('/instructor/dashboard');
 
-                saveStudentData({
-                    ...currentData,
-                    exams: updatedExams
-                });
-
-                alert("Exam created and linked successfully!");
-                navigate('/instructor/dashboard');
-            } catch (err) {
-                console.error("Failed to save exam:", err);
-                alert("Failed to save exam. Please try again.");
-            } finally {
-                setLoading(false);
-            }
-        }, 800);
+        } catch (err) {
+            // Error handling
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
