@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import {
-  ShieldCheck, Zap, Globe, BarChart3,
-  ArrowRight, CheckCircle2, Layout, Users,
-  Mail, Phone, MapPin, Menu, X, Play, Terminal, Code2
+  ArrowRight, Menu, X, Terminal, BarChart3, CheckCircle2,
+  Mail, Phone, MapPin, Send, Play,
+  Twitter, Facebook, Linkedin, Instagram,
+  Globe, Zap, GraduationCap
 } from 'lucide-react';
 import markLogo from '../../assets/image.png';
+import nasscomLogo from '../../assets/nascom.jpg';
+
+// --- IMPORTING NEW 3D ICONS ---
+import instructorIcon from '../../assets/instructor.png';
+import privateIcon from '../../assets/private.png';
+import selfPacedIcon from '../../assets/self_paced.png'; 
+import labsIcon from '../../assets/labs.png';
+import examIcon from '../../assets/exam.png';
 
 const LandingView = ({ onLogin, onRegister }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -40,7 +49,7 @@ const LandingView = ({ onLogin, onRegister }) => {
         src={markLogo}
         alt="Shnoor International"
         className="rounded-xl"
-        style={{ width: '60px', height: '62px', objectFit: 'cover' , borderRadius: '50%',marginRight: '10px' }}
+        style={{ width: '60px', height: '62px', objectFit: 'cover' , borderRadius: '50%', marginRight: '10px' }}
       />
       <div>
         <h1 className={`brand-logo ${titleColor} text-xl md:text-2xl font-semibold mb-1 tracking-tight leading-tight`}>
@@ -71,8 +80,9 @@ const LandingView = ({ onLogin, onRegister }) => {
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-8 bg-white/50 px-6 py-2 rounded-full border border-white/50 backdrop-blur-sm">
             <NavLink target="home" label="Home" />
-            <NavLink target="features" label="Features" />
-            <NavLink target="about" label="Mission" />
+            <NavLink target="training" label="Training" />
+            <NavLink target="certification" label="Certifications" />
+            <NavLink target="stories" label="Success Stories" />
             <NavLink target="contact" label="Contact" />
           </div>
 
@@ -95,8 +105,9 @@ const LandingView = ({ onLogin, onRegister }) => {
         {mobileMenuOpen && (
           <div className="md:hidden bg-white border-b border-slate-200 p-6 flex flex-col gap-6 shadow-xl absolute w-full animate-fade-in-up">
             <NavLink target="home" label="Home" />
-            <NavLink target="features" label="Features" />
-            <NavLink target="about" label="Mission" />
+            <NavLink target="training" label="Training" />
+            <NavLink target="certification" label="Certifications" />
+            <NavLink target="stories" label="Success Stories" />
             <NavLink target="contact" label="Contact" />
             <hr className="border-slate-100" />
             <button onClick={onLogin} className="w-full h-12 border border-slate-200 rounded-xl font-bold text-slate-900">Log In</button>
@@ -134,13 +145,12 @@ const LandingView = ({ onLogin, onRegister }) => {
               <button onClick={onRegister} className="h-14 px-8 bg-slate-900 text-white rounded-full font-bold text-sm uppercase tracking-widest hover:bg-slate-800 transition-all flex items-center gap-2 shadow-xl hover:shadow-slate-900/30 hover:-translate-y-1">
                 Start Learning Now <ArrowRight size={18} />
               </button>
-              <button onClick={() => scrollToSection('features')} className="h-14 px-8 bg-white border border-slate-200 text-slate-700 rounded-full font-bold text-sm uppercase tracking-widest hover:border-slate-300 hover:text-slate-900 hover:bg-slate-50 transition-all">
+              <button onClick={() => scrollToSection('training')} className="h-14 px-8 bg-white border border-slate-200 text-slate-700 rounded-full font-bold text-sm uppercase tracking-widest hover:border-slate-300 hover:text-slate-900 hover:bg-slate-50 transition-all">
                 Explore Platform
               </button>
             </div>
-
+            
             <div className="mt-12 flex items-center justify-center lg:justify-start gap-8 text-slate-400 grayscale opacity-70">
-              {/* Logos could go here, using text for now */}
               <span className="font-bold text-xl">ACME Corp</span>
               <span className="font-bold text-xl">GlobalTech</span>
               <span className="font-bold text-xl">Nebula</span>
@@ -150,10 +160,7 @@ const LandingView = ({ onLogin, onRegister }) => {
 
           {/* Right Column: Visual Mockup */}
           <div className="relative hidden lg:block perspective-1000">
-            {/* Main Floating Card */}
             <div className="relative z-10 bg-white rounded-2xl shadow-2xl border border-slate-200 p-6 animate-float transform rotate-y-12 rotate-z-2 w-full max-w-lg mx-auto">
-
-              {/* Header Mockup */}
               <div className="flex items-center justify-between mb-6 border-b border-slate-100 pb-4">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-slate-100"></div>
@@ -167,7 +174,6 @@ const LandingView = ({ onLogin, onRegister }) => {
                 </div>
               </div>
 
-              {/* Chart Mockup */}
               <div className="flex gap-2 items-end h-32 mb-6 px-2">
                 {[40, 70, 45, 90, 60, 75, 50].map((h, i) => (
                   <div key={i} className="flex-1 bg-slate-50 rounded-t-sm relative group overflow-hidden">
@@ -176,7 +182,6 @@ const LandingView = ({ onLogin, onRegister }) => {
                 ))}
               </div>
 
-              {/* List Items Mockup */}
               <div className="space-y-3">
                 {[1, 2, 3].map((i) => (
                   <div key={i} className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 hover:bg-slate-100 transition-colors cursor-pointer">
@@ -192,7 +197,6 @@ const LandingView = ({ onLogin, onRegister }) => {
               </div>
             </div>
 
-            {/* Back Elements for Depth */}
             <div className="absolute -top-12 -right-12 z-0">
               <div className="bg-slate-900 rounded-2xl p-6 shadow-xl animate-float animation-delay-2000 w-48">
                 <div className="flex items-center gap-2 mb-2 text-white/80">
@@ -217,196 +221,298 @@ const LandingView = ({ onLogin, onRegister }) => {
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </section>
 
-      {/* --- FEATURES GRID --- */}
-      <section id="features" className="py-24 px-6 relative z-10">
+      {/* --- TRAINING OPTIONS GRID (FIXED RATIO) --- */}
+      <section id="training" className="py-20 px-6 relative z-10 bg-white/50 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20 max-w-3xl mx-auto">
-            <h2 className="text-sm font-black text-slate-900 uppercase tracking-widest mb-3">Why Shnoor?</h2>
-            <h3 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight mb-4">
-              Everything you need to <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-900 to-slate-600">scale excellence.</span>
-            </h3>
-            <p className="text-slate-500 text-lg leading-relaxed">
-              We've redesigned the corporate learning experience from the ground up to be fast, beautiful, and incredibly effective.
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight mb-4">
+              Flexible Training Options
+            </h2>
+            <p className="text-slate-500 max-w-2xl mx-auto">
+              Choose the learning style that fits your schedule and goals.
             </p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              { icon: ShieldCheck, title: "Enterprise Security", desc: "Bank-grade encryption and granular role-based access control for every user." },
-              { icon: Code2, title: "Code-Native Practice", desc: "Integrated Monaco editors allow developers to practice in a real IDE environment." },
-              { icon: Zap, title: "Instant Feedback", desc: "Automated grading pipelines deliver performance results in milliseconds." },
-              { icon: BarChart3, title: "Deep Analytics", desc: "Track skill gaps and progression with intuitive, real-time dashboards." },
-              { icon: Layout, title: "Distraction-Free", desc: "A minimalist interface designed to keep learners in the flow state." },
-              { icon: Users, title: "Cohort Learning", desc: "Built-in community tools to foster peer-to-peer learning and mentorship." }
-            ].map((feature, idx) => (
-              <div key={idx} className="group p-8 bg-white border border-slate-200 rounded-3xl hover:border-slate-300 hover:shadow-xl hover:shadow-slate-900/5 transition-all duration-300 relative overflow-hidden">
-                <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity transform group-hover:scale-110 duration-500">
-                  <feature.icon size={120} />
+          
+          <div className="flex flex-wrap justify-center gap-8">
+             {/* Card 1: Instructor-Led */}
+             <div className="w-full md:w-[45%] lg:w-[30%] group p-8 bg-white border border-slate-200 rounded-2xl hover:border-indigo-200 hover:shadow-xl hover:shadow-indigo-900/5 transition-all duration-300 text-center flex flex-col items-center">
+                {/* ADJUSTED: Smaller circle (w-32), Larger relative image (w-24) to fill space */}
+                <div className="w-32 h-32 bg-indigo-50 rounded-full flex items-center justify-center mb-6 transform group-hover:scale-110 transition-transform duration-300">
+                  <img src={instructorIcon} alt="Instructor-Led" className="w-24 h-24 object-contain" />
                 </div>
-
-                <div className="w-14 h-14 bg-slate-100 rounded-2xl flex items-center justify-center text-slate-900 mb-6 group-hover:scale-110 group-hover:bg-slate-900 group-hover:text-white transition-all duration-300 shadow-sm">
-                  <feature.icon size={26} />
-                </div>
-
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-slate-700 transition-colors">{feature.title}</h3>
-                <p className="text-slate-500 leading-relaxed group-hover:text-slate-600 relative z-10">
-                  {feature.desc}
+                <h3 className="text-xl font-bold text-slate-900 mb-3">Instructor-Led Training</h3>
+                <p className="text-slate-500 leading-relaxed text-sm">
+                  Join live, interactive sessions with expert instructors. Real-time Q&A, hands-on guidance, and structured learning paths.
                 </p>
-              </div>
-            ))}
+             </div>
+
+             {/* Card 2: Private Training */}
+             <div className="w-full md:w-[45%] lg:w-[30%] group p-8 bg-white border border-slate-200 rounded-2xl hover:border-indigo-200 hover:shadow-xl hover:shadow-indigo-900/5 transition-all duration-300 text-center flex flex-col items-center">
+                <div className="w-32 h-32 bg-indigo-50 rounded-full flex items-center justify-center mb-6 transform group-hover:scale-110 transition-transform duration-300">
+                  <img src={privateIcon} alt="Private Training" className="w-24 h-24 object-contain" />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">Private Training</h3>
+                <p className="text-slate-500 leading-relaxed text-sm">
+                  Dedicated sessions tailored for your corporate team. Customized curriculum to meet your specific business goals.
+                </p>
+             </div>
+
+             {/* Card 3: Practice Arena */}
+             <div className="w-full md:w-[45%] lg:w-[30%] group p-8 bg-white border border-slate-200 rounded-2xl hover:border-indigo-200 hover:shadow-xl hover:shadow-indigo-900/5 transition-all duration-300 text-center flex flex-col items-center">
+                <div className="w-32 h-32 bg-indigo-50 rounded-full flex items-center justify-center mb-6 transform group-hover:scale-110 transition-transform duration-300">
+                  <img src={selfPacedIcon} alt="Practice Arena" className="w-24 h-24 object-contain" />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">Practice Arena</h3>
+                <p className="text-slate-500 leading-relaxed text-sm">
+                  Sharpen your skills with interactive video modules. Watch expert solution breakdowns and tackle algorithmic challenges.
+                </p>
+             </div>
+
+             {/* Card 4: Facilitated Labs */}
+             <div className="w-full md:w-[45%] lg:w-[30%] group p-8 bg-white border border-slate-200 rounded-2xl hover:border-indigo-200 hover:shadow-xl hover:shadow-indigo-900/5 transition-all duration-300 text-center flex flex-col items-center">
+                <div className="w-32 h-32 bg-indigo-50 rounded-full flex items-center justify-center mb-6 transform group-hover:scale-110 transition-transform duration-300">
+                  <img src={labsIcon} alt="Facilitated Labs" className="w-24 h-24 object-contain" />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">Facilitated Labs</h3>
+                <p className="text-slate-500 leading-relaxed text-sm">
+                  Experience code-native learning. Our browser-based IDE (powered by Monaco) lets you run, debug, and test code instantly.
+                </p>
+             </div>
+
+             {/* Card 5: Exam Prep */}
+             <div className="w-full md:w-[45%] lg:w-[30%] group p-8 bg-white border border-slate-200 rounded-2xl hover:border-indigo-200 hover:shadow-xl hover:shadow-indigo-900/5 transition-all duration-300 text-center flex flex-col items-center">
+                <div className="w-32 h-32 bg-indigo-50 rounded-full flex items-center justify-center mb-6 transform group-hover:scale-110 transition-transform duration-300">
+                  <img src={examIcon} alt="Exam Prep" className="w-24 h-24 object-contain" />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">Exam Prep</h3>
+                <p className="text-slate-500 leading-relaxed text-sm">
+                  Comprehensive study guides, practice tests, and review sessions to ensure you ace your certification exams.
+                </p>
+             </div>
           </div>
         </div>
       </section>
 
-      {/* --- STATS / MISSION SECTION --- */}
-      <section id="about" className="py-24 px-6 relative z-10 bg-slate-900 overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#94a3b8 1px, transparent 1px)', backgroundSize: '32px 32px' }}></div>
-
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="text-white">
-              <h2 className="text-sm font-black text-slate-400 uppercase tracking-widest mb-2">Our Results</h2>
-              <h3 className="text-4xl md:text-5xl font-black tracking-tight mb-8">
-                Trusted by the world's <br /> most innovative teams.
-              </h3>
-
-              <div className="space-y-8">
-                <div className="flex gap-4 items-start">
-                  <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center shrink-0 border border-white/10">
-                    <Globe className="text-slate-300" size={24} />
-                  </div>
-                  <div>
-                    <h4 className="text-xl font-bold mb-1">Global Scale</h4>
-                    <p className="text-slate-400 leading-relaxed">Infrastructure that scales automatically to support teams from 10 to 100,000+ without blinking.</p>
-                  </div>
-                </div>
-
-                <div className="flex gap-4 items-start">
-                  <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center shrink-0 border border-white/10">
-                    <Zap className="text-yellow-400" size={24} />
-                  </div>
-                  <div>
-                    <h4 className="text-xl font-bold mb-1">Lightning Fast</h4>
-                    <p className="text-slate-400 leading-relaxed">Zero-latency page loads and video streaming. We optimized every byte so your team never waits.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 p-8 rounded-3xl">
-                <div className="text-5xl font-black text-white mb-2">98%</div>
-                <div className="text-sm font-bold text-slate-300 uppercase tracking-widest">Completion Rate</div>
-              </div>
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 p-8 rounded-3xl">
-                <div className="text-5xl font-black text-white mb-2">2x</div>
-                <div className="text-sm font-bold text-slate-300 uppercase tracking-widest">Faster Onboarding</div>
-              </div>
-              <div className="col-span-2 bg-slate-800 p-8 rounded-3xl shadow-2xl shadow-slate-900/50 flex items-center justify-between group cursor-pointer hover:bg-slate-700 transition-colors border border-white/10">
-                <div>
-                  <div className="text-3xl font-black text-white mb-1">Case Studies</div>
-                  <div className="text-xs font-bold text-slate-400 uppercase tracking-widest">Read Success Stories</div>
-                </div>
-                <ArrowRight className="text-white transform group-hover:translate-x-2 transition-transform" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* --- CTA / CONTACT SECTION --- */}
-      <section id="contact" className="py-24 px-6 relative z-10">
-        <div className="max-w-5xl mx-auto bg-white rounded-[2.5rem] p-8 md:p-16 shadow-2xl border border-slate-100 relative overflow-hidden text-center">
-          <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-slate-700 via-slate-600 to-slate-500"></div>
-
-          <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">Ready to transform your team?</h2>
-          <p className="text-xl text-slate-500 mb-10 max-w-2xl mx-auto">
-            Join 500+ forward-thinking companies building the workforce of tomorrow with Shnoor.
+      {/* --- CERTIFICATION SECTION --- */}
+      <section id="certification" className="py-20 px-6 bg-slate-100/50">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight mb-6">
+            Set Yourself Apart with <br/> Industry-Recognized Certifications
+          </h2>
+          <p className="text-slate-500 text-lg mb-10 max-w-2xl mx-auto">
+            Validate your expertise and advance your career. Our certifications are recognized globally and demonstrate your mastery of the Shnoor ecosystem.
           </p>
+          <button onClick={onRegister} className="h-14 px-10 bg-indigo-600 text-white rounded-full font-bold text-sm uppercase tracking-widest hover:bg-indigo-700 transition-all shadow-xl hover:shadow-indigo-600/30">
+             Explore Certifications
+          </button>
+        </div>
+      </section>
 
-          <div className="flex flex-col md:flex-row justify-center items-center gap-4 mb-12">
-            <button onClick={onRegister} className="w-full md:w-auto h-16 px-10 bg-slate-900 text-white rounded-full font-bold text-lg hover:bg-slate-800 transition-all shadow-xl hover:shadow-slate-900/25">
-              Get Started for Free
-            </button>
-            <button className="w-full md:w-auto h-16 px-10 bg-white border-2 border-slate-200 text-slate-700 rounded-full font-bold text-lg hover:border-slate-900 hover:text-slate-900 transition-all">
-              Schedule Demo
-            </button>
+      {/* --- DARK AWARD BANNER (NASSCOM) --- */}
+      <section className="bg-slate-900 py-16 px-6 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '32px 32px' }}></div>
+        <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-center gap-8 relative z-10">
+           <div className="w-36 h-36 rounded-full border-4 border-white/20 flex items-center justify-center bg-white backdrop-blur-sm shadow-2xl relative p-4">
+              <img 
+                src={nasscomLogo} 
+                alt="NASSCOM Certified" 
+                className="w-full h-auto object-contain"
+              />
+              <div className="absolute -top-2 -right-2 bg-indigo-600 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Milestone</div>
+           </div>
+           <div className="text-center md:text-left">
+              <h3 className="text-2xl font-bold text-white mb-2">Proudly Recognized by NASSCOM</h3>
+              <p className="text-slate-400 max-w-lg">
+                 Our proposal has been officially approved by NASSCOM, marking a significant step toward becoming a Certified Company—validating our vision, ethics, and process excellence.
+              </p>
+              <button className="mt-6 text-sm font-bold text-indigo-400 hover:text-white transition-colors flex items-center gap-2 mx-auto md:mx-0">
+                 Read the Announcement <ArrowRight size={14} />
+              </button>
+           </div>
+        </div>
+      </section>
+
+      {/* --- SUCCESS STORIES --- */}
+      <section id="stories" className="py-24 px-6 relative z-10">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+             <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight mb-4">
+                See How Our Students Have Transformed
+             </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+             <div className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-slate-900/5 transition-all text-center group">
+                <div className="w-16 h-16 mx-auto bg-slate-100 rounded-full flex items-center justify-center mb-6 text-slate-400 group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors">
+                   <Globe size={24} />
+                </div>
+                <h4 className="text-lg font-bold text-slate-900 mb-2">Tech Giants Corp</h4>
+                <p className="text-slate-500 italic mb-6">"Shnoor's platform helped us onboard 500+ engineers in record time. The hands-on labs were a game changer."</p>
+             </div>
+             <div className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-slate-900/5 transition-all text-center group">
+                 <div className="w-16 h-16 mx-auto bg-slate-100 rounded-full flex items-center justify-center mb-6 text-slate-400 group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors">
+                   <Zap size={24} />
+                </div>
+                <h4 className="text-lg font-bold text-slate-900 mb-2">Innovate Inc</h4>
+                <p className="text-slate-500 italic mb-6">"The certification paths gave our team a clear roadmap for growth. We've seen a 40% boost in productivity."</p>
+             </div>
+             <div className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-slate-900/5 transition-all text-center group">
+                 <div className="w-16 h-16 mx-auto bg-slate-100 rounded-full flex items-center justify-center mb-6 text-slate-400 group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors">
+                   <GraduationCap size={24} />
+                </div>
+                <h4 className="text-lg font-bold text-slate-900 mb-2">Future Academy</h4>
+                <p className="text-slate-500 italic mb-6">"Our students love the interactive coding challenges. It makes complex concepts easy to digest and apply."</p>
+             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* --- CONTACT SECTION --- */}
+      <section id="contact" className="py-24 px-6 relative z-10 bg-slate-50">
+        <div className="max-w-6xl mx-auto bg-white rounded-[2rem] overflow-hidden shadow-2xl flex flex-col lg:flex-row border border-slate-100">
+          
+          {/* Left Side (Dark Info) */}
+          <div className="bg-slate-900 p-12 lg:w-5/12 text-white flex flex-col justify-center relative overflow-hidden">
+            <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
+            
+            <div className="relative z-10">
+              <span className="text-xs font-bold tracking-widest uppercase text-slate-400 mb-2 block">Get in Touch</span>
+              <h2 className="text-3xl font-black tracking-tight mb-8">Ready to upgrade your workforce?</h2>
+              
+              <div className="space-y-8">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                    <Mail size={18} className="text-indigo-400" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="font-medium text-slate-200">info@shnoor.com <span className="text-slate-500 text-sm">(General)</span></span>
+                    <span className="font-medium text-slate-200">proc@shnoor.com <span className="text-slate-500 text-sm">(Sales)</span></span>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                    <Phone size={18} className="text-indigo-400" />
+                  </div>
+                   <div className="flex flex-col">
+                    <span className="font-medium text-slate-200">+91-9429694298</span>
+                    <span className="font-medium text-slate-200">+91-9041914601</span>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                    <MapPin size={18} className="text-indigo-400" />
+                  </div>
+                  <span className="font-medium text-slate-200 leading-relaxed">
+                    10009 Mount Tabor Road, City,<br/> Odessa Missouri, United States
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-6 md:gap-12 pt-8 border-t border-slate-100">
-            <div className="flex items-center gap-2 text-slate-500 text-sm font-bold">
-              <CheckCircle2 size={16} className="text-green-500" /> No credit card required
-            </div>
-            <div className="flex items-center gap-2 text-slate-500 text-sm font-bold">
-              <CheckCircle2 size={16} className="text-green-500" /> 14-day free trial
-            </div>
-            <div className="flex items-center gap-2 text-slate-500 text-sm font-bold">
-              <CheckCircle2 size={16} className="text-green-500" /> Cancel anytime
-            </div>
+          {/* Right Side (Light Form) */}
+          <div className="p-12 lg:w-7/12 bg-white flex flex-col justify-center">
+            <form className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-slate-500 uppercase tracking-wide">First Name</label>
+                  <input type="text" className="w-full h-12 px-4 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all text-slate-900 font-medium" />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-slate-500 uppercase tracking-wide">Last Name</label>
+                  <input type="text" className="w-full h-12 px-4 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all text-slate-900 font-medium" />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <label className="text-xs font-bold text-slate-500 uppercase tracking-wide">Work Email</label>
+                <input type="email" className="w-full h-12 px-4 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all text-slate-900 font-medium" />
+              </div>
+              <div className="space-y-2">
+                <label className="text-xs font-bold text-slate-500 uppercase tracking-wide">Message</label>
+                <textarea rows="4" className="w-full p-4 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all text-slate-900 font-medium resize-none"></textarea>
+              </div>
+              <button type="button" className="w-full h-14 bg-indigo-600 text-white rounded-xl font-bold uppercase tracking-widest hover:bg-indigo-700 transition-all shadow-lg hover:shadow-indigo-600/25 flex items-center justify-center gap-2">
+                Send Message <Send size={18} />
+              </button>
+            </form>
           </div>
         </div>
       </section>
 
       {/* --- FOOTER --- */}
-      <footer className="bg-[#0F172A] border-t border-slate-800 pt-16 pb-8 px-6 relative z-10 font-medium">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-          <div className="col-span-1 md:col-span-1">
+      <footer className="bg-[#0F172A] border-t border-slate-800 pt-16 pb-8 px-6 relative z-10 font-medium text-left">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
+          
+          {/* Column 1: Brand & Socials (Span 5) */}
+          <div className="lg:col-span-5">
             <div className="mb-6">
               <BrandLogo titleColor="!text-white" subtitleColor="!text-[#94a3b8]" />
             </div>
-            <p className="!text-[#94a3b8] text-sm leading-relaxed mb-6">
-              Empowering the next generation of innovative teams with world-class learning tools.
+            <p className="!text-[#94a3b8] text-sm leading-relaxed mb-8 max-w-sm">
+              Transform your learning process with our powerful platform. Create professional training paths, track progress, and certify skills faster with Shnoor International.
             </p>
+            {/* Social Icons */}
             <div className="flex gap-4">
-              {/* Socials */}
-              <div className="w-8 h-8 rounded-full bg-slate-800 !text-[#94a3b8] hover:bg-slate-700 hover:text-white flex items-center justify-center transition-colors cursor-pointer">
-                <Globe size={16} />
-              </div>
-              <div className="w-8 h-8 rounded-full bg-slate-800 !text-[#94a3b8] hover:bg-slate-700 hover:text-white flex items-center justify-center transition-colors cursor-pointer">
-                <Mail size={16} />
-              </div>
+              <a href="#" className="text-slate-400 hover:text-white transition-colors"><Twitter size={20} /></a>
+              <a href="#" className="text-slate-400 hover:text-white transition-colors"><Facebook size={20} /></a>
+              <a href="#" className="text-slate-400 hover:text-white transition-colors"><Linkedin size={20} /></a>
+              <a href="#" className="text-slate-400 hover:text-white transition-colors"><Instagram size={20} /></a>
             </div>
           </div>
 
-          <div>
-            <h4 className="font-bold !text-white mb-6">Product</h4>
+          {/* Column 2: Quick Links (Span 3) */}
+          <div className="lg:col-span-3">
+            <h4 className="font-bold !text-white mb-6 text-lg">Quick Links</h4>
             <ul className="space-y-4 text-sm">
-              <li><a href="#" className="!text-[#94a3b8] hover:!text-white transition-colors">Features</a></li>
-              <li><a href="#" className="!text-[#94a3b8] hover:!text-white transition-colors">Pricing</a></li>
-              <li><a href="#" className="!text-[#94a3b8] hover:!text-white transition-colors">Enterprise</a></li>
+              <li><button onClick={() => scrollToSection('home')} className="!text-[#94a3b8] hover:!text-white transition-colors">Home</button></li>
+              <li><button onClick={() => scrollToSection('training')} className="!text-[#94a3b8] hover:!text-white transition-colors">Training</button></li>
+              <li><button onClick={() => scrollToSection('contact')} className="!text-[#94a3b8] hover:!text-white transition-colors">Contact Us</button></li>
             </ul>
           </div>
 
-          <div>
-            <h4 className="font-bold !text-white mb-6">Resources</h4>
-            <ul className="space-y-4 text-sm">
-              <li><a href="#" className="!text-[#94a3b8] hover:!text-white transition-colors">Blog</a></li>
-              <li><a href="#" className="!text-[#94a3b8] hover:!text-white transition-colors">Documentation</a></li>
-              <li><a href="#" className="!text-[#94a3b8] hover:!text-white transition-colors">Community</a></li>
-            </ul>
-          </div>
+          {/* Column 3: Contact & Support (Span 4) */}
+          <div className="lg:col-span-4">
+            <h4 className="font-bold !text-white mb-6 text-lg">Contact & Support</h4>
+            <ul className="space-y-6 text-sm !text-[#94a3b8]">
+              {/* Emails */}
+              <li className="flex items-start gap-3">
+                <Mail size={18} className="shrink-0 text-indigo-400 mt-1" />
+                <div className="flex flex-col">
+                  <span>info@shnoor.com (General)</span>
+                  <span>proc@shnoor.com (Sales)</span>
+                </div>
+              </li>
+              
+              {/* Phones */}
+              <li className="flex items-start gap-3">
+                <Phone size={18} className="shrink-0 text-indigo-400 mt-1" />
+                <div className="flex flex-col">
+                  <span>+91-9429694298</span>
+                  <span>+91-9041914601</span>
+                </div>
+              </li>
 
-          <div>
-            <h4 className="font-bold !text-white mb-6">Legal</h4>
-            <ul className="space-y-4 text-sm">
-              <li><a href="#" className="!text-[#94a3b8] hover:!text-white transition-colors">Privacy</a></li>
-              <li><a href="#" className="!text-[#94a3b8] hover:!text-white transition-colors">Terms</a></li>
-              <li><a href="#" className="!text-[#94a3b8] hover:!text-white transition-colors">Security</a></li>
+              {/* Address */}
+              <li className="flex items-start gap-3">
+                <MapPin size={18} className="shrink-0 text-indigo-400 mt-1" />
+                <span>10009 Mount Tabor Road<br/>City, Odessa Missouri, United States</span>
+              </li>
             </ul>
           </div>
         </div>
 
+        {/* Bottom Bar */}
         <div className="max-w-7xl mx-auto pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-sm !text-[#64748b]">
-          <div>© 2024 Shnoor Systems Inc. All rights reserved.</div>
+          <div>© 2026 Shnoor International. All rights reserved.</div>
           <div className="flex gap-6">
             <a href="#" className="hover:!text-[#cbd5e1] !text-[#64748b]">Privacy Policy</a>
-            <a href="#" className="hover:!text-[#cbd5e1] !text-[#64748b]">Terms of Service</a>
+            <a href="#" className="hover:!text-[#cbd5e1] !text-[#64748b]">Cookie Policy</a>
+            <a href="#" className="hover:!text-[#cbd5e1] !text-[#64748b]">Company Profile</a>
           </div>
         </div>
       </footer>
