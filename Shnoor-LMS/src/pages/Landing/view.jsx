@@ -3,12 +3,11 @@ import {
   ArrowRight, Menu, X, Terminal, BarChart3, CheckCircle2,
   Mail, Phone, MapPin, Send, Play,
   Twitter, Facebook, Linkedin, Instagram,
-  Globe, Zap, GraduationCap
+  Globe, Zap, GraduationCap, Layout, BookOpen, Video, Award
 } from 'lucide-react';
 import markLogo from '../../assets/image.png';
 import nasscomLogo from '../../assets/nascom.jpg';
 
-// --- IMPORTING NEW 3D ICONS ---
 import instructorIcon from '../../assets/instructor.png';
 import privateIcon from '../../assets/private.png';
 import selfPacedIcon from '../../assets/self_paced.png'; 
@@ -19,7 +18,6 @@ const LandingView = ({ onLogin, onRegister }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Handle scroll effect for navbar
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
@@ -158,69 +156,131 @@ const LandingView = ({ onLogin, onRegister }) => {
             </div>
           </div>
 
-          {/* Right Column: Visual Mockup */}
-          <div className="relative hidden lg:block perspective-1000">
-            <div className="relative z-10 bg-white rounded-2xl shadow-2xl border border-slate-200 p-6 animate-float transform rotate-y-12 rotate-z-2 w-full max-w-lg mx-auto">
-              <div className="flex items-center justify-between mb-6 border-b border-slate-100 pb-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-slate-100"></div>
-                  <div>
-                    <div className="h-2.5 w-24 bg-slate-800 rounded mb-1.5"></div>
-                    <div className="h-2 w-16 bg-slate-300 rounded"></div>
-                  </div>
+          {/* Right Column: Visual Mockup (LMS DASHBOARD) */}
+          <div className="hidden lg:block relative h-full min-h-[500px] perspective-[2000px]">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-indigo-100/50 to-slate-100/50 rounded-full blur-3xl -z-10 animate-pulse"></div>
+
+            {/* 3D Container */}
+            <div className="absolute top-12 left-10 right-10 bg-[#1e293b] backdrop-blur-xl border border-slate-700 shadow-2xl rounded-3xl overflow-hidden transform rotate-y-[-10deg] rotate-x-[5deg] hover:rotate-0 transition-transform duration-700 ease-out z-10 font-sans">
+              
+              {/* LMS Header */}
+              <div className="flex items-center justify-between px-6 py-4 bg-[#0f172a] border-b border-slate-700">
+                <div className="flex items-center gap-4">
+                   <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-indigo-700 flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                      <BookOpen size={18} />
+                   </div>
+                   <div>
+                      <div className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Ongoing Course</div>
+                      <div className="text-sm font-bold text-white tracking-wide">Enterprise Solution Architect</div>
+                   </div>
                 </div>
-                <div className="h-8 w-8 rounded-lg bg-slate-50 flex items-center justify-center text-slate-900">
-                  <BarChart3 size={16} />
+                <div className="text-right">
+                   <div className="text-xs text-slate-400 mb-1.5 font-medium flex items-center justify-end gap-2">
+                      <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> 65% Completed
+                   </div>
+                   <div className="w-32 h-1.5 bg-slate-700 rounded-full overflow-hidden">
+                      <div className="w-[65%] h-full bg-gradient-to-r from-green-400 to-green-600 rounded-full shadow-[0_0_10px_rgba(74,222,128,0.5)]"></div>
+                   </div>
                 </div>
               </div>
 
-              <div className="flex gap-2 items-end h-32 mb-6 px-2">
-                {[40, 70, 45, 90, 60, 75, 50].map((h, i) => (
-                  <div key={i} className="flex-1 bg-slate-50 rounded-t-sm relative group overflow-hidden">
-                    <div style={{ height: `${h}%` }} className="absolute bottom-0 w-full bg-slate-900 rounded-t-sm transition-all duration-500 group-hover:bg-slate-700"></div>
-                  </div>
-                ))}
-              </div>
+              {/* LMS Body: Course Player UI */}
+              <div className="flex h-[320px] bg-[#1e293b]">
+                 {/* Sidebar (Modules) */}
+                 <div className="w-[35%] border-r border-slate-700/50 p-4 space-y-2 hidden sm:block overflow-y-auto custom-scrollbar">
+                    <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-3 px-2">Course Content</div>
+                    
+                    {[1, 2, 3, 4].map((i) => (
+                       <div key={i} className={`flex items-center gap-3 p-3 rounded-xl text-xs cursor-pointer transition-all duration-200 group ${i === 3 ? 'bg-indigo-600/10 border border-indigo-500/30 text-white shadow-sm' : 'text-slate-400 hover:bg-slate-700/30'}`}>
+                          <div className={`w-5 h-5 rounded-full flex items-center justify-center border shrink-0 ${i < 3 ? 'border-green-500/50 bg-green-500/10 text-green-500' : (i === 3 ? 'border-indigo-500 text-indigo-400' : 'border-slate-600')}`}>
+                             {i < 3 ? <CheckCircle2 size={10} /> : (i === 3 ? <Play size={8} fill="currentColor" /> : <span className="text-[8px]">{i}</span>)}
+                          </div>
+                          <div className="flex-1 truncate font-medium">
+                             {['System Design Basics', 'Microservices 101', 'Scalability Patterns', 'Security Protocols'][i-1]}
+                          </div>
+                       </div>
+                    ))}
+                 </div>
 
-              <div className="space-y-3">
-                {[1, 2, 3].map((i) => (
-                  <div key={i} className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 hover:bg-slate-100 transition-colors cursor-pointer">
-                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${i === 1 ? 'bg-green-100 text-green-600' : 'bg-slate-200 text-slate-700'}`}>
-                      {i === 1 ? <CheckCircle2 size={16} /> : <Play size={16} />}
+                 {/* Main Content (Video Player Mockup) */}
+                 <div className="flex-1 p-6 flex flex-col relative">
+                    {/* Video Screen */}
+                    <div className="flex-1 bg-slate-900 rounded-xl relative overflow-hidden group cursor-pointer border border-slate-700/50 shadow-2xl">
+                       {/* Abstract Video Content */}
+                       <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center">
+                          <div className="w-full h-full opacity-20" style={{backgroundImage: 'radial-gradient(#6366f1 1px, transparent 1px)', backgroundSize: '20px 20px'}}></div>
+                          
+                          {/* Play Button */}
+                          <div className="w-16 h-16 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center group-hover:scale-110 transition-transform border border-white/20 shadow-xl z-10">
+                             <Play size={28} className="text-white fill-current ml-1 drop-shadow-md" />
+                          </div>
+                       </div>
+
+                       {/* Video Controls Overlay */}
+                       <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+                          <div className="flex justify-between text-[10px] text-slate-300 font-mono mb-2">
+                             <span>14:20</span>
+                             <span>45:00</span>
+                          </div>
+                          <div className="w-full h-1 bg-white/20 rounded-full cursor-pointer">
+                             <div className="w-[32%] h-full bg-indigo-500 rounded-full relative">
+                                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-white rounded-full shadow-md scale-0 group-hover:scale-100 transition-transform"></div>
+                             </div>
+                          </div>
+                       </div>
                     </div>
-                    <div className="flex-1">
-                      <div className="h-2 w-32 bg-slate-800 rounded mb-1.5 opacity-80"></div>
-                      <div className="h-1.5 w-20 bg-slate-400 rounded opacity-60"></div>
+
+                    <div className="mt-4 flex items-center justify-between">
+                       <div>
+                          <h4 className="text-white font-bold text-sm tracking-tight">03. Scalability Patterns</h4>
+                          <p className="text-slate-400 text-xs mt-1">Understanding horizontal vs vertical scaling strategies.</p>
+                       </div>
+                       <button className="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-colors shadow-lg shadow-indigo-900/20">
+                          Next Lesson
+                       </button>
                     </div>
-                  </div>
-                ))}
+                 </div>
               </div>
             </div>
 
-            <div className="absolute -top-12 -right-12 z-0">
-              <div className="bg-slate-900 rounded-2xl p-6 shadow-xl animate-float animation-delay-2000 w-48">
-                <div className="flex items-center gap-2 mb-2 text-white/80">
-                  <Terminal size={14} /> <span className="text-xs font-mono">Terminal</span>
-                </div>
-                <div className="space-y-2">
-                  <div className="h-1.5 w-full bg-white/20 rounded"></div>
-                  <div className="h-1.5 w-2/3 bg-white/20 rounded"></div>
-                  <div className="h-1.5 w-3/4 bg-white/40 rounded"></div>
-                </div>
+            {/* Floating Card 1: Certificate (Bottom Left) */}
+            <div className="absolute top-[75%] -left-8 bg-white p-4 pr-8 rounded-2xl shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] flex items-center gap-4 animate-[bounce_4s_infinite] z-20 border border-slate-100">
+              <div className="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 shadow-inner ring-4 ring-indigo-50">
+                <Award size={24} />
+              </div>
+              <div>
+                <div className="text-sm font-bold text-slate-900">Certificate Earned</div>
+                <div className="text-xs text-slate-500 font-medium">Cloud Architecture</div>
               </div>
             </div>
 
-            <div className="absolute -bottom-8 -left-8 z-20">
-              <div className="bg-white rounded-xl p-4 shadow-xl border border-slate-100 animate-float flex items-center gap-3">
-                <div className="h-10 w-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
-                  <CheckCircle2 size={20} />
-                </div>
-                <div>
-                  <div className="text-xs font-bold text-slate-500 uppercase tracking-wider">Status</div>
-                  <div className="text-sm font-black text-slate-900">All Systems Go</div>
-                </div>
+            {/* Floating Card 2: Skill Unlocked (Top Right - REPLACED LIVE SESSION) */}
+            <div className="absolute top-12 -right-12 bg-white p-3 pr-5 rounded-2xl shadow-2xl flex items-center gap-3 z-30 animate-[bounce_6s_infinite] border border-slate-100">
+              <div className="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600">
+                 <Zap size={18} />
+              </div>
+              <div>
+                <div className="text-sm font-bold text-slate-900">Skill Unlocked</div>
+                <div className="text-xs text-slate-500 font-medium">System Design</div>
               </div>
             </div>
+
+            {/* Floating Card 3: Mentor (Bottom Right) */}
+            <div className="absolute bottom-12 -right-4 bg-white p-3 pr-6 rounded-2xl shadow-xl flex items-center gap-3 z-30 animate-[bounce_5s_infinite] border border-slate-100">
+              <div className="relative">
+                <div className="w-10 h-10 rounded-full bg-slate-200 overflow-hidden border-2 border-white shadow-sm">
+                  <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Annie&mouth=smile" alt="Mentor" />
+                </div>
+                <div className="absolute -bottom-1 -right-1 bg-green-500 rounded-full p-0.5 border-2 border-white">
+                  <CheckCircle2 size={10} className="text-white" />
+                </div>
+              </div>
+              <div>
+                <div className="text-xs font-bold text-slate-900">Feedback Received</div>
+                <div className="text-[10px] text-slate-500 font-medium">Great project work!</div>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
